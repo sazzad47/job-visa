@@ -1,0 +1,93 @@
+.visa-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.visa-form-input {
+    margin-top: 1rem;
+    
+}
+
+/* file upload */
+
+/* .mg20 {
+    margin: 20px;
+  }
+  
+  .my20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .mr20 {
+    margin-right: 20px;
+  } */
+  
+  /* .container {
+    position: relative;
+    width: 600px;
+    margin: auto;
+  } */
+  
+  .preview {
+    max-width: 200px;
+  }
+  
+  .btn-upload {
+    position: absolute !important;
+    right: 12px;
+  }
+  
+  .file-name {
+    
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 300px;
+    vertical-align: middle;
+  }
+  
+  .list-group {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list-header {
+    margin-top: 10px !important;
+  }
+  
+  .upload-message {
+    font-weight: bold;
+    color: #63A84E;
+  }
+  
+  .upload-message.error{
+    color: #DA4148;
+  }
+  
+  .btn-choose {
+    margin-right: 12px !important;
+  }
+  .PhoneInputInput {
+     height: 3.5rem;
+     border: 1px solid rgb(238, 166, 166);
+     border-radius: 2px;
+
+  }
+  .PhoneInputInput:active , .PhoneInputInput:focus {
+    outline: 2px solid rgb(106, 106, 240);
+    border: none !important;
+    
+  }
+  .PhoneInputInput:hover {
+    border: 1px solid red;
+  }
+  
+  .PhoneInputCountry {
+    height: 3.5rem;
+  }
+.recap {
+  transform: scale(0.66);
+  transform-origin: 0 0;
+}

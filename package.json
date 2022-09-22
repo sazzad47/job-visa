@@ -1,0 +1,41 @@
+{
+  "name": "nextjs-ecommerce",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@mui/styles": "^5.10.6",
+    "@mui/x-date-pickers": "^5.0.2",
+    "bcrypt": "^5.0.0",
+    "dayjs": "^1.11.5",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.14",
+    "mongoose-sequence": "^5.3.1",
+    "next": "^12.3.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-google-recaptcha": "^2.1.0",
+    "react-phone-number-input": "^3.2.11",
+    "react-transition-group": "^4.4.5",
+    "reactstrap": "^9.1.4",
+    "url-loader": "^4.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.19.1",
+    "@expo/webpack-config": "^0.17.2",
+    "autoprefixer": "^10.4.12",
+    "file-loader": "^6.2.0",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
+  }
+}

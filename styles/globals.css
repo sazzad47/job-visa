@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img{
+  object-fit: cover;
+  object-position: 0 30%;
+}
+
+/* ----------- Loading ------------- */
+@import url("./loading.css");
+
+/* ----------- Products ------------- */
+@import url("./product.css");
+
+/* ----------- Profile ------------- */
+@import url("./profile.css");
+
+/* ----------- Products Manager ------------- */
+@import url("./products_manager.css");
+
+/* ----------- Home ------------- */
+@import url("./home.css");
+
+/* ----------- About ------------- */
+@import url("./about.css");
+
+/* ----------- Contact ------------- */
+@import url("./contact.css");
+
+/* ----------- Navbar ------------- */
+@import url("./navbar.css");
+
+/* ----------- Footer ------------- */
+@import url("./footer.css");
+
+/* ----------- Auth ------------- */
+@import url("./auth.css");
+
+/* ----------- Visa ------------- */
+@import url("./visa.css");

@@ -1,0 +1,37 @@
+/* Conatact section starts */
+
+.contact-input-box {
+    display: flex;
+    flex-direction: column-reverse;
+    color: black;
+    margin-bottom: 1rem;
+
+    
+}
+.contact-input {
+ background-color: rgb(226, 241, 247);
+ color: black;
+ outline: none;
+ border: none;
+ height: 2rem;
+ padding: 0.8rem;
+ border-radius: 3px;
+}
+.contact-textarea {
+ background-color: rgb(226, 241, 247);
+ color: #fff;
+ outline: none;
+ border: none;
+ padding: 0.8rem;
+ border-radius: 3px;
+}
+.contact form .inputBox input:focus ~ label,
+.contact form .inputBox input:valid ~ label,
+.contact form .inputBox textarea:focus ~ label,
+.contact form .inputBox textarea:valid ~ label{
+ top:-.5rem;
+ font-size: 1.5rem;
+ color:var(--pink);
+}
+
+/* Conatact section ends */
