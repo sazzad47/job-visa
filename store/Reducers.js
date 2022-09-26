@@ -1,4 +1,4 @@
-import { ACTIONS } from './Actions'
+import { ACTIONS, JOB_APPLICANT_ACTIONS } from './Actions'
 import { VISA_APPLICANT_ACTIONS } from './Actions';
 import { LOAN_APPLICANT_ACTIONS } from './Actions';
 
@@ -155,6 +155,50 @@ const reducers = (state, action) => {
                     ...state.loanApplicant,
                     communication: {
                         ...state.loanApplicant.communication,
+                        [action.payload.name]: action.payload.value
+                    }
+                }
+             };
+        case JOB_APPLICANT_ACTIONS.CHANGE_JOB_APPLICANTS_JOB_INPUTS: 
+            return {
+                ...state,
+                jobApplicant: {
+                    ...state.jobApplicant,
+                    jobInfo: {
+                        ...state.jobApplicant.jobInfo,
+                        [action.payload.name]: action.payload.value
+                    }
+                }
+             };
+        case JOB_APPLICANT_ACTIONS.CHANGE_JOB_APPLICANTS_INPUTS: 
+            return {
+                ...state,
+                jobApplicant: {
+                    ...state.jobApplicant,
+                    appliantInfo: {
+                        ...state.jobApplicant.appliantInfo,
+                        [action.payload.name]: action.payload.value
+                    }
+                }
+             };
+        case JOB_APPLICANT_ACTIONS.CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS: 
+            return {
+                ...state,
+                jobApplicant: {
+                    ...state.jobApplicant,
+                    passportVisaDetails: {
+                        ...state.jobApplicant.passportVisaDetails,
+                        [action.payload.name]: action.payload.value
+                    }
+                }
+             };
+        case JOB_APPLICANT_ACTIONS.CHANGE_JOB_APPLICANTS_CONTACT_INPUTS: 
+            return {
+                ...state,
+                jobApplicant: {
+                    ...state.jobApplicant,
+                    communication: {
+                        ...state.jobApplicant.communication,
                         [action.payload.name]: action.payload.value
                     }
                 }

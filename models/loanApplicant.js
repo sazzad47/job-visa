@@ -3,7 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 const loanApplicantSchema = new mongoose.Schema({
-    loanApplicationID: Number,
+    index: Number,
     visaApplyID: {
         type: String,
     },
@@ -126,7 +126,12 @@ const loanApplicantSchema = new mongoose.Schema({
     },
     loanStatus: {
         type: String,
+        default: "pending"
     },
+    done: {
+        type: Boolean,
+        default: false
+    }
     
 }, {
     timestamps: true
@@ -134,7 +139,7 @@ const loanApplicantSchema = new mongoose.Schema({
 
 
 if(!mongoose.models.loanApplicant){
-    loanApplicantSchema.plugin(AutoIncrement,{id:'loanApplicationCounter',inc_field:'loanApplicationID' });
+    loanApplicantSchema.plugin(AutoIncrement,{id:'loanApplicationCounter',inc_field:'index' });
   }
 
 let Dataset = mongoose.models.loanApplicant || mongoose.model('loanApplicant', loanApplicantSchema)

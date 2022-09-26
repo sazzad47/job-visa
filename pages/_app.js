@@ -1,4 +1,6 @@
-import '../styles/globals.css'
+// import '../styles/globals.css'
+import '../styles/test.scss'
+
 import Layout from '../components/Layout'
 import { DataProvider } from '../store/GlobalState'
 

@@ -8,11 +8,11 @@ import Footer from './footer/Footer'
 function Layout({children}) {
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <Notify />
             <Modal />
             {children}
-            <Footer/>
+            {/* <Footer/> */}
            
         </div>
     )

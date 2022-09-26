@@ -3,7 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 const visaApplicantSchema = new mongoose.Schema({
-    visaApplicationID: Number,
+    index: Number,
     IdentityCard: {
         type: String,
     },
@@ -177,7 +177,12 @@ const visaApplicantSchema = new mongoose.Schema({
     },
     visaStatus: {
         type: String,
+        default: "pending"
     },
+    done: {
+        type: Boolean,
+        default: false
+    }
     
 }, {
     timestamps: true
@@ -185,7 +190,7 @@ const visaApplicantSchema = new mongoose.Schema({
 
 
 if(!mongoose.models.visaApplicant){
-    visaApplicantSchema.plugin(AutoIncrement,{id:'visaApplicationCounter',inc_field:'visaApplicationID' });
+    visaApplicantSchema.plugin(AutoIncrement,{id:'visaApplicationCounter',inc_field:'index' });
   }
 
 let Dataset = mongoose.models.visaApplicant || mongoose.model('visaApplicant', visaApplicantSchema)

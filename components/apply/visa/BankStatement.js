@@ -67,7 +67,7 @@ const BankStatement = ({handleBack, handleNext}) => {
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?
-          <Button type='submit' variant='contained'>Next</Button>:
+          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
           <Button variant='contained' onClick={handleNext}>Next</Button>
         }
           </div>

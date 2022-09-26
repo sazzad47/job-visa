@@ -105,7 +105,7 @@ const ContactInfo = ({handleBack}) => {
     ])
     
 
-    const res = await postData('apply/visa', { 
+    const res = await postData('visaApplicants', { 
       ...visaApplicant,
       personalInfo: {
         ...visaApplicant.personalInfo,
