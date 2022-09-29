@@ -141,7 +141,9 @@ const getApplicants = async (req, res) => {
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
         console.log('perpage', filter)
-        const applicants = await LoanApplicants.find(filter).skip(skip).limit(limit).sort(sort)
+        const applicants = await LoanApplicants.find({
+            $and: [filter, {done: false}]
+        }).skip(skip).limit(limit).sort(sort)
         const totalApplicants = await LoanApplicants.find()
         // .skip(page * perPage)
         // .limit(perPage)

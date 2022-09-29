@@ -77,15 +77,17 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async(req, res) => {
     try {
-        const result = await auth(req, res)
+        // const result = await auth(req, res)
         
-        if(result.role !== 'admin') 
-        return res.status(400).json({err: 'Authentication is not valid.'})
+        // if(result.role !== 'admin') 
+        // return res.status(400).json({err: 'Authentication is not valid.'})
 
         const {id} = req.query
 
-        await VisaApplicants.findByIdAndDelete(id)
-        res.json({msg: 'Deleted a product.'})
+        await VisaApplicants.findOneAndUpdate({_id: id}, {
+            done: true
+        })
+        res.json({msg: 'Element deleted!'})
 
     } catch (err) {
         return res.status(500).json({err: err.message})

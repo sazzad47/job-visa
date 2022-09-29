@@ -1,14 +1,14 @@
 import connectDB from '../../../utils/connectDB'
-import LoanApplicants from '../../../models/loanApplicant'
+import Contact from '../../../models/contactModel'
 import auth from '../../../middleware/auth'
-import { ConstructionOutlined } from '@mui/icons-material'
+
 
 connectDB()
 
 export default async (req, res) => {
     switch(req.method){
         case "GET":
-            await getApplicant(req, res)
+            await getContact(req, res)
             break;
         case "PATCH":
             await updateStatus(req, res)
@@ -22,12 +22,12 @@ export default async (req, res) => {
     }
 }
 
-const getApplicant = async (req, res) => {
+const getContact = async (req, res) => {
     try {
         const { id } = req.query;
         
-        const applicant = await LoanApplicants.findById(id)
-        if(!applicant) return res.status(400).json({err: 'This applicant does not exist.'})
+        const applicant = await Contact.findById(id)
+        if(!applicant) return res.status(400).json({err: 'This contact does not exist.'})
         
         res.json({ applicant })
         
@@ -45,10 +45,9 @@ const updateStatus = async (req, res) => {
        const {id} = req.query
        const {status} = req.body
 
-       await LoanApplicants.findOneAndUpdate({_id: id}, {status})
+       await Contact.findOneAndUpdate({_id: id}, {status})
        res.json({msg: 'Success!'})
-       console.log('status',req.query)
-
+       
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
@@ -66,7 +65,7 @@ const updateProduct = async (req, res) => {
         if(!title || !price || !inStock || !description || !content || category === 'all' || images.length === 0)
         return res.status(400).json({err: 'Please add all the fields.'})
 
-        await LoanApplicants.findOneAndUpdate({_id: id}, {
+        await Contact.findOneAndUpdate({_id: id}, {
             title: title.toLowerCase(), price, inStock, description, content, category, images
         })
 
@@ -85,10 +84,9 @@ const deleteProduct = async(req, res) => {
 
         const {id} = req.query
 
-        await LoanApplicants.findOneAndUpdate({_id: id}, {
-            done: true
-        })
-        res.json({msg: 'Element deleted!'})
+        await Contact.findByIdAndDelete(id)
+        res.json({msg: 'Message deleted!'})
+
     } catch (err) {
         return res.status(500).json({err: err.message})
     }

@@ -1,37 +1,25 @@
-/* Conatact section starts */
-
-.contact-input-box {
-    display: flex;
-    flex-direction: column-reverse;
-    color: black;
-    margin-bottom: 1rem;
-
-    
-}
-.contact-input {
- background-color: rgb(226, 241, 247);
- color: black;
- outline: none;
- border: none;
- height: 2rem;
- padding: 0.8rem;
- border-radius: 3px;
-}
-.contact-textarea {
- background-color: rgb(226, 241, 247);
- color: #fff;
- outline: none;
- border: none;
- padding: 0.8rem;
- border-radius: 3px;
-}
-.contact form .inputBox input:focus ~ label,
-.contact form .inputBox input:valid ~ label,
-.contact form .inputBox textarea:focus ~ label,
-.contact form .inputBox textarea:valid ~ label{
- top:-.5rem;
- font-size: 1.5rem;
- color:var(--pink);
-}
-
-/* Conatact section ends */
+.contact-section {
+    background-color: var(--white);
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 799px) {
+    .contact-section {
+      --offset-height: -100px;
+  
+      display: grid;
+      grid-template-columns: 3fr 1.5fr;
+      width: 80vw;
+      height: 475px;
+      margin: 0 auto;
+      top: var(--offset-height);
+      left: 50%;
+      margin-left: -40vw;
+      margin-bottom: 5rem;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.15);
+    }
+  }
+  

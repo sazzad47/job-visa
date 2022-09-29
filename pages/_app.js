@@ -1,6 +1,6 @@
 // import '../styles/globals.css'
 import '../styles/test.scss'
-
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../components/Layout'
 import { DataProvider } from '../store/GlobalState'
 

@@ -16,12 +16,13 @@ const VisaApplicatioinList = props => {
     
    return (<List title="Loan Applicants" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
       
-        <Datagrid rowClick="edit">
+        <Datagrid>
             <TextField source="index" label="ID" />
             <TextField source="email" label="Email"/>
-            <TextField source="phone" label="Phone"/>
+            <TextField source="phoneNumber" label="Phone"/>
+            <TextField source="status" label="Status"/>
            
-            <EditButton/>
+          
             <ShowButton/>
         </Datagrid>
     </List>)
