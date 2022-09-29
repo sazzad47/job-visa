@@ -106,8 +106,9 @@ const Communication = ({handleBack}) => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    
     let media
+    
+    
     dispatch({ type: 'NOTIFY', payload: {loading: true} })
     
     if(!invalidDocument) media = await imageUpload([
@@ -132,8 +133,7 @@ const Communication = ({handleBack}) => {
         bankStatement
     ])
     
-
-    const res = await postData('apply/loan', { 
+    const res = await postData('loanApplicants', { 
       ...loanApplicant,
       appliantInfo: {
         ...loanApplicant.appliantInfo,
@@ -214,7 +214,7 @@ const Communication = ({handleBack}) => {
         minRows={3}
         name="comments"
         onChange={handleInput}
-        style={{ width: 200 }}
+        style={{ width: "100%" }}
       />
        <Row className="d-flex mt-3">
         <div className='d-flex align-items-center justify-content-start mb-2'>

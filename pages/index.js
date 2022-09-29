@@ -85,7 +85,7 @@ const Home = (props) => {
       
       <Team/>
       
-      <Newsletter/>
+      {/* <Newsletter/> */}
 
       {/* <Filter state={state} /> */}
 

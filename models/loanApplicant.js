@@ -124,7 +124,7 @@ const loanApplicantSchema = new mongoose.Schema({
     comments: {
         type: String,
     },
-    loanStatus: {
+    status: {
         type: String,
         default: "pending"
     },

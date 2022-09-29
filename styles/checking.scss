@@ -1,0 +1,18 @@
+.checking-container {
+    min-height: 100vh;
+    min-width: 100%;
+}
+.checking-effect {
+    text-transform: capitalize;
+    display:inline-block;
+    font-family: monospace;
+    font-size: 20px;
+    clip-path: inset(0 3ch 0 0);
+    animation: l 1s steps(4) infinite;
+  }
+  
+  @keyframes l {
+    to {
+      clip-path: inset(0 -1ch 0 0)
+    }
+  }

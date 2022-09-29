@@ -1,5 +1,5 @@
 import connectDB from '../../../utils/connectDB'
-import VisaApplicants from '../../../models/visaApplicant'
+import LoanApplicants from '../../../models/loanApplicant'
 import auth from '../../../middleware/auth'
 import { ConstructionOutlined } from '@mui/icons-material'
 
@@ -26,7 +26,7 @@ const getApplicant = async (req, res) => {
     try {
         const { id } = req.query;
         
-        const applicant = await VisaApplicants.findById(id)
+        const applicant = await LoanApplicants.findById(id)
         if(!applicant) return res.status(400).json({err: 'This applicant does not exist.'})
         
         res.json({ applicant })
@@ -45,9 +45,10 @@ const updateStatus = async (req, res) => {
        const {id} = req.query
        const {status} = req.body
 
-       await VisaApplicants.findOneAndUpdate({_id: id}, {status})
+       await LoanApplicants.findOneAndUpdate({_id: id}, {status})
        res.json({msg: 'Success!'})
-       
+       console.log('status',req.query)
+
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
@@ -65,7 +66,7 @@ const updateProduct = async (req, res) => {
         if(!title || !price || !inStock || !description || !content || category === 'all' || images.length === 0)
         return res.status(400).json({err: 'Please add all the fields.'})
 
-        await VisaApplicants.findOneAndUpdate({_id: id}, {
+        await LoanApplicants.findOneAndUpdate({_id: id}, {
             title: title.toLowerCase(), price, inStock, description, content, category, images
         })
 
@@ -84,7 +85,7 @@ const deleteProduct = async(req, res) => {
 
         const {id} = req.query
 
-        await VisaApplicants.findByIdAndDelete(id)
+        await LoanApplicants.findByIdAndDelete(id)
         res.json({msg: 'Deleted a product.'})
 
     } catch (err) {

@@ -175,7 +175,7 @@ const visaApplicantSchema = new mongoose.Schema({
     homePhone: {
         type: String,
     },
-    visaStatus: {
+    status: {
         type: String,
         default: "pending"
     },

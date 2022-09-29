@@ -23,6 +23,7 @@ const Header = () => {
   const theme = useTheme();
   const mobileNav = useRef(null);
   const [open, setOpen] = React.useState(false);
+  const [openCheckingMenu, setOpenCheckingMenu] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -33,12 +34,20 @@ const Header = () => {
   };
  
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorCheckingMenu, setAnchorCheckingMenu] = useState(null);
   const openDrop = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const openCheckingDrop = Boolean(anchorCheckingMenu);
+  const handleOpenCheckingDrop = (event) => {
+    setAnchorCheckingMenu(event.currentTarget);
+  };
+  const handleCloseCheckingDrop = () => {
+    setAnchorCheckingMenu(null);
   };
   return (
     <header className="header">
@@ -64,6 +73,20 @@ const Header = () => {
                     endIcon={<KeyboardArrowDownIcon />}
                   >
                     <span style={{color:'#fff'}}>Apply</span>
+                  </Button>
+              
+                  
+                  </li>
+                <li className="nav__item">
+                <Button
+                    id="basic-button"
+                    aria-controls={openCheckingMenu ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={openCheckingMenu ? 'true' : undefined}
+                    onClick={handleOpenCheckingDrop}
+                    endIcon={<KeyboardArrowDownIcon />}
+                  >
+                    <span style={{color:'#fff'}}>Checking</span>
                   </Button>
               
                   
@@ -111,6 +134,20 @@ const Header = () => {
         <Link href="/apply/visa"><MenuItem onClick={handleClose}>Apply for Visa</MenuItem></Link>
         <Link href="/apply/visaLoan"><MenuItem onClick={handleClose}>Apply for Visa Loan</MenuItem></Link>
         <Link href="/apply/jobs"><MenuItem onClick={handleClose}>Apply for jobs</MenuItem></Link>
+        
+      </Menu>
+        <Menu
+        id="basic-menu"
+        anchorEl={anchorCheckingMenu}
+        open={openCheckingDrop}
+        onClose={handleCloseCheckingDrop}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <Link href="/checking/visa"><MenuItem onClick={handleCloseCheckingDrop}>Visa Checking</MenuItem></Link>
+        <Link href="/checking/job"><MenuItem onClick={handleCloseCheckingDrop}>Job Checking</MenuItem></Link>
+        
         
       </Menu>
 

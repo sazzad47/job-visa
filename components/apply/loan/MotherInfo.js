@@ -57,8 +57,8 @@ const MotherInfo = ({handleBack, handleNext}) => {
         <FormControlLabel name='isMotherPresent' onChange={handleInput} value="no" control={<Radio />} label="Dead" />
        
       </RadioGroup>
-      {isMotherPresent ==='no'? <> <div className='mt-3 mb-2'>Death Certificate</div>
-          <FileUpload name="motherDeathCertificate" type='CHANGE_LOAN_APPLICANTS_MOTHER_INPUTS'/></>:null}
+      <div className='mt-3 mb-2'>Death Certificate</div>
+          <FileUpload name="motherDeathCertificate" type='CHANGE_LOAN_APPLICANTS_MOTHER_INPUTS'/>
       <div className='visa-form-input'>
         <TextField name='motherIdNumber' onChange={handleInput} required fullWidth label="ID Card Number" variant="outlined" />
       </div>

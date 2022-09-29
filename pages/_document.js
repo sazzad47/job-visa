@@ -5,7 +5,7 @@ class MyDocument extends Document{
         return(
             <Html lang="en">
                 <Head>
-                    <meta name="description" content="Dev AT E-commerce website with Next.js"/>
+                    <meta name="description" content="Job-Visa"/>
                     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"></link>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>

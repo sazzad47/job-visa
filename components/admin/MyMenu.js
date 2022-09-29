@@ -9,8 +9,8 @@ export const MyMenu = () => (
     <Menu>
         <Menu.DashboardItem />
         <Menu.Item to="/visaApplicants" primaryText="Visa Applicants" leftIcon={<BookIcon />}/>
-        <Menu.Item to="/" primaryText="Loan Applicants" leftIcon={<ChatBubbleIcon />}/>
-        <Menu.Item to="/users" primaryText="Job Applicants" leftIcon={<PeopleIcon />}/>
+        <Menu.Item to="/loanApplicants" primaryText="Loan Applicants" leftIcon={<ChatBubbleIcon />}/>
+        <Menu.Item to="/jobApplicants" primaryText="Job Applicants" leftIcon={<PeopleIcon />}/>
         <Menu.Item to="/custom-route" primaryText="Notice" leftIcon={<LabelIcon />}/>
         <Menu.Item to="/custom-route" primaryText="Worker Job" leftIcon={<LabelIcon />}/>
         <Menu.Item to="/custom-route" primaryText="Worker Job" leftIcon={<LabelIcon />}/>
