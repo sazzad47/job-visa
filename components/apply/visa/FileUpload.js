@@ -18,8 +18,8 @@ const FileUpload = ({name, type}) => {
       if(file.size > 1024 * 1024) //1mb
           return dispatch({type: 'NOTIFY', payload: {error: 'The largest image size is 1mb.'}})
 
-      if(file.type !== "image/jpeg" && file.type !== "image/png") //1mb
-          return dispatch({type: 'NOTIFY', payload: {error: 'Image format is incorrect.'}})
+      // if(file.type !== "image/jpeg" && file.type !== "image/png") //1mb
+      //     return dispatch({type: 'NOTIFY', payload: {error: 'Image format is incorrect.'}})
       
       dispatch({ type: type, payload: {name: e.target.name, value: file}})
       setCurrentFile(file)
@@ -43,7 +43,7 @@ const FileUpload = ({name, type}) => {
             className="btn-choose"
             variant="outlined"
             component="span" >
-             Choose Image
+             Browse file
           </Button>
         </label>
         <div className="file-name">

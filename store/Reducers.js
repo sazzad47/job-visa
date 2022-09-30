@@ -1,4 +1,4 @@
-import { ACTIONS, JOB_APPLICANT_ACTIONS } from './Actions'
+import { ACTIONS, JOBS_ACTIONS, JOB_APPLICANT_ACTIONS } from './Actions'
 import { VISA_APPLICANT_ACTIONS } from './Actions';
 import { LOAN_APPLICANT_ACTIONS } from './Actions';
 
@@ -201,6 +201,14 @@ const reducers = (state, action) => {
                         ...state.jobApplicant.communication,
                         [action.payload.name]: action.payload.value
                     }
+                }
+             };
+        case JOBS_ACTIONS.CHANGE_JOBS_CREATE_INPUTS: 
+            return {
+                ...state,
+                jobs: {
+                    ...state.jobs,
+                        [action.payload.name]: action.payload.value
                 }
              };
         case ACTIONS.NOTIFY:

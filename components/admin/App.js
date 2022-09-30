@@ -18,6 +18,7 @@ import JobApplicationShow from './job-application/ShowApplication';
 import ContactList from './contact/ContactList';
 import ShowContact from './contact/ShowContact';
 import JobList from './job/JobList';
+import JobCreate from './job/JobCreate';
 
 const dataProvider = myDataProvider(`${baseUrl}/api`, httpClient);
 const App = () => {
@@ -27,7 +28,7 @@ const App = () => {
       <Resource name="loanApplicants" list={LoanApplicatioinList} show={LoanApplicationShow} options={{label: "Loan Applicants"}} />
       <Resource name="jobApplicants" list={JobApplicatioinList} show={JobApplicationShow} options={{label: "Job Applicants"}} />
       <Resource name="contact" list={ContactList} show={ShowContact} options={{label: "Contacts"}} />
-      <Resource name="jobs" list={JobList} show={ShowContact} options={{label: "Jobs"}} />
+      <Resource name="jobs" list={JobList} create={JobCreate} options={{label: "Jobs"}} />
      
     </Admin>
   )

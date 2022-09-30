@@ -10,7 +10,7 @@ export default async (req, res) => {
             await createJob(req, res)
             break;
         case "GET":
-            await getApplicants(req, res)
+            await getJobs(req, res)
             break;
     }
 }
@@ -35,18 +35,18 @@ const createJob = async (req, res) => {
 
 
 
-const getApplicants = async (req, res) => {
+const getJobs = async (req, res) => {
     try {
 
         const filter = JSON.parse(req.query.query)
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
-        const applicants = await Jobs.find({
-            $and: [filter, {done: false}]
-        }).skip(skip).limit(limit).sort(sort)
+        const applicants = await Jobs.find(filter).skip(skip).limit(limit).sort(sort)
         const totalApplicants = await Jobs.find()
-    
+        // .skip(page * perPage)
+        // .limit(perPage)
+        
         res
         .setHeader("x-total-count", parseInt(totalApplicants.length))
         .json({

@@ -190,5 +190,11 @@ export const initialState = {
     
 
     },
+    jobs: {
+        title: '',
+        shortDescription: '',
+        photo: '',
+        file: '',
+    },
     notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: []
 }
