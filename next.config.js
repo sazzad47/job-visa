@@ -1,6 +1,6 @@
 module.exports = {
     env: {
-        "BASE_URL": "http://localhost:3000",
+        "BASE_URL": "https://job-visa.herokuapp.com",
         "MONGODB_URL": "mongodb+srv://sazzad:hadith@cluster0.kxnduio.mongodb.net/?retryWrites=true&w=majority",
         "ACCESS_TOKEN_SECRET": "YOUR_ACCESS_TOKEN_SECRET",
         "REFRESH_TOKEN_SECRET": "YOUR_REFRESH_TOKEN_SECRET",

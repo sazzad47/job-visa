@@ -49,7 +49,8 @@ const JobCreate = () => {
         return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
       }
     
-     console.log('state', photo, file)
+     console.log('state', photo)
+     console.log('state', file)
     return (
         <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
@@ -63,7 +64,7 @@ const JobCreate = () => {
             <Typography style={{marginTop: '1rem', marginBottom:'0.5rem'}}> Add a photo</Typography>
             <FileUpload name="photo" type="CHANGE_JOBS_CREATE_INPUTS"/>
             <Typography style={{marginTop: '1rem', marginBottom:'0.5rem'}}> Add a pdf file of the circular</Typography>
-            <FileUpload type="CHANGE_JOBS_CREATE_INPUTS"/>
+            <FileUpload name="file" type="CHANGE_JOBS_CREATE_INPUTS"/>
             <Button style={{marginTop:'1rem'}} variant="contained" type="submit"><SaveIcon/> Save</Button>
         </form>
     )
