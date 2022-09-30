@@ -13,10 +13,11 @@ import VisaApplicationShow from './visa/ShowApplication';
 import VisaApplicatioinList from './visa/ApplicationList';
 import LoanApplicatioinList from './loan/ApplicationList';
 import LoanApplicationShow from './loan/ShowApplication';
-import JobApplicatioinList from './job/ApplicationList';
-import JobApplicationShow from './job/ShowApplication';
+import JobApplicatioinList from './job-application/ApplicationList';
+import JobApplicationShow from './job-application/ShowApplication';
 import ContactList from './contact/ContactList';
 import ShowContact from './contact/ShowContact';
+import JobList from './job/JobList';
 
 const dataProvider = myDataProvider(`${baseUrl}/api`, httpClient);
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Resource name="loanApplicants" list={LoanApplicatioinList} show={LoanApplicationShow} options={{label: "Loan Applicants"}} />
       <Resource name="jobApplicants" list={JobApplicatioinList} show={JobApplicationShow} options={{label: "Job Applicants"}} />
       <Resource name="contact" list={ContactList} show={ShowContact} options={{label: "Contacts"}} />
+      <Resource name="jobs" list={JobList} show={ShowContact} options={{label: "Jobs"}} />
      
     </Admin>
   )

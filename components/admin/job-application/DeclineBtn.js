@@ -14,7 +14,7 @@ const DeclineBtn = () => {
        
          let id = record.id
          
-          patchData(`visaApplicants/${id}`, {status: 'declined'})
+         patchData(`jobApplicants/${id}`, {status: 'declined'})
          
           notify('Application declined!', {type: 'success'})
     }

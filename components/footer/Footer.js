@@ -54,7 +54,7 @@ const Footer = () => {
             </div>
 
             <div className="footer__bottom">
-              @Copyright 2022, designed and developed by Novage.
+              @Copyright 2022, Designed and Developed by Novage.
             </div>
           </div>
         </div>

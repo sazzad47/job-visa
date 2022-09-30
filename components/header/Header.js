@@ -93,8 +93,8 @@ const Header = () => {
                   </li>
                 <Link href="/about"><li className="nav__item"><a href="#">About</a></li></Link>
                 <Link href="/contact"><li className="nav__item"><a href="#about">Contact</a></li></Link>
-                <li className="navLoginBtn"><a href="#contact">Jobs</a></li>
-                <Link href='/auth'><li className="navLoginBtn"><a href="#contact">Login</a></li></Link>
+                <Link href="/jobs"><li className="navLoginBtn"><a style={{textDecoration: 'none'}}>Jobs</a></li></Link>
+                <Link href='/auth'><li className="navLoginBtn"><a style={{textDecoration: 'none'}}>Login</a></li></Link>
               </ul>
   
             {/* <nav className="mobile-nav d-flex d-md-none" ref={mobileNav}>

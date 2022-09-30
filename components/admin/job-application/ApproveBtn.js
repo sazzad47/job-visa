@@ -13,7 +13,7 @@ const ApproveBtn = () => {
         
          let id = record.id
           
-          patchData(`visaApplicants/${id}`, {status: 'approved'})
+          patchData(`jobApplicants/${id}`, {status: 'approved'})
           notify('Application approved!', {type: 'success'})
     }
     return (

@@ -9,7 +9,7 @@ const GeneratePDFButton = ({title}) => {
     const generatePDF = () => {
         
         let element = document.getElementById('exportToPDF');
-        savePDF(element, {pageSize: 'A4', margin: 40, title: `${title} Application No ${record.index}`, fileName: `${title} Application No ${record.index}`})
+        savePDF(element, {pageSize: 'A4', margin: 40, title: `Job Application No ${record.index}`, fileName: `${title} Application No ${record.index}`})
     }
 
     return (
