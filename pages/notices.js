@@ -1,10 +1,13 @@
 import React from 'react'
-const Notices = () => {
+import Intro from '../components/jobs/Intro'
+import JobItem from '../components/jobs/JobItem'
+const Notice = () => {
     return (
         <React.Fragment>
-
+            <Intro/>
+            <JobItem/>
         </React.Fragment>
     )
 }
 
-export default Notices
+export default Notice

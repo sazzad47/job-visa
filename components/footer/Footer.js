@@ -35,9 +35,9 @@ const Footer = () => {
             <div className="footer__item-03">
               <h4>Viewer Guide</h4>
               <ul className="quick__list">
-                <li><a href="#">Feature</a></li>
-                <li><a href="#">Blog Post</a></li>
-                <li><a href="#">Careers</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Cookies</a></li>
+                <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Help & Support</a></li>
               </ul>
             </div>
@@ -48,6 +48,7 @@ const Footer = () => {
                 <li><a href="#">About us</a></li>
                 <li><a href="#">Our clients</a></li>
                 <li><a href="#">Legal Notice</a></li>
+                <li><a href="#">Accessibility Statement</a></li>
                
               </ul>
             </div>
