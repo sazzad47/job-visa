@@ -196,5 +196,5 @@ export const initialState = {
         photo: '',
         file: '',
     },
-    notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: []
+    notify: {}, auth: {}, modal: [], users: []
 }
