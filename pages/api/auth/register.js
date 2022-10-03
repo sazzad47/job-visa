@@ -2,6 +2,7 @@ import connectDB from '../../../utils/connectDB'
 import Users from '../../../models/userModel'
 import valid from '../../../utils/valid'
 import bcrypt from 'bcrypt'
+import { createAccessToken, createRefreshToken } from '../../../utils/generateToken'
 
 
 connectDB()
@@ -29,9 +30,20 @@ const register = async (req, res) => {
         const newUser = new Users({ 
             name, email, password: passwordHash, cf_password 
         })
+        
+        const access_token = createAccessToken({id: newUser._id})
+        const refresh_token = createRefreshToken({id: newUser._id})
 
         await newUser.save()
-        res.json({msg: "Register Success!"})
+        res.json({
+            msg: "Registration Successful!",
+            refresh_token,
+            access_token,
+            user: {
+                ...newUser._doc,
+                password: ''
+            }
+    })
 
     }catch(err){
         return res.status(500).json({err: err.message})

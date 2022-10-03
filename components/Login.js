@@ -3,6 +3,7 @@ import {DataContext} from '../store/GlobalState'
 import {postData} from '../utils/fetchData'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
+import GoogleAuth from './GoogleAuth'
 
 const Login = ({handleOpenRegister}) => {
   const initialState = { email: '', password: '' }
@@ -48,6 +49,8 @@ const Login = ({handleOpenRegister}) => {
   return (
     <div>
         <h4>Login</h4>
+         <GoogleAuth/>
+         <h2 className='googleLoginOr'><span>Or</span></h2>
             <form onSubmit={handleSubmit}>
               <input 
               type='email' 
@@ -65,8 +68,8 @@ const Login = ({handleOpenRegister}) => {
               value={password}
               onChange={handleChangeInput}
               required/>
-              <button type='submit' className='submit-btn'>Submit</button>
               <input type='checkbox'/><span>Remember Me</span>
+              <button type='submit' className='submit-btn'>Submit</button>
             </form>
             <button type='button' className='butn' onClick={handleOpenRegister}>I'm New Here</button>
             

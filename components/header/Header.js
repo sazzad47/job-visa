@@ -8,6 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {styled, useTheme } from '@mui/material/styles';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { DataContext } from '../../store/GlobalState';
+import { useContext } from 'react';
+import LoggedRouter from './LoggedRouter';
 const drawerWidth = 240;
 
 
@@ -20,6 +23,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
 }));
 const Header = () => {
+  const {state, dispatch} = useContext(DataContext)
+  const { auth, cart } = state
+  
   const theme = useTheme();
   const mobileNav = useRef(null);
   const [open, setOpen] = React.useState(false);
@@ -92,12 +98,12 @@ const Header = () => {
                   
                   </li>
                 <Link href="/notices"><li className="nav__item"><a href="#">Notice</a></li></Link>
+                <Link href="/jobs"><li className="nav__item"><a href="#">Jobs</a></li></Link>
                 <Link href="/about"><li className="nav__item"><a href="#">Services</a></li></Link>
                 <Link href="/payment"><li className="nav__item"><a href="#">Payment</a></li></Link>
-                <Link href="/about"><li className="nav__item"><a href="#">About</a></li></Link>
                 <Link href="/contact"><li className="nav__item"><a href="#about">Contact</a></li></Link>
-                <Link href="/jobs"><li className="navLoginBtn"><a style={{textDecoration: 'none'}}>Jobs</a></li></Link>
-                <Link href='/auth'><li className="navLoginBtn"><a style={{textDecoration: 'none'}}>Login</a></li></Link>
+                {Object.keys(auth).length === 0?<Link href='/auth'><li className="navLoginBtn"><a style={{textDecoration: 'none'}}>Login</a></li></Link> 
+                : <LoggedRouter/>}
               </ul>
   
             {/* <nav className="mobile-nav d-flex d-md-none" ref={mobileNav}>
@@ -207,25 +213,24 @@ const Header = () => {
             </ListItem>
             </a>
             </Link>
-            <Link href="/about">
+            <Link href="/notices">
             <a>
             <ListItem onClick={handleDrawerClose}>
               Notice
             </ListItem>
             </a>
+            </Link>
+            <Link href="/services">
             <a>
             <ListItem onClick={handleDrawerClose}>
               Services
             </ListItem>
             </a>
+            </Link>
+            <Link href="/payment">
             <a>
             <ListItem onClick={handleDrawerClose}>
               Payment
-            </ListItem>
-            </a>
-            <a>
-            <ListItem onClick={handleDrawerClose}>
-              About
             </ListItem>
             </a>
             </Link>

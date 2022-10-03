@@ -3,7 +3,8 @@ import valid from '../utils/valid'
 import {DataContext} from '../store/GlobalState'
 import {postData} from '../utils/fetchData'
 import { useRouter } from 'next/router'
-
+import Cookie from 'js-cookie'
+import GoogleAuth from './GoogleAuth'
 const Register = ({handleOpenLogin}) => {
   const initialState = {name:'',email:'',password:'',cf_password:''};
   const [userData, setUserData] = useState(initialState);
@@ -30,9 +31,22 @@ const Register = ({handleOpenLogin}) => {
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
 
-    return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+    dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+
+    dispatch({ type: 'AUTH', payload: {
+      token: res.access_token,
+      user: res.user
+    }})
+
+    Cookie.set('refreshtoken', res.refresh_token, {
+      path: 'api/auth/accessToken',
+      expires: 7
+    })
+
+    localStorage.setItem('firstLogin', true)
   }
-   
+
+  
   useEffect(() => {
     if(Object.keys(auth).length !== 0) router.push("/")
   }, [auth])
@@ -40,6 +54,8 @@ const Register = ({handleOpenLogin}) => {
   return (
     <div>
       <h4>Register</h4>
+      <GoogleAuth/>
+         <h2 className='googleLoginOr'><span>Or</span></h2>
             <form onSubmit={handleSubmit}>
               <input 
               type='text' 
