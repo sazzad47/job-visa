@@ -40,17 +40,27 @@ const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
     MedicalReportDocument
   } = state.visaApplicant.medical;
 
-  const invalidDocument = (
-    !frontPhotoOfIdCard ||
-    !backPhotoOfIdCard ||
-    !photo ||
-    !signature ||
-    !passportDocument ||
-    !marriageCertificate ||
-    !ieltsDocument ||
-    !bankStateDocument ||
-    !MedicalReportDocument
-    )
+  
+  const documents = {
+    frontPhotoOfIdCard,
+    backPhotoOfIdCard,
+    photo,
+    signature,
+    passportDocument,
+    marriageCertificate,
+    ieltsDocument,
+    bankStateDocument,
+    MedicalReportDocument
+    }
+  Object.keys(documents).forEach(key => {
+    if (documents[key] === '') {
+      delete documents[key];
+    }
+  });
+
+  const validDocuments = Object.values(documents)
+  const validKeys = Object.keys(documents)
+
   const [phnValue, setPhnValue] = useState(null);
   const [homePhnValue, setHomePhnValue] = useState(null);
   const recaptcha = useRef(null);
@@ -92,57 +102,38 @@ const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
     let media
     // dispatch({ type: 'NOTIFY', payload: {loading: true} })
     setLoading(true)
-    if (!invalidDocument) {
-       media = await imageUpload([
-       frontPhotoOfIdCard,
-       backPhotoOfIdCard,
-       photo,
-       signature,
-       passportDocument,
-       marriageCertificate,
-       ieltsDocument,
-       bankStateDocument,
-       MedicalReportDocument
-    ])} else media = await imageUpload([
-      frontPhotoOfIdCard,
-      backPhotoOfIdCard,
-      photo,
-      signature,
-      passportDocument,
-      marriageCertificate,
-      bankStateDocument,
-      MedicalReportDocument
-   ])
+    media = await imageUpload(validDocuments)
+    const mediaData =  Object.assign.apply({}, validKeys.map( (v, i) => ( {[v]: media[i]} ) ) );
     
 
     const res = await postData('visaApplicants', { 
       ...visaApplicant,
       personalInfo: {
         ...visaApplicant.personalInfo,
-        frontPhotoOfIdCard: media[0].url,
-        backPhotoOfIdCard: media[1].url,
-        photo: media[2].url,
-        signature: media[3].url,
+        frontPhotoOfIdCard: mediaData.frontPhotoOfIdCard || "",
+        backPhotoOfIdCard: mediaData.backPhotoOfIdCard || "",
+        photo: mediaData.photo || "",
+        signature: mediaData.signature || "",
       },
       passportInfo: {
         ...visaApplicant.passportInfo,
-        passportDocument: media[4].url,
+        passportDocument: mediaData.passportDocument || "",
       },
       visaProcessingInfo: {
         ...visaApplicant.visaProcessingInfo,
-        marriageCertificate: media[5].url,
+        marriageCertificate: mediaData.marriageCertificate || "",
       },
       home: {
         ...visaApplicant.home,
-        ieltsDocument: ieltsDocument? media[6].url : '',
+        ieltsDocument: mediaData.ieltsDocument || "",
       },
       bank: {
         ...visaApplicant.bank,
-        bankStateDocument: ieltsDocument? media[7].url : media[6].url,
+        bankStateDocument: mediaData.bankStateDocument || "",
       },
       medical: {
         ...visaApplicant.medical,
-        MedicalReportDocument: ieltsDocument? media[8].url : media[7].url,
+        MedicalReportDocument: mediaData.MedicalReportDocument || "",
       },
   })
     

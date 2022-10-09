@@ -31,15 +31,26 @@ const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
   } = state.jobApplicant.passportVisaDetails;
  
 
-  const invalidDocument = (
-    !fJobExperienceCertificate ||
-    !sJobExperienceCertificate ||
-    !tJobExperienceCertificate ||
-    !foJobExperienceCertificate ||
-    !photo ||
-    !signature ||
-    !medicalReport
-    )
+ 
+    const documents = {
+    fJobExperienceCertificate,
+    sJobExperienceCertificate,
+    tJobExperienceCertificate,
+    foJobExperienceCertificate,
+    photo,
+    signature,
+    medicalReport
+    }
+
+    Object.keys(documents).forEach(key => {
+      if (documents[key] === '') {
+        delete documents[key];
+      }
+    });
+
+  const validDocuments = Object.values(documents)
+  const validKeys = Object.keys(documents)
+  
   const [phnValue, setPhnValue] = useState(null);
   const [homePhnValue, setHomePhnValue] = useState(null);
   const recaptcha = useRef(null);
@@ -81,34 +92,27 @@ const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
     let media
     // dispatch({ type: 'NOTIFY', payload: {loading: true} })
     setLoading(true)
-    if(!invalidDocument) media = await imageUpload([
-      fJobExperienceCertificate,
-      sJobExperienceCertificate,
-      tJobExperienceCertificate,
-      foJobExperienceCertificate,
-      photo,
-      signature,
-      medicalReport
-    ])
+    media = await imageUpload(validDocuments)
+    const mediaData =  Object.assign.apply({}, validKeys.map( (v, i) => ( {[v]: media[i]} ) ) );
     
 
     const res = await postData('jobApplicants', { 
       ...jobApplicant,
       jobInfo: {
         ...jobApplicant.jobInfo,
-        fJobExperienceCertificate: media[0].url,
-        sJobExperienceCertificate: media[1].url,
-        tJobExperienceCertificate: media[2].url,
-        foJobExperienceCertificate: media[3].url,
+        fJobExperienceCertificate: mediaData.fJobExperienceCertificate || "",
+        sJobExperienceCertificate: mediaData.sJobExperienceCertificate || "",
+        tJobExperienceCertificate: mediaData.tJobExperienceCertificate || "",
+        foJobExperienceCertificate: mediaData.foJobExperienceCertificate || "",
       },
       appliantInfo: {
         ...jobApplicant.appliantInfo,
-        photo: media[4].url,
-        signature: media[5].url,
+        photo: mediaData.photo || "",
+        signature: mediaData.signature || "",
       },
       passportVisaDetails: {
         ...jobApplicant.passportVisaDetails,
-        medicalReport: media[6].url,
+        medicalReport: mediaData.medicalReport || "",
       },
   })
     
