@@ -6,7 +6,7 @@ import Image from 'next/image';
 import loanIcon from '../../public/images/demos/loanIcon.png'
 import { useState } from 'react';
 
-const Visa = () => {
+const Laon = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   return (
@@ -31,4 +31,4 @@ const Visa = () => {
   )
 }
 
-export default Visa
+export default Loan

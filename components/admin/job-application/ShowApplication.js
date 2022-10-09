@@ -1,6 +1,7 @@
 
 import { Typography } from "@mui/material";
 import { ExportButton, FileField, ImageField, RichTextField, Show, SimpleShowLayout, TextField, TopToolbar, useRecordContext } from "react-admin";
+import SetCost from "../SetCost";
 import ApproveBtn from "./ApproveBtn";
 import { applicantInfo, contactInfo, jobInfo, passportVisaInfo } from "./data";
 import DeclineBtn from "./DeclineBtn";
@@ -16,7 +17,7 @@ const ApplicationTitle = () => {
 const ApplicationActions = () => (
     <TopToolbar>
         
-       
+        <SetCost resource="jobApplicants" />
         <ApproveBtn/>
         <DeclineBtn/>
         <GeneratePDFButton title="Job"/>

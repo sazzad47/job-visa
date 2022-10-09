@@ -8,7 +8,7 @@ const ApproveBtn = () => {
   const notify = useNotify()
   const record = useRecordContext();
   if (!record) return null;
-    const {dispatch} = useContext(DataContext)
+    
     const handleApprove = () => {
         
          let id = record.id

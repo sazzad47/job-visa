@@ -175,6 +175,10 @@ const visaApplicantSchema = new mongoose.Schema({
     homePhone: {
         type: String,
     },
+    cost: {
+        type: String,
+        default: "Not specified"
+    },
     status: {
         type: String,
         default: "pending"

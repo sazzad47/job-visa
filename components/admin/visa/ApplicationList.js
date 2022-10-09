@@ -20,6 +20,7 @@ const VisaApplicatioinList = props => {
             <TextField source="index" label="ID" />
             <TextField source="email" label="Email"/>
             <TextField source="phone" label="Phone"/>
+            <TextField source="cost" label="Cost"/>
             <TextField source="status" label="Status"/>
            
             <ShowButton/>

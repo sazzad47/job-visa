@@ -1,12 +1,13 @@
 import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
 
-import React, { useContext, useReducer, useState } from 'react'
-
+import React, { useContext, useReducer, useRef, useState } from 'react'
+import { toast } from 'react-toastify';
 import { DataContext } from '../../../store/GlobalState';
+import InputModal from '../../InputModal';
 
 
-const LoanInfo = ({handleNext}) => {
- 
+const LoanInfo = ({setTotalCost, setLoan, handleNext}) => {
+  
   const { state, dispatch } = useContext(DataContext);
   const {
     visaApplyID,
@@ -23,10 +24,22 @@ const LoanInfo = ({handleNext}) => {
     !loanAmount ||
     !amountOfMoney 
     )
-
-   
-   
+     function percentageToActual () {
+      const amountToApplyFor = ((parseInt(loanAmount)/100) * parseInt(totalRS)).toFixed(2);
+      const invalidAmount = isNaN(amountToApplyFor);
+      if (invalidAmount) return null;
+      return amountToApplyFor;
+     }
+    const handleNextPage = () => {
+      setTotalCost()
+      setLoan()
+      handleNext()
+    }
+    const handleNotify = () => {
+      toast("Sorry! You can't apply for more than 70% loan.", {type: 'error'})
+    }
     const handleInput = (e) => {
+      
       dispatch({
         type: 'CHANGE_LOAN_APPLICANTS_LOAN_INPUTS', 
         payload: {name: e.target.name, value: e.target.value}
@@ -48,21 +61,36 @@ const LoanInfo = ({handleNext}) => {
       <div className='visa-form-input'>
         <TextField name='jobApplyID' onChange={handleInput} required fullWidth label="Job Apply ID" placeholder='Enter your job apply ID' variant="outlined" />
       </div>
-      <div className='visa-form-input'>
-        <TextField name='totalRS' onChange={handleInput} required fullWidth label="Total Rs" variant="outlined" />
+      <div className='mt-3'>Total Rs</div>
+      <div className='visa-form-input mb-3'>
+        {/* <TextField name='totalRS' required fullWidth variant="outlined" ref={totalRSField} />  */}
+        <div className='loan-amount'>{totalRS}</div>
       </div>
+      
+      <FormLabel id="loanAmount">Loan Amount</FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="loanAmount"
+        name="loanAmount"
+        required
+        
+      >
+        <FormControlLabel name='loanAmount' onChange={handleInput} value="15" control={<Radio />} label="15%" />
+        <FormControlLabel name='loanAmount' onChange={handleInput} value="25" control={<Radio />} label="25%" />
+        <InputModal handleInput={handleInput} name="loanAmount" label="Loan Amount" placeholder="Ex. 30%" />
+       
+      </RadioGroup>
+      <div className='mt-3'>Amount of Money</div>
       <div className='visa-form-input'>
-        <TextField name='loanAmount' onChange={handleInput} required fullWidth label="Loan Amount" placeholder="Enter loan amount" variant="outlined" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='amountOfMoney' onChange={handleInput} required fullWidth label="Amount of Money" variant="outlined" />
+        {/* <TextField name='amountOfMoney' value={percentageToActual()} onChange={handleInput} required fullWidth disabled variant="outlined" /> */}
+       <div className='loan-amount'>{percentageToActual()}</div>
       </div>
     
           <div className='mt-4 d-flex align-items-center justify-content-end'>
 
           {emptyInput?
           <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
+          <Button variant='contained' onClick={ parseInt(loanAmount) > 70? handleNotify: handleNextPage}>Next</Button>
         }
           </div>
         </form>

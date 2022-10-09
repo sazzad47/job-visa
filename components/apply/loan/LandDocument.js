@@ -77,12 +77,13 @@ const LandDocument = ({handleBack, handleNext}) => {
       </div>
       
    
-       
+        {mediumOfGetting !== "Purchased property" && <> 
         <div className='mt-3 mb-2'>Death Certificate</div>
           <FileUpload accept="application/pdf" name="precursorDeathCertificate" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
         
         <div className='mt-3 mb-2'>Inheritance Certificate</div>
           <FileUpload accept="application/pdf" name="inheritanceCertificate" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
+         </>}
         <div className='mt-3 mb-2'>Upload complete house land documents</div>
           <FileUpload accept="application/pdf" name="houseLandDocuments" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
         <div className='mt-3 mb-2'>Loan Form</div>

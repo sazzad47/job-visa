@@ -11,7 +11,7 @@ import { postData } from '../../../utils/fetchData';
 import {imageUpload} from '../../../utils/imageUpload';
 import {fileUpload} from '../../../utils/fileUpload';
 
-const Communication = ({handleBack}) => {
+const Communication = ({setLoading, setSuccess, handleBack}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth, loanApplicant} = state;
   const {
@@ -118,7 +118,7 @@ const Communication = ({handleBack}) => {
     e.preventDefault()
     let media
     
-    
+       setLoading(true)
     // dispatch({ type: 'NOTIFY', payload: {loading: true} })
     
         media = await imageUpload(validDocuments)
@@ -163,7 +163,8 @@ const Communication = ({handleBack}) => {
   })
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-
+    setLoading(false)
+    setSuccess(true)
     return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
   }
 

@@ -148,6 +148,10 @@ const jobApplicantSchema = new mongoose.Schema({
     homePhoneNumber: {
         type: String,
     },
+    cost: {
+        type: String,
+        default: "Not specified"
+    },
     status: {
         type: String,
         default: "pending"

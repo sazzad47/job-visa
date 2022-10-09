@@ -78,7 +78,7 @@ export const initialState = {
         loanInfo: {
             visaApplyID: '',
             jobApplyID: '',
-            totalRS: '',
+            totalRS: '444',
             loanAmount: '',
             amountOfMoney: '',
         },

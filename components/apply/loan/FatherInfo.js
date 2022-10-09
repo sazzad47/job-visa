@@ -57,8 +57,12 @@ const FatherInfo = ({handleBack, handleNext}) => {
         <FormControlLabel name='isFatherPresent' onChange={handleInput} value="no" control={<Radio />} label="Dead" />
        
       </RadioGroup>
-      <div className='mt-3 mb-2'>Death Certificate</div>
+      {isFatherPresent === "no" &&
+        <> 
+       <div className='mt-3 mb-2'>Death Certificate</div>
           <FileUpload accept="application/pdf" name="fatherDeathCertificate" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          </>
+          }
       <div className='visa-form-input'>
         <TextField name='fatherIdNumber' onChange={handleInput} required fullWidth label="ID Card Number" variant="outlined" />
       </div>
@@ -69,8 +73,13 @@ const FatherInfo = ({handleBack, handleNext}) => {
           <FileUpload accept="image/*" name="fatherBackPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
         <div className='mt-3 mb-2'>Father&#39;s Photo</div>
           <FileUpload accept="image/*" name="photoOfFather" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
-        <div className='mt-3 mb-2'>Signature</div>
+          {isFatherPresent === "yes" &&
+        <> 
+       <div className='mt-3 mb-2'>Signature</div>
           <FileUpload accept="image/*" name="signatureOfFather" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          </>
+          }
+        
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

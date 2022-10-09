@@ -12,13 +12,15 @@ import MotherInfo from './MotherInfo';
 import LandDocument from './LandDocument';
 import BankDetails from './BankDetails';
 import Communication from './Communication';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Button } from '@mui/material';
 
 
-
-export default function LoanForm() {
+export default function LoanForm({loading, setLoading, success, setSuccess}) {
 
   const [activeStep, setActiveStep] = React.useState(0);
-  
+  const [totalCost, setTotalCost] = React.useState("");
+  const [loan, setLoan] = React.useState("");
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -30,7 +32,7 @@ export default function LoanForm() {
   const steps = [
     {
       label: 'Loan Information',
-      form: <LoanInfo handleNext={handleNext} handleBack={handleBack} />,
+      form: <LoanInfo setTotalCost={setTotalCost} setLoan={setLoan} handleNext={handleNext} handleBack={handleBack} />,
     },
     {
       label: 'Information of the Applicant',
@@ -55,14 +57,48 @@ export default function LoanForm() {
     },
     {
       label: 'Communication Medium',
-      form: <Communication handleNext={handleNext} handleBack={handleBack} />,
+      form: <Communication totalCost={totalCost} loan={loan} setLoading={setLoading} setSuccess={setSuccess} handleNext={handleNext} handleBack={handleBack} />,
     },
      
   ];
   
   const maxSteps = steps.length;
   return (
-    <Box sx={{ maxWidth: 450, flexGrow: 1 }}>
+    <>
+    {success?
+      
+      <Box sx={{ maxWidth: 450, flexGrow: 1 }}>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          pl: 2,
+          bgcolor: 'background.default',
+        }}
+      >  
+        <Box sx={{m:1}}><CheckCircleIcon color='primary' /></Box>
+        <Typography className='visa-page-form-title'>Uploaded successfully!</Typography>
+        
+        
+      </Paper>
+      <div className='d-flex align-items-center justify-content-center mb-2'>
+
+    
+      <Box sx={{ width: '100%', mt: 3 }}>
+       <Typography align='center'>Go to your dashboard to check your information.</Typography>
+      </Box>
+      </div>
+      <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2, display: 'flex', justifyContent: 'center' }}>
+        <Button variant='contained'>dashboard</Button>
+      </Box>
+      
+      
+    </Box> :
+
+      <Box sx={{ maxWidth: 450, flexGrow: 1 }}>
       <Paper
         square
         elevation={0}
@@ -74,46 +110,32 @@ export default function LoanForm() {
           bgcolor: 'background.default',
         }}
       >
-        <Typography className='visa-page-form-title'>{steps[activeStep].label}</Typography>
+        {loading? <Typography className='checking-effect visa-page-form-title'>Uploading...</Typography>
+        :<Typography className='visa-page-form-title'>{steps[activeStep].label}</Typography>}
+        
       </Paper>
       <div className='d-flex align-items-center justify-content-center mb-2'>
 
+      {loading? 
+      <Box sx={{ width: '100%', mt: 3 }}>
+       <Typography align='center'>Please wait, it may take some time depending on your internet speed.</Typography>
+      </Box>:
       <MobileStepper
         
         variant="dots"
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
-        />
+        />}
       </div>
-      <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2 }}>
+      {loading? null : <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2 }}>
         {steps[activeStep].form}
-      </Box>
-      {/* <MobileStepper
-        variant="progress"
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            variant='contained'
-            size="small"
-            onClick={handleNext}
-           
-            
-          >
-            {activeStep === maxSteps - 1? 'Submit': 'Next' }
-           
-          </Button>
-        }
-        backButton={
-          <Button size="small" variant='contained' onClick={handleBack} disabled={activeStep === 0}>
-            
-            Back
-          </Button>
-        }
-      /> */}
+      </Box>}
+      
+      
     </Box>
+  }
+  </>
   );
 }
 
