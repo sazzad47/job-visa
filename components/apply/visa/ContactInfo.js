@@ -10,7 +10,7 @@ import { DataContext } from '../../../store/GlobalState';
 import { postData } from '../../../utils/fetchData';
 import {imageUpload} from '../../../utils/imageUpload';
 
-const ContactInfo = ({handleBack}) => {
+const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth, visaApplicant} = state;
   const {
@@ -90,9 +90,10 @@ const ContactInfo = ({handleBack}) => {
     e.preventDefault()
     
     let media
-    dispatch({ type: 'NOTIFY', payload: {loading: true} })
-    
-    if(!invalidDocument) media = await imageUpload([
+    // dispatch({ type: 'NOTIFY', payload: {loading: true} })
+    setLoading(true)
+    if (!invalidDocument) {
+       media = await imageUpload([
        frontPhotoOfIdCard,
        backPhotoOfIdCard,
        photo,
@@ -102,7 +103,16 @@ const ContactInfo = ({handleBack}) => {
        ieltsDocument,
        bankStateDocument,
        MedicalReportDocument
-    ])
+    ])} else media = await imageUpload([
+      frontPhotoOfIdCard,
+      backPhotoOfIdCard,
+      photo,
+      signature,
+      passportDocument,
+      marriageCertificate,
+      bankStateDocument,
+      MedicalReportDocument
+   ])
     
 
     const res = await postData('visaApplicants', { 
@@ -124,20 +134,21 @@ const ContactInfo = ({handleBack}) => {
       },
       home: {
         ...visaApplicant.home,
-        ieltsDocument: media[6].url,
+        ieltsDocument: ieltsDocument? media[6].url : '',
       },
       bank: {
         ...visaApplicant.bank,
-        bankStateDocument: media[7].url,
+        bankStateDocument: ieltsDocument? media[7].url : media[6].url,
       },
       medical: {
         ...visaApplicant.medical,
-        MedicalReportDocument: media[8].url,
+        MedicalReportDocument: ieltsDocument? media[8].url : media[7].url,
       },
   })
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-
+    setLoading(false)
+    setSuccess(true)
     return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
   }
 

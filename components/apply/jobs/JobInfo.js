@@ -99,7 +99,7 @@ const BankStatement = ({handleBack, handleNext}) => {
         <TextField name='fJobExperience' onChange={handleInput} required fullWidth label="How many years of experience do you have?" variant="standard" />
       </div>
       <div className='mt-3 mb-2'>Job Experience Certificate</div>
-          <FileUpload name="fJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
+          <FileUpload accept="application/pdf" name="fJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
       <Typography className='mt-5'>Second Choice Job</Typography>
       <div className=''>
         <TextField name='sJobCountry' onChange={handleInput} required fullWidth label="Job Country Name" variant="standard" />
@@ -117,7 +117,7 @@ const BankStatement = ({handleBack, handleNext}) => {
         <TextField name='sJobExperience' onChange={handleInput} required fullWidth label="How many years of experience do you have?" variant="standard" />
       </div>
       <div className='mt-3 mb-2'>Job Experience Certificate</div>
-          <FileUpload name="sJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
+          <FileUpload accept="application/pdf" name="sJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
       <Typography className='mt-5'>Third Choice Job</Typography>
       <div className=''>
         <TextField name='tJobCountry' onChange={handleInput} required fullWidth label="Job Country Name" variant="standard" />
@@ -135,7 +135,7 @@ const BankStatement = ({handleBack, handleNext}) => {
         <TextField name='tJobExperience' onChange={handleInput} required fullWidth label="How many years of experience do you have?" variant="standard" />
       </div>
       <div className='mt-3 mb-2'>Job Experience Certificate</div>
-          <FileUpload name="tJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
+          <FileUpload accept="application/pdf" name="tJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
       <Typography className='mt-5'>Fourth Choice Job</Typography>
       <div className=''>
         <TextField name='foJobCountry' onChange={handleInput} required fullWidth label="Job Country Name" variant="standard" />
@@ -153,7 +153,7 @@ const BankStatement = ({handleBack, handleNext}) => {
         <TextField name='foJobExperience' onChange={handleInput} required fullWidth label="How many years of experience do you have?" variant="standard" />
       </div>
       <div className='mt-3 mb-2'>Job Experience Certificate</div>
-          <FileUpload name="foJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
+          <FileUpload accept="application/pdf" name="foJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
        <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

@@ -4,6 +4,9 @@ import {postData} from '../utils/fetchData'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 import GoogleAuth from './GoogleAuth'
+import { Typography } from '@mui/material'
+import Link from 'next/link'
+
 
 const Login = ({handleOpenRegister}) => {
   const initialState = { email: '', password: '' }
@@ -68,7 +71,7 @@ const Login = ({handleOpenRegister}) => {
               value={password}
               onChange={handleChangeInput}
               required/>
-              <input type='checkbox'/><span>Remember Me</span>
+              <Link href="/forgot-password"><a><Typography align='start' style={{fontSize:'12px'}}>Forgot your password?</Typography></a></Link>
               <button type='submit' className='submit-btn'>Submit</button>
             </form>
             <button type='button' className='butn' onClick={handleOpenRegister}>I'm New Here</button>

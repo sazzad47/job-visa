@@ -9,6 +9,10 @@ module.exports = {
         "CLOUD_NAME": "sazzadhossen",
         "CLOUD_API": "https://api.cloudinary.com/v1_1/sazzadhossen/image/upload",
         "GOOGLE_CLIENT_ID": "549887149127-2n4fmn3gath3nq4fuc5jhf3hmi4l04o2.apps.googleusercontent.com",
-        "GOOGLE_CLIENT_SECRET": "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"
+        "GOOGLE_CLIENT_SECRET": "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",
+        "SENDER_EMAIL": "sazzad47.ju",
+        "SENDER_EMAIL_PASSWORD": "vhhetgqwbssyyoyo",
+        "EMAIL_SERVICE":"smtp.gmail.com",
+        "EMAIL_PORT": 587,
     }
 }

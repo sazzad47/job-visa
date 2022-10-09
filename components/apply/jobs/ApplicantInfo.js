@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { countries } from '../visa/data';
+import InputModal from '../../InputModal';
 
 
 const PersonalInfo = ({handleBack, handleNext}) => {
@@ -88,8 +89,7 @@ const PersonalInfo = ({handleBack, handleNext}) => {
       >
         <FormControlLabel name='languages' onChange={handleInput} value="English" control={<Radio />} label="English" />
         <FormControlLabel name='languages' onChange={handleInput} value="Hindi" control={<Radio />} label="Hindi" />
-        <FormControlLabel name='languages' onChange={handleInput} value="Other" control={<Radio />} label="Other" />
-        
+        <InputModal handleInput={handleInput} name="languages" label="How many languages do you know?" placeholder="" />
       </RadioGroup>
       
       <div className='visa-form-input'>
@@ -152,9 +152,9 @@ const PersonalInfo = ({handleBack, handleNext}) => {
          </LocalizationProvider>
          </div>
          <div className='mt-3 mb-2'>Your Photo</div>
-          <FileUpload name="photo" type='CHANGE_JOB_APPLICANTS_INPUTS'/>
+          <FileUpload accept="image/*" name="photo" type='CHANGE_JOB_APPLICANTS_INPUTS'/>
          <div className='mt-3 mb-2'>Your Signature</div>
-           <FileUpload name="signature" type='CHANGE_JOB_APPLICANTS_INPUTS'/>
+           <FileUpload accept="image/*" name="signature" type='CHANGE_JOB_APPLICANTS_INPUTS'/>
        
            <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>

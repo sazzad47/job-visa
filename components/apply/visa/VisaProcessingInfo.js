@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from './FileUpload';
 import { countries } from './data';
 import { DataContext } from '../../../store/GlobalState';
+import InputModal from '../../InputModal';
 
 const VisaProcessingInfo = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
@@ -69,7 +70,7 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
         
       </RadioGroup>
       <div className='mt-3 mb-2'>Upload your marriage certificate</div>
-          <FileUpload name="marriageCertificate" type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"/>
+          <FileUpload accept="application/pdf" name="marriageCertificate" type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"/>
           <FormLabel className='mt-4' id="wishedStayDuration">How many months/years do you want to stay?</FormLabel>
       <RadioGroup
         row
@@ -78,7 +79,7 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
       >
         <FormControlLabel name='wishedStayDuration' onChange={handleInput} value="7 months" control={<Radio />} label="7 months" />
         <FormControlLabel name='wishedStayDuration' onChange={handleInput} value="3 years" control={<Radio />} label="3 years" />
-        <FormControlLabel name='wishedStayDuration' onChange={handleInput} value="other" control={<Radio />} label="other" />
+        <InputModal handleInput={handleInput} name="wishedStayDuration" label="How many months/years do you want to stay?" placeholder="" />
         
       </RadioGroup>
       <FormLabel className='mt-4' id="isWishingCitizenship">Do you want to be citizen there?</FormLabel>

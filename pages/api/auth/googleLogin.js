@@ -17,17 +17,14 @@ export default async (req, res) => {
 
 const googleLogin = async (req, res) => {
     try{
-        const {tokenId} = req.body
+        const {userData} = req.body
 
-        const verify = await client.verifyIdToken({idToken: tokenId, audience: process.env.GOOGLE_CLIENT_ID})
-        
-        const {email_verified, email, name, } = verify.payload
+        const {email, name} = userData
 
-        const password = email + process.env.GOOGLE_SECRET
+        const password = email + process.env.GOOGLE_CLIENT_SECRET
 
         const passwordHash = await bcrypt.hash(password, 12)
 
-        if(!email_verified) return res.status(400).json({msg: "Email verification failed."})
 
         const user = await Users.findOne({email})
         

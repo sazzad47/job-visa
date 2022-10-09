@@ -5,6 +5,7 @@ import React, { useContext, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
+import InputModal from '../../InputModal';
 
 const HomeInfo = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
@@ -98,7 +99,8 @@ const HomeInfo = ({handleBack, handleNext}) => {
         <FormControlLabel name='familyDependentOn' onChange={handleInput} value="My father" control={<Radio />} label="My father" />
         <FormControlLabel name='familyDependentOn' onChange={handleInput} value="My mother" control={<Radio />} label="My mother" />
         <FormControlLabel name='familyDependentOn' onChange={handleInput} value="Myself" control={<Radio />} label="Myself" />
-        <FormControlLabel name='familyDependentOn' onChange={handleInput} value="Other" control={<Radio />} label="Other" />
+        <InputModal handleInput={handleInput} name="familyDependentOn" label="Who does your family depend on?" placeholder="" />
+
         
       </RadioGroup>
       <div className='mt-3'>What do you do now?</div>
@@ -142,8 +144,12 @@ const HomeInfo = ({handleBack, handleNext}) => {
             <MenuItem value="9">9</MenuItem>
          </TextField>
         </div>
-        <div className='mt-3 mb-2'>IELTS Document</div>
-          <FileUpload name="ieltsDocument" type="CHANGE_VISA_APPLICANTS_HOME_INPUTS"/>
+        {ieltsScore !== 'No' &&
+          <>
+          <div className='mt-3 mb-2'>IELTS Document</div>
+          <FileUpload accept="application/pdf" name="ieltsDocument" type="CHANGE_VISA_APPLICANTS_HOME_INPUTS"/>
+          </>
+          }
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

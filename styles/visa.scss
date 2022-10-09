@@ -9,6 +9,25 @@
     margin-top: 1rem;
     
 }
+.visa-page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.visa-page-form {
+  margin: 2rem;
+  border-top: 2px solid rgb(109, 145, 245);
+}
+.form-no-border {
+  margin: 2rem;
+  padding: 0;
+}
+.visa-page-form-title {
+  font-weight: bold;
+  color: rgb(109, 145, 245)
+}
 
 /* file upload */
 

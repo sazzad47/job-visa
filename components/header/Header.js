@@ -156,6 +156,7 @@ const Header = () => {
       >
         <Link href="/checking/visa"><MenuItem onClick={handleCloseCheckingDrop}>Visa Checking</MenuItem></Link>
         <Link href="/checking/job"><MenuItem onClick={handleCloseCheckingDrop}>Job Checking</MenuItem></Link>
+        <Link href="/checking/loan"><MenuItem onClick={handleCloseCheckingDrop}>Loan Checking</MenuItem></Link>
         
         
       </Menu>
@@ -203,6 +204,27 @@ const Header = () => {
             <a>
             <ListItem onClick={handleDrawerClose}>
               Apply for Visa Loan
+            </ListItem>
+            </a>
+            </Link>
+            <Link href="/checking/visa">
+            <a>
+            <ListItem onClick={handleDrawerClose}>
+              Visa Checking
+            </ListItem>
+            </a>
+            </Link>
+            <Link href="/checking/job">
+            <a>
+            <ListItem onClick={handleDrawerClose}>
+              Job Checking
+            </ListItem>
+            </a>
+            </Link>
+            <Link href="/checking/loan">
+            <a>
+            <ListItem onClick={handleDrawerClose}>
+              Loan Checking
             </ListItem>
             </a>
             </Link>

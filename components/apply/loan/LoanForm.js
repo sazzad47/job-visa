@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
+import MobileStepper from '@mui/material/MobileStepper';
 import LoanInfo from './LoanInfo';
 import ApplicantInfo from './ApplicantInfo';
 import FatherInfo from './FatherInfo';
@@ -69,13 +69,23 @@ export default function LoanForm() {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          
+          justifyContent: 'center',
           pl: 2,
           bgcolor: 'background.default',
         }}
       >
-        <Typography style={{fontWeight:'bold'}}>{steps[activeStep].label}</Typography>
+        <Typography className='visa-page-form-title'>{steps[activeStep].label}</Typography>
       </Paper>
+      <div className='d-flex align-items-center justify-content-center mb-2'>
+
+      <MobileStepper
+        
+        variant="dots"
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+        />
+      </div>
       <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2 }}>
         {steps[activeStep].form}
       </Box>

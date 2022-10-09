@@ -131,7 +131,7 @@ const PassportDetails = ({handleBack, handleNext}) => {
          
       
         <div className='mt-3 mb-2'>Upload your passport</div>
-          <FileUpload name="passportDocument" type='CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS'/>
+          <FileUpload accept="application/pdf" name="passportDocument" type='CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

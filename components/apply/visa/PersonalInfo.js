@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { useRef } from 'react';
+import InputModal from '../../InputModal';
 
 const PersonalInfo = ({handleNext}) => {
  
@@ -104,7 +105,7 @@ const PersonalInfo = ({handleNext}) => {
         <FormControlLabel name='IdentityCard' onChange={handleInput} value="National ID Card" control={<Radio />} label="National ID Card" />
         <FormControlLabel name='IdentityCard' onChange={handleInput} value="Passport" control={<Radio />} label="Passport" />
         <FormControlLabel name='IdentityCard' onChange={handleInput} value="Birth Certificate" control={<Radio />} label="Birth Certificate" />
-        <FormControlLabel name='IdentityCard' onChange={handleInput} value="Other" control={<Radio />} label="Other" />
+        <InputModal handleInput={handleInput} name="IdentityCard" label="Identity Card" placeholder="Enter your Identity Card" />
       </RadioGroup>
       <div className='visa-form-input'>
         <TextField name='IdCardNumber' onChange={handleInput} required fullWidth label="ID Card Number" placeholder='Enter your ID card number' variant="outlined" />
@@ -145,8 +146,7 @@ const PersonalInfo = ({handleNext}) => {
       >
         <FormControlLabel name='gender' onChange={handleInput} value="Male" control={<Radio />} label="Male" />
         <FormControlLabel name='gender' onChange={handleInput} value="Female" control={<Radio />} label="Female" />
-        <FormControlLabel name='gender' onChange={handleInput} value="Other" control={<Radio />} label="Other" />
-        
+        <InputModal handleInput={handleInput} name="gender" label="Gender" placeholder="Enter your gender" />
       </RadioGroup>
       </div>
      
@@ -215,13 +215,13 @@ const PersonalInfo = ({handleNext}) => {
             </RadioGroup>
         </div>
         <div className='mt-3 mb-2'>Front Photo of your ID Card</div>
-          <FileUpload name="frontPhotoOfIdCard" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
+          <FileUpload accept="image/*" name="frontPhotoOfIdCard" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
         <div className='mt-3 mb-2'>Back Photo of your ID Card</div>
-          <FileUpload name="backPhotoOfIdCard" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
+          <FileUpload accept="image/*" name="backPhotoOfIdCard" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
         <div className='mt-3 mb-2'>Your Photo</div>
-          <FileUpload name="photo" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
+          <FileUpload accept="image/*" name="photo" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
         <div className='mt-3 mb-2'>Your Signature</div>
-          <FileUpload name="signature" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
+          <FileUpload accept="image/*" name="signature" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-end'>
 
           {emptyInput?

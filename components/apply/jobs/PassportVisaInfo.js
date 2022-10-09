@@ -99,7 +99,7 @@ const HomeInfo = ({handleBack, handleNext}) => {
         <TextField name='visaApplicationID' onChange={handleInput} required fullWidth label="Visa Application ID" variant="standard" />
       </div>
       <div className='mt-3 mb-2'>Medical Report</div>
-          <FileUpload name="medicalReport" type="CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS"/>
+          <FileUpload accept="application/pdf" name="medicalReport" type="CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS"/>
      
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>

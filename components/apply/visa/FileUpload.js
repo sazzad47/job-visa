@@ -6,7 +6,7 @@ import { DataContext } from '../../../store/GlobalState';
 
 
 
-const FileUpload = ({name, type}) => {
+const FileUpload = ({accept, name, type}) => {
     const {state, dispatch} = useContext(DataContext);
     const [currentFile, setCurrentFile] = useState(null);
    
@@ -15,8 +15,8 @@ const FileUpload = ({name, type}) => {
       if(!file)
           return dispatch({type: 'NOTIFY', payload: {error: 'File does not exist.'}})
 
-      if(file.size > 1024 * 1024) //1mb
-          return dispatch({type: 'NOTIFY', payload: {error: 'The largest image size is 1mb.'}})
+      // if(file.size > 1024 * 1024) //1mb
+      //     return dispatch({type: 'NOTIFY', payload: {error: 'The largest image size is 1mb.'}})
 
       // if(file.type !== "image/jpeg" && file.type !== "image/png") //1mb
       //     return dispatch({type: 'NOTIFY', payload: {error: 'Image format is incorrect.'}})
@@ -37,13 +37,15 @@ const FileUpload = ({name, type}) => {
             name={name}
             style={{ display: 'none' }}
             type="file"
-            accept="image/*"
+            // accept="image/*"
+            // accept="application/pdf"
+            accept={accept}
             onChange={selectFile} />
           <Button
             className="btn-choose"
             variant="outlined"
             component="span" >
-             Browse file
+             {accept==="image/*" ? "Browse Image" : "Browse file"}
           </Button>
         </label>
         <div className="file-name">

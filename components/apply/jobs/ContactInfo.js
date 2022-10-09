@@ -10,7 +10,7 @@ import { DataContext } from '../../../store/GlobalState';
 import { postData } from '../../../utils/fetchData';
 import {imageUpload} from '../../../utils/imageUpload';
 
-const ContactInfo = ({handleBack}) => {
+const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth, jobApplicant} = state;
   
@@ -79,8 +79,8 @@ const ContactInfo = ({handleBack}) => {
     e.preventDefault()
     
     let media
-    dispatch({ type: 'NOTIFY', payload: {loading: true} })
-    
+    // dispatch({ type: 'NOTIFY', payload: {loading: true} })
+    setLoading(true)
     if(!invalidDocument) media = await imageUpload([
       fJobExperienceCertificate,
       sJobExperienceCertificate,
@@ -113,7 +113,8 @@ const ContactInfo = ({handleBack}) => {
   })
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-
+    setLoading(false)
+    setSuccess(true)
     return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
   }
 

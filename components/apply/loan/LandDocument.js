@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from '../visa/FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { useRef } from 'react';
+import InputModal from '../../InputModal';
 
 const LandDocument = ({handleBack, handleNext}) => {
  
@@ -68,8 +69,7 @@ const LandDocument = ({handleBack, handleNext}) => {
         <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Father&#39;s property" control={<Radio />} label="Father&#39;s property" />
         <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Mother&#39;s property" control={<Radio />} label="Mother&#39;s property" />
         <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Grandfather&#39;s property" control={<Radio />} label="Grandfather&#39;s property" />
-        <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Other" control={<Radio />} label="Other" />
-        
+        <InputModal handleInput={handleInput} name="mediumOfGetting" label="How did you get this property?" placeholder="" />
       </RadioGroup>
       </div>
       <div className='visa-form-input'>

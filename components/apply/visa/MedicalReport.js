@@ -62,7 +62,7 @@ const MedicalReport = ({handleBack, handleNext}) => {
          </LocalizationProvider>
          </div>
          <div className='mt-3 mb-2'>Upload medical report file</div>
-          <FileUpload name="MedicalReportDocument" type="CHANGE_VISA_APPLICANTS_MEDICAL_INPUTS"/>
+          <FileUpload accept="application/pdf" name="MedicalReportDocument" type="CHANGE_VISA_APPLICANTS_MEDICAL_INPUTS"/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

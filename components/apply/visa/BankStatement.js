@@ -63,7 +63,7 @@ const BankStatement = ({handleBack, handleNext}) => {
          </LocalizationProvider>
          </div>
          <div className='mt-3 mb-2'>Upload bank statement file</div>
-          <FileUpload name="bankStateDocument" type="CHANGE_VISA_APPLICANTS_BANK_INPUTS"/>
+          <FileUpload accept="application/pdf" name="bankStateDocument" type="CHANGE_VISA_APPLICANTS_BANK_INPUTS"/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?
