@@ -47,13 +47,13 @@ const ApplicantInfo = ({handleBack, handleNext}) => {
         <TextField name='idNumber' onChange={handleInput} required fullWidth label="ID Card Number" placeholder='Enter your ID card number' variant="outlined" />
       </div>
         <div className='mt-3 mb-2'>Front Photo of your ID Card</div>
-          <FileUpload name="frontPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
+          <FileUpload accept="image/*" name="frontPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
         <div className='mt-3 mb-2'>Back Photo of your ID Card</div>
-          <FileUpload name="backPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
+          <FileUpload accept="image/*" name="backPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
         <div className='mt-3 mb-2'>Your Photo</div>
-          <FileUpload name="photoOfApplicant" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
+          <FileUpload accept="image/*" name="photoOfApplicant" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
         <div className='mt-3 mb-2'>Your Signature</div>
-          <FileUpload name="signature" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
+          <FileUpload accept="image/*" name="signature" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

@@ -58,19 +58,19 @@ const FatherInfo = ({handleBack, handleNext}) => {
        
       </RadioGroup>
       <div className='mt-3 mb-2'>Death Certificate</div>
-          <FileUpload name="fatherDeathCertificate" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          <FileUpload accept="application/pdf" name="fatherDeathCertificate" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
       <div className='visa-form-input'>
         <TextField name='fatherIdNumber' onChange={handleInput} required fullWidth label="ID Card Number" variant="outlined" />
       </div>
      
         <div className='mt-3 mb-2'>Front Photo of ID Card</div>
-          <FileUpload name="fatherFrontPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          <FileUpload accept="image/*" name="fatherFrontPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
         <div className='mt-3 mb-2'>Back Photo of ID Card</div>
-          <FileUpload name="fatherBackPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          <FileUpload accept="image/*" name="fatherBackPhotoOfIdCard" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
         <div className='mt-3 mb-2'>Father&#39;s Photo</div>
-          <FileUpload name="photoOfFather" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          <FileUpload accept="image/*" name="photoOfFather" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
         <div className='mt-3 mb-2'>Signature</div>
-          <FileUpload name="signatureOfFather" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
+          <FileUpload accept="image/*" name="signatureOfFather" type='CHANGE_LOAN_APPLICANTS_FATHER_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?

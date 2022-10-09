@@ -54,7 +54,7 @@ const BankDetails = ({handleBack, handleNext}) => {
       </div>
      
         <div className='mt-3 mb-2'>Bank Statement</div>
-          <FileUpload name="bankStatement" type='CHANGE_LOAN_APPLICANTS_BANK_INPUTS'/>
+          <FileUpload accept="application/pdf" name="bankStatement" type='CHANGE_LOAN_APPLICANTS_BANK_INPUTS'/>
         
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>

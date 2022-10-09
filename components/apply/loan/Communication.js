@@ -9,6 +9,7 @@ import {Row } from 'reactstrap';
 import { DataContext } from '../../../store/GlobalState';
 import { postData } from '../../../utils/fetchData';
 import {imageUpload} from '../../../utils/imageUpload';
+import {fileUpload} from '../../../utils/fileUpload';
 
 const Communication = ({handleBack}) => {
   const { state, dispatch } = useContext(DataContext);
@@ -48,27 +49,36 @@ const Communication = ({handleBack}) => {
   } = state.loanApplicant.bankDetails;
   
  
-  const invalidDocument = (
-    !frontPhotoOfIdCard ||
-    !backPhotoOfIdCard ||
-    !photoOfApplicant ||
-    !signature ||
-    !fatherDeathCertificate ||
-    !fatherFrontPhotoOfIdCard ||
-    !fatherBackPhotoOfIdCard ||
-    !photoOfFather ||
-    !signatureOfFather ||
-    !motherDeathCertificate ||
-    !motherFrontPhotoOfIdCard ||
-    !motherBackPhotoOfIdCard ||
-    !photoOfMother ||
-    !signatureOfMother ||
-    !precursorDeathCertificate ||
-    !inheritanceCertificate ||
-    !houseLandDocuments ||
-    !loanForm ||
-    !bankStatement
-    )
+  
+  const documents = {
+    frontPhotoOfIdCard,
+    backPhotoOfIdCard,
+    photoOfApplicant,
+    signature,
+    fatherDeathCertificate,
+    fatherFrontPhotoOfIdCard,
+    fatherBackPhotoOfIdCard,
+    photoOfFather,
+    signatureOfFather,
+    motherDeathCertificate,
+    motherFrontPhotoOfIdCard,
+    motherBackPhotoOfIdCard,
+    photoOfMother,
+    signatureOfMother,
+    precursorDeathCertificate,
+    inheritanceCertificate,
+    houseLandDocuments,
+    loanForm,
+    bankStatement
+  }
+  Object.keys(documents).forEach(key => {
+    if (documents[key] === '') {
+      delete documents[key];
+    }
+  });
+  const validDocuments = Object.values(documents)
+  const validKeys = Object.keys(documents)
+ 
   const [phnValue, setPhnValue] = useState(null);
   const [homePhnValue, setHomePhnValue] = useState(null);
   const recaptcha = useRef(null);
@@ -109,65 +119,46 @@ const Communication = ({handleBack}) => {
     let media
     
     
-    dispatch({ type: 'NOTIFY', payload: {loading: true} })
+    // dispatch({ type: 'NOTIFY', payload: {loading: true} })
     
-    if(!invalidDocument) media = await imageUpload([
-        frontPhotoOfIdCard,
-        backPhotoOfIdCard,
-        photoOfApplicant,
-        signature,
-        fatherDeathCertificate,
-        fatherFrontPhotoOfIdCard,
-        fatherBackPhotoOfIdCard,
-        photoOfFather,
-        signatureOfFather,
-        motherDeathCertificate,
-        motherFrontPhotoOfIdCard,
-        motherBackPhotoOfIdCard,
-        photoOfMother,
-        signatureOfMother,
-        precursorDeathCertificate,
-        inheritanceCertificate,
-        houseLandDocuments,
-        loanForm,
-        bankStatement
-    ])
-    
+        media = await imageUpload(validDocuments)
+        const mediaData =  Object.assign.apply({}, validKeys.map( (v, i) => ( {[v]: media[i]} ) ) );
+        
     const res = await postData('loanApplicants', { 
       ...loanApplicant,
       appliantInfo: {
         ...loanApplicant.appliantInfo,
-        frontPhotoOfIdCard: media[0].url,
-        backPhotoOfIdCard: media[1].url,
-        photoOfApplicant: media[2].url,
-        signature: media[3].url,
+        frontPhotoOfIdCard: mediaData.frontPhotoOfIdCard || "",
+        backPhotoOfIdCard: mediaData.backPhotoOfIdCard || "",
+        photoOfApplicant: mediaData.photoOfApplicant || "",
+        signature: mediaData.signature || "",
       },
       fatherInfo: {
         ...loanApplicant.fatherInfo,
-        fatherDeathCertificate: media[4].url,
-        fatherFrontPhotoOfIdCard: media[5].url,
-        fatherBackPhotoOfIdCard: media[6].url,
-        photoOfFather: media[7].url,
-        signatureOfFather: media[8].url,
+        fatherDeathCertificate: mediaData.fatherDeathCertificate || "",
+        fatherFrontPhotoOfIdCard: mediaData.fatherFrontPhotoOfIdCard || "",
+        fatherBackPhotoOfIdCard: mediaData.fatherBackPhotoOfIdCard || "",
+        photoOfFather: mediaData.photoOfFather || "",
+        signatureOfFather: mediaData.signatureOfFather || "",
       },
       motherInfo: {
         ...loanApplicant.motherInfo,
-        motherDeathCertificate: media[9].url,
-        motherFrontPhotoOfIdCard: media[10].url,
-        motherBackPhotoOfIdCard: media[11].url,
-        photoOfMother: media[12].url,
-        signatureOfMother: media[13].url,
+        motherDeathCertificate: mediaData.motherDeathCertificate || "",
+        motherFrontPhotoOfIdCard: mediaData.motherFrontPhotoOfIdCard || "",
+        motherBackPhotoOfIdCard: mediaData.motherBackPhotoOfIdCard || "",
+        photoOfMother: mediaData.photoOfMother || "",
+        signatureOfMother: mediaData.signatureOfMother || "",
       },
       landDocument: {
         ...loanApplicant.landDocument,
-        precursorDeathCertificate: media[14].url,
-        inheritanceCertificate: media[15].url,
-        houseLandDocuments: media[16].url,
-        loanForm: media[17].url,
+        precursorDeathCertificate: mediaData.precursorDeathCertificate || "",
+        inheritanceCertificate: mediaData.inheritanceCertificate || "",
+        houseLandDocuments: mediaData.houseLandDocuments || "",
+        loanForm: mediaData.loanForm || "",
       },
       bankDetails: {
         ...loanApplicant.bankDetails,
-        bankStatement: media[18].url,
+        bankStatement: mediaData.bankStatement || "",
       },
   })
     

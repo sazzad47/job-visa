@@ -17,7 +17,7 @@ export default async (req, res) => {
 
 const apply = async (req, res) => {
     try{
-        
+        console.log('loanApp', req.body)
         const { loanInfo, appliantInfo, fatherInfo, motherInfo, landDocument, bankDetails, communication } = req.body
         const {
             visaApplyID,

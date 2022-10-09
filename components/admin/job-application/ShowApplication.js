@@ -9,6 +9,7 @@ import GeneratePDFButton from "./GeneratePDFButton";
 const ApplicationTitle = () => {
     const record = useRecordContext();
     if (!record) return null;
+    console.log('pdf', record.sJobExperienceCertificate)
     return <span>{`Application No ${record.index}`}</span>;
 };
 
@@ -31,19 +32,20 @@ const VisaApplicationShow = props => (
             {/* <DateField label="Submission date" source="created_at" /> */}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Job Information</Typography>
              {jobInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
+             
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Applicant's Information</Typography>
              {applicantInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Passport/Visa Information</Typography>
              {passportVisaInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Contact Information</Typography>
              {contactInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
         </SimpleShowLayout>
     </Show>

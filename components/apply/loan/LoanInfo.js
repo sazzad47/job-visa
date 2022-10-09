@@ -54,7 +54,6 @@ const LoanInfo = ({handleNext}) => {
       <div className='visa-form-input'>
         <TextField name='loanAmount' onChange={handleInput} required fullWidth label="Loan Amount" placeholder="Enter loan amount" variant="outlined" />
       </div>
-      <div className='mt-3'>Address</div>
       <div className='visa-form-input'>
         <TextField name='amountOfMoney' onChange={handleInput} required fullWidth label="Amount of Money" variant="outlined" />
       </div>

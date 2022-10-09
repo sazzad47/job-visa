@@ -31,31 +31,31 @@ const VisaApplicationShow = props => (
             {/* <DateField label="Submission date" source="created_at" /> */}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Loan Information</Typography>
              {loanInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Applicant's Information</Typography>
              {applicantInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Father's Information</Typography>
              {fatherInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Mother's Information</Typography>
              {motherInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Land Information</Typography>
              {landInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Bank Information</Typography>
              {bankInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
             <Typography variant='h6' sx={{fontWeight: 'medium'}}>Contact Information</Typography>
              {contactInfo.map((item, i) => (
-                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} label={item.label} source={item.value}/>
+                item.type ==='text'? <TextField key={i} label={item.label} source={item.value}/> : item.type==='photo'? <ImageField key={i} label={item.label} source={item.value}/> : <FileField key={i} title={item.label} source={item.value}/>
              ))}
         </SimpleShowLayout>
     </Show>

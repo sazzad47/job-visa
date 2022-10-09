@@ -79,14 +79,14 @@ const LandDocument = ({handleBack, handleNext}) => {
    
        
         <div className='mt-3 mb-2'>Death Certificate</div>
-          <FileUpload name="precursorDeathCertificate" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
+          <FileUpload accept="application/pdf" name="precursorDeathCertificate" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
         
         <div className='mt-3 mb-2'>Inheritance Certificate</div>
-          <FileUpload name="inheritanceCertificate" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
+          <FileUpload accept="application/pdf" name="inheritanceCertificate" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
         <div className='mt-3 mb-2'>Upload complete house land documents</div>
-          <FileUpload name="houseLandDocuments" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
+          <FileUpload accept="application/pdf" name="houseLandDocuments" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
         <div className='mt-3 mb-2'>Loan Form</div>
-          <FileUpload name="loanForm" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
+          <FileUpload accept="application/pdf" name="loanForm" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
           {emptyInput?
