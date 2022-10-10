@@ -99,7 +99,7 @@ const Header = () => {
                   </li>
                 <Link href="/notices"><li className="nav__item"><a href="#">Notice</a></li></Link>
                 <Link href="/jobs"><li className="nav__item"><a href="#">Jobs</a></li></Link>
-                <Link href="/about"><li className="nav__item"><a href="#">Services</a></li></Link>
+                <Link href="/services"><li className="nav__item"><a href="#">Services</a></li></Link>
                 <Link href="/payment"><li className="nav__item"><a href="#">Payment</a></li></Link>
                 <Link href="/contact"><li className="nav__item"><a href="#about">Contact</a></li></Link>
                 {Object.keys(auth).length === 0?<Link href='/auth'><li className="navLoginBtn"><a style={{textDecoration: 'none'}}>Login</a></li></Link> 

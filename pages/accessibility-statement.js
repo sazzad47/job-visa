@@ -1,10 +1,13 @@
+import { Container } from '@mui/material'
 import React from 'react'
-const AccessibilityStatement = () => {
+import Breadcrumb from '../components/BreadCrumb'
+const AccessibiltyStatement = () => {
     return (
         <React.Fragment>
-
+           <Breadcrumb title="Accessibility Statement"/>
+           <Container></Container>
         </React.Fragment>
     )
 }
 
-export default AccessibilityStatement
+export default AccessibiltyStatement

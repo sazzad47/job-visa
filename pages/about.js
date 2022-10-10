@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import React from 'react'
+import Breadcrumb from '../components/BreadCrumb'
 import about from '../public/images/demos/about.png'
 
 const About = () => {
   return (
+    <>
+       <Breadcrumb title="About"/>
     <section id="about">
       <div className="container">
         <div className="search__engine-wrapper about__us">
@@ -38,6 +41,7 @@ const About = () => {
         </div>
       </div>
     </section>
+    </>
   )
 }
 

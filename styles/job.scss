@@ -1,0 +1,38 @@
+.job-intro-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    text-align: start;
+    background-color: var(--main-blue);
+    color: var(--white);
+    height: 30vh;
+    padding: 20px;
+    margin-bottom: 2rem;
+}
+.job-circular-board {
+    margin: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.job-post-container {
+    border-top: 2px solid blue;
+}
+.breadcrumb {
+    max-width: 100%;
+    background-color: rgb(250, 228, 228);
+    margin: 1rem;
+}
+.job-filter-container {
+    background-color: rgb(225, 242, 247);
+    
+    max-width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+.job-filter-select {
+    height: 4rem;
+} 
