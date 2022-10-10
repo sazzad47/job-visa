@@ -3,11 +3,12 @@ import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem,
 import React, { useContext, useReducer, useRef, useState } from 'react'
 import { toast } from 'react-toastify';
 import { DataContext } from '../../../store/GlobalState';
+import { getData } from '../../../utils/fetchData';
 import InputModal from '../../InputModal';
 
 
-const LoanInfo = ({setTotalCost, setLoan, handleNext}) => {
-  
+const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
+  const [loading, setLoading] = useState(false);
   const { state, dispatch } = useContext(DataContext);
   const {
     visaApplyID,
@@ -24,15 +25,25 @@ const LoanInfo = ({setTotalCost, setLoan, handleNext}) => {
     !loanAmount ||
     !amountOfMoney 
     )
-     function percentageToActual () {
-      const amountToApplyFor = ((parseInt(loanAmount)/100) * parseInt(totalRS)).toFixed(2);
-      const invalidAmount = isNaN(amountToApplyFor);
-      if (invalidAmount) return null;
-      return amountToApplyFor;
-     }
+    const getTotalCost = async() => {
+      setLoading(true)
+      const res = await getData(
+        `totalCost?visaApplyID=${visaApplyID}&jobApplyID=${jobApplyID}`
+      )
+      // if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+      setTotalCost(res.totalCost)
+      setLoading(false);
+    }
+    function percentageToActual () {
+     const amountToApplyFor = ((parseInt(loanAmount)/100) * parseInt(totalCost)).toFixed(2);
+     const invalidAmount = isNaN(amountToApplyFor);
+     if (invalidAmount) return null;
+     return amountToApplyFor;
+    }
+    const amountToApplyFor = percentageToActual()
     const handleNextPage = () => {
-      setTotalCost()
-      setLoan()
+      
+      setLoan(amountToApplyFor)
       handleNext()
     }
     const handleNotify = () => {
@@ -59,15 +70,17 @@ const LoanInfo = ({setTotalCost, setLoan, handleNext}) => {
         <TextField name='visaApplyID' onChange={handleInput} required fullWidth label="Visa Apply ID" placeholder='Enter your visa apply ID' variant="outlined" />
       </div>
       <div className='visa-form-input'>
-        <TextField name='jobApplyID' onChange={handleInput} required fullWidth label="Job Apply ID" placeholder='Enter your job apply ID' variant="outlined" />
+        <TextField name='jobApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Job Apply ID" placeholder='Enter your job apply ID' variant="outlined" />
       </div>
       <div className='mt-3'>Total Rs</div>
       <div className='visa-form-input mb-3'>
         {/* <TextField name='totalRS' required fullWidth variant="outlined" ref={totalRSField} />  */}
-        <div className='loan-amount'>{totalRS}</div>
+        <div className='loan-amount'>{loading? "loading..." : totalCost}</div>
       </div>
       
-      <FormLabel id="loanAmount">Loan Amount</FormLabel>
+      {totalCost &&
+        <> 
+        <FormLabel id="loanAmount">Loan Amount</FormLabel>
       <RadioGroup
         row
         aria-labelledby="loanAmount"
@@ -80,18 +93,24 @@ const LoanInfo = ({setTotalCost, setLoan, handleNext}) => {
         <InputModal handleInput={handleInput} name="loanAmount" label="Loan Amount" placeholder="Ex. 30%" />
        
       </RadioGroup>
+      </>
+      }
+      {totalCost && loanAmount && 
+      <>
       <div className='mt-3'>Amount of Money</div>
       <div className='visa-form-input'>
         {/* <TextField name='amountOfMoney' value={percentageToActual()} onChange={handleInput} required fullWidth disabled variant="outlined" /> */}
-       <div className='loan-amount'>{percentageToActual()}</div>
+       <div className='loan-amount'>{amountToApplyFor}</div>
       </div>
+      </>
+      }
     
           <div className='mt-4 d-flex align-items-center justify-content-end'>
 
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
+          
+          
           <Button variant='contained' onClick={ parseInt(loanAmount) > 70? handleNotify: handleNextPage}>Next</Button>
-        }
+        
           </div>
         </form>
     </React.Fragment>

@@ -32,7 +32,7 @@ export default function LoanForm({loading, setLoading, success, setSuccess}) {
   const steps = [
     {
       label: 'Loan Information',
-      form: <LoanInfo setTotalCost={setTotalCost} setLoan={setLoan} handleNext={handleNext} handleBack={handleBack} />,
+      form: <LoanInfo totalCost = {totalCost} setTotalCost={setTotalCost} setLoan={setLoan} handleNext={handleNext} handleBack={handleBack} />,
     },
     {
       label: 'Information of the Applicant',

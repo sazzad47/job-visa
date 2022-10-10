@@ -6,7 +6,7 @@ import Image from 'next/image';
 import loanIcon from '../../public/images/demos/loanIcon.png'
 import { useState } from 'react';
 
-const Laon = () => {
+const Loan = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   return (

@@ -11,7 +11,7 @@ import { postData } from '../../../utils/fetchData';
 import {imageUpload} from '../../../utils/imageUpload';
 import {fileUpload} from '../../../utils/fileUpload';
 
-const Communication = ({setLoading, setSuccess, handleBack}) => {
+const Communication = ({totalCost, loan, setLoading, setSuccess, handleBack}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth, loanApplicant} = state;
   const {
@@ -116,6 +116,7 @@ const Communication = ({setLoading, setSuccess, handleBack}) => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+    console.log('loan', loan)
     let media
     
        setLoading(true)
@@ -126,6 +127,11 @@ const Communication = ({setLoading, setSuccess, handleBack}) => {
         
     const res = await postData('loanApplicants', { 
       ...loanApplicant,
+      loanInfo: {
+        ...loanApplicant.loanInfo,
+        totalRS: totalCost,
+        amountOfMoney: loan,
+      },
       appliantInfo: {
         ...loanApplicant.appliantInfo,
         frontPhotoOfIdCard: mediaData.frontPhotoOfIdCard || "",
