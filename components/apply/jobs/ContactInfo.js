@@ -114,7 +114,7 @@ const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
         ...jobApplicant.passportVisaDetails,
         medicalReport: mediaData.medicalReport || "",
       },
-  })
+  }, auth.token)
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
     setLoading(false)

@@ -18,10 +18,10 @@ const ShowContact = props => (
 
            
             
-            <TextField Lable = "Name" source="name"/>
-            <TextField Lable = "Phone" source="phone"/>
-            <TextField Lable = "Email" source="email"/>
-            <TextField Lable = "Message" source="message"/>
+            <TextField label = "Name" source="name"/>
+            <TextField label = "Phone" source="phone"/>
+            <TextField label = "Email" source="email"/>
+            <TextField label = "Message" source="message"/>
            
             
         </SimpleShowLayout>

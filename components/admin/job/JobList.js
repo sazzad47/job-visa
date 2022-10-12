@@ -1,4 +1,4 @@
-import { CreateButton, Datagrid, EditButton, FileField, Filter, ImageField, List, SearchInput, ShowButton, TextField } from "react-admin"
+import { CreateButton, Datagrid, BooleanField, FileField, Filter, ImageField, List, SearchInput, ShowButton, TextField } from "react-admin"
 import { Pagination } from "../PostPagination"
 
 const SearchFilter = props => (

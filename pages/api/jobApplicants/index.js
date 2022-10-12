@@ -1,6 +1,8 @@
 import connectDB from '../../../utils/connectDB'
 import JobApplicants from '../../../models/jobApplicant'
-
+import Users from '../../../models/userModel'
+import auth from '../../../middleware/auth'
+import sendEmail from '../../../utils/mail'
 
 connectDB()
 
@@ -17,6 +19,7 @@ export default async (req, res) => {
 
 const apply = async (req, res) => {
     try{
+        const result = await auth(req, res)
         
         const { jobInfo, appliantInfo, passportVisaDetails, communication } = req.body
         const {
@@ -82,6 +85,7 @@ const apply = async (req, res) => {
        
 
         const newUser = new JobApplicants({ 
+            user: result.id,
             fJobCountry,
             fJobNo,
             fJobSL,
@@ -132,7 +136,27 @@ const apply = async (req, res) => {
             homePhoneNumber,
             
         })
+
+        await Users.findOneAndUpdate({_id: result.id}, {
+            $push: {jobApplications: newUser._id}
+        }, {new: true})
+
         await newUser.save()
+        await sendEmail({
+            to: newUser.email,
+            from: process.env.SENDER_EMAIL,
+            subject: '[job-visa] Received job application.',
+            html: `
+            <div>
+              <p>Hello, ${newUser.name}</p>
+              <p>We received your job application.</p>
+              <p>Sed ut perspiciatis unde omnis iste natus error
+               sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+               eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+               vitae dicta sunt explicabo.</p>
+            </div>
+            `,
+          });
         res.json({msg: "Application submitted successfully"})
 
     }catch(err){

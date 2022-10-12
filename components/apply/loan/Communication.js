@@ -166,7 +166,7 @@ const Communication = ({totalCost, loan, setLoading, setSuccess, handleBack}) =>
         ...loanApplicant.bankDetails,
         bankStatement: mediaData.bankStatement || "",
       },
-  })
+  }, auth.token)
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
     setLoading(false)

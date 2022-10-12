@@ -1,6 +1,8 @@
 import connectDB from '../../../utils/connectDB'
 import VisaApplicant from '../../../models/visaApplicant'
-
+import Users from '../../../models/userModel'
+import auth from '../../../middleware/auth'
+import sendEmail from '../../../utils/mail'
 
 connectDB()
 
@@ -17,6 +19,7 @@ export default async (req, res) => {
 
 const apply = async (req, res) => {
     try{
+        const result = await auth(req, res)
         
         const { personalInfo, passportInfo, visaProcessingInfo, home, bank, medical, contact } = req.body
         const {
@@ -98,6 +101,7 @@ const apply = async (req, res) => {
         } = contact;
 
         const newUser = new VisaApplicant({ 
+            user: result.id,
             IdentityCard,
             IdCardNumber,
             fullName,
@@ -157,8 +161,26 @@ const apply = async (req, res) => {
             homePhone,
             
         })
+        await Users.findOneAndUpdate({_id: result.id}, {
+            $push: {visaApplications: newUser._id}
+        }, {new: true})
 
         await newUser.save()
+        await sendEmail({
+            to: newUser.email,
+            from: process.env.SENDER_EMAIL,
+            subject: '[job-visa] Received visa application.',
+            html: `
+            <div>
+              <p>Hello, ${newUser.name}</p>
+              <p>We received your visa application.</p>
+              <p>Sed ut perspiciatis unde omnis iste natus error
+               sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+               eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+               vitae dicta sunt explicabo.</p>
+            </div>
+            `,
+          });
         res.json({msg: "Application submitted successfully"})
 
     }catch(err){
@@ -177,7 +199,7 @@ const getApplicants = async (req, res) => {
         const skip = parseInt(req.query.skip)
         const applicants = await VisaApplicant.find({
             $and: [filter, {done: false}]
-        }).skip(skip).limit(limit).sort(sort)
+        }).populate('user', '-password').skip(skip).limit(limit).sort(sort)
         const totalApplicants = await VisaApplicant.find()
     
         res
@@ -187,6 +209,7 @@ const getApplicants = async (req, res) => {
             result: applicants.length,
             applicants
         })
+        
     } catch (err) {
         return res.status(500).json({err: err.message})
     }

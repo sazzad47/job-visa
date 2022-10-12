@@ -2,6 +2,8 @@ import connectDB from '../../utils/connectDB'
 import LoanApplicants from '../../models/loanApplicant'
 import VisaApplicants from '../../models/visaApplicant'
 import JobApplicants from '../../models/jobApplicant'
+import Users from '../../models/userModel'
+import auth from '../../middleware/auth'
 connectDB()
 
 export default async (req, res) => {
@@ -18,23 +20,33 @@ export default async (req, res) => {
 
 const getTotalCost = async (req, res) => {
     const {visaApplyID, jobApplyID} = req.query
-    
+    console.log('jobApplyID', req.query)
     try {
-        let visa = await VisaApplicants.findOne({index: visaApplyID})
-        let job = await JobApplicants.findOne({index: jobApplyID})
-        let visaCost = parseInt(visa.cost)
-        let jobCost = parseInt(job.cost)
-        let totalCost = visaCost + jobCost
+        const result = await auth(req, res)
         
-        console.log('jobApplyID', totalCost)
+        const visa = await VisaApplicants.findOne({index: visaApplyID})
+        const job = await JobApplicants.findOne({index: jobApplyID})
+        // let jobCost = parseInt(job.cost)
+        // let visaCost = parseInt(visa.cost)
         
-        
-        
+        // let totalCost
+        // if (!visa || !job) return res.json({ totalCost: parseInt(job.cost) || parseInt(visa.cost), success: true })
+        if (!visa) return res.json({totalCost: parseInt(job.cost), success: true })
+        if (!job) return res.json({totalCost: parseInt(visa.cost), success: true })
+         
         res.json({
-            
-            totalCost,
+        
+            totalCost: parseInt(visa.cost) + parseInt(job.cost),
             success: true
         })
+        
+        
+        
+        
+        
+        
+        
+        
         
     } catch (err) {
         return res.status(500).json({ err: err.message })

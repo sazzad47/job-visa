@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const visaApplicantSchema = new mongoose.Schema({
     index: Number,
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'user'
+    },
     IdentityCard: {
         type: String,
     },
@@ -176,8 +180,12 @@ const visaApplicantSchema = new mongoose.Schema({
         type: String,
     },
     cost: {
-        type: String,
-        default: "Not specified"
+        type: Number,
+        default: 0
+    },
+    paid: {
+        type: Boolean,
+        default: false
     },
     status: {
         type: String,

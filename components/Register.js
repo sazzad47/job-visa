@@ -5,7 +5,11 @@ import {postData} from '../utils/fetchData'
 import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
 import GoogleAuth from './GoogleAuth'
+import { sendStatusCode } from 'next/dist/server/api-utils'
 const Register = ({handleOpenLogin}) => {
+  const [code, setCode] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const initialState = {name:'',email:'',password:'',cf_password:''};
   const [userData, setUserData] = useState(initialState);
   const {name, email, password, cf_password} = userData;
@@ -19,7 +23,26 @@ const Register = ({handleOpenLogin}) => {
       const {name, value} = e.target;
       setUserData({...userData,[name]:value})
   }
+  
+  const verifyEmail = async e => {
+    e.preventDefault()
+    const errMsg = valid(name, email, password, cf_password)
+    if(errMsg) return dispatch({ type: 'NOTIFY', payload: {error: errMsg} })
 
+    setLoading(true)
+    dispatch({ type: 'NOTIFY', payload: {loading: true} })
+    const res = await postData('auth/verifyEmail', userData)
+    
+    if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+
+    dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+    setLoading(false)
+    setSuccess(true)
+
+    
+
+   
+  }
   const handleSubmit = async e => {
     e.preventDefault()
     const errMsg = valid(name, email, password, cf_password)
@@ -54,44 +77,66 @@ const Register = ({handleOpenLogin}) => {
   return (
     <div>
       <h4>Register</h4>
-      <GoogleAuth/>
-         <h2 className='googleLoginOr'><span>Or</span></h2>
-            <form onSubmit={handleSubmit}>
+      {success?
+              <> 
+      
+          <div className='text-center'>Verify Email</div>
+            
+              <form onSubmit={verifyEmail}>
               <input 
-              type='text' 
+              type='number' 
               className='input-box' 
-              placeholder='Your Name'
-              name='name' 
-              value={name}
-              onChange={handleChangeInput}
+              placeholder='Enter the code'
+              name='code' 
+              value={code}
+              onChange={(e)=> setCode(e.target.value)} 
               required/>
-              <input 
-              type='email' 
-              className='input-box' 
-              placeholder='Your email'
-              name='email' 
-              value={email}
-              onChange={handleChangeInput}
-              required/>
-              <input 
-              type='password' 
-              className='input-box' 
-              placeholder='Password'
-              name='password' 
-              value={password}
-              onChange={handleChangeInput}
-              required/>
-              <input 
-              type='password' 
-              className='input-box' 
-              placeholder='Confirm password'
-              name='cf_password'
-              value={cf_password} 
-              onChange={handleChangeInput}
-              required/>
-              <button type='submit' className='submit-btn'>Submit</button>
+              
+              <button type='submit' className='submit-btn'>{loading? <span className="checking-effect">Verifying...</span>: "Verify"}</button>
             </form>
-            <button type='button' className='butn' onClick={handleOpenLogin}>I have an account</button>
+            
+            </> :
+            <> 
+            <GoogleAuth/>
+         <h2 className='googleLoginOr'><span>Or</span></h2>
+            <form onSubmit={verifyEmail}>
+            <input 
+            type='text' 
+            className='input-box' 
+            placeholder='Your Name'
+            name='name' 
+            value={name}
+            onChange={handleChangeInput}
+            required/>
+            <input 
+            type='email' 
+            className='input-box' 
+            placeholder='Your email'
+            name='email' 
+            value={email}
+            onChange={handleChangeInput}
+            required/>
+            <input 
+            type='password' 
+            className='input-box' 
+            placeholder='Password'
+            name='password' 
+            value={password}
+            onChange={handleChangeInput}
+            required/>
+            <input 
+            type='password' 
+            className='input-box' 
+            placeholder='Confirm password'
+            name='cf_password'
+            value={cf_password} 
+            onChange={handleChangeInput}
+            required/>
+            <button type='submit' className='submit-btn'>{loading? <span className="checking-effect">...</span>: "Submit"}</button>
+          </form>
+          <button type='button' className='butn' onClick={handleOpenLogin}>I have an account</button>
+          </>
+            }
     </div>
   )
 }

@@ -1,5 +1,8 @@
 import connectDB from '../../../utils/connectDB'
 import LoanApplicants from '../../../models/loanApplicant'
+import Users from '../../../models/userModel'
+import auth from '../../../middleware/auth'
+import sendEmail from '../../../utils/mail'
 
 
 connectDB()
@@ -17,7 +20,8 @@ export default async (req, res) => {
 
 const apply = async (req, res) => {
     try{
-        console.log('loanApp', req.body)
+        const result = await auth(req, res)
+        
         const { loanInfo, appliantInfo, fatherInfo, motherInfo, landDocument, bankDetails, communication } = req.body
         const {
             visaApplyID,
@@ -81,6 +85,7 @@ const apply = async (req, res) => {
         } = communication;
 
         const newUser = new LoanApplicants({ 
+            user: result.id,
             visaApplyID,
             jobApplyID,
             totalRS,
@@ -122,7 +127,26 @@ const apply = async (req, res) => {
             homePhoneNumber,
             comments,
         })
+        await Users.findOneAndUpdate({_id: result.id}, {
+            $push: {loans: newUser._id}
+        }, {new: true})
+
         await newUser.save()
+        await sendEmail({
+            to: newUser.email,
+            from: process.env.SENDER_EMAIL,
+            subject: '[job-visa] Received loan application.',
+            html: `
+            <div>
+              <p>Hello, ${newUser.name}</p>
+              <p>We received your loan application.</p>
+              <p>Sed ut perspiciatis unde omnis iste natus error
+               sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+               eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+               vitae dicta sunt explicabo.</p>
+            </div>
+            `,
+          });
         res.json({msg: "Application submitted successfully"})
 
     }catch(err){

@@ -4,7 +4,7 @@ import { Pagination } from "../PostPagination"
 const SearchFilter = props => (
 
     <Filter {...props}>
-      <SearchInput placeholder='Search ID' source="index" alwaysOn resettable/>
+      <SearchInput type="number" placeholder='Search ID' source="index" alwaysOn resettable/>
     </Filter>
     
    

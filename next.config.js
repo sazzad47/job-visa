@@ -14,5 +14,7 @@ module.exports = {
         "SENDER_EMAIL_PASSWORD": "vhhetgqwbssyyoyo",
         "EMAIL_SERVICE":"smtp.gmail.com",
         "EMAIL_PORT": 587,
+        "STRIPE_PUBLISHABLE_KEY": "pk_test_51LrTfeJMUXLRq6IyglTDRwYn5u3775QpPpASw9EA5gXG3WV1ruqa9XTuhwCQzfJ3nEY5HVtDniOJqk2PPf0HvoEa00SjMu5j1a",
+        "STRIPE_SECRET_KEY": "sk_test_51LrTfeJMUXLRq6IylpiimFXxuzAo7dn7ubQvTWvuTXY4Ukydi8oJEVjALdsytV3dF7afZ1tUREbcPaUQJBoSEwut00cFnGtmxC"
     }
 }

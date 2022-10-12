@@ -1,8 +1,8 @@
 import React from 'react'
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-const DownloadPDF = () => {
+const DownloadPDF = ({url}) => {
   const handleDownload = () => {
-    fetch("https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf").then(response => {
+    fetch(url).then(response => {
     response.blob().then(blob => {
       
         const fileURL = window.URL.createObjectURL(blob);

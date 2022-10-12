@@ -135,7 +135,7 @@ const ContactInfo = ({setLoading, setSuccess, handleBack}) => {
         ...visaApplicant.medical,
         MedicalReportDocument: mediaData.MedicalReportDocument || "",
       },
-  })
+  }, auth.token)
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
     setLoading(false)

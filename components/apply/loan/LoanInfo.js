@@ -10,6 +10,7 @@ import InputModal from '../../InputModal';
 const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
   const [loading, setLoading] = useState(false);
   const { state, dispatch } = useContext(DataContext);
+  const {auth} = state
   const {
     visaApplyID,
     jobApplyID,
@@ -28,7 +29,7 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
     const getTotalCost = async() => {
       setLoading(true)
       const res = await getData(
-        `totalCost?visaApplyID=${visaApplyID}&jobApplyID=${jobApplyID}`
+        `totalCost?visaApplyID=${visaApplyID}&jobApplyID=${jobApplyID}`, auth.token
       )
       // if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
       setTotalCost(res.totalCost)
@@ -67,7 +68,7 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
       <form onSubmit={handleSubmit}>
       
       <div className='visa-form-input'>
-        <TextField name='visaApplyID' onChange={handleInput} required fullWidth label="Visa Apply ID" placeholder='Enter your visa apply ID' variant="outlined" />
+        <TextField name='visaApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Visa Apply ID" placeholder='Enter your visa apply ID' variant="outlined" />
       </div>
       <div className='visa-form-input'>
         <TextField name='jobApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Job Apply ID" placeholder='Enter your job apply ID' variant="outlined" />

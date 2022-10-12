@@ -8,16 +8,14 @@ import Checkbox from '@mui/material/Checkbox';
 export default function AddressForm() {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Shipping address
-      </Typography>
+      
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
             required
             id="firstName"
             name="firstName"
-            label="First name"
+            label="Visa Application ID"
             fullWidth
             autoComplete="given-name"
             variant="standard"
@@ -28,7 +26,7 @@ export default function AddressForm() {
             required
             id="lastName"
             name="lastName"
-            label="Last name"
+            label="Job Application ID"
             fullWidth
             autoComplete="family-name"
             variant="standard"

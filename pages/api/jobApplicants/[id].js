@@ -1,7 +1,8 @@
 import connectDB from '../../../utils/connectDB'
 import JobApplicants from '../../../models/jobApplicant'
 import auth from '../../../middleware/auth'
-import { ConstructionOutlined } from '@mui/icons-material'
+import Users from '../../../models/userModel'
+import sendEmail from '../../../utils/mail'
 
 connectDB()
 
@@ -45,7 +46,39 @@ const updateStatus = async (req, res) => {
        const {id} = req.query
        const {status} = req.body
 
-       await JobApplicants.findOneAndUpdate({_id: id}, {status})
+       const application = await JobApplicants.findOneAndUpdate({_id: id}, {status}).populate('user', '-password')
+       
+       if (status === "approved") return await sendEmail({
+        to: application.user.email,
+        from: process.env.SENDER_EMAIL,
+        subject: '[job-visa] Job application approved.',
+        html: `
+        <div>
+          <p>Hello, ${application.user.name}</p>
+          <p>Your job application has been approved!.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error
+           sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+           eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+           vitae dicta sunt explicabo.</p>
+        </div>
+        `,
+      });
+
+      await sendEmail({
+        to: application.user.email,
+        from: process.env.SENDER_EMAIL,
+        subject: '[job-visa] Job application declined.',
+        html: `
+        <div>
+          <p>Hello, ${application.user.name}</p>
+          <p>Your job application has been declined!.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error
+           sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+           eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+           vitae dicta sunt explicabo.</p>
+        </div>
+        `,
+      });
        res.json({msg: 'Success!'})
        
       
@@ -59,11 +92,27 @@ const updateCost = async (req, res) => {
     //    if(result.role !== 'admin' || !result.root) 
     //    return res.status(400).json({err: "Authentication is not valid"})
 
-       const {id} = req.query
-       const {cost} = req.body
+    const {id} = req.query
+    const {cost} = req.body
 
-       await JobApplicants.findOneAndUpdate({_id: id}, {cost})
-       res.json({msg: 'Success!'})
+    const application = await JobApplicants.findOneAndUpdate({_id: id}, {cost: parseInt(cost)}).populate('user', '-password')
+    await JobApplicants.findOneAndUpdate({_id: id}, {paid: false})
+       await sendEmail({
+        to: application.user.email,
+        from: process.env.SENDER_EMAIL,
+        subject: '[job-visa] Job cost.',
+        html: `
+        <div>
+          <p>Hello, ${application.user.name}</p>
+          <p>Your job cost is ${cost}.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error
+           sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+           eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+           vitae dicta sunt explicabo.</p>
+        </div>
+        `,
+      });
+    res.json({msg: 'Success!'})
        
     } catch (err) {
         return res.status(500).json({err: err.message})

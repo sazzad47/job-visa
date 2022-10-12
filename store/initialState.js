@@ -190,11 +190,17 @@ export const initialState = {
     
 
     },
+    paymentInfo: {
+       visaApplyID: 0,
+       jobApplyID: 0,
+       bankReceipt: ''
+    },
     jobs: {
         title: '',
         shortDescription: '',
         photo: '',
         file: '',
+        method: ''
     },
     notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: []
 }

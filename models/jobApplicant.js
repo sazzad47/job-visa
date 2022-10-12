@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const jobApplicantSchema = new mongoose.Schema({
     index: Number,
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'user'
+    },
     fJobCountry: {
         type: String,
     },
@@ -149,8 +153,12 @@ const jobApplicantSchema = new mongoose.Schema({
         type: String,
     },
     cost: {
-        type: String,
-        default: "Not specified"
+        type: Number,
+        default: 0
+    },
+    paid: {
+        type: Boolean,
+        default: false
     },
     status: {
         type: String,

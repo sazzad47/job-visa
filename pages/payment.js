@@ -11,33 +11,27 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import PaymentWithCard from '../components/payment/Card'
+import Bank from '../components/payment/Bank'
 import AddressForm from '../components/payment/AddressForm';
 import PaymentForm from '../components/payment/PaymentForm';
 import Review from '../components/payment/Review';
 import Breadcrumb from '../components/BreadCrumb';
 
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
 
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [value, setValue] = React.useState('1');
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -52,7 +46,21 @@ export default function Checkout() {
      <>
      <Breadcrumb title="Payment"/>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Box sx={{ width: '100%', typography: 'body1' }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChange} aria-label="lab API tabs example">
+                <Tab style={{textTransform:'none'}} label="Pay with card" value="1" />
+                <Tab style={{textTransform:'none'}} label="Pay with bank" value="2" />
+                
+              </TabList>
+            </Box>
+            <TabPanel value="1"><PaymentWithCard /></TabPanel>
+            <TabPanel value="2"><Bank/></TabPanel>
+            
+          </TabContext>
+        </Box>
+        {/* <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
           </Typography>
@@ -95,7 +103,7 @@ export default function Checkout() {
               </React.Fragment>
             )}
           </React.Fragment>
-        </Paper>
+        </Paper> */}
        
       </Container>
       </>

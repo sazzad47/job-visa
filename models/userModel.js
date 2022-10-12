@@ -26,6 +26,21 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    visaCost: {
+        type: Number,
+        default: 0
+    },
+    jobCost: {
+        type: Number,
+        default: 0
+    },
+    totalCost: {
+         type: Number,
+         default: 0
+    },
+    visaApplications: [{ type: Schema.Types.ObjectId, ref: 'visaApplicant' }],
+    jobApplications: [{ type: Schema.Types.ObjectId, ref: 'jobApplicant' }],
+    loans: [{ type: Schema.Types.ObjectId, ref: 'loanApplicant' }],
     avatar: {
         type: String,
         default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
