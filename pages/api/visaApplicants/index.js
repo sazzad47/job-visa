@@ -201,13 +201,18 @@ const getApplicants = async (req, res) => {
             $and: [filter, {done: false}]
         }).populate('user', '-password').skip(skip).limit(limit).sort(sort)
         const totalApplicants = await VisaApplicant.find()
-    
+        let modifiedApplicants = applicants.map(a => {
+            var returnValue = {...a};
+            returnValue.user = returnValue.user.index;
+          
+            return returnValue
+          })
         res
         .setHeader("x-total-count", parseInt(totalApplicants.length))
         .json({
             status: 'success',
             result: applicants.length,
-            applicants
+            applicants: modifiedApplicants
         })
         
     } catch (err) {

@@ -10,10 +10,10 @@ import { countries } from '../../data';
 import { useState } from 'react';
 import FileUpload from "react-material-file-upload";
 
-const JobCreate = () => {
-  const initialState = { title: '', country: '', file: '' }
+const CreateNotice = () => {
+  const initialState = { title: '', file: '' }
   const [data, setData] = useState(initialState)
-  const { title, country, file } = data
+  const { title, file } = data
   const [files, setFiles] = useState([]);
   const selectedFile = files[0]
     
@@ -41,7 +41,7 @@ const JobCreate = () => {
             selectedFile
         ])
         
-        const res = await postData('jobs', { 
+        const res = await postData('notices', { 
            ...data,
           file: media[0],
            
@@ -57,29 +57,10 @@ const JobCreate = () => {
     return (
         <form onSubmit={handleSubmit}>
             <Grid container spacing={2} sx={{mt:3}}>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={8}>
                     <TextField fullWidth multiline name="title" value={title} label="Title" onChange={handleChangeInput}/> 
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    
-                    <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-filled-label">Country</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-filled-label"
-                        id="demo-simple-select-filled"
-                        fullWidth
-                        name="country"
-                        value={country}
-                        onChange={handleChangeInput}
-                        >
-                        
-                        {countries.map((item, i) => (
-                            <MenuItem key={i} value={item.name}>{item.name}</MenuItem>
-                        ))} 
-                       
-                        </Select>
-                    </FormControl>
-                </Grid>
+                
             </Grid>
             
             <Grid className="mt-3">
@@ -90,4 +71,4 @@ const JobCreate = () => {
         </form>
     )
 }
-export default JobCreate
+export default CreateNotice

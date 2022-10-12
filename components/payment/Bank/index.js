@@ -51,20 +51,13 @@ const Index = () => {
         })
   
       }
-      const item = {
-        name: "Visa and Job",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-        visaApplyID,
-        jobApplyID,
-        quantity: 1,
-        price: totalCost,
-      };
-      console.log('item', item)
+      
+     
       
   return (
     <> 
      {start? 
-     <Form  /> 
+     <Form totalCost={totalCost} /> 
      :
      <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography className='mb-4' component="h1" variant="h4" align="center">

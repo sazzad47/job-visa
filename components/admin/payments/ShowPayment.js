@@ -5,7 +5,7 @@ import { DeleteButton, ExportButton, FileField, ImageField, RichTextField, Show,
 const ApplicationTitle = () => {
     const record = useRecordContext();
     if (!record) return null;
-    return <span>{`Message No ${record.index}`}</span>;
+    return <span>{`Payment ID ${record.index}`}</span>;
 };
 
 const ApplicationActions = () => (
@@ -14,7 +14,7 @@ const ApplicationActions = () => (
     </TopToolbar>
 );
 
-const ShowContact = props => (
+const ShowPayment = props => (
     <>
     <Show {...props} title={<ApplicationTitle/>} actions={<ApplicationActions/>}>
        
@@ -22,11 +22,12 @@ const ShowContact = props => (
 
            
             
-            <TextField label = "Message ID" source="index"/>
-            <TextField label = "Name" source="name"/>
-            <TextField label = "Phone" source="phone"/>
-            <TextField label = "Email" source="email"/>
-            <TextField label = "Message" source="message"/>
+            <TextField source="index" label="Payment ID" />
+            <TextField source="visaApplyID" label="Visa Application ID" />
+            <TextField source="jobApplyID" label="Job Application ID"/>
+            <TextField source="method" label="Payment Method"/>
+            <TextField source="amount" label="Amount"/>
+            <FileField source="bankReceipt" title="Bank Receipt"/>
            
             
         </SimpleShowLayout>
@@ -35,4 +36,4 @@ const ShowContact = props => (
     </>
 );
 
-export default ShowContact
+export default ShowPayment

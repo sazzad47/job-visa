@@ -12,26 +12,9 @@ import {
     DELETE_MANY,
 } from 'react-admin';
 
-/**
- * Maps react-admin queries to a simple REST API
- *
- * The REST dialect is similar to the one of FakeRest
- * @see https://github.com/marmelab/FakeRest
- * @example
- * GET_LIST     => GET http://my.api.url/posts?sort=['title','ASC']&range=[0, 24]
- * GET_ONE      => GET http://my.api.url/posts/123
- * GET_MANY     => GET http://my.api.url/posts?filter={ids:[123,456,789]}
- * UPDATE       => PUT http://my.api.url/posts/123
- * CREATE       => POST http://my.api.url/posts
- * DELETE       => DELETE http://my.api.url/posts/123
- */
+
 export default (apiUrl, httpClient) => {
-    /**
-     * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
-     * @param {String} resource Name of the resource to fetch, e.g. 'posts'
-     * @param {Object} params The data request params, depending on the type
-     * @returns {Object} { url, options } The HTTP request parameters
-     */
+ 
     const convertDataRequestToHTTP = (type, resource, params) => {
         let url = '';
         const options = {};
@@ -136,12 +119,7 @@ export default (apiUrl, httpClient) => {
         }
     };
 
-    /**
-     * @param {string} type Request type, e.g GET_LIST
-     * @param {string} resource Resource name, e.g. "posts"
-     * @param {Object} payload Request parameters. Depends on the request type
-     * @returns {Promise} the Promise for a data response
-     */
+  
     return (type, resource, params) => {
         // simple-rest doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
         if (type === UPDATE_MANY) {

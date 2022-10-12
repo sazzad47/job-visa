@@ -177,17 +177,22 @@ const getApplicants = async (req, res) => {
         console.log('perpage', filter)
         const applicants = await JobApplicants.find({
             $and: [filter, {done: false}]
-        }).skip(skip).limit(limit).sort(sort)
+        }).populate('user', '-password').skip(skip).limit(limit).sort(sort)
         const totalApplicants = await JobApplicants.find()
         // .skip(page * perPage)
         // .limit(perPage)
-        
+        let modifiedApplicants = applicants.map(a => {
+            let returnValue = {...a};
+            returnValue.user = returnValue.user.index;
+          
+            return returnValue
+          })
         res
         .setHeader("x-total-count", parseInt(totalApplicants.length))
         .json({
             status: 'success',
             result: applicants.length,
-            applicants
+            applicants: modifiedApplicants
         })
     } catch (err) {
         return res.status(500).json({err: err.message})

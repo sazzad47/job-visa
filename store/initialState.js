@@ -1,4 +1,11 @@
 export const initialState = {
+    register: {
+         name: '',
+         email: '',
+         password: '',
+         cf_password: '',
+         code: ''
+    },
     visaApplicant: {
         personalInfo: {
            IdentityCard: '',
@@ -193,7 +200,8 @@ export const initialState = {
     paymentInfo: {
        visaApplyID: 0,
        jobApplyID: 0,
-       bankReceipt: ''
+       bankReceipt: '',
+       amount: ''
     },
     jobs: {
         title: '',

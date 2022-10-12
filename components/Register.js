@@ -6,32 +6,32 @@ import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
 import GoogleAuth from './GoogleAuth'
 import { sendStatusCode } from 'next/dist/server/api-utils'
-const Register = ({handleOpenLogin}) => {
+const Register = ({setSuccess, handleOpenLogin}) => {
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const initialState = {name:'',email:'',password:'',cf_password:''};
-  const [userData, setUserData] = useState(initialState);
-  const {name, email, password, cf_password} = userData;
+ 
+  
 
   const {state, dispatch} = useContext(DataContext)
-  const { auth } = state
+  const { auth, register } = state
+  const {name, email, password, cf_password} = register
 
   const router = useRouter()
   
   const handleChangeInput = e => {
-      const {name, value} = e.target;
-      setUserData({...userData,[name]:value})
+      dispatch({type: 'CHANGE_INPUTS', payload: {name: e.target.name, value:e.target.value}})
+      
   }
   
   const verifyEmail = async e => {
     e.preventDefault()
+    console.log('regiset', register)
     const errMsg = valid(name, email, password, cf_password)
     if(errMsg) return dispatch({ type: 'NOTIFY', payload: {error: errMsg} })
 
     setLoading(true)
     dispatch({ type: 'NOTIFY', payload: {loading: true} })
-    const res = await postData('auth/verifyEmail', userData)
+    const res = await postData('auth/verifyEmail', register)
     
     if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
 
@@ -43,60 +43,12 @@ const Register = ({handleOpenLogin}) => {
 
    
   }
-  const handleSubmit = async e => {
-    e.preventDefault()
-    const errMsg = valid(name, email, password, cf_password)
-    if(errMsg) return dispatch({ type: 'NOTIFY', payload: {error: errMsg} })
-
-    dispatch({ type: 'NOTIFY', payload: {loading: true} })
-
-    const res = await postData('auth/register', userData)
-    
-    if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-
-    dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
-
-    dispatch({ type: 'AUTH', payload: {
-      token: res.access_token,
-      user: res.user
-    }})
-
-    Cookie.set('refreshtoken', res.refresh_token, {
-      path: 'api/auth/accessToken',
-      expires: 7
-    })
-
-    localStorage.setItem('firstLogin', true)
-  }
-
-  
-  useEffect(() => {
-    if(Object.keys(auth).length !== 0) router.push("/")
-  }, [auth])
+ 
 
   return (
     <div>
       <h4>Register</h4>
-      {success?
-              <> 
-      
-          <div className='text-center'>Verify Email</div>
-            
-              <form onSubmit={verifyEmail}>
-              <input 
-              type='number' 
-              className='input-box' 
-              placeholder='Enter the code'
-              name='code' 
-              value={code}
-              onChange={(e)=> setCode(e.target.value)} 
-              required/>
-              
-              <button type='submit' className='submit-btn'>{loading? <span className="checking-effect">Verifying...</span>: "Verify"}</button>
-            </form>
-            
-            </> :
-            <> 
+     
             <GoogleAuth/>
          <h2 className='googleLoginOr'><span>Or</span></h2>
             <form onSubmit={verifyEmail}>
@@ -105,7 +57,6 @@ const Register = ({handleOpenLogin}) => {
             className='input-box' 
             placeholder='Your Name'
             name='name' 
-            value={name}
             onChange={handleChangeInput}
             required/>
             <input 
@@ -113,7 +64,6 @@ const Register = ({handleOpenLogin}) => {
             className='input-box' 
             placeholder='Your email'
             name='email' 
-            value={email}
             onChange={handleChangeInput}
             required/>
             <input 
@@ -121,7 +71,6 @@ const Register = ({handleOpenLogin}) => {
             className='input-box' 
             placeholder='Password'
             name='password' 
-            value={password}
             onChange={handleChangeInput}
             required/>
             <input 
@@ -129,14 +78,12 @@ const Register = ({handleOpenLogin}) => {
             className='input-box' 
             placeholder='Confirm password'
             name='cf_password'
-            value={cf_password} 
             onChange={handleChangeInput}
             required/>
             <button type='submit' className='submit-btn'>{loading? <span className="checking-effect">...</span>: "Submit"}</button>
           </form>
           <button type='button' className='butn' onClick={handleOpenLogin}>I have an account</button>
-          </>
-            }
+          
     </div>
   )
 }

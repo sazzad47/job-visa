@@ -12,14 +12,13 @@ const SearchFilter = props => (
 
 
 
-const JobList = props => {
+const JobNotice = props => {
     
    return (<List title="Jobs" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
       
         <Datagrid>
-            <TextField source="index" label="Job ID" />
+            <TextField source="index" label="Notice ID" />
             <TextField source="title" label="Title" />
-            <TextField source="country" label="Country"/>
             <FileField source="file" title="PDF"/>
             <EditButton/>
             <ShowButton/>
@@ -27,4 +26,4 @@ const JobList = props => {
     </List>)
 }
 
-export default JobList
+export default JobNotice

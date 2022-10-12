@@ -18,6 +18,7 @@ const VisaApplicatioinList = props => {
       
         <Datagrid>
             <TextField source="index" label="ID" />
+            <TextField source="user" label="User ID" />
             <TextField source="email" label="Email"/>
             <TextField source="phoneNumber" label="Phone"/>
             <TextField source="cost" label="Cost"/>

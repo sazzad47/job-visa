@@ -9,7 +9,7 @@ import { useState } from 'react'
 import PaymentMessage from './PaymentMessage'
 import { imageUpload } from '../../../utils/imageUpload'
 
-const Form = () => {
+const Form = ({totalCost}) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const { state, dispatch } = useContext(DataContext);
@@ -18,7 +18,7 @@ const Form = () => {
      setLoading(true)
      let media
      media = await imageUpload([paymentInfo.bankReceipt])
-     const res= await postData('payment/bank', {...paymentInfo, bankReceipt: media[0], method: 'bank'}, auth.token)
+     const res= await postData('payment/bank', {...paymentInfo, bankReceipt: media[0], method: 'bank', amount: totalCost}, auth.token)
      if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
      setLoading(false)
      setSuccess(true)

@@ -164,20 +164,25 @@ const getApplicants = async (req, res) => {
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
-        console.log('perpage', filter)
+        
         const applicants = await LoanApplicants.find({
             $and: [filter, {done: false}]
-        }).skip(skip).limit(limit).sort(sort)
+        }).populate('user', '-password').skip(skip).limit(limit).sort(sort)
         const totalApplicants = await LoanApplicants.find()
         // .skip(page * perPage)
         // .limit(perPage)
-        
+        let modifiedApplicants = applicants.map(a => {
+            let returnValue = {...a};
+            returnValue.user = returnValue.user.index;
+          
+            return returnValue
+          })
         res
         .setHeader("x-total-count", parseInt(totalApplicants.length))
         .json({
             status: 'success',
             result: applicants.length,
-            applicants
+            applicants: modifiedApplicants
         })
     } catch (err) {
         return res.status(500).json({err: err.message})

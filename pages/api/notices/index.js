@@ -1,5 +1,5 @@
 import connectDB from '../../../utils/connectDB'
-import Jobs from '../../../models/jobModel'
+import Notices from '../../../models/noticeModel'
 
 
 connectDB()
@@ -7,26 +7,26 @@ connectDB()
 export default async (req, res) => {
     switch(req.method){
         case "POST":
-            await createJob(req, res)
+            await createNotice(req, res)
             break;
         case "GET":
-            await getJobs(req, res)
+            await getNotices(req, res)
             break;
     }
 }
 
-const createJob = async (req, res) => {
+const createNotice = async (req, res) => {
     try{
         
-        const { title, country, file } = req.body
+        const { title, file } = req.body
         console.log('file', req.body)
-        const newJob = new Jobs({ 
-            title, country, file, dateOfPost: new Date().toISOString()
+        const newNotice = new Notices({ 
+            title, file, dateOfPost: new Date().toISOString()
             
         })
 
-        await newJob.save()
-        res.json({msg: "Job saved successfully"})
+        await newNotice.save()
+        res.json({msg: "Notice saved successfully"})
 
     }catch(err){
         return res.status(500).json({err: err.message})
@@ -35,20 +35,18 @@ const createJob = async (req, res) => {
 
 
 
-const getJobs = async (req, res) => {
+const getNotices = async (req, res) => {
     try {
 
         const filter = JSON.parse(req.query.query)
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
-        const applicants = await Jobs.find(filter).skip(skip).limit(limit).sort(sort)
-      
-        const totalApplicants = await Jobs.find()
+        const applicants = await Notices.find(filter).skip(skip).limit(limit).sort(sort)
+        const totalApplicants = await Notices.find()
         // .skip(page * perPage)
         // .limit(perPage)
         
-          
         res
         .setHeader("x-total-count", parseInt(totalApplicants.length))
         .json({

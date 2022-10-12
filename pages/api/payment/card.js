@@ -41,7 +41,7 @@ async function CreateStripeSession(req, res) {
     user: result.id,
     visaApplyID: item.visaApplyID,
     jobApplyID: item.jobApplyID,
-    method: "card",
+    method: item.method,
     amount: item.price
     
     

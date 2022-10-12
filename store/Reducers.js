@@ -1,10 +1,19 @@
-import { ACTIONS, JOBS_ACTIONS, JOB_APPLICANT_ACTIONS, PAYMENT_ACTIONS } from './Actions'
+import { ACTIONS, JOBS_ACTIONS, JOB_APPLICANT_ACTIONS, PAYMENT_ACTIONS, REGISTER_ACTIONS } from './Actions'
 import { VISA_APPLICANT_ACTIONS } from './Actions';
 import { LOAN_APPLICANT_ACTIONS } from './Actions';
 
 
 const reducers = (state, action) => {
     switch(action.type){
+        case REGISTER_ACTIONS.CHANGE_INPUTS: 
+            return {
+                ...state,
+                register: {
+                   ...state.register,
+                    [action.payload.name]: action.payload.value
+                }
+                    
+             };
         case VISA_APPLICANT_ACTIONS.CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS: 
             return {
                 ...state,
