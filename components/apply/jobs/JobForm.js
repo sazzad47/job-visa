@@ -11,6 +11,7 @@ import JobInfo from './JobInfo';
 import ContactInfo from './ContactInfo';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Button } from '@mui/material';
+import Link from 'next/link';
 
 
 export default function JobForm ({loading, setLoading, success, setSuccess}) {
@@ -76,7 +77,7 @@ export default function JobForm ({loading, setLoading, success, setSuccess}) {
       </Box>
       </div>
       <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2, display: 'flex', justifyContent: 'center' }}>
-        <Button variant='contained'>dashboard</Button>
+        <Link href="/profile"><Button variant='contained'>dashboard</Button></Link>
       </Box>
       
       

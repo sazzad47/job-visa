@@ -1,71 +1,41 @@
 import * as React from 'react';
 import { forwardRef, memo } from 'react';
-import { Logout, UserMenu, useUserMenu, Layout, useLocaleState } from 'react-admin';
+import { UserMenu, useUserMenu, Layout, useLocaleState } from 'react-admin';
 import { Link } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import ListItemText from '@mui/material/ListItemText';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LanguageIcon from '@mui/icons-material/Language';
+import {useRouter} from 'next/router'
+import {DataContext} from '../../store/GlobalState'
+import Cookie from 'js-cookie'
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useContext } from 'react';
 import { MyMenu } from './MyMenu';
 import {
-    MenuItem,
-    MenuItemProps,
-    ListItemIcon,
     CssBaseline,
 } from '@mui/material';
 import MyAppBar from './Appbar';
 
-// It's important to pass the ref to allow MUI to manage the keyboard navigation
-const ConfigurationMenu = React.forwardRef((props, ref) => {
-    return (
-        <MenuItem
-            ref={ref}
-            component={Link}
-            // It's important to pass the props to allow MUI to manage the keyboard navigation
-            {...props}
-            to="/configuration"
-        >
-            <ListItemIcon>
-                <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText>
-               Configuration
-            </ListItemText>
-        </MenuItem>
-    );
-});
 
-// It's important to pass the ref to allow MUI to manage the keyboard navigation
-const SwitchLanguage = React.forwardRef((props, ref) => {
-    const [locale, setLocale] = useLocaleState();
-    // We are not using MenuItemLink so we retrieve the onClose function from the UserContext
-    const { onClose } = useUserMenu();
+const Logout = () => {
+    const {state, dispatch} = useContext(DataContext)
+    const { auth } = state
 
+    const router = useRouter()
+    const handleLogout = () => {
+        Cookie.remove('refreshtoken', {path: 'api/auth/accessToken'})
+        localStorage.removeItem('firstLogin')
+        dispatch({ type: 'AUTH', payload: {} })
+        dispatch({ type: 'NOTIFY', payload: {success: 'Logged out!'} })
+        return router.push('/')
+    }
     return (
-        <MenuItem
-            ref={ref}
-            // It's important to pass the props to allow MUI to manage the keyboard navigation
-            {...props}
-            sx={{ color: 'text.secondary' }}
-            onClick={event => {
-                setLocale(locale === 'en' ? 'fr' : 'en');
-                onClose(); // Close the menu
-            }}
-        >
-            <ListItemIcon sx={{ minWidth: 5 }}>
-                <LanguageIcon />
-            </ListItemIcon>
-            <ListItemText>
-                Switch Language
-            </ListItemText>
-        </MenuItem>
-    );
-});
+        <div style={{padding:'0 1rem', cursor:'pointer'}} onClick={handleLogout}><LogoutIcon/> Logout</div>
+    )
+}
+
 
 const MyUserMenu = props => (
     <UserMenu {...props}>
-        <ConfigurationMenu />
-        <SwitchLanguage />
+        
         <Logout />
     </UserMenu>
 );

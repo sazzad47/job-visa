@@ -5,13 +5,20 @@ import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
 import Image from 'next/image';
 import loanIcon from '../../public/images/demos/loanIcon.png'
 import { useState } from 'react';
+import Auth from '../../components/Auth';
+import { useContext } from 'react';
+import { DataContext } from '../../store/GlobalState';
 
 const Loan = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const {state, dispatch} = useContext(DataContext)
+  const { auth } = state
   return (
     <React.Fragment>
-        <div className='visa-page'>
+        <div className={auth.token? 'visa-page': 'authContainer'}>
+          {auth.token? 
+          <> 
        <div className='visa-page-header'>
         <Image src={loanIcon}/>
         <Typography align='center' style={{fontSize:'1.4rem'}}>Loan Application Form</Typography>
@@ -26,6 +33,8 @@ const Loan = () => {
       <LoanForm loading={loading} setLoading={setLoading} success={success} setSuccess={setSuccess} />
      </div>
       </Card>
+      </> : <Auth/>
+       }
         </div>
     </React.Fragment>
   )

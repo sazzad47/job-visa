@@ -95,7 +95,7 @@ const Profile = () => {
             <section className="row text-secondary my-3">
                 <div className="col-md-4">
                     <h3 className="text-center text-uppercase">
-                        {auth.user.role === 'user' ? 'User Profile' : 'Admin Profile'}
+                        User Dashboard
                     </h3>
 
                     <div className="avatar">

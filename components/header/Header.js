@@ -18,7 +18,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
+
   ...theme.mixins.toolbar,
   justifyContent: 'flex-start',
 }));
@@ -106,17 +106,7 @@ const Header = () => {
                 : <LoggedRouter/>}
               </ul>
   
-            {/* <nav className="mobile-nav d-flex d-md-none" ref={mobileNav}>
-              <Link href="/"><a>Home</a></Link>
-              <a href="#packages">Apply for Visa</a>
-              <a href="#packages">Apply for Visa Loan</a>
-              <a href="#packages">Apply for Jobs</a>
-              <Link href="/about"><a>About</a></Link>
-             
-              <Link href="/contact"><a>contact</a></Link>
-              <a href="#services">Jobs</a>
-              <Link href="/auth"><a>Login</a></Link>
-            </nav> */}
+           
            
             
           <span className="mobile__menu d-block d-md-none">

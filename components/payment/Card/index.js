@@ -1,13 +1,11 @@
 import { Box, Button, CircularProgress, Grid, Paper, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
-import AddressForm from '../AddressForm';
-import PaymentForm from '../PaymentForm';
-import Review from '../Review';
+
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
+
 import { getData, postData } from '../../../utils/fetchData';
 import { useRouter } from 'next/router';
-import PaymentMessage from '../../PaymentMessage';
+import PaymentMessage from './PaymentMessage';
 import { DataContext } from '../../../store/GlobalState';
 
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
@@ -15,7 +13,7 @@ const stripePromise = loadStripe(publishableKey);
 
 
 
-const Index = () => {
+const Index = ({setCheckAuth}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth} = state
   const [loading, setLoading] = useState(false);
@@ -58,8 +56,10 @@ const Index = () => {
         quantity: 1,
         price: totalCost,
       };
-      console.log('item', item)
+    
       const createCheckOutSession = async () => {
+        if (!auth.token) return setCheckAuth(true);
+        dispatch({ type: 'NOTIFY', payload: {loading: true} })
         const stripe = await stripePromise;
         const checkoutSession = await postData('payment/card', {
           item: item,
@@ -70,7 +70,7 @@ const Index = () => {
         if (result.error) {
           alert(result.error.message);
         }
-       
+        dispatch({ type: 'NOTIFY', payload: {loading: false} })
       };
   return (
     <> 
@@ -94,7 +94,7 @@ const Index = () => {
         </Grid>
         <Grid item xs={12} className="text-end">
 
-        <Button variant='contained' onClick={createCheckOutSession}>Checkout</Button>
+        <Button disabled={!totalCost} variant='contained' onClick={createCheckOutSession}>Checkout</Button>
         </Grid>
         </Grid>
         </Paper>}

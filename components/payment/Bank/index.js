@@ -1,8 +1,6 @@
 import { Box, Button, CircularProgress, Grid, Paper, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
-import AddressForm from '../AddressForm';
-import PaymentForm from '../PaymentForm';
-import Review from '../Review';
+
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { getData, postData } from '../../../utils/fetchData';
@@ -10,18 +8,20 @@ import { useRouter } from 'next/router';
 import PaymentMessage from '../../PaymentMessage';
 import { DataContext } from '../../../store/GlobalState';
 import Form from './Form';
+import Auth from '../../Auth';
 
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(publishableKey);
 
 
 
-const Index = () => {
+const Index = ({setCheckAuth}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth} = state
   const [loading, setLoading] = useState(false);
   const [totalCost, setTotalCost] = useState('');
   const [start, setStart] = useState(false)
+  
   const router = useRouter();
   const { status } = router.query;
 
@@ -42,7 +42,9 @@ const Index = () => {
         setTotalCost(res.totalCost)
         setLoading(false);
       }
-
+      const changeState = () => {
+        auth.token? setStart(true): setCheckAuth(true)
+      }
       const handleInput = (e) => {
       
         dispatch({
@@ -57,7 +59,10 @@ const Index = () => {
   return (
     <> 
      {start? 
-     <Form totalCost={totalCost} /> 
+     
+      <Form totalCost={totalCost} /> 
+      
+    
      :
      <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography className='mb-4' component="h1" variant="h4" align="center">
@@ -76,7 +81,7 @@ const Index = () => {
         </Grid>
         <Grid item xs={12} className="text-end">
 
-        <Button variant='contained' onClick={()=> setStart(true)}>Checkout</Button>
+        <Button disabled={!totalCost} variant='contained' onClick={changeState}>Checkout</Button>
         </Grid>
         </Grid>
         </Paper>}

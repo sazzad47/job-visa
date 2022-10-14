@@ -6,6 +6,7 @@ import { patchData } from '../utils/fetchData';
 import { useContext } from 'react';
 import { DataContext } from '../store/GlobalState';
 import { useEffect } from 'react';
+import Link from 'next/link';
 const PaymentMessage = ({status, item}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth} = state
@@ -44,7 +45,7 @@ const PaymentMessage = ({status, item}) => {
         </Box>
         </div>
         <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2, display: 'flex', justifyContent: 'center' }}>
-          <Button variant='contained'>dashboard</Button>
+        <Link href="/profile"><Button variant='contained'>dashboard</Button></Link>
         </Box>
         
         

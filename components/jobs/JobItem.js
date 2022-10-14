@@ -11,6 +11,8 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import PaymentsIcon from '@mui/icons-material/Payments';
 
 import Filter from '../Filter';
+import Link from 'next/link';
+import DownloadPDF from '../DownloadPDF';
 const JobItem = ({item}) => {
 
     console.log('jobitem', item)
@@ -33,7 +35,7 @@ const JobItem = ({item}) => {
                     <Typography gutterBottom variant="h5" component="h2">
                       Job ID: {item.index}
                     </Typography>
-                     <FileDownloadIcon color='primary'/>
+                     <DownloadPDF url ={item.file}/>
 
                     </Grid>
                     <Typography>
@@ -54,8 +56,8 @@ const JobItem = ({item}) => {
                   </Grid>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Apply</Button>
-                    <Button size="small">View</Button>
+                    <Link href="/apply/jobs"><Button size="small">Apply</Button></Link>
+                    <Button size="small"><a style={{textDecoration:'none'}} href={`${item.file}`}>View</a></Button>
                   </CardActions>
                 </Card>
               </Grid>

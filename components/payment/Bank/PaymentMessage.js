@@ -1,7 +1,8 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+
+import Link from 'next/link';
 const PaymentMessage = ({status}) => {
   return (
     <React.Fragment>
@@ -31,7 +32,7 @@ const PaymentMessage = ({status}) => {
         </Box>
         </div>
         <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2, display: 'flex', justifyContent: 'center' }}>
-          <Button variant='contained'>dashboard</Button>
+        <Link href="/profile"><Button variant='contained'>dashboard</Button></Link>
         </Box>
         
         

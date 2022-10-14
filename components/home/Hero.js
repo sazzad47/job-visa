@@ -16,7 +16,7 @@ const Hero = () => {
             </p>
             <div>
 
-            <Link href="/auth"><button className="btn">Get Visa</button></Link>
+            <Link href="/apply/visa"><button className="btn">Get Visa</button></Link>
             
             </div>
           </div>

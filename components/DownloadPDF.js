@@ -19,7 +19,7 @@ const DownloadPDF = ({url}) => {
    
 
   return (
-    <span style={{cursor: 'pointer'}} onClick ={handleDownload}><FileDownloadIcon /></span>
+    <span style={{cursor: 'pointer'}} onClick ={handleDownload}><FileDownloadIcon color='primary' /></span>
   )
 }
 

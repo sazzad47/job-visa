@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import DownloadPDF from "../DownloadPDF";
 const columns = [
   { id: "title", label: "Title", minWidth: 170, align: "center" },
   {
@@ -27,30 +28,7 @@ const columns = [
   }
 ];
 
- function downloadPDF ({file}) {
-   const handleDownload = () => {
-    fetch(file).then(response => {
-    response.blob().then(blob => {
-      
-        const fileURL = window.URL.createObjectURL(blob);
-       
-        let alink = document.createElement('a');
-        alink.href = fileURL;
-        alink.download = "notice.pdf";
-        alink.click();
-    })
 
-      
-  })
-   }
-   
-
-  return (
-    <span style={{cursor: 'pointer'}} onClick ={handleDownload}><FileDownloadIcon /></span>
-  )
-
-  
-}
 
 function createData(title, date, download) {
  
@@ -72,7 +50,7 @@ const useStyles = makeStyles({
 export default function Index({data}) {
  
   const rows = data.map((item) => (
-    createData(<a href={`${item.file}`}>{item.title}</a>, `${new Date(item.createdAt).toLocaleDateString()}`, downloadPDF(item.file))
+    createData(<a href={`${item.file}`}>{item.title}</a>, `${new Date(item.createdAt).toLocaleDateString()}`, DownloadPDF(item.file))
   ))
 
     
