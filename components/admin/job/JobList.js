@@ -20,6 +20,7 @@ const JobList = props => {
             <TextField source="index" label="Job ID" />
             <TextField source="title" label="Title" />
             <TextField source="country" label="Country"/>
+            <TextField source="salary" label="Average Salary"/>
             <FileField source="file" title="PDF"/>
             <EditButton/>
             <ShowButton/>

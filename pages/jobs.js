@@ -8,17 +8,19 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-
+import NearbyErrorIcon from '@mui/icons-material/NearbyError';
 import Filter from '../components/Filter';
 import Breadcrumb from '../components/BreadCrumb';
 import { getData } from '../utils/fetchData';
 import { useRouter } from 'next/router';
 import { DataContext } from '../store/GlobalState';
+import JobItem from '../components/jobs/JobItem';
+import filterSearch from '../utils/filterSearch';
 const Jobs = ({props}) => {
 
  
       
-    const [data, setData] = useState(props)
+    const [data, setData] = useState(props.data)
 
   const [isCheck, setIsCheck] = useState(false)
   const [page, setPage] = useState(1)
@@ -28,14 +30,17 @@ const Jobs = ({props}) => {
   const {auth} = state
 
   useEffect(() => {
-    setData(props)
-  },[props])
+    setData(props.data)
+  },[props.data])
 
   useEffect(() => {
     if(Object.keys(router.query).length === 0) setPage(1)
   },[router.query])
      
-   
+  const handleLoadmore = () => {
+    setPage(page + 1)
+    filterSearch({router, page: page + 1})
+  }
      
   return (
     <React.Fragment>
@@ -44,42 +49,31 @@ const Jobs = ({props}) => {
          
           <Filter/>
         
-          <Grid container spacing={4}>
-            {data.map((item) => (
-              <Grid item key={item._id} xs={12} sm={6} md={6}>
-                <Card className='job-post-container'
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                >
-                  
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Grid className='d-flex justify-content-between'>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Job ID: {item.index}
-                    </Typography>
-                     <FileDownloadIcon color='primary'/>
+          
+          {
+          data.length === 0 
+          ? <Grid className='d-flex flex-column align-items-center justify-content-center'>
+            <Card sx={{p:4}} className='d-flex flex-column align-items-center justify-content-center' >
+                <NearbyErrorIcon color="primary" />
+                <Typography>No result found!</Typography>
+            </Card>
+            </Grid>
 
-                    </Grid>
-                    <Typography>
-                      10 Oct 2022
-                    </Typography>
-                    <Typography>
-                    
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  
-                    </Typography>
-                    <Grid className='d-flex mt-2'>
-                    <Grid className='me-2'><LocationOnIcon color='primary'/></Grid>
-                    <Typography>London, United Kingdom</Typography>
-                  </Grid>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small">Apply</Button>
-                    <Button size="small">View</Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
+          : 
+          <Grid container spacing={4}>
+           {data.map(item => (
+            <JobItem key={item._id} item={item} />
+          ))}
           </Grid>
+        }
+            
+            {
+        props.result < page * 6 ? ""
+        : <Button variant='outlined' className="d-block mx-auto my-4"
+        onClick={handleLoadmore}>
+          Load more
+        </Button>
+      }
         </Container>
     </React.Fragment>
   )
@@ -98,7 +92,11 @@ export async function getServerSideProps({query}) {
  
   return {
     props: {
-      props: res.data
+      props: {
+        data: res.data,
+        result: res.result,
+    
+    }
     }, 
   }
 }

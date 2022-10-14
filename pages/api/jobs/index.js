@@ -18,10 +18,10 @@ export default async (req, res) => {
 const createJob = async (req, res) => {
     try{
         
-        const { title, country, file } = req.body
+        const { title, country, salary, file } = req.body
        
         const newJob = new Jobs({ 
-            title, country, file, dateOfPost: new Date().toISOString()
+            title, country, salary: parseInt(salary), file, dateOfPost: new Date().toISOString()
             
         })
 

@@ -11,9 +11,9 @@ import { useState } from 'react';
 import FileUpload from "react-material-file-upload";
 
 const JobCreate = () => {
-  const initialState = { title: '', country: '', file: '' }
+  const initialState = { title: '', country: '', salary: '', file: '' }
   const [data, setData] = useState(initialState)
-  const { title, country, file } = data
+  const { title, country, salary, file } = data
   const [files, setFiles] = useState([]);
   const selectedFile = files[0]
     
@@ -36,7 +36,7 @@ const JobCreate = () => {
         let media
         dispatch({ type: 'NOTIFY', payload: {loading: true} })
         
-        console.log('state', selectedFile)
+       
         if(selectedFile) media = await imageUpload([
             selectedFile
         ])
@@ -79,6 +79,9 @@ const JobCreate = () => {
                        
                         </Select>
                     </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField fullWidth multiline type="number" name="salary" value={salary} label="Average Salary(USD)" onChange={handleChangeInput}/> 
                 </Grid>
             </Grid>
             

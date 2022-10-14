@@ -4,6 +4,7 @@ const jobSchema = new mongoose.Schema({
     index: Number,
     title: String,
     country: String,
+    salary: Number,
     file: String,
     dateOfPost: Date,
     done: {

@@ -7,7 +7,7 @@ import { countries } from "../../data";
 import FileUpload from "react-material-file-upload";
 import SaveIcon from '@mui/icons-material/Save';
 import { imageUpload } from "../../../utils/imageUpload";
-const ApplicationTitle = ({setID, setTitle, setCountry, setFile}) => {
+const ApplicationTitle = ({setID, setTitle, setCountry, setSalary, setFile}) => {
     const record = useRecordContext();
     if (!record) return null;
 
@@ -15,6 +15,7 @@ const ApplicationTitle = ({setID, setTitle, setCountry, setFile}) => {
         setID(record.id)
         setTitle(record.title)
         setCountry(record.country)
+        setSalary(record.salary)
         setFile(record.file)
     },[])
     
@@ -27,6 +28,7 @@ const EditJob = props => {
     const [files, setFiles] = useState([]);
     const [title, setTitle] = useState('');
     const [country, setCountry] = useState('');
+    const [salary, setSalary] = useState('');
     const [file, setFile] = useState('');
     const selectedFile = files[0]
     const {state, dispatch} = useContext(DataContext)
@@ -39,13 +41,13 @@ const EditJob = props => {
             let media
             dispatch({ type: 'NOTIFY', payload: {loading: true} })
             
-            console.log('state', file)
+           
             if(selectedFile) media = await imageUpload([
                selectedFile
             ])
             
             const res = await putData(`jobs/${id}`, { 
-               title, country,
+               title, country, salary,
               file: media[0],
                
           })
@@ -56,7 +58,7 @@ const EditJob = props => {
           }
       
     return (
-        <Edit title={<ApplicationTitle setID={setID} setTitle={setTitle} setCountry={setCountry} setFile={setFile} />} {...props}>
+        <Edit title={<ApplicationTitle setID={setID} setTitle={setTitle} setCountry={setCountry} setSalary={setSalary} setFile={setFile} />} {...props}>
         <form onSubmit={handleUpdate} style={{padding:'2rem'}}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
@@ -79,6 +81,9 @@ const EditJob = props => {
                     
                     </Select>
                 </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField fullWidth multiline type="number" label="Average Salary(USD)" value={salary} onChange={(e)=> setSalary(e.target.value)}/>
                 </Grid>
             </Grid>
                 <Grid className="mt-3">

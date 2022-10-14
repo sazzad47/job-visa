@@ -42,13 +42,13 @@ const updateJob = async (req, res) => {
         // return res.status(400).json({err: 'Authentication is not valid.'})
 
         const {id} = req.query
-        const {title, country, file} = req.body
+        const {title, country, salary, file} = req.body
 
-        if(!title || !country || !file )
+        if(!title || !country || !salary || !file )
         return res.status(400).json({err: 'Please add all the fields.'})
 
         await Jobs.findOneAndUpdate({_id: id}, {
-            title, country, file
+            title, country, salary: parseInt(salary), file
         })
 
         res.json({msg: 'Success! Job updated'})

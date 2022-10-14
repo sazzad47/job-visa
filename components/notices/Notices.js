@@ -76,7 +76,7 @@ export default function Index({data}) {
   ))
 
     
-    // createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
+   
    
     
     
