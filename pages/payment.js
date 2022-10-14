@@ -10,7 +10,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import PaymentWithCard from '../components/payment/Card'
 import Bank from '../components/payment/Bank'
 
-import Breadcrumb from '../components/BreadCrumb';
+import Breadcrumb from '../components/Breadcrumb'
 import { useContext } from 'react';
 import { DataContext } from '../store/GlobalState';
 import Auth from '../components/Auth';
