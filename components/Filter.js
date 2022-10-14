@@ -13,15 +13,15 @@ const Filter = ({state}) => {
       }
     const [search, setSearch] = useState('')
     const [sort, setSort] = useState('')
-    const [category, setCategory] = useState('')
+    const [country, setCountry] = useState('')
 
     // const {categories} = state
     const router = useRouter()
 
 
-    const handleCategory = (e) => {
-        setCategory(e.target.value)
-        filterSearch({router, category: e.target.value})
+    const handlecountry = (e) => {
+        setCountry(e.target.value)
+        filterSearch({router, country: e.target.value})
     }
 
     const handleSort = (e) => {
@@ -34,7 +34,7 @@ const Filter = ({state}) => {
     },[search])
 
     return (
-        <div className="job-filter-container">
+        <div className="mb-5">
             <Grid container spacing={4}>
                <Grid item xs={12} md={3} >
                
@@ -43,8 +43,8 @@ const Filter = ({state}) => {
                     <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
-                    value={category}
-                    onChange={handleCategory}
+                    value={country}
+                    onChange={handlecountry}
                     >
                     {
                         countries.map(item => (
@@ -71,7 +71,7 @@ const Filter = ({state}) => {
                   </InputAdornment>
                 )
               }}
-                fullWidth placeholder='Search with title...' variant='filled'/>
+                fullWidth placeholder='Search with title...' value={search.toLowerCase()} onChange={e => setSearch(e.target.value)} variant='filled'/>
                </Grid>
                <Grid item xs={12} md={3}>
 
@@ -84,8 +84,8 @@ const Filter = ({state}) => {
                     value={sort}
                     onChange={handleSort}
                     >
-                    <MenuItem value="-createdAt">Newest</MenuItem>
-                     <MenuItem value="oldest">Oldest</MenuItem>
+                    <MenuItem value="createdAt">Newest</MenuItem>
+                     <MenuItem value="-createdAt">Oldest</MenuItem>
                      
                      <MenuItem value="-salary">Salary: High-Low</MenuItem>
                      <MenuItem value="salary">Salary: Low-High</MenuItem>
@@ -97,7 +97,7 @@ const Filter = ({state}) => {
             </Grid>
             {/* <div className="col-12 col-md-2 mw-100">
                 <select className="custom-select text-capitalize"
-                value={category} onChange={handleCategory}>
+                value={country} onChange={handlecountry}>
 
                     <option value="all">All Products</option>
 

@@ -6,6 +6,10 @@ const jobSchema = new mongoose.Schema({
     country: String,
     file: String,
     dateOfPost: Date,
+    done: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 })

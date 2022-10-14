@@ -1,6 +1,5 @@
 import { stringify } from 'query-string';
 import {
-    fetchUtils,
     GET_LIST,
     GET_ONE,
     GET_MANY,
@@ -26,10 +25,7 @@ export default (apiUrl, httpClient) => {
                     sort: JSON.stringify({[field]: order=='ASC'?1:-1}),
                     skip: (page - 1) * perPage,
                     limit: perPage,
-                    /*range: JSON.stringify([
-                        (page - 1) * perPage,
-                        page * perPage - 1,
-                    ]),*/
+                  
                     query: JSON.stringify(params.filter),
                 };
                 url = `${apiUrl}/${resource}?${stringify(query)}`;
@@ -52,10 +48,7 @@ export default (apiUrl, httpClient) => {
                     sort: JSON.stringify({[field]: order=='ASC'?0:1}),
                     skip: (page - 1) * perPage,
                     limit: perPage,
-                    // range: JSON.stringify([
-                    //     (page - 1) * perPage,
-                    //     page * perPage - 1,
-                    // ]),
+                   
                     query: JSON.stringify({
                         ...params.filter,
                         [params.target]: params.id,
@@ -96,7 +89,7 @@ export default (apiUrl, httpClient) => {
             case GET_MANY:
             case GET_MANY_REFERENCE:
                 return {
-                    data: data?.applicants?.map(item => {item.id = item._id; delete item._id; return item}),
+                    data: data?.data?.map(item => {item.id = item._id; delete item._id; return item}),
                     total: parseInt(
                         headers['x-total-count']?.split('/').pop(), 10
                         
@@ -106,7 +99,7 @@ export default (apiUrl, httpClient) => {
             case CREATE:
             case UPDATE:
             case DELETE:
-                return { data: convertToReactAdmin(data.applicant) };
+                return { data: convertToReactAdmin(data.data) };
             case DELETE:
             case DELETE_MANY:
                 return {data: params}
@@ -121,7 +114,7 @@ export default (apiUrl, httpClient) => {
 
   
     return (type, resource, params) => {
-        // simple-rest doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
+        
         if (type === UPDATE_MANY) {
             return Promise.all(
                 params.ids.map(id =>
@@ -134,7 +127,7 @@ export default (apiUrl, httpClient) => {
                 data: responses.map(response => response.json),
             }));
         }
-        // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
+       
         if (type === DELETE_MANY) {
             return Promise.all(
                 params.ids.map(id =>

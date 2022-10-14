@@ -1,7 +1,7 @@
 import connectDB from '../../../utils/connectDB'
 import Jobs from '../../../models/jobModel'
 import auth from '../../../middleware/auth'
-import { ConstructionOutlined } from '@mui/icons-material'
+
 
 connectDB()
 
@@ -10,14 +10,11 @@ export default async (req, res) => {
         case "GET":
             await getJob(req, res)
             break;
-        case "PATCH":
-            await updateStatus(req, res)
-            break;
         case "PUT":
             await updateJob(req, res)
             break;
         case "DELETE":
-            await deleteProduct(req, res)
+            await deleteItem(req, res)
             break;
     }
 }
@@ -26,32 +23,17 @@ const getJob = async (req, res) => {
     try {
         const { id } = req.query;
         
-        const applicant = await Jobs.findById(id)
-        if(!applicant) return res.status(400).json({err: 'This applicant does not exist.'})
+        const data = await Jobs.findById(id)
+        if(!data) return res.status(400).json({err: 'This job does not exist.'})
         
-        res.json({ applicant })
+        res.json({ data })
         
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
 }
 
-const updateStatus = async (req, res) => {
-    try {
-    //    const result = await auth(req, res)
-    //    if(result.role !== 'admin' || !result.root) 
-    //    return res.status(400).json({err: "Authentication is not valid"})
 
-       const {id} = req.query
-       const {status} = req.body
-
-       await Jobs.findOneAndUpdate({_id: id}, {status})
-       res.json({msg: 'Success!'})
-       
-    } catch (err) {
-        return res.status(500).json({err: err.message})
-    }
-}
 
 const updateJob = async (req, res) => {
     try {
@@ -75,7 +57,7 @@ const updateJob = async (req, res) => {
     }
 }
 
-const deleteProduct = async(req, res) => {
+const deleteItem = async(req, res) => {
     try {
         // const result = await auth(req, res)
         
@@ -84,9 +66,10 @@ const deleteProduct = async(req, res) => {
 
         const {id} = req.query
 
-        await Contact.findByIdAndDelete(id)
+        await Jobs.findOneAndUpdate({_id: id}, {
+            done: true
+        })
         res.json({msg: 'Element deleted!'})
-
     } catch (err) {
         return res.status(500).json({err: err.message})
     }

@@ -84,8 +84,8 @@ const apply = async (req, res) => {
             comments,
         } = communication;
 
-        const newUser = new LoanApplicants({ 
-            user: result.id,
+        const newApplication = new LoanApplicants({ 
+            userId: result.userId,
             visaApplyID,
             jobApplyID,
             totalRS,
@@ -128,17 +128,17 @@ const apply = async (req, res) => {
             comments,
         })
         await Users.findOneAndUpdate({_id: result.id}, {
-            $push: {loans: newUser._id}
+            $push: {loans: newApplication._id}
         }, {new: true})
 
-        await newUser.save()
+        await newApplication.save()
         await sendEmail({
-            to: newUser.email,
+            to: newApplication.email,
             from: process.env.SENDER_EMAIL,
             subject: '[job-visa] Received loan application.',
             html: `
             <div>
-              <p>Hello, ${newUser.name}</p>
+              <p>Hello, ${newApplication.name}</p>
               <p>We received your loan application.</p>
               <p>Sed ut perspiciatis unde omnis iste natus error
                sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
@@ -158,105 +158,25 @@ const apply = async (req, res) => {
 
 const getApplicants = async (req, res) => {
     try {
-        // const features = new APIfeatures(LoanApplicants.find(), req.query)
-        // .paginating()
+        
         const filter = JSON.parse(req.query.query)
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
         
-        const applicants = await LoanApplicants.find({
+        const data = await LoanApplicants.find({
             $and: [filter, {done: false}]
-        }).populate('user', '-password').skip(skip).limit(limit).sort(sort)
-        const totalApplicants = await LoanApplicants.find()
-        // .skip(page * perPage)
-        // .limit(perPage)
-        let modifiedApplicants = applicants.map(a => {
-            let returnValue = {...a};
-            returnValue.user = returnValue.user.index;
-          
-            return returnValue
-          })
+        }).skip(skip).limit(limit).sort(sort)
+        const totalItem = await LoanApplicants.find({done: false})
         res
-        .setHeader("x-total-count", parseInt(totalApplicants.length))
+        .setHeader("x-total-count", parseInt(totalItem.length))
         .json({
             status: 'success',
-            result: applicants.length,
-            applicants: modifiedApplicants
+            result: data.length,
+            data
         })
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
 }
 
-// const getApplicants = async (req, res ) => {
-//     const url = require('url');
-//     try {
-//     //    const result = await auth(req, res)
-//     //    if(result.role !== 'admin') 
-//     //    return res.status(400).json({err: "Authentication is not valid"})
-    
-//         // const path = url.parse(req.url, true).query;
-//         // console.log(path);
-//         // let Page = req.query.range;
-//         // console.log("page", Page);
-//         // let SortingResource = req.query.sort;
-//         // let orderedByWhatType = JSON.parse(SortingResource);
-//         // console.log("orderedByWhatType", orderedByWhatType);
-//         // let orderedByWhat = orderedByWhatType[0];
-//         // let sortAscOrDes = orderedByWhatType[1];
-//         // console.log("ordered By What", orderedByWhat);
-//         // console.log("sortAscOrDes", sortAscOrDes);
-//         // let PageCurrent = JSON.parse(Page);
-//         // console.log("Page array ", PageCurrent);
-//         // let PerPageATZeroIndex = parseInt(PageCurrent[1]);
-//         // console.log("PerPage", typeof PerPageATZeroIndex);
-//         // let PageIndex = PageCurrent[0];
-
-//         // //// function for range////
-//         // const range = (start, end, length = end - start + 1) =>
-//         // Array.from({ length }, (_, i) => start + i);
-
-//         // ///////function for range///
-//         // const TotalRows = range(PageIndex, PerPageATZeroIndex).length;
-//         // console.log("i am range", range(PageIndex, PerPageATZeroIndex).length);
-
-//         // let OFFSET = PageIndex;
-//         // let till = OFFSET + PerPageATZeroIndex;
-//         // let FilterInput = req.query.filter;
-//         // const FilterArray = JSON.parse(FilterInput);
-//         // console.log("Filter", FilterArray);
-
-//         // let FilterSource = Object.keys(FilterArray);
-//         // let FilterText = Object.values(FilterArray)[0];
-//         // FilterText = Object.values(null || FilterArray)[0];
-
-//         // if (FilterText == undefined) {
-//         //     console.log("Oooops, am Undefined");
-//         //     let query = `  SELECT * FROM tbl_Personal WHERE shortname LIKE ('%')         
-//         //     ORDER BY pnr ${sortAscOrDes} OFFSET ${PageIndex} ROWS FETCH NEXT ${TotalRows} ROWS ONLY `;
-//         //     let numRows = `SELECT * FROM tbl_Personal`;
-//         //     const paginationEmployees = await executeQuery(query);
-//         //     const numRowsCount = await executeQuery(numRows);
-//         //     res.header("Access-Control-Expose-Headers", "X-Total-Count");
-//         //     res.header(
-//         //     "X-Total-Count",
-//         //     `pagination ${OFFSET} - ${till}/${numRowsCount.length}`
-//         //     );
-//         //     res.json(paginationEmployees);
-//         //     }
-
-//         const applicants = await LoanApplicants.find()
-//         res 
-//        .setHeader(
-//         "x-total-count",
-//         parseInt(applicants.length) 
-//         // `pagination ${OFFSET} - ${till}/${applicants.length}`
-//         )
-//         .json({applicants})
-
-
-//     } catch (err) {
-//         return res.status(500).json({err: err.message})
-//     }
-// }

@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const jobApplicantSchema = new mongoose.Schema({
     index: Number,
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: 'user'
+    userId: {
+        type: Number,
+        default: 0
     },
     fJobCountry: {
         type: String,

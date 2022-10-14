@@ -19,7 +19,7 @@ const createNotice = async (req, res) => {
     try{
         
         const { title, file } = req.body
-        console.log('file', req.body)
+      
         const newNotice = new Notices({ 
             title, file, dateOfPost: new Date().toISOString()
             
@@ -38,21 +38,26 @@ const createNotice = async (req, res) => {
 const getNotices = async (req, res) => {
     try {
 
+        
+        
+        
         const filter = JSON.parse(req.query.query)
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
-        const applicants = await Notices.find(filter).skip(skip).limit(limit).sort(sort)
-        const totalApplicants = await Notices.find()
-        // .skip(page * perPage)
-        // .limit(perPage)
+        const data = await Notices.find({
+            $and: [filter, {done: false}]
+        }).skip(skip).limit(limit).sort(sort)
+        
+        const totalItem = await Notices.find({done: false})
+       
         
         res
-        .setHeader("x-total-count", parseInt(totalApplicants.length))
+        .setHeader("x-total-count", parseInt(totalItem.length))
         .json({
             status: 'success',
-            result: applicants.length,
-            applicants
+            result: data.length,
+            data
         })
     } catch (err) {
         return res.status(500).json({err: err.message})

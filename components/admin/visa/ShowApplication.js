@@ -1,6 +1,7 @@
 
 import { Typography } from "@mui/material";
 import { ExportButton, FileField, ImageField, RichTextField, Show, SimpleShowLayout, TextField, TopToolbar, useRecordContext } from "react-admin";
+import MarkAsPaid from "../MarkAsPaid";
 import SetCost from "../SetCost";
 import ApproveBtn from "./ApproveBtn";
 import DeclineBtn from "./DeclineBtn";
@@ -16,6 +17,7 @@ const ApplicationActions = () => (
     <TopToolbar>
         
         <SetCost resource = "visaApplicants"/>
+        <MarkAsPaid resource="visaApplicants" />
         <ApproveBtn/>
         <DeclineBtn/>
         <GeneratePDFButton title="Visa"/>

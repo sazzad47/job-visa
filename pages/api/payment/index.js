@@ -19,24 +19,24 @@ export default async (req, res) => {
 
 const getPayment = async (req, res) => {
     try {
-        // const features = new APIfeatures(Payment.find(), req.query)
-        // .paginating()
+       
         const filter = JSON.parse(req.query.query)
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
         
-        const applicants = await Payment.find(filter).skip(skip).limit(limit).sort(sort)
-        const totalApplicants = await Payment.find()
-        // .skip(page * perPage)
-        // .limit(perPage)
+        const data = await Payment.find({
+            $and: [filter, {done: false}]
+        }).skip(skip).limit(limit).sort(sort)
+        const totalItem = await Payment.find({done: false})
+       
         
         res
-        .setHeader("x-total-count", parseInt(totalApplicants.length))
+        .setHeader("x-total-count", parseInt(totalItem.length))
         .json({
             status: 'success',
-            result: applicants.length,
-            applicants
+            result: data.length,
+            data
         })
     } catch (err) {
         return res.status(500).json({err: err.message})

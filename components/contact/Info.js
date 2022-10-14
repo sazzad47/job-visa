@@ -1,45 +1,37 @@
 import React from 'react'
 import { Icon, InlineIcon } from '@iconify/react'
-
-import locationIcon from '@iconify/icons-mdi/map-marker-radius-outline'
-import phoneIcon from '@iconify/icons-mdi/phone-outline'
-import emailIcon from '@iconify/icons-mdi/email-multiple-outline'
-
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Parser from 'html-react-parser';
 import facebookIcon from '@iconify/icons-mdi/facebook'
 import linkedinIcon from '@iconify/icons-mdi/linkedin'
 import twitterIcon from '@iconify/icons-mdi/twitter'
 
 
 
-const contactDetails = [
-  {
-    value: '1600 Amphitheatre Parkway, Mountain View, california.',
-    icon: locationIcon,
-  },
-  { value: '+1 234 567 8900', icon: phoneIcon },
-  { value: 'support@example.com', icon: emailIcon },
-]
 
-const renderContactDetails = () =>
-  contactDetails.map(detail => (
-    <p key={detail.value} className="info-detail">
-      <InlineIcon icon={detail.icon} /> {detail.value}
-    </p>
-  ))
 
 const renderIcons = () =>
   [facebookIcon, linkedinIcon, twitterIcon].map((icon, key) => (
     <Icon icon={icon} key={key} className="info-icon" />
   ))
 
-const Info = () => (
+const Info = ({data}) => {
+  console.log('ckkk', data)
+  return ( 
   <section className="info">
     <h2 className="info-h2">Contact information</h2>
 
-    <div className="info-details-container">{renderContactDetails()}</div>
+    <div className="d-flex flex-column">
+      <div className='d-flex mb-2'><LocalPhoneIcon sx={{mr:2}} /> {Parser(data.phone)}</div>
+      <div className='d-flex my-2'><EmailIcon sx={{mr:2}} /> {Parser(data.email)}</div>
+      <div className='d-flex'><LocationOnIcon sx={{mr:2}} /> {Parser(data.address)}</div>
+    </div>
 
     <div className="info-icons-container">{renderIcons()}</div>
   </section>
-)
+  )
+}
 
 export default Info

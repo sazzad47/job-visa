@@ -19,7 +19,7 @@ const createJob = async (req, res) => {
     try{
         
         const { title, country, file } = req.body
-        console.log('file', req.body)
+       
         const newJob = new Jobs({ 
             title, country, file, dateOfPost: new Date().toISOString()
             
@@ -42,19 +42,20 @@ const getJobs = async (req, res) => {
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
-        const applicants = await Jobs.find(filter).skip(skip).limit(limit).sort(sort)
+        const data = await Jobs.find({
+            $and: [filter, {done: false}]
+        }).skip(skip).limit(limit).sort(sort)
       
-        const totalApplicants = await Jobs.find()
-        // .skip(page * perPage)
-        // .limit(perPage)
+        const totalItem = await Jobs.find({done: false})
+        
         
           
         res
-        .setHeader("x-total-count", parseInt(totalApplicants.length))
+        .setHeader("x-total-count", parseInt(totalItem.length))
         .json({
             status: 'success',
-            result: applicants.length,
-            applicants
+            result: data.length,
+            data
         })
     } catch (err) {
         return res.status(500).json({err: err.message})

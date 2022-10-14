@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 
 const loanApplicantSchema = new mongoose.Schema({
     index: Number,
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: 'user'
-    },
+    userId: Number,
     visaApplyID: {
         type: String,
         default: ""

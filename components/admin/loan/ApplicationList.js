@@ -5,6 +5,7 @@ const SearchFilter = props => (
 
     <Filter {...props}>
       <SearchInput type="number" placeholder='Search ID' source="index" alwaysOn resettable/>
+      <SearchInput type="number" placeholder='Search User ID' source="userId" alwaysOn resettable/>
     </Filter>
     
    
@@ -18,6 +19,7 @@ const VisaApplicatioinList = props => {
       
         <Datagrid>
             <TextField source="index" label="ID" />
+            <TextField source="userId" label="User ID" />
             <TextField source="email" label="Email"/>
             <TextField source="phoneNumber" label="Phone"/>
             <TextField source="status" label="Status"/>

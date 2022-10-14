@@ -8,21 +8,17 @@ const ApplicationTitle = () => {
     return <span>{`Message No ${record.index}`}</span>;
 };
 
-const ApplicationActions = () => (
-    <TopToolbar>
-        <DeleteButton/>
-    </TopToolbar>
-);
+
 
 const ShowContact = props => (
     <>
-    <Show {...props} title={<ApplicationTitle/>} actions={<ApplicationActions/>}>
+    <Show {...props} title={<ApplicationTitle/>} >
        
         <SimpleShowLayout>
 
            
             
-            <TextField label = "Message ID" source="index"/>
+            
             <TextField label = "Name" source="name"/>
             <TextField label = "Phone" source="phone"/>
             <TextField label = "Email" source="email"/>

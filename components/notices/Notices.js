@@ -10,26 +10,26 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 const columns = [
-  { id: "title", label: "Title", minWidth: 170 },
+  { id: "title", label: "Title", minWidth: 170, align: "center" },
   {
     id: "date",
     label: "Date",
     minWidth: 170,
-    align: "right",
+    align: "center",
     format: (value) => value.toLocaleString()
   },
   {
     id: "download",
     label: "Download",
     minWidth: 170,
-    align: "right",
+    align: "center",
     format: (value) => value.toLocaleString()
   }
 ];
 
- function downloadPDF () {
+ function downloadPDF ({file}) {
    const handleDownload = () => {
-    fetch("https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf").then(response => {
+    fetch(file).then(response => {
     response.blob().then(blob => {
       
         const fileURL = window.URL.createObjectURL(blob);
@@ -69,17 +69,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function StickyHeadTable() {
+export default function Index({data}) {
+ 
+  const rows = data.map((item) => (
+    createData(<a href={`${item.file}`}>{item.title}</a>, `${new Date(item.createdAt).toLocaleDateString()}`, downloadPDF(item.file))
+  ))
 
-  const rows = [
-    createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
-    createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
-    createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
-    createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
-    createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
+    
+    // createData(<a href="https://res.cloudinary.com/sazzadhossen/image/upload/v1665296965/sazzad-upload/nakywullk3zzbe3bekw3.pdf">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>, "10-10-2022", downloadPDF()),
+   
     
     
-  ];
+  ;
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

@@ -1,7 +1,7 @@
 const baseUrl = process.env.BASE_URL
-import React, {useEffect} from 'react';
+import React from 'react';
 
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
+import { Admin, Resource, CustomRoutes } from 'react-admin';
 
 import myDataProvider from './myDataProvider'
 import {fetchJson as httpClient} from './httpClient'
@@ -15,8 +15,8 @@ import LoanApplicatioinList from './loan/ApplicationList';
 import LoanApplicationShow from './loan/ShowApplication';
 import JobApplicatioinList from './job-application/ApplicationList';
 import JobApplicationShow from './job-application/ShowApplication';
-import ContactList from './contact/ContactList';
-import ShowContact from './contact/ShowContact';
+import MessageList from './messages/MessageList';
+import ShowMessage from './messages/ShowMessage';
 import JobList from './job/JobList';
 import JobCreate from './job/JobCreate';
 import EditJob from './job/EditJob';
@@ -27,10 +27,28 @@ import ShowNotice from './notices/ShowNotice';
 import EditNotice from './notices/EditNotice';
 import PaymentList from './payments/PaymentList'
 import ShowPayment from './payments/ShowPayment';
-import ServicesList from './services/ServicesList';
-import ShowService from './services/ShowServices';
-import EditServices from './services/EditServices';
-import CreateServices from './services/CreateServices';
+
+
+import { Route } from 'react-router-dom';
+
+import Contact from './contact';
+import EditContact from './contact/EditPage';
+import Services from './services';
+import EditServices from './services/EditPage';
+import Terms from './terms';
+import EditTerms from './terms/EditPage';
+import Cookies from './cookies';
+import EditCookies from './cookies/EditPage';
+import Policies from './policies';
+import EditPolicies from './policies/EditPage';
+import HelpPage from './help';
+import EditHelpPage from './help/EditPage';
+import About from './about';
+import EditAbout from './about/EditPage';
+import LegalNotice from './legalNotice';
+import EditLegalNotice from './legalNotice/EditPage';
+import AccessibilityStatement from './accessibilityStatement';
+import EditAccessibilityStatement from './accessibilityStatement/EditPage';
 
 const dataProvider = myDataProvider(`${baseUrl}/api`, httpClient);
 const App = () => {
@@ -41,9 +59,31 @@ const App = () => {
       <Resource name="jobApplicants" list={JobApplicatioinList} show={JobApplicationShow} options={{label: "Job Applicants"}} />
       <Resource name="jobs" list={JobList} create={JobCreate} show={ShowJob} edit={EditJob} options={{label: "Jobs"}} />
       <Resource name="notices" list={NoticeList} create={CreateNotice} show={ShowNotice} edit={EditNotice} options={{label: "Notices"}} />
+      <Resource name="messages" list={MessageList} show={ShowMessage} options={{label: "Messages"}} />
       <Resource name="payment" list={PaymentList} show={ShowPayment} options={{label: "Payments"}} />
-      <Resource name="services" list={ServicesList} create={CreateServices} show={ShowService} edit={EditServices} options={{label: "Payments"}} />
-      <Resource name="contact" list={ContactList} show={ShowContact} options={{label: "Contacts"}} />
+      
+      <CustomRoutes>
+            <Route path="/contact" element={<Contact pageName="contact" />} />
+            <Route path="/contact/edit" element={<EditContact pageName="contact" />} />
+            <Route path="/services" element={<Services pageName="services" />} />
+            <Route path="/services/edit" element={<EditServices pageName="services" />} />
+            <Route path="/terms" element={<Terms pageName="terms" />} />
+            <Route path="/terms/edit" element={<EditTerms pageName="terms" />} />
+            <Route path="/cookies" element={<Cookies pageName="cookies" />} />
+            <Route path="/cookies/edit" element={<EditCookies pageName="cookies" />} />
+            <Route path="/policies" element={<Policies pageName="policies" />} />
+            <Route path="/policies/edit" element={<EditPolicies pageName="policies" />} />
+            <Route path="/help" element={<HelpPage pageName="help" />} />
+            <Route path="/help/edit" element={<EditHelpPage pageName="help" />} />
+            <Route path="/about" element={<About pageName="about" />} />
+            <Route path="/about/edit" element={<EditAbout pageName="about" />} />
+            <Route path="/legalNotice" element={<LegalNotice pageName="legalNotice" />} />
+            <Route path="/legalNotice/edit" element={<EditLegalNotice pageName="legalNotice" />} />
+            <Route path="/accessibilityStatement" element={<AccessibilityStatement pageName="accessibilityStatement" />} />
+            <Route path="/accessibilityStatement/edit" element={<EditAccessibilityStatement pageName="accessibilityStatement" />} />
+          
+        </CustomRoutes>
+     
      
     </Admin>
   )

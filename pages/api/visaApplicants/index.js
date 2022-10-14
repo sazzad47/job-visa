@@ -12,7 +12,7 @@ export default async (req, res) => {
             await apply(req, res)
             break;
         case "GET":
-            await getApplicants(req, res)
+            await getData(req, res)
             break;
     }
 }
@@ -100,8 +100,8 @@ const apply = async (req, res) => {
             homePhone,
         } = contact;
 
-        const newUser = new VisaApplicant({ 
-            user: result.id,
+        const newApplication = new VisaApplicant({ 
+            userId: result.userId,
             IdentityCard,
             IdCardNumber,
             fullName,
@@ -162,17 +162,17 @@ const apply = async (req, res) => {
             
         })
         await Users.findOneAndUpdate({_id: result.id}, {
-            $push: {visaApplications: newUser._id}
+            $push: {visaApplications: newApplication._id}
         }, {new: true})
 
-        await newUser.save()
+        await newApplication.save()
         await sendEmail({
-            to: newUser.email,
+            to: newApplication.email,
             from: process.env.SENDER_EMAIL,
             subject: '[job-visa] Received visa application.',
             html: `
             <div>
-              <p>Hello, ${newUser.name}</p>
+              <p>Hello, ${newApplication.name}</p>
               <p>We received your visa application.</p>
               <p>Sed ut perspiciatis unde omnis iste natus error
                sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
@@ -190,29 +190,23 @@ const apply = async (req, res) => {
 
 
 
-const getApplicants = async (req, res) => {
+const getData = async (req, res) => {
     try {
 
         const filter = JSON.parse(req.query.query)
         const sort = JSON.parse(req.query.sort)
         const limit = parseInt(req.query.limit)
         const skip = parseInt(req.query.skip)
-        const applicants = await VisaApplicant.find({
+        const data = await VisaApplicant.find({
             $and: [filter, {done: false}]
-        }).populate('user', '-password').skip(skip).limit(limit).sort(sort)
-        const totalApplicants = await VisaApplicant.find()
-        let modifiedApplicants = applicants.map(a => {
-            var returnValue = {...a};
-            returnValue.user = returnValue.user.index;
-          
-            return returnValue
-          })
+        }).skip(skip).limit(limit).sort(sort)
+        const totalItem = await VisaApplicant.find({done: false})
         res
-        .setHeader("x-total-count", parseInt(totalApplicants.length))
+        .setHeader("x-total-count", parseInt(totalItem.length))
         .json({
             status: 'success',
-            result: applicants.length,
-            applicants: modifiedApplicants
+            result: data.length,
+            data
         })
         
     } catch (err) {

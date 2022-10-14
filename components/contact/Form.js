@@ -60,7 +60,7 @@ const Form = () => {
       e.preventDefault()
       if (invalid) return toast('Please fill out all the fieds!', {type: 'error'})
       setLoading(true)
-      await postData('contact', userData)
+      await postData('messages', userData)
       setLoading(false)
       setUserData(initialState)
       toast('Thank you for contacting us!', {type: 'success'})

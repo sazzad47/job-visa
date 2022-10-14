@@ -1,48 +1,42 @@
-import Image from 'next/image'
+import { Container, Grid } from '@mui/material'
 import React from 'react'
 import Breadcrumb from '../components/BreadCrumb'
-import about from '../public/images/demos/about.png'
+import { getData } from '../utils/fetchData'
+import Parser from 'html-react-parser';
 
-const About = () => {
-  return (
-    <>
-       <Breadcrumb title="About"/>
-    <section id="about">
-      <div className="container">
-        <div className="search__engine-wrapper about__us">
-          <div className="search__engine-content">
-            
-            <h2 style={{color:'black'}}>Lorem ipsum dolor sit</h2>
-            <p style={{color:'black'}} className="search__engine-text02">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              laudantium officiis itaque magnam modi ipsum laboriosam quia
-              temporibus minima dignissimos. Quaerat ipsum odio corporis dolore
-              expedita esse est officia dolores.
-            </p>
-            <p style={{color:'black'}} className="search__engine-text02">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              laudantium officiis itaque magnam modi ipsum laboriosam quia
-              temporibus minima dignissimos. Quaerat ipsum odio corporis dolore
-              expedita esse est officia dolores.
-            </p>
-            <p style={{color:'black'}} className="search__engine-text02">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              laudantium officiis itaque magnam modi ipsum laboriosam quia
-              temporibus minima dignissimos. Quaerat ipsum odio corporis dolore
-              expedita esse est officia dolores.
-            </p>
+const About = ({data}) => {
+   
+    
 
-            
-          </div>
+    return (
+        <React.Fragment>
+           <Breadcrumb title="About"/>
+           <Container sx={{minHeight:'100vh'}}>
+            <Grid>
+            {Parser(data.title)}
+            </Grid>
+            <Grid>
+            {Parser(data.shortDescription)}
+            </Grid>
+            <Grid>
+            {Parser(data.body)}
+            </Grid>
+           </Container>
+        </React.Fragment>
+    )
+}
 
-          <div className="search__img about__img d-flex justify-content-center">
-            <Image src={about} alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
-    </>
+export async function getServerSideProps() {
+  
+  const res = await getData(
+    `about?index=1`
   )
+  
+  return {
+    props: {
+        data: res.data,
+    }, 
+  }
 }
 
 export default About

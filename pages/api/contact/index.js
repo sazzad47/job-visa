@@ -1,5 +1,5 @@
 import connectDB from '../../../utils/connectDB'
-import Contact from '../../../models/contactModel'
+import Page from '../../../models/contactModel'
 
 
 connectDB()
@@ -7,27 +7,26 @@ connectDB()
 export default async (req, res) => {
     switch(req.method){
         case "POST":
-            await postContact(req, res)
+            await createPage(req, res)
             break;
         case "GET":
-            await getContact(req, res)
+            await getPage(req, res)
             break;
     }
 }
 
-const postContact = async (req, res) => {
+const createPage = async (req, res) => {
     try{
         
-        const { name, phone, email, message } = req.body
+        const { address, phone, email } = req.body
         
-
-        const newUser = new Contact({ 
-            name, phone, email, message
+        const newPage = new Page({ 
+            address: address, phone:phone, email:email, dateOfPost: new Date().toISOString()
             
         })
-
-        await newUser.save()
-        res.json({msg: "Thank you"})
+        
+        await newPage.save()
+        res.json({msg: "Page saved successfully"})
 
     }catch(err){
         return res.status(500).json({err: err.message})
@@ -36,28 +35,20 @@ const postContact = async (req, res) => {
 
 
 
-const getContact = async (req, res) => {
+const getPage = async (req, res) => {
     try {
-        // const features = new APIfeatures(Contact.find(), req.query)
-        // .paginating()
-        const filter = JSON.parse(req.query.query)
-        const sort = JSON.parse(req.query.sort)
-        const limit = parseInt(req.query.limit)
-        const skip = parseInt(req.query.skip)
-        console.log('perpage', filter)
-        const applicants = await Contact.find(filter).skip(skip).limit(limit).sort(sort)
-        const totalApplicants = await Contact.find()
-        // .skip(page * perPage)
-        // .limit(perPage)
+       
+        const {index} = req.query
         
-        res
-        .setHeader("x-total-count", parseInt(totalApplicants.length))
-        .json({
+        const data = await Page.findOne({index: parseInt(index)})
+        
+        res.json({
             status: 'success',
-            result: applicants.length,
-            applicants
+            data
         })
+        
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
 }
+

@@ -36,7 +36,7 @@ export default function SetCost({resource}) {
           if (!amount) return;
           let id = record.id
           
-          putData(`${resource}/${id}`, {cost: amount})
+          putData(`${resource}/${id}?cost=${amount}`)
           handleClose()
           notify('Cost has been set successfully!', {type: 'success'})
     }

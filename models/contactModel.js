@@ -2,10 +2,9 @@ import mongoose from 'mongoose'
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const contactSchema = new mongoose.Schema({
     index: Number,
-    name: String,
+    address: String,
     phone: String,
     email: String,
-    message: String,
 }, {
     timestamps: true
 })

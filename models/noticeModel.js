@@ -5,6 +5,10 @@ const noticeSchema = new mongoose.Schema({
     title: String,
     file: String,
     dateOfPost: Date,
+    done: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 })

@@ -47,7 +47,7 @@ const Footer = () => {
               <h4>Community</h4>
               <ul className="quick__list">
                 <li><Link href="/about"><a>About us</a></Link></li>
-                <li><Link href="/notices"><a>Legal Notice</a></Link></li>
+                <li><Link href="/legal-notice"><a>Legal Notice</a></Link></li>
                 <li><Link href="/accessibility-statement"><a>Accessibility Statement</a></Link></li>
                
               </ul>

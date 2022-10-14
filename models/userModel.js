@@ -3,7 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-    index: Number,
+    userId: Number,
     name: {
         type: String,
         required: true
@@ -50,9 +50,11 @@ const userSchema = new mongoose.Schema({
 })
 
 
-// if(!mongoose.models.user){
-//     userSchema.plugin(AutoIncrement,{id:'userCounter',inc_field:'index' });
-//   }
+
+if(!mongoose.models.user){
+    userSchema.plugin(AutoIncrement,{id:'userId_counter',inc_field:'userId' });
+  }
+  
 
 
 let Dataset = mongoose.models.user || mongoose.model('user', userSchema)

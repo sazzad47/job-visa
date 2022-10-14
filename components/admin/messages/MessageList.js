@@ -19,7 +19,6 @@ const ContactList = props => {
    return (<List title="Contacts" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
       
         <Datagrid>
-            <TextField source="index" label="Message ID" />
             <TextField source="name" label="Name" />
             <TextField source="phone" label="Phone"/>
             <TextField source="email" label="Email"/>

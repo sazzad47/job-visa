@@ -1,7 +1,6 @@
 import connectDB from '../../../utils/connectDB'
 import VisaApplicants from '../../../models/visaApplicant'
 import auth from '../../../middleware/auth'
-import { ConstructionOutlined } from '@mui/icons-material'
 import sendEmail from '../../../utils/mail'
 
 connectDB()
@@ -18,7 +17,7 @@ export default async (req, res) => {
             await updateCost(req, res)
             break;
         case "DELETE":
-            await deleteProduct(req, res)
+            await deleteItem(req, res)
             break;
     }
 }
@@ -27,10 +26,10 @@ const getApplicant = async (req, res) => {
     try {
         const { id } = req.query;
         
-        const applicant = await VisaApplicants.findById(id)
-        if(!applicant) return res.status(400).json({err: 'This applicant does not exist.'})
+        const data = await VisaApplicants.findById(id)
+        if(!data) return res.status(400).json({err: 'This applicant does not exist.'})
         
-        res.json({ applicant })
+        res.json({ data })
         
     } catch (err) {
         return res.status(500).json({err: err.message})
@@ -92,19 +91,22 @@ const updateCost = async (req, res) => {
     //    if(result.role !== 'admin' || !result.root) 
     //    return res.status(400).json({err: "Authentication is not valid"})
 
-       const {id} = req.query
-       const {cost} = req.body
-
-       const application = await VisaApplicants.findOneAndUpdate({_id: id}, {cost: parseInt(cost)}).populate('user', '-password')
-       await VisaApplicants.findOneAndUpdate({_id: id}, {paid: false})
-       await sendEmail({
+    const {id} = req.query
+    const {cost} = req.query
+    const application = await VisaApplicants.findOne({_id: id}).populate('user', '-password')
+    if (cost) {
+    
+    
+    await VisaApplicants.findOneAndUpdate({_id: id}, {cost: parseInt(cost)}) 
+    await VisaApplicants.findOneAndUpdate({_id: id}, {paid: false})
+    await sendEmail({
         to: application.user.email,
         from: process.env.SENDER_EMAIL,
-        subject: '[job-visa] Visa cost.',
+        subject: '[job-visa] Job cost.',
         html: `
         <div>
           <p>Hello, ${application.user.name}</p>
-          <p>Your visa cost is ${cost}.</p>
+          <p>Your job cost is ${cost}.</p>
           <p>Sed ut perspiciatis unde omnis iste natus error
            sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
@@ -112,36 +114,34 @@ const updateCost = async (req, res) => {
         </div>
         `,
       });
-       res.json({msg: 'Success!'})
+   } else {
+    await VisaApplicants.findOneAndUpdate({_id: id}, {paid: true})
+    await sendEmail({
+        to: application.user.email,
+        from: process.env.SENDER_EMAIL,
+        subject: '[job-visa] Job cost.',
+        html: `
+        <div>
+          <p>Hello, ${application.user.name}</p>
+          <p>We received your payment.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error
+           sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+           eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
+           vitae dicta sunt explicabo.</p>
+        </div>
+        `,
+      });
+   }
+       
+    res.json({msg: 'Success!'})
        
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
 }
 
-// const updateProduct = async (req, res) => {
-//     try {
-//         const result = await auth(req, res)
-//         if(result.role !== 'admin') 
-//         return res.status(400).json({err: 'Authentication is not valid.'})
 
-//         const {id} = req.query
-//         const {title, price, inStock, description, content, category, images} = req.body
-
-//         if(!title || !price || !inStock || !description || !content || category === 'all' || images.length === 0)
-//         return res.status(400).json({err: 'Please add all the fields.'})
-
-//         await VisaApplicants.findOneAndUpdate({_id: id}, {
-//             title: title.toLowerCase(), price, inStock, description, content, category, images
-//         })
-
-//         res.json({msg: 'Success! Updated a product'})
-//     } catch (err) {
-//         return res.status(500).json({err: err.message})
-//     }
-// }
-
-const deleteProduct = async(req, res) => {
+const deleteItem = async(req, res) => {
     try {
         // const result = await auth(req, res)
         

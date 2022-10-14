@@ -8,9 +8,6 @@ connectDB()
 
 export default async (req, res) => {
     switch(req.method){
-        case "POST":
-            await apply(req, res)
-            break;
         case "GET":
             await getTotalCost(req, res)
             break;

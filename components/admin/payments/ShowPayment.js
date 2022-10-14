@@ -8,15 +8,11 @@ const ApplicationTitle = () => {
     return <span>{`Payment ID ${record.index}`}</span>;
 };
 
-const ApplicationActions = () => (
-    <TopToolbar>
-        <DeleteButton/>
-    </TopToolbar>
-);
+
 
 const ShowPayment = props => (
     <>
-    <Show {...props} title={<ApplicationTitle/>} actions={<ApplicationActions/>}>
+    <Show {...props} title={<ApplicationTitle/>}>
        
         <SimpleShowLayout>
 
