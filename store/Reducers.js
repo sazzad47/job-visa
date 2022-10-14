@@ -238,30 +238,30 @@ const reducers = (state, action) => {
                 ...state,
                 auth: action.payload
             };
-        case ACTIONS.ADD_CART:
+        case ACTIONS.ADD_VISA_APPLICATIONS:
             return {
                 ...state,
-                cart: action.payload
+                visaApplications: action.payload
             };
-        case ACTIONS.ADD_MODAL:
+        case ACTIONS.ADD_JOB_APPLICATIONS:
             return {
                 ...state,
-                modal: action.payload
+                jobApplications: action.payload
             };
-        case ACTIONS.ADD_ORDERS:
+        case ACTIONS.ADD_LOAN_APPLICATIONS:
             return {
                 ...state,
-                orders: action.payload
+                loanApplications: action.payload
+            };
+        case ACTIONS.ADD_PAYMENT:
+            return {
+                ...state,
+                payments: action.payload
             };
         case ACTIONS.ADD_USERS:
             return {
                 ...state,
                 users: action.payload
-            };
-        case ACTIONS.ADD_CATEGORIES:
-            return {
-                ...state,
-                categories: action.payload
             };
         default:
             return state;

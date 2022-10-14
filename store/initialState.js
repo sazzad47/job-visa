@@ -210,5 +210,5 @@ export const initialState = {
         file: '',
         method: ''
     },
-    notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: []
+    notify: {}, auth: {}, visaApplications: [], jobApplications: [], loanApplications: [], payments: [], users: [], 
 }

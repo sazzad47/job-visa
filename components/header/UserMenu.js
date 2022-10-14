@@ -8,6 +8,7 @@ import {useRouter} from 'next/router'
 import {DataContext} from '../../store/GlobalState'
 import Cookie from 'js-cookie'
 import { useContext } from 'react';
+import Link from 'next/link';
 
 
 export default function UserMenu() {
@@ -60,8 +61,8 @@ export default function UserMenu() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose}>Dashboard</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <Link href="/dashboard"><MenuItem onClick={handleClose}>Dashboard</MenuItem></Link>
+        <Link href="/settings"><MenuItem onClick={handleClose}>Settings</MenuItem></Link>
         <MenuItem onClick={()=> {
             handleLogout();
             handleClose();

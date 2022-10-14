@@ -10,13 +10,7 @@ import Link from 'next/link';
 const PaymentMessage = ({status, item}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth} = state
-  // const paymentSuccess = async () => {
-  //   await patchData('payment/card', {item: item}, auth.token)
-  // }
-
-  // useEffect(() => {
-  //   paymentSuccess()
-  // },[])
+ 
   return (
     <React.Fragment>
         {status && status === 'success' && (
@@ -45,7 +39,7 @@ const PaymentMessage = ({status, item}) => {
         </Box>
         </div>
         <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2, display: 'flex', justifyContent: 'center' }}>
-        <Link href="/profile"><Button variant='contained'>dashboard</Button></Link>
+        <Link href="/dashboard"><Button variant='contained'>dashboard</Button></Link>
         </Box>
         
         

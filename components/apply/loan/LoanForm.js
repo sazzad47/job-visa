@@ -93,7 +93,7 @@ export default function LoanForm({loading, setLoading, success, setSuccess}) {
       </Box>
       </div>
       <Box sx={{  maxWidth: 450, minWidth: {xs: 300, sm: 450}, width: '100%', p: 2, display: 'flex', justifyContent: 'center' }}>
-      <Link href="/profile"><Button variant='contained'>dashboard</Button></Link>
+      <Link href="/dashboard"><Button variant='contained'>dashboard</Button></Link>
       </Box>
       
       
