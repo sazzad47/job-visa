@@ -1,5 +1,5 @@
 import React from 'react'
-import Breadcrumb from '../components/BreadCrumb'
+import Breadcrumb from '../components/Breadcrumb'
 import Notices from '../components/notices/Notices'
 import { getData } from '../utils/fetchData'
 const Notice = ({data}) => {

@@ -1,6 +1,6 @@
 import { Container, Grid } from '@mui/material'
 import React from 'react'
-import Breadcrumb from '../components/BreadCrumb'
+import Breadcrumb from '../components/Breadcrumb'
 import { getData } from '../utils/fetchData'
 import Parser from 'html-react-parser';
 

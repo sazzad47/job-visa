@@ -10,7 +10,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import NearbyErrorIcon from '@mui/icons-material/NearbyError';
 import Filter from '../components/Filter';
-import Breadcrumb from '../components/BreadCrumb';
+import Breadcrumb from '../components/Breadcrumb'
 import { getData } from '../utils/fetchData';
 import { useRouter } from 'next/router';
 import { DataContext } from '../store/GlobalState';

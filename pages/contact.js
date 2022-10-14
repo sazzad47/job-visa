@@ -1,5 +1,5 @@
 import React from 'react'
-import Breadcrumb from '../components/BreadCrumb'
+import Breadcrumb from '../components/Breadcrumb'
 
 import Form from '../components/contact/Form'
 import Info from '../components/contact/Info'
