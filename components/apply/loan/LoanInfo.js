@@ -21,10 +21,8 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
 
   const emptyInput = (
     !visaApplyID ||
-    !jobApplyID ||
-    !totalRS ||
-    !loanAmount ||
-    !amountOfMoney 
+    !loanAmount
+   
     )
     const getTotalCost = async() => {
       setLoading(true)
@@ -43,7 +41,7 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
     }
     const amountToApplyFor = percentageToActual()
     const handleNextPage = () => {
-      
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
       setLoan(amountToApplyFor)
       handleNext()
     }
@@ -62,7 +60,7 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
     const handleSubmit = (e) => {
      e.preventDefault();
     }
-    console.log('state',state)
+   
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>

@@ -7,6 +7,7 @@ import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { useRef } from 'react';
 import InputModal from '../../InputModal';
+import { toast } from 'react-toastify';
 
 const PersonalInfo = ({handleNext}) => {
  
@@ -86,7 +87,10 @@ const PersonalInfo = ({handleNext}) => {
       })
 
     }
-
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
     const handleSubmit = (e) => {
      e.preventDefault();
     }
@@ -224,10 +228,9 @@ const PersonalInfo = ({handleNext}) => {
           <FileUpload accept="image/*" name="signature" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-end'>
 
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+         
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
         </form>
     </React.Fragment>

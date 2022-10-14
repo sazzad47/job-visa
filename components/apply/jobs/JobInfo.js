@@ -5,6 +5,7 @@ import React, { useContext, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
+import { toast } from 'react-toastify';
 
 const BankStatement = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
@@ -73,7 +74,10 @@ const BankStatement = ({handleBack, handleNext}) => {
       })
 
     }
-
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
     const handleSubmit = (e) => {
      e.preventDefault();
     }
@@ -156,10 +160,10 @@ const BankStatement = ({handleBack, handleNext}) => {
           <FileUpload accept="application/pdf" name="foJobExperienceCertificate" type="CHANGE_JOB_APPLICANTS_JOB_INPUTS"/>
        <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+      
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+          
+        
           </div>
         </form>
     </React.Fragment>

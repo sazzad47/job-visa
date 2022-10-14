@@ -7,6 +7,7 @@ import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { countries } from '../visa/data';
 import InputModal from '../../InputModal';
+import { toast } from 'react-toastify';
 
 
 const PersonalInfo = ({handleBack, handleNext}) => {
@@ -60,7 +61,10 @@ const PersonalInfo = ({handleBack, handleNext}) => {
       setDob(newValue);
     };
    
-    
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
    
     const handleInput = (e) => {
       dispatch({
@@ -158,10 +162,9 @@ const PersonalInfo = ({handleBack, handleNext}) => {
        
            <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+          
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
         </form>
     </React.Fragment>

@@ -2,9 +2,9 @@ import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { patchData } from '../utils/fetchData';
+
 import { useContext } from 'react';
-import { DataContext } from '../store/GlobalState';
+import { DataContext } from '../../../store/GlobalState';
 import { useEffect } from 'react';
 import Link from 'next/link';
 const PaymentMessage = ({status, item}) => {

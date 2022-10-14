@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from '../visa/FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { useRef } from 'react';
+import { toast } from 'react-toastify';
 
 const ApplicantInfo = ({handleBack, handleNext}) => {
  
@@ -26,7 +27,10 @@ const ApplicantInfo = ({handleBack, handleNext}) => {
     !signature
     )
 
-   
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
     const handleInput = (e) => {
       dispatch({
         type: 'CHANGE_LOAN_APPLICANTS_INPUTS', 
@@ -38,7 +42,7 @@ const ApplicantInfo = ({handleBack, handleNext}) => {
     const handleSubmit = (e) => {
      e.preventDefault();
     }
-    console.log('state',state)
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
@@ -56,10 +60,9 @@ const ApplicantInfo = ({handleBack, handleNext}) => {
           <FileUpload accept="image/*" name="signature" type='CHANGE_LOAN_APPLICANTS_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+          
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
         </form>
     </React.Fragment>

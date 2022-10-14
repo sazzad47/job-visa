@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { getData, postData } from '../../../utils/fetchData';
 import { useRouter } from 'next/router';
-import PaymentMessage from '../../PaymentMessage';
+import PaymentMessage from './PaymentMessage';
 import { DataContext } from '../../../store/GlobalState';
 import Form from './Form';
 import Auth from '../../Auth';

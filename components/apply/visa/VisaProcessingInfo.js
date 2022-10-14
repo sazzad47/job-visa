@@ -7,6 +7,7 @@ import FileUpload from './FileUpload';
 import { countries } from './data';
 import { DataContext } from '../../../store/GlobalState';
 import InputModal from '../../InputModal';
+import { toast } from 'react-toastify';
 
 const VisaProcessingInfo = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
@@ -37,7 +38,10 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
     const handleSubmit = (e) => {
      e.preventDefault();
     }
-   
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
    
     const countryList = countries.map((country, index) => (
       <MenuItem key={index} value={country.name}>{country.name}</MenuItem>
@@ -95,10 +99,9 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
       </RadioGroup>
        <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+          
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
        
         </form>

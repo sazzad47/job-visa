@@ -4,6 +4,7 @@ import React, { useContext, useReducer, useState } from 'react'
 
 import FileUpload from '../visa/FileUpload';
 import { DataContext } from '../../../store/GlobalState';
+import { toast } from 'react-toastify';
 
 
 const FatherInfo = ({handleBack, handleNext}) => {
@@ -21,15 +22,17 @@ const FatherInfo = ({handleBack, handleNext}) => {
 
   const emptyInput = (
     !isFatherPresent ||
-    !fatherDeathCertificate ||
     !fatherIdNumber ||
     !fatherFrontPhotoOfIdCard ||
     !fatherBackPhotoOfIdCard ||
-    !photoOfFather ||
-    !signatureOfFather
+    !photoOfFather
+    
     )
 
-   
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
     const handleInput = (e) => {
       dispatch({
         type: 'CHANGE_LOAN_APPLICANTS_FATHER_INPUTS', 
@@ -82,10 +85,10 @@ const FatherInfo = ({handleBack, handleNext}) => {
         
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+          
+         
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
         </form>
     </React.Fragment>

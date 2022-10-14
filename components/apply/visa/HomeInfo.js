@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import InputModal from '../../InputModal';
+import { toast } from 'react-toastify';
 
 const HomeInfo = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
@@ -41,8 +42,8 @@ const HomeInfo = ({handleBack, handleNext}) => {
     !familyMember ||
     !educationalQualification ||
     !languages ||
-    !ieltsScore ||
-    !ieltsDocument
+    !ieltsScore
+   
     )
     const handleInput = (e) => {
       dispatch({
@@ -51,11 +52,14 @@ const HomeInfo = ({handleBack, handleNext}) => {
       })
 
     }
-
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
     const handleSubmit = (e) => {
      e.preventDefault();
     }
-    console.log('state',state)
+    
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
@@ -152,10 +156,9 @@ const HomeInfo = ({handleBack, handleNext}) => {
           }
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+          
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
         </form>
     </React.Fragment>

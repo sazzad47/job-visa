@@ -7,6 +7,7 @@ import FileUpload from '../visa/FileUpload';
 import { DataContext } from '../../../store/GlobalState';
 import { useRef } from 'react';
 import InputModal from '../../InputModal';
+import { toast } from 'react-toastify';
 
 const LandDocument = ({handleBack, handleNext}) => {
  
@@ -27,13 +28,14 @@ const LandDocument = ({handleBack, handleNext}) => {
     !landAmount ||
     !mediumOfGetting ||
     !plotNo ||
-    !precursorDeathCertificate ||
-    !inheritanceCertificate ||
     !houseLandDocuments ||
     !loanForm
     )
 
-   
+    const handleChangeStep = () => {
+      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
+      handleNext()
+    }
     const handleInput = (e) => {
       dispatch({
         type: 'CHANGE_LOAN_APPLICANTS_LAND_INPUTS', 
@@ -90,10 +92,9 @@ const LandDocument = ({handleBack, handleNext}) => {
           <FileUpload accept="application/pdf" name="loanForm" type='CHANGE_LOAN_APPLICANTS_LAND_INPUTS'/>
           <div className='mt-4 d-flex align-items-center justify-content-between'>
           <Button variant='contained' onClick={handleBack}>Back</Button>
-          {emptyInput?
-          <Button type='submit' variant='contained' onClick={handleNext}>Next</Button>:
-          <Button variant='contained' onClick={handleNext}>Next</Button>
-        }
+          
+          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
+        
           </div>
         </form>
     </React.Fragment>
