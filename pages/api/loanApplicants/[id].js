@@ -65,11 +65,9 @@ const updateStatus = async (req, res) => {
         </div>
         `,
       });
-       if (visaApplyID =="") return await JobApplicant.findOneAndUpdate({index: parseInt(visaApplyID)}, { $inc: { cost: -loanAmount } })
-       if (jobApplyID =="") return await VisaApplicant.findOneAndUpdate({index: parseInt(visaApplyID)}, { $inc: { cost: -loanAmount } })
-         
-       await VisaApplicant.findOneAndUpdate({index: parseInt(visaApplyID)}, { $inc: { cost: -loanAmount/2 } })
-       await JobApplicant.findOneAndUpdate({index: parseInt(jobApplyID)}, { $inc: { cost: -loanAmount/2 } })
+      
+       await VisaApplicant.findOneAndUpdate({index: parseInt(visaApplyID)}, { $inc: { cost: -loanAmount } })
+       
         
        await sendEmail({
         to: updatedApplication.user.email,

@@ -22,7 +22,6 @@ const VisaApplicatioinList = props => {
             <TextField source="userId" label="User ID" />
             <TextField source="email" label="Email"/>
             <TextField source="phoneNumber" label="Phone"/>
-            <TextField source="cost" label="Cost"/>
             <BooleanField source="paid" label="Paid" />
             <TextField source="status" label="Status"/>
 
