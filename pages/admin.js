@@ -16,7 +16,7 @@ const AdminPage = () => {
     <>
     {/* {auth?.user?.role === 'admin'? */}
 
-    <App/>: 
+    <App/>
    {/* <>
     <Container style={{display:'flex', alignItems:'center', justifyContent:'center', minHeight:'100vh'}} component="main" maxWidth="xs">
             404 page not found!
