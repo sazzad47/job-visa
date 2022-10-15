@@ -16,24 +16,20 @@ export default async (req, res) => {
 
 
 const getTotalCost = async (req, res) => {
-    const {visaApplyID, jobApplyID} = req.query
+    const {visaApplyID, } = req.query
     console.log('jobApplyID', req.query)
     try {
         const result = await auth(req, res)
         
         const visa = await VisaApplicants.findOne({index: visaApplyID})
-        const job = await JobApplicants.findOne({index: jobApplyID})
-        // let jobCost = parseInt(job.cost)
-        // let visaCost = parseInt(visa.cost)
+        if(!visa) return res.status(400).json({err: 'Application not found!'})
+       
+        if (visa.cost === 0) return res.status(400).json({err: 'Cost not set yet.'})
         
-        // let totalCost
-        // if (!visa || !job) return res.json({ totalCost: parseInt(job.cost) || parseInt(visa.cost), success: true })
-        if (!visa) return res.json({totalCost: parseInt(job.cost), success: true })
-        if (!job) return res.json({totalCost: parseInt(visa.cost), success: true })
          
         res.json({
         
-            totalCost: parseInt(visa.cost) + parseInt(job.cost),
+            totalCost: visa.cost,
             success: true
         })
         

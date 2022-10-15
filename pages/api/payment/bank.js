@@ -1,6 +1,5 @@
 import connectDB from '../../../utils/connectDB'
 import Payment from '../../../models/paymentModel'
-
 import auth from '../../../middleware/auth'
 import sendEmail from '../../../utils/mail'
 

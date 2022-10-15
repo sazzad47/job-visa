@@ -198,8 +198,8 @@ export const initialState = {
 
     },
     paymentInfo: {
-       visaApplyID: 0,
-       jobApplyID: 0,
+       visaApplyID: '',
+       jobApplyID: '',
        bankReceipt: '',
        amount: ''
     },

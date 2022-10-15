@@ -1,6 +1,6 @@
 import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
 
-import React, { useContext, useReducer, useRef, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import { toast } from 'react-toastify';
 import { DataContext } from '../../../store/GlobalState';
 import { getData } from '../../../utils/fetchData';
@@ -24,15 +24,25 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
     !loanAmount
    
     )
-    const getTotalCost = async() => {
-      setLoading(true)
-      const res = await getData(
-        `totalCost?visaApplyID=${visaApplyID}&jobApplyID=${jobApplyID}`, auth.token
-      )
-      // if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-      setTotalCost(res.totalCost)
-      setLoading(false);
-    }
+    const [message, setMessage] = useState('')
+
+      const getTotalCost = async() => {
+        if (!visaApplyID) return
+        setLoading(true)
+        const res = await getData(
+          `totalCost?visaApplyID=${visaApplyID}`, auth.token
+        )
+        console.log('res', res)
+        if(res.err) {
+          setLoading(false);
+          setMessage(res.err) 
+        } else {
+          setLoading(false);
+          setMessage(`Total Cost: $${res.totalCost}`)
+          setTotalCost(res.totalCost)
+        }
+        
+      }
     function percentageToActual () {
      const amountToApplyFor = ((parseInt(loanAmount)/100) * parseInt(totalCost)).toFixed(2);
      const invalidAmount = isNaN(amountToApplyFor);
@@ -60,7 +70,12 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
     const handleSubmit = (e) => {
      e.preventDefault();
     }
-   
+    useEffect(()=> {
+      if (!visaApplyID) {
+        setMessage('')
+      }
+    },[visaApplyID])
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
@@ -74,7 +89,7 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
       <div className='mt-3'>Total Rs</div>
       <div className='visa-form-input mb-3'>
         {/* <TextField name='totalRS' required fullWidth variant="outlined" ref={totalRSField} />  */}
-        <div className='loan-amount'>{loading? "loading..." : totalCost}</div>
+        <div className='loan-amount'>{loading? "loading..." : message? message: null}</div>
       </div>
       
       {totalCost &&

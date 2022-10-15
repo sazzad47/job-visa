@@ -33,7 +33,11 @@ async function CreateStripeSession(req, res) {
     success_url: redirectURL + '?status=success',
     cancel_url: redirectURL + '?status=cancel',
     metadata: {
-        name: item.name,
+      user: result.userId,
+      visaApplyID: item.visaApplyID,
+      jobApplyID: item.jobApplyID,
+      method: item.method,
+      amount: item.price
     },
   });
 

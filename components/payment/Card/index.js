@@ -1,5 +1,5 @@
 import { Box, Button, CircularProgress, Grid, Paper, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -18,27 +18,34 @@ const Index = ({setCheckAuth}) => {
   const {auth} = state
   const [loading, setLoading] = useState(false);
   const [totalCost, setTotalCost] = useState('');
+  const [error, setError] = useState('')
   const router = useRouter();
   const { status } = router.query;
 
   const {
     visaApplyID,
-    jobApplyID,
   
   } = state.paymentInfo;
    
-   
+  const [message, setMessage] = useState('')
 
       const getTotalCost = async() => {
+        if (!visaApplyID) return
         setLoading(true)
         const res = await getData(
-          `totalCost?visaApplyID=${visaApplyID}&jobApplyID=${jobApplyID}`, auth.token
+          `totalCost?visaApplyID=${visaApplyID}`, auth.token
         )
-        // if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-        setTotalCost(res.totalCost)
-        setLoading(false);
+        console.log('res', res)
+        if(res.err) {
+          setLoading(false);
+          setMessage(res.err) 
+        } else {
+          setLoading(false);
+          setMessage(`Total Cost: $${res.totalCost}`)
+        }
+        
       }
-
+      console.log('message', message)
       const handleInput = (e) => {
       
         dispatch({
@@ -48,10 +55,9 @@ const Index = ({setCheckAuth}) => {
   
       }
       const item = {
-        name: "Visa and Job",
+        name: `Visa Application No ${visaApplyID}`,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
         visaApplyID,
-        jobApplyID,
         method: "card",
         quantity: 1,
         price: totalCost,
@@ -72,6 +78,12 @@ const Index = ({setCheckAuth}) => {
         }
         dispatch({ type: 'NOTIFY', payload: {loading: false} })
       };
+
+      useEffect(()=> {
+        if (!visaApplyID) {
+          setMessage('')
+        }
+      },[visaApplyID])
   return (
     <> 
      {status? 
@@ -83,14 +95,11 @@ const Index = ({setCheckAuth}) => {
           </Typography>
           
           <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-        <TextField name='visaApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Visa Apply ID" placeholder='Enter your visa apply ID' variant="outlined" />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField name='jobApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Job Apply ID" placeholder='Enter your job apply ID' variant="outlined" />
+        <Grid item xs={12}>
+        <TextField type="number" name='visaApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Visa Apply ID" placeholder='Enter your visa apply ID' variant="outlined" />
         </Grid>
         <Grid item xs={12} className="text-center">
-          {loading? <CircularProgress /> :<div className='loan-amount'>Total Costs: ${totalCost !== ""? totalCost : 0.00}</div>}
+          {loading? <CircularProgress /> :<div className='loan-amount'> {message? message: null} </div>}
         </Grid>
         <Grid item xs={12} className="text-end">
 
