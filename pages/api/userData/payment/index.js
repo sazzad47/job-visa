@@ -18,7 +18,9 @@ const getPayments = async (req, res) => {
         const result = await auth(req, res)
 
         
-        const payments = await Payments.find({user: result.id}).populate("user", "-password")
+        let payments
+        if (result.role === 'user') return payments = await Payments.find({userId: result.userId}).populate("user", "-password")
+        payments = await Payments.find().populate("user", "-password")
     
         
         res.json({payments})

@@ -18,7 +18,9 @@ const getApplications = async (req, res) => {
         const result = await auth(req, res)
 
         
-        const applications = await Applications.find({userId: result.userId}).populate("user", "-password")
+        let applications
+        if (result.role === 'user') return applications = await Applications.find({userId: result.userId}).populate("user", "-password")
+        applications = await Applications.find().populate("user", "-password")
     
        
         res.json({applications})

@@ -49,11 +49,12 @@ import LegalNotice from './legalNotice';
 import EditLegalNotice from './legalNotice/EditPage';
 import AccessibilityStatement from './accessibilityStatement';
 import EditAccessibilityStatement from './accessibilityStatement/EditPage';
+import Dashboard from './dashboard';
 
 const dataProvider = myDataProvider(`${baseUrl}/api`, httpClient);
 const App = () => {
   return (
-    <Admin title="Novage" loginPage={MyLoginPage} layout={Layout} dataProvider={dataProvider} authProvider={authProvider} >
+    <Admin dashboard={Dashboard} title="Novage" loginPage={MyLoginPage} layout={Layout} dataProvider={dataProvider} authProvider={authProvider} >
       <Resource name="visaApplicants" list={VisaApplicatioinList} show={VisaApplicationShow} edit={EditVisaApplicants} options={{label: "Visa Applicants"}} />
       <Resource name="loanApplicants" list={LoanApplicatioinList} show={LoanApplicationShow} options={{label: "Loan Applicants"}} />
       <Resource name="jobApplicants" list={JobApplicatioinList} show={JobApplicationShow} options={{label: "Job Applicants"}} />
@@ -63,6 +64,7 @@ const App = () => {
       <Resource name="payment" list={PaymentList} show={ShowPayment} options={{label: "Payments"}} />
       
       <CustomRoutes>
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contact" element={<Contact pageName="contact" />} />
             <Route path="/contact/edit" element={<EditContact pageName="contact" />} />
             <Route path="/services" element={<Services pageName="services" />} />
