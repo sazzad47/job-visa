@@ -8,10 +8,6 @@ const paymentSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'user'
     },
-    jobApplyID: {
-        type: String,
-        default: ""
-    },
     visaApplyID: {
         type: String,
         default: ""

@@ -40,6 +40,9 @@ const Index = ({setCheckAuth}) => {
           setLoading(false);
           setMessage(res.err) 
         } else {
+          let cost = res.totalCost
+          setTotalCost(cost)
+          console.log('total', totalCost)
           setLoading(false);
           setMessage(`Total Cost: $${res.totalCost}`)
         }

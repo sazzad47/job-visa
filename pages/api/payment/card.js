@@ -33,44 +33,14 @@ async function CreateStripeSession(req, res) {
     success_url: redirectURL + '?status=success',
     cancel_url: redirectURL + '?status=cancel',
     metadata: {
-      user: result.userId,
+      user: JSON.stringify(result.id),
       visaApplyID: item.visaApplyID,
-      jobApplyID: item.jobApplyID,
+      amount: item.price,
       method: item.method,
-      amount: item.price
     },
   });
 
-  const newPayment = new Payment({ 
-    user: result.id,
-    visaApplyID: item.visaApplyID,
-    jobApplyID: item.jobApplyID,
-    method: item.method,
-    amount: item.price
-    
-    
-})
-
-
-
-await newPayment.save()
-await sendEmail({
-    to: result.email,
-    from: process.env.SENDER_EMAIL,
-    subject: '[job-visa] Received payment.',
-    html: `
-    <div>
-      <p>Hello, ${result.name}</p>
-      <p>We received your payment.</p>
-      <p>Sed ut perspiciatis unde omnis iste natus error
-       sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
-       eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae 
-       vitae dicta sunt explicabo.</p>
-    </div>
-    `,
-  });
-  await VisaApplicant.findOneAndUpdate({index: parseInt(item.visaApplyID)}, {paid: true})
-  await JobApplicant.findOneAndUpdate({index: parseInt(item.jobApplyID)}, {paid: true})
+  
   res.json({ id: session.id });
 }
 
