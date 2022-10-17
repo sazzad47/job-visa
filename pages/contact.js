@@ -21,17 +21,17 @@ const ContactSection = ({data}) => {
   )
 }
 
-export async function getServerSideProps() {
+// export async function getServerSideProps() {
   
-  const res = await getData(
-    `contact?index=1`
-  )
+//   const res = await getData(
+//     `contact?index=1`
+//   )
   
-  return {
-    props: {
-        data: res.data,
-    }, 
-  }
-}
+//   return {
+//     props: {
+//         data: res.data,
+//     }, 
+//   }
+// }
 
 export default ContactSection
