@@ -40,10 +40,12 @@ import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
 import Notices from '../components/notices/Notices'
 import { getData } from '../utils/fetchData'
+import Form from '../components/contact/Form'
 const Notice = ({data}) => {
     return (
         <React.Fragment>
            <Breadcrumb title="Notices"/>
+           <Form/>
             <Notices data={data} />
         </React.Fragment>
     )
