@@ -35,7 +35,7 @@
 // }
 
 // export default Contact
-
+import Info from '../components/contact/Info'
 import { Container, Grid } from '@mui/material'
 import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
@@ -61,8 +61,8 @@ const Services = ({data}) => {
             </Grid>
            </Container> */}
           <div className="">
-        {/* <Info data={data} /> */}
-            <Form />
+        <Info data={data} />
+            {/* <Form /> */}
          </div>
         </React.Fragment>
     )
@@ -71,7 +71,7 @@ const Services = ({data}) => {
 export async function getServerSideProps() {
   
   const res = await getData(
-    `services?index=1`
+    `contact?index=1`
   )
   
   return {
