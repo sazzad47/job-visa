@@ -14,7 +14,7 @@ const ContactSection = ({data}) => {
    <Breadcrumb title="Contact"/>
    
     <div className="">
-      <Info data={data} />
+      {/* <Info data={data} /> */}
       <Form />
     </div>
   </>
