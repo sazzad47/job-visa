@@ -36,47 +36,28 @@
 
 // export default Contact
 
-import { Container, Grid } from '@mui/material'
 import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
+import Notices from '../components/notices/Notices'
 import { getData } from '../utils/fetchData'
-import Parser from 'html-react-parser';
-import Info from '../components/contact/Info'
-
-const Services = ({data}) => {
-   
-    
-
+const Notice = ({data}) => {
     return (
         <React.Fragment>
-           <Breadcrumb title="Services"/>
-           <Container sx={{minHeight:'100vh'}}>
-           <Info data = {data}/>
-            <Grid>
-            {Parser(data.phone)}
-            </Grid>
-            <Grid>
-            {Parser(data.email)}
-            </Grid>
-            <Grid>
-            {Parser(data.address)}
-            </Grid>
-           </Container>
+           <Breadcrumb title="Notices"/>
+            <Notices data={data} />
         </React.Fragment>
     )
 }
 
 export async function getServerSideProps() {
   
-  const res = await getData(
-    `contact?index=1`
-  )
-  
-  return {
-    props: {
-        data: res.data,
-    }, 
+    const res = await getData('notices/getAll')
+    console.log('noticeddd', res.data)
+    return {
+      props: {
+          data: res.data,
+      }, 
+    }
   }
-}
 
-export default Services
+export default Notice
