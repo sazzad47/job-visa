@@ -51,13 +51,13 @@ const Services = ({data}) => {
            <Breadcrumb title="Services"/>
            <Container sx={{minHeight:'100vh'}}>
             <Grid>
-            {Parser(data.title)}
+            {Parser(data.phone)}
             </Grid>
             <Grid>
-            {Parser(data.shortDescription)}
+            {Parser(data.email)}
             </Grid>
             <Grid>
-            {Parser(data.body)}
+            {Parser(data.address)}
             </Grid>
            </Container>
         </React.Fragment>
@@ -67,7 +67,7 @@ const Services = ({data}) => {
 export async function getServerSideProps() {
   
   const res = await getData(
-    `services?index=1`
+    `contact?index=1`
   )
   
   return {
