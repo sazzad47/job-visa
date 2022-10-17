@@ -35,40 +35,31 @@
 // }
 
 // export default Contact
-import Info from '../components/contact/Info'
+
 import { Container, Grid } from '@mui/material'
 import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
 import { getData } from '../utils/fetchData'
 import Parser from 'html-react-parser';
-import Form from '../components/contact/Form'
+
 const Services = ({data}) => {
    
     
 
     return (
         <React.Fragment>
-           {data? <>
-           
-           
-           
-           
-            <Breadcrumb title="Services"/>
+           <Breadcrumb title="Services"/>
            <Container sx={{minHeight:'100vh'}}>
             <Grid>
-            {Parser(data.phone)}
+            {Parser(data.title)}
             </Grid>
             <Grid>
-            {Parser(data.email)}
+            {Parser(data.shortDescription)}
             </Grid>
             <Grid>
-            {Parser(data.address)}
+            {Parser(data.body)}
             </Grid>
            </Container>
-           </>
-           : "Loading..."}
-          
-           
         </React.Fragment>
     )
 }
@@ -76,7 +67,7 @@ const Services = ({data}) => {
 export async function getServerSideProps() {
   
   const res = await getData(
-    `contact?index=1`
+    `services?index=1`
   )
   
   return {
