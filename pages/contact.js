@@ -24,7 +24,7 @@ const Contact = ({data}) => {
 export async function getServerSideProps() {
   
   const res = await getData(
-    `contact?index=1`
+    `help?index=1`
   )
   
   return {
