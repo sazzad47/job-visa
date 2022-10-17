@@ -41,7 +41,7 @@ import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
 import { getData } from '../utils/fetchData'
 import Parser from 'html-react-parser';
-
+import Form from '../components/contact/Form'
 const Services = ({data}) => {
    
     
@@ -49,7 +49,7 @@ const Services = ({data}) => {
     return (
         <React.Fragment>
            <Breadcrumb title="Services"/>
-           <Container sx={{minHeight:'100vh'}}>
+           {/* <Container sx={{minHeight:'100vh'}}>
             <Grid>
             {Parser(data.title)}
             </Grid>
@@ -59,7 +59,11 @@ const Services = ({data}) => {
             <Grid>
             {Parser(data.body)}
             </Grid>
-           </Container>
+           </Container> */}
+          <div className="">
+        {/* <Info data={data} /> */}
+            <Form />
+         </div>
         </React.Fragment>
     )
 }
