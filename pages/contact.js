@@ -48,22 +48,27 @@ const Services = ({data}) => {
 
     return (
         <React.Fragment>
-           <Breadcrumb title="Services"/>
-           {/* <Container sx={{minHeight:'100vh'}}>
+           {data? <>
+           
+           
+           
+           
+            <Breadcrumb title="Services"/>
+           <Container sx={{minHeight:'100vh'}}>
             <Grid>
-            {Parser(data.title)}
+            {Parser(data.phone)}
             </Grid>
             <Grid>
-            {Parser(data.shortDescription)}
+            {Parser(data.email)}
             </Grid>
             <Grid>
-            {Parser(data.body)}
+            {Parser(data.address)}
             </Grid>
-           </Container> */}
-          <div className="">
-        <Info data={data} />
-            {/* <Form /> */}
-         </div>
+           </Container>
+           </>
+           : "Loading..."}
+          
+           
         </React.Fragment>
     )
 }
