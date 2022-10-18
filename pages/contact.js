@@ -46,9 +46,9 @@ import { toast } from 'react-toastify';
 
 const Notice = ({data}) => {
   const [loading, setLoading] = useState(false)
-  const initialState = { name: '', phone: '', email: '', message: '' }
+  const initialState = { name: '', email: '', message: '' }
     const [userData, setUserData] = useState(initialState)
-    const { name, phone, email, message } = userData
+    const { name, email, message } = userData
     const invalid = Object.values(initialState).map(item => item === '')
     const handleChangeInput = e => {
       const {name, value} = e.target
@@ -96,18 +96,18 @@ const Notice = ({data}) => {
       <div className="contact-right-side">
         <div className="contact-topic-text">Send us a message</div>
         
-      <form action="#">
+      <form onSubmit={handleSubmit}>
         <div className="contact-input-box">
-          <input type="text" placeholder="Enter your name" />
+          <input type="text" name='name' value={name} placeholder="Enter your name" />
         </div>
         <div className="contact-input-box">
-          <input type="text" placeholder="Enter your email" />
+          <input type="text" name='email' value={email} placeholder="Enter your email" />
         </div>
         <div className="contact-input-box message-box">
-          <textarea type="text" placeholder="Enter your message" />
+          <textarea type="text" name='message' value={message} placeholder="Enter your message" />
         </div>
         <div className="contact-button">
-          <input type="button" value="Send Now" />
+          <button type='submit'>Send</button>
         </div>
       </form>
     </div>
