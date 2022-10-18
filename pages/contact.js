@@ -66,8 +66,8 @@ const Notice = ({data}) => {
         <div className="contact-email details">
           <i className="fas fa-envelope"></i>
           <div className="contact-topic">Email</div>
-          <div className="contact-text-one">codinglab@gmail.com</div>
-          <div className="contact-text-two">info.codinglab@gmail.com</div>
+          <div className="contact-text-one">{Parser(data.email)}</div>
+         
         </div>
       </div>
       <div className="contact-right-side">
