@@ -57,11 +57,11 @@ const Notice = ({data}) => {
            <section className="info">
     <h2 className="info-h2">Contact information</h2>
 
-    <div className="d-flex flex-column">
+    {/* <div className="d-flex flex-column">
       <div className='d-flex mb-2'><LocalPhoneIcon sx={{mr:2}} /> {Parser(data.phone)}</div>
       <div className='d-flex my-2'><EmailIcon sx={{mr:2}} /> {Parser(data.email)}</div>
       <div className='d-flex'><LocationOnIcon sx={{mr:2}} /> {Parser(data.address)}</div>
-    </div>
+    </div> */}
 
     
   </section>
