@@ -39,10 +39,33 @@
 import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
 import Parser from 'html-react-parser';
-import { getData } from '../utils/fetchData'
+import { getData, postData } from '../utils/fetchData'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Notice = ({data}) => {
+  const [loading, setLoading] = useState(false)
+  const initialState = { name: '', phone: '', email: '', message: '' }
+    const [userData, setUserData] = useState(initialState)
+    const { name, phone, email, message } = userData
+    const invalid = Object.values(initialState).map(item => item === '')
+    const handleChangeInput = e => {
+      const {name, value} = e.target
+      setUserData({...userData, [name]:value})
+    }
+  
+    const handleSubmit = async e => {
+      e.preventDefault()
+      if (invalid) return toast('Please fill out all the fieds!', {type: 'error'})
+      setLoading(true)
+      await postData('messages', userData)
+      setLoading(false)
+      setUserData(initialState)
+      toast('Thank you for contacting us!', {type: 'success'})
+      console.log('userdata', userData)
+    }
+
     return (
         <React.Fragment>
            <Breadcrumb title="Contact"/>
