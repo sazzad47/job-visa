@@ -54,14 +54,14 @@ const Notice = ({data}) => {
         <div className="contact-address details">
           <i className="fas fa-map-marker-alt"></i>
           <div className="contact-topic">Address</div>
-          <div className="contact-text-one">Surkhet, NP12</div>
-          <div className="contact-text-two">Birendranagar 06</div>
+          <div className="contact-text-one">{Parser(data.address)}</div>
+          
         </div>
         <div className="contact-phone details">
           <i className="fas fa-phone-alt"></i>
           <div className="contact-topic">Phone</div>
-          <div className="contact-text-one">+0098 9893 5647</div>
-          <div className="contact-text-two">+0096 3434 5678</div>
+          <div className="contact-text-one">{Parser(data.phone)}</div>
+          
         </div>
         <div className="contact-email details">
           <i className="fas fa-envelope"></i>
