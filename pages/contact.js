@@ -70,15 +70,15 @@ const Notice = ({data}) => {
     )
 }
 
-export async function getServerSideProps() {
+// export async function getServerSideProps() {
   
-    const res = await getData('contact?index=1')
-    console.log('noticeddd', res.data)
-    return {
-      props: {
-          data: res.data,
-      }, 
-    }
-  }
+//     const res = await getData('contact?index=1')
+//     console.log('noticeddd', res.data)
+//     return {
+//       props: {
+//           data: res.data,
+//       }, 
+//     }
+//   }
 
 export default Notice
