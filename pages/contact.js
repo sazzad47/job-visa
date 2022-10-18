@@ -72,7 +72,7 @@ const Notice = ({data}) => {
       </div>
       <div className="contact-right-side">
         <div className="contact-topic-text">Send us a message</div>
-        <p>If you have any work from me or any types of quries related to my tutorial, you can send me message from here. It's my pleasure to help you.</p>
+        
       <form action="#">
         <div className="contact-input-box">
           <input type="text" placeholder="Enter your name" />
