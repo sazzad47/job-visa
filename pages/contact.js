@@ -46,9 +46,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Parser from 'html-react-parser';
-import facebookIcon from '@iconify/icons-mdi/facebook'
-import linkedinIcon from '@iconify/icons-mdi/linkedin'
-import twitterIcon from '@iconify/icons-mdi/twitter'
+
 
 const Notice = ({data}) => {
     return (
@@ -70,15 +68,15 @@ const Notice = ({data}) => {
     )
 }
 
-// export async function getServerSideProps() {
+export async function getServerSideProps() {
   
-//     const res = await getData('contact?index=1')
-//     console.log('noticeddd', res.data)
-//     return {
-//       props: {
-//           data: res.data,
-//       }, 
-//     }
-//   }
+    const res = await getData('contact?index=1')
+    console.log('noticeddd', res.data)
+    return {
+      props: {
+          data: res.data,
+      }, 
+    }
+  }
 
 export default Notice
