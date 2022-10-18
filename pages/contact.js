@@ -98,13 +98,13 @@ const Notice = ({data}) => {
         
       <form onSubmit={handleSubmit}>
         <div className="contact-input-box">
-          <input type="text" name='name' value={name} placeholder="Enter your name" />
+          <input type="text" name='name' value={name} onChange={handleChangeInput} placeholder="Enter your name" />
         </div>
         <div className="contact-input-box">
-          <input type="text" name='email' value={email} placeholder="Enter your email" />
+          <input type="text" name='email' value={email} onChange={handleChangeInput} placeholder="Enter your email" />
         </div>
         <div className="contact-input-box message-box">
-          <textarea type="text" name='message' value={message} placeholder="Enter your message" />
+          <textarea type="text" name='message' value={message} onChange={handleChangeInput} placeholder="Enter your message" />
         </div>
         <div className="contact-button">
           <button type='submit'>Send</button>
