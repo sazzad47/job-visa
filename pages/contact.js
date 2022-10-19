@@ -1,51 +1,12 @@
-// import React from 'react'
-// import Breadcrumb from '../components/Breadcrumb'
-
-// import Form from '../components/contact/Form'
-// import Info from '../components/contact/Info'
-// import { getData } from '../utils/fetchData'
-
-
-
-// const Contact = ({data}) => {
- 
-//   return (
-//  <> 
-//    <Breadcrumb title="Contact"/>
-   
-//     <div className="contact-">
-//       {/* <Info data={data} /> */}
-//       <Form />
-//     </div>
-//   </>
-//   )
-// }
-
-// export async function getServerSideProps() {
-  
-//   const res = await getData(
-//     `contact?index=1`
-//   )
-  
-//   return {
-//     props: {
-//         data: res.data,
-//     }, 
-//   }
-// }
-
-// export default Contact
-
 import React from 'react'
 import Breadcrumb from '../components/Breadcrumb'
 import Parser from 'html-react-parser';
 import { getData, postData } from '../utils/fetchData'
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 const Notice = ({data}) => {
-  const [loading, setLoading] = useState(false)
+ 
   const initialState = { name: '', email: '', message: '' }
     const [userData, setUserData] = useState(initialState)
     const { name, email, message } = userData
@@ -58,9 +19,9 @@ const Notice = ({data}) => {
     const handleSubmit = async e => {
       e.preventDefault()
       if (!valid) return toast('Please fill out all the fieds!', {type: 'error'})
-      setLoading(true)
+     
       await postData('messages', userData)
-      setLoading(false)
+      
       setUserData(initialState)
       toast('Thank you for contacting us!', {type: 'success'})
      

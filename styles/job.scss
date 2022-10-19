@@ -21,10 +21,14 @@
 .job-post-container {
     border-top: 2px solid blue;
 }
-.breadcrumb {
+.custom-breadcrum {
+    height: 4rem;
     max-width: 100%;
+    display: flex;
+    align-items: center;
     background-color: rgb(250, 228, 228);
     margin: 1rem;
+    padding: 1rem;
 }
 .job-filter-container {
     background-color: rgb(225, 242, 247);

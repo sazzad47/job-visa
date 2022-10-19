@@ -7,23 +7,25 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import GrainIcon from '@mui/icons-material/Grain';
 import Link from 'next/link';
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
-}
+
 
 export default function Breadcrumb({title}) {
   return (
-    <div role="presentation" className='breadcrumb' onClick={handleClick}>
-      <Breadcrumbs aria-label="breadcrumb" className='breadcrumb' >
+    <div className='custom-breadcrum'>
+      <Breadcrumbs>
         <Link
           underline="hover"
           sx={{ display: 'flex', alignItems: 'center' }}
           color="inherit"
           href="/"
         ><a style={{textDecoration: 'none'}}>
+          <Typography
+          sx={{ display: 'flex', alignItems: 'center' }}
+          color="text.primary"
+        >
           <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
           Home
+        </Typography>
         </a>
         </Link>
         
