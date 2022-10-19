@@ -188,6 +188,14 @@ const visaApplicantSchema = new mongoose.Schema({
         type: String,
         default: "pending"
     },
+    visa: {
+        type: String,
+        default: ""
+    },
+    uploadedVisa: {
+        type: Boolean,
+        default: false
+    },
     done: {
         type: Boolean,
         default: false

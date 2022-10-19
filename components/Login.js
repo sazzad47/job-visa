@@ -71,7 +71,7 @@ const Login = ({handleOpenRegister}) => {
               value={password}
               onChange={handleChangeInput}
               required/>
-              <Link href="/forgot-password"><a><Typography align='start' style={{fontSize:'12px'}}>Forgot your password?</Typography></a></Link>
+              <Link href="/forgot-password"><a><Typography align='left' style={{fontSize:'12px'}}>Forgot your password?</Typography></a></Link>
               <button type='submit' className='submit-btn'>Submit</button>
             </form>
             <button type='button' className='butn' onClick={handleOpenRegister}>I'm New Here</button>

@@ -15,16 +15,18 @@ const SearchFilter = props => (
 
 const VisaApplicatioinList = props => {
     
-   return (<List  aside={<FilterSidebar />} title="Visa Applicants" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
+   return (<List aside={<FilterSidebar />} title="Visa Applicants" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
       
         <Datagrid>
             <TextField source="index" label="ID" />
             <TextField source="userId" label="User ID" />
-            <TextField source="email" label="Email"/>
-            <TextField source="phone" label="Phone"/>
+            <TextField source="passportCountry" label="From Country"/>
+            <TextField source="wishedCountry" label="Visa Application Country"/>
+            <TextField source="visaType" label="Category"/>
             <TextField source="cost" label="Cost"/>
             <BooleanField source="paid" label="Paid" />
             <TextField source="status" label="Status"/>
+            <BooleanField source="uploadedVisa" label="Visa Uploaded"/>
            
             <ShowButton/>
         </Datagrid>

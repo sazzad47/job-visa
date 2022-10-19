@@ -86,6 +86,8 @@ const VisaChecking = () => {
                 <Grid item xs={12} md={6}>{data?.dateOfBirth}</Grid>
                 <Grid item xs={12} md={6}>Status:</Grid>
                 <Grid item xs={12} md={6} style={{color:'yellowgreen'}}>{data?.status}</Grid>
+                <Grid item xs={12} md={6}>Visa:</Grid>
+                <Grid item xs={12} md={6}>{data?.uploadedVisa===false? "Not uploaded yet": data?.visa}</Grid>
               </Grid>
             </Box>: null) : null}
           </Box>

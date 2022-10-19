@@ -6,6 +6,7 @@ import SetCost from "../SetCost";
 import ApproveBtn from "./ApproveBtn";
 import DeclineBtn from "./DeclineBtn";
 import GeneratePDFButton from "./GeneratePDFButton";
+import UploadVisa from "./UploadVisa";
 
 const ApplicationTitle = () => {
     const record = useRecordContext();
@@ -18,6 +19,7 @@ const ApplicationActions = () => (
         
         <SetCost resource = "visaApplicants"/>
         <MarkAsPaid resource="visaApplicants" />
+        <UploadVisa/>
         <ApproveBtn/>
         <DeclineBtn/>
         <GeneratePDFButton title="Visa"/>

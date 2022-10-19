@@ -44,7 +44,13 @@ const updateStatus = async (req, res) => {
 
        const {id} = req.query
        const {status} = req.body
-
+       const {visa} = req.query
+       if (visa) {
+        console.log('visa', visa)
+        await VisaApplicants.findOneAndUpdate({_id: id}, {visa}, {uploadedVisa: true}).populate('user', '-password') 
+        res.json({msg: 'Success!'}) 
+      } else {
+       
        const application = await VisaApplicants.findOneAndUpdate({_id: id}, {status}).populate('user', '-password')
 
        if (status === "approved") return await sendEmail({
@@ -79,6 +85,7 @@ const updateStatus = async (req, res) => {
         `,
       });
        res.json({msg: 'Success!'})
+    }
        
     } catch (err) {
         return res.status(500).json({err: err.message})
