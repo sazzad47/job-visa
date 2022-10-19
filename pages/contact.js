@@ -49,21 +49,21 @@ const Notice = ({data}) => {
   const initialState = { name: '', email: '', message: '' }
     const [userData, setUserData] = useState(initialState)
     const { name, email, message } = userData
-    const invalid = Object.values(initialState).map(item => item === '')
     const handleChangeInput = e => {
       const {name, value} = e.target
       setUserData({...userData, [name]:value})
     }
-  
+    const valid = Object.values(userData).every(item => item !== '')
+    
     const handleSubmit = async e => {
       e.preventDefault()
-      if (invalid) return toast('Please fill out all the fieds!', {type: 'error'})
+      if (!valid) return toast('Please fill out all the fieds!', {type: 'error'})
       setLoading(true)
       await postData('messages', userData)
       setLoading(false)
       setUserData(initialState)
       toast('Thank you for contacting us!', {type: 'success'})
-      console.log('userdata', userData)
+     
     }
 
     return (
