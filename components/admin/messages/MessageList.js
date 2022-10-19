@@ -16,11 +16,10 @@ const SearchFilter = props => (
 
 const ContactList = props => {
     
-   return (<List title="Contacts" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
+   return (<List title="Messages" pagination={<Pagination />} {...props} filters={<SearchFilter />}>
       
         <Datagrid>
             <TextField source="name" label="Name" />
-            <TextField source="phone" label="Phone"/>
             <TextField source="email" label="Email"/>
             <TextField source="message" label="Message"/>
             <ShowButton/>

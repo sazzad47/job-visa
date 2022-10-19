@@ -1,17 +1,20 @@
-import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+import { Button, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, TextField } from '@mui/material'
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import React, { useContext, useReducer, useState } from 'react'
-import dayjs, { Dayjs } from 'dayjs';
+import React, { useContext, useState } from 'react'
+
 import FileUpload from './FileUpload';
 import { DataContext } from '../../../store/GlobalState';
-import { useRef } from 'react';
+
 import InputModal from '../../InputModal';
 import { toast } from 'react-toastify';
 
 const PersonalInfo = ({handleNext}) => {
  
   const { state, dispatch } = useContext(DataContext);
+  const [showGenderField, setShowGenderField] = useState(true)
+  const [showCardField, setShowCardField] = useState(true)
+
   const {
     IdentityCard,
     IdCardNumber,
@@ -94,23 +97,26 @@ const PersonalInfo = ({handleNext}) => {
     const handleSubmit = (e) => {
      e.preventDefault();
     }
-    console.log('state',state.visaApplicant)
+   
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
       <FormLabel id="identityCard">Identity Card</FormLabel>
       <RadioGroup
+        
         row
         aria-labelledby="identityCard"
         name="identityCard"
         required
         
       >
-        <FormControlLabel name='IdentityCard' onChange={handleInput} value="National ID Card" control={<Radio />} label="National ID Card" />
-        <FormControlLabel name='IdentityCard' onChange={handleInput} value="Passport" control={<Radio />} label="Passport" />
-        <FormControlLabel name='IdentityCard' onChange={handleInput} value="Birth Certificate" control={<Radio />} label="Birth Certificate" />
-        <InputModal handleInput={handleInput} name="IdentityCard" label="Identity Card" placeholder="Enter your Identity Card" />
+        <FormControlLabel name='IdentityCard' onChange={handleInput} onClick={()=> setShowCardField(true)} value="National ID Card" control={<Radio />} label="National ID Card" />
+        <FormControlLabel name='IdentityCard' onChange={handleInput} onClick={()=> setShowCardField(true)} value="Passport" control={<Radio />} label="Passport" />
+        <FormControlLabel name='IdentityCard' onChange={handleInput} onClick={()=> setShowCardField(true)} value="Birth Certificate" control={<Radio />} label="Birth Certificate" />
+        <InputModal handleInput={handleInput} showOther={setShowCardField} name="IdentityCard" label="Identity Card" placeholder="Enter your Identity Card" />
       </RadioGroup>
+      <TextField hidden={showCardField} fullWidth disabled value={IdentityCard} />
+      
       <div className='visa-form-input'>
         <TextField name='IdCardNumber' onChange={handleInput} required fullWidth label="ID Card Number" placeholder='Enter your ID card number' variant="outlined" />
       </div>
@@ -148,10 +154,11 @@ const PersonalInfo = ({handleNext}) => {
         aria-labelledby="gender"
         name="gender"
       >
-        <FormControlLabel name='gender' onChange={handleInput} value="Male" control={<Radio />} label="Male" />
-        <FormControlLabel name='gender' onChange={handleInput} value="Female" control={<Radio />} label="Female" />
-        <InputModal handleInput={handleInput} name="gender" label="Gender" placeholder="Enter your gender" />
+        <FormControlLabel name='gender' onChange={handleInput} onClick={()=> setShowGenderField(true)} value="Male" control={<Radio />} label="Male" />
+        <FormControlLabel name='gender' onChange={handleInput} onClick={()=> setShowGenderField(true)} value="Female" control={<Radio />} label="Female" />
+        <InputModal handleInput={handleInput} showOther={setShowGenderField} name="gender" label="Gender" placeholder="Enter your gender" />
       </RadioGroup>
+      <TextField hidden={showGenderField} fullWidth disabled value={gender} />
       </div>
      
       
@@ -217,6 +224,7 @@ const PersonalInfo = ({handleNext}) => {
                 <FormControlLabel name='maritalStatus' onChange={handleInput} value="Divorced" control={<Radio />} label="Divorced" />
                 <FormControlLabel name='maritalStatus' onChange={handleInput} value="Widow(er)" control={<Radio />} label="Widow(er)" />
             </RadioGroup>
+            
         </div>
         <div className='mt-3 mb-2'>Front Photo of your ID Card</div>
           <FileUpload accept="image/*" name="frontPhotoOfIdCard" type='CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS'/>

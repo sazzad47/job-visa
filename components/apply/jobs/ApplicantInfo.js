@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 const PersonalInfo = ({handleBack, handleNext}) => {
  
   const { state, dispatch } = useContext(DataContext);
+  const [showLanguagesField, setShowLanguagesField] = useState(true)
   const {
     languages,
     nationality,
@@ -91,10 +92,11 @@ const PersonalInfo = ({handleBack, handleNext}) => {
         aria-labelledby="languages"
         name="languages"
       >
-        <FormControlLabel name='languages' onChange={handleInput} value="English" control={<Radio />} label="English" />
-        <FormControlLabel name='languages' onChange={handleInput} value="Hindi" control={<Radio />} label="Hindi" />
-        <InputModal handleInput={handleInput} name="languages" label="How many languages do you know?" placeholder="" />
+        <FormControlLabel name='languages' onChange={handleInput} onClick={()=> setShowLanguagesField(true)} value="English" control={<Radio />} label="English" />
+        <FormControlLabel name='languages' onChange={handleInput} onClick={()=> setShowLanguagesField(true)} value="Hindi" control={<Radio />} label="Hindi" />
+        <InputModal handleInput={handleInput} showOther={setShowLanguagesField} name="languages" label="How many languages do you know?" placeholder="" />
       </RadioGroup>
+      <TextField hidden={showLanguagesField} fullWidth disabled value={languages} />
       
       <div className='visa-form-input'>
         <TextField name='nationality' onChange={handleInput} required fullWidth label="What is your nationality?" variant="standard" />

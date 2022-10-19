@@ -9,6 +9,7 @@ import PaymentMessage from './PaymentMessage';
 import { DataContext } from '../../../store/GlobalState';
 import Form from './Form';
 import Auth from '../../Auth';
+import { useEffect } from 'react';
 
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 const stripePromise = loadStripe(publishableKey);
@@ -23,25 +24,37 @@ const Index = ({setCheckAuth}) => {
   const [start, setStart] = useState(false)
   
   const router = useRouter();
-  const { status } = router.query;
+ 
 
   const {
     visaApplyID,
-    jobApplyID,
+   
   
   } = state.paymentInfo;
    
    
 
-      const getTotalCost = async() => {
-        setLoading(true)
-        const res = await getData(
-          `totalCost?visaApplyID=${visaApplyID}&jobApplyID=${jobApplyID}`, auth.token
-        )
-        // if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-        setTotalCost(res.totalCost)
-        setLoading(false);
-      }
+  const [message, setMessage] = useState('')
+
+  const getTotalCost = async() => {
+    if (!visaApplyID) return
+    setLoading(true)
+    const res = await getData(
+      `totalCost?visaApplyID=${visaApplyID}`, auth.token
+    )
+   
+    if(res.err) {
+      setLoading(false);
+      setMessage(res.err) 
+    } else {
+      let cost = res.totalCost
+      setTotalCost(cost)
+      
+      setLoading(false);
+      setMessage(`Total Cost: $${res.totalCost}`)
+    }
+    
+  }
       const changeState = () => {
         auth.token? setStart(true): setCheckAuth(true)
       }
@@ -54,7 +67,12 @@ const Index = ({setCheckAuth}) => {
   
       }
       
-     
+      useEffect(()=> {
+        if (!visaApplyID) {
+          setMessage('')
+          setTotalCost('')
+        }
+      },[visaApplyID])
       
   return (
     <> 
@@ -70,14 +88,12 @@ const Index = ({setCheckAuth}) => {
           </Typography>
           
           <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} >
         <TextField name='visaApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Visa Apply ID" placeholder='Enter your visa apply ID' variant="outlined" />
         </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField name='jobApplyID' onChange={handleInput} onKeyUp={getTotalCost} required fullWidth label="Job Apply ID" placeholder='Enter your job apply ID' variant="outlined" />
-        </Grid>
+        
         <Grid item xs={12} className="text-center">
-          {loading? <CircularProgress /> :<div className='loan-amount'>Total Costs: ${totalCost !== ""? totalCost : 0.00}</div>}
+          {loading? <CircularProgress /> :<div className='loan-amount'> {message? message: null} </div>}
         </Grid>
         <Grid item xs={12} className="text-end">
 

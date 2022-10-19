@@ -123,7 +123,7 @@ const LoanInfo = ({totalCost, setTotalCost, setLoan, handleNext}) => {
 
           
           
-          <Button variant='contained' onClick={ parseInt(loanAmount) > 70? handleNotify: handleNextPage}>Next</Button>
+          <Button disabled={!amountToApplyFor} variant='contained' onClick={ parseInt(loanAmount) > 70? handleNotify: handleNextPage}>Next</Button>
         
           </div>
         </form>

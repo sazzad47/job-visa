@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 const LandDocument = ({handleBack, handleNext}) => {
  
   const { state, dispatch } = useContext(DataContext);
+  const [showMediumField, setShowMediumField] = useState(true)
   const {
     landLocation,
     landAmount,
@@ -67,12 +68,13 @@ const LandDocument = ({handleBack, handleNext}) => {
         aria-labelledby="mediumOfGetting"
         name="mediumOfGetting"
       >
-        <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Purchased property" control={<Radio />} label="Purchased property" />
-        <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Father&#39;s property" control={<Radio />} label="Father&#39;s property" />
-        <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Mother&#39;s property" control={<Radio />} label="Mother&#39;s property" />
-        <FormControlLabel name='mediumOfGetting' onChange={handleInput} value="Grandfather&#39;s property" control={<Radio />} label="Grandfather&#39;s property" />
-        <InputModal handleInput={handleInput} name="mediumOfGetting" label="How did you get this property?" placeholder="" />
+        <FormControlLabel name='mediumOfGetting' onChange={handleInput} onClick={()=> setShowMediumField(true)} value="Purchased property" control={<Radio />} label="Purchased property" />
+        <FormControlLabel name='mediumOfGetting' onChange={handleInput} onClick={()=> setShowMediumField(true)} value="Father&#39;s property" control={<Radio />} label="Father&#39;s property" />
+        <FormControlLabel name='mediumOfGetting' onChange={handleInput} onClick={()=> setShowMediumField(true)} value="Mother&#39;s property" control={<Radio />} label="Mother&#39;s property" />
+        <FormControlLabel name='mediumOfGetting' onChange={handleInput} onClick={()=> setShowMediumField(true)} value="Grandfather&#39;s property" control={<Radio />} label="Grandfather&#39;s property" />
+        <InputModal handleInput={handleInput} showOther={setShowMediumField} name="mediumOfGetting" label="How did you get this property?" placeholder="" />
       </RadioGroup>
+      <TextField hidden={showMediumField} fullWidth disabled value={mediumOfGetting} />
       </div>
       <div className='visa-form-input'>
         <TextField name='plotNo' onChange={handleInput} required fullWidth label="Plot no" variant="outlined" />

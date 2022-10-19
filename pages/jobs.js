@@ -1,13 +1,6 @@
 import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Container, Grid, IconButton, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import NearbyErrorIcon from '@mui/icons-material/NearbyError';
 import Filter from '../components/Filter';
 import Breadcrumb from '../components/Breadcrumb'

@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 const VisaProcessingInfo = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
+  const [showDurationField, setShowDurationField] = useState(true)
   const {
     wishedCountry,
     visaType,
@@ -81,11 +82,12 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
         aria-labelledby="wishedStayDuration"
         name="wishedStayDuration"
       >
-        <FormControlLabel name='wishedStayDuration' onChange={handleInput} value="7 months" control={<Radio />} label="7 months" />
-        <FormControlLabel name='wishedStayDuration' onChange={handleInput} value="3 years" control={<Radio />} label="3 years" />
-        <InputModal handleInput={handleInput} name="wishedStayDuration" label="How many months/years do you want to stay?" placeholder="" />
+        <FormControlLabel name='wishedStayDuration' onChange={handleInput} onClick={()=> setShowDurationField(true)} value="7 months" control={<Radio />} label="7 months" />
+        <FormControlLabel name='wishedStayDuration' onChange={handleInput} onClick={()=> setShowDurationField(true)} value="3 years" control={<Radio />} label="3 years" />
+        <InputModal handleInput={handleInput} showOther={setShowDurationField} name="wishedStayDuration" label="How many months/years do you want to stay?" placeholder="" />
         
       </RadioGroup>
+      <TextField hidden={showDurationField} fullWidth disabled value={wishedStayDuration} />
       <FormLabel className='mt-4' id="isWishingCitizenship">Do you want to be citizen there?</FormLabel>
       <RadioGroup
         row

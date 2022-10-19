@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 
 const HomeInfo = ({handleBack, handleNext}) => {
   const { state, dispatch } = useContext(DataContext);
+  const [showDependenceField, setShowDependenceField] = useState(true)
   const {
     locatedAtHome,
     homeStreetAddress,
@@ -100,13 +101,14 @@ const HomeInfo = ({handleBack, handleNext}) => {
         aria-labelledby="familyDependentOn"
         name="familyDependentOn"
       >
-        <FormControlLabel name='familyDependentOn' onChange={handleInput} value="My father" control={<Radio />} label="My father" />
-        <FormControlLabel name='familyDependentOn' onChange={handleInput} value="My mother" control={<Radio />} label="My mother" />
-        <FormControlLabel name='familyDependentOn' onChange={handleInput} value="Myself" control={<Radio />} label="Myself" />
-        <InputModal handleInput={handleInput} name="familyDependentOn" label="Who does your family depend on?" placeholder="" />
+        <FormControlLabel name='familyDependentOn' onChange={handleInput} onClick={()=> setShowDependenceField(true)} value="My father" control={<Radio />} label="My father" />
+        <FormControlLabel name='familyDependentOn' onChange={handleInput} onClick={()=> setShowDependenceField(true)} value="My mother" control={<Radio />} label="My mother" />
+        <FormControlLabel name='familyDependentOn' onChange={handleInput} onClick={()=> setShowDependenceField(true)} value="Myself" control={<Radio />} label="Myself" />
+        <InputModal handleInput={handleInput} showOther={setShowDependenceField} name="familyDependentOn" label="Who does your family depend on?" placeholder="" />
 
         
       </RadioGroup>
+      <TextField hidden={showDependenceField} fullWidth disabled value={familyDependentOn} />
       <div className='mt-3'>What do you do now?</div>
       <div className='visa-form-input'>
         <TextField name='currentJob' onChange={handleInput} required fullWidth variant="outlined" />

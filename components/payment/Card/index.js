@@ -35,20 +35,20 @@ const Index = ({setCheckAuth}) => {
         const res = await getData(
           `totalCost?visaApplyID=${visaApplyID}`, auth.token
         )
-        console.log('res', res)
+       
         if(res.err) {
           setLoading(false);
           setMessage(res.err) 
         } else {
           let cost = res.totalCost
           setTotalCost(cost)
-          console.log('total', totalCost)
+          
           setLoading(false);
           setMessage(`Total Cost: $${res.totalCost}`)
         }
         
       }
-      console.log('message', message)
+      
       const handleInput = (e) => {
       
         dispatch({
@@ -85,6 +85,7 @@ const Index = ({setCheckAuth}) => {
       useEffect(()=> {
         if (!visaApplyID) {
           setMessage('')
+          setTotalCost('')
         }
       },[visaApplyID])
   return (

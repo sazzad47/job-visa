@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import DownloadPDF from "../DownloadPDF";
 const columns = [
+  { id: "id", label: "ID", minWidth: 70, align: "center" },
   { id: "title", label: "Title", minWidth: 170, align: "center" },
   {
     id: "date",
@@ -30,9 +31,9 @@ const columns = [
 
 
 
-function createData(title, date, download) {
+function createData(id, title, date, download) {
  
-  return { title, date, download };
+  return {id, title, date, download };
 }
 
 
@@ -50,7 +51,7 @@ const useStyles = makeStyles({
 export default function Index({data}) {
  
   const rows = data.map((item) => (
-    createData(<a href={`${item.file}`}>{item.title}</a>, `${new Date(item.createdAt).toLocaleDateString()}`, DownloadPDF(item.file))
+    createData(item.index, <a href={`${item.file}`}>{item.title}</a>, `${new Date(item.createdAt).toLocaleDateString()}`, DownloadPDF(item.file))
   ))
 
     

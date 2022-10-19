@@ -19,14 +19,24 @@ const style = {
   p: 4,
 };
 
-export default function InputModal({handleInput, name, label, placeholder}) {
+export default function InputModal({handleInput, showOther, name, label, placeholder}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const inputField = React.useRef(null)
+  const value = inputField?.current?.value
+  
+  console.log('value', inputField.current?.value)
+  const handleSubmit = () => {
+    if(!value) return;
+    showOther(false)
+    handleClose()
+  }
 
   return (
     <div>
       <FormControlLabel onClick={handleOpen} control={<Radio />} label="Other" />
+      
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -40,9 +50,9 @@ export default function InputModal({handleInput, name, label, placeholder}) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <TextField name={name} onChange={handleInput} required fullWidth label={label} placeholder={placeholder} variant="outlined" />
+            <input className='custom-input' ref={inputField} name={name} onChange={handleInput} required fullWidth label={label} placeholder={placeholder} variant="outlined" />
             <Grid className='d-flex justify-content-between mt-4'>
-                <Button variant='contained' onClick={handleClose} >submit</Button>
+                <Button variant='contained' onClick={handleSubmit} >submit</Button>
                 <Button variant='outlined' onClick={handleClose} >close</Button>
                 </Grid>
            
