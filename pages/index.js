@@ -17,7 +17,7 @@ const Home = () => {
   
 
   return(
-    <div className='landing-page'>
+    <div className='landing_page'>
       <Head>
         <title>Home Page</title>
       </Head>

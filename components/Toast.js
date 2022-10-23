@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 const Toast = ({msg, handleShow, bgColor}) => {
     return(
         <div className={`toast show position-fixed text-light ${bgColor}`}
-        style={{ top: '5px', right: '5px', zIndex: 9, minWidth: '280px' }} >
+        style={{ top: '5px', right: '5px', zIndex: 100, minWidth: '280px' }} >
 
             <div className={`toast-header ${bgColor} text-light d-flex justify-content-between`}>
                 <strong className="mr-auto text-light">{msg.title}</strong>

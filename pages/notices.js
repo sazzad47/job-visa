@@ -6,7 +6,10 @@ const Notice = ({data}) => {
     return (
         <React.Fragment>
            <Breadcrumb title="Notices"/>
+           <div className='page_content'>
+
             <Notices data={data} />
+           </div>
         </React.Fragment>
     )
 }

@@ -9,13 +9,32 @@ import {DataContext} from '../../store/GlobalState'
 import Cookie from 'js-cookie'
 import { useContext } from 'react';
 import Link from 'next/link';
+import { NavLink } from './NavLink';
 
 
-export default function UserMenu() {
+export default function UserMenu({setApplyMenuSubMenu, boxClass, toggleClass}) {
 
     const router = useRouter()
     const {state, dispatch} = useContext(DataContext)
     const { auth, cart } = state
+
+    
+    const [isAccountMenuSubMenu, setAccountMenuSubMenu] = React.useState(false);
+      
+      
+    const toggleAccountSubmenu = () => {
+      setAccountMenuSubMenu(isAccountMenuSubMenu === false ? true : false);
+     
+    };
+
+    
+    let boxAccountClassSubMenu = ["auth_sub__menus"];
+    if(isAccountMenuSubMenu) {
+        boxAccountClassSubMenu.push('auth_sub__menus__Active');
+    }else {
+        boxAccountClassSubMenu.push('');
+    }
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     
@@ -35,8 +54,59 @@ export default function UserMenu() {
     }
 
   return (
-    <div>
-      <Avatar
+   
+     <>
+      <nav className="main-nav auth_computer_menu" >
+
+
+                    <ul className={boxClass.join(' ')}>
+                    
+                    <li onClick={toggleAccountSubmenu} className="menu-item auth_sub__menus__arrows" ><NavLink href="#" className="nav-item nav-link">
+                    <Avatar
+                      sx={{ bgcolor: deepPurple[500], cursor: 'pointer' }}
+                      id="user-menu-button"
+                      aria-controls={open ? 'user-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleClick}
+                    >
+                      {auth.user?.name.charAt(0)}
+                    </Avatar>
+                    </NavLink>
+                        <ul className={boxAccountClassSubMenu.join(' ')} > 
+                            <li> <Link href="/dashboard"><a onClick={toggleClass}>Dashboard</a></Link> </li>
+                            <li><Link href="/settings"><a onClick={toggleClass}>Settings</a></Link> </li>
+                            <li><a 
+                            onClick={()=> {
+                              handleLogout();
+                              toggleClass();
+                              }}>Logout</a> </li>
+                        </ul>
+                    </li>
+                    
+                    </ul>
+
+
+                    </nav>     
+                    <li onClick={toggleAccountSubmenu} className="menu-item auth_mobile_menu auth_sub__menus__arrows" ><NavLink href="#" className="nav-item nav-link">Account</NavLink>
+                        <ul className={boxAccountClassSubMenu.join(' ')} > 
+                        <li> <Link href="/dashboard"><a onClick={toggleClass}>Dashboard</a></Link> </li>
+                            <li><Link href="/settings"><a onClick={toggleClass}>Settings</a></Link> </li>
+                            <li><a 
+                            onClick={()=> {
+                              handleLogout();
+                              toggleClass();
+                              }}>Logout</a> </li>
+                        </ul>
+                    </li>
+     </>
+    
+
+  );
+}
+
+
+ {/* <Avatar
         sx={{ bgcolor: deepPurple[500], cursor: 'pointer' }}
         id="user-menu-button"
         aria-controls={open ? 'user-menu' : undefined}
@@ -67,7 +137,4 @@ export default function UserMenu() {
             handleLogout();
             handleClose();
             }}>Logout</MenuItem>
-      </Menu>
-    </div>
-  );
-}
+      </Menu> */}

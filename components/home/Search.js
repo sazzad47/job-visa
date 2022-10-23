@@ -28,7 +28,7 @@ const Search = () => {
               voluptates?
             </p>
 
-            <Link href="/apply/visa"><button className="btn">Apply Now</button></Link>
+            <Link href="/apply/visa"><button className="getVisa-btn">Apply Now</button></Link>
           </div>
         </div>
       </div>

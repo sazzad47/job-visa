@@ -9,14 +9,10 @@ const Choose = () => {
   return (
     <section>
       <div className="container">
-        <div className="choose__us-top">
-          <h2>Why Choose us</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br />
-            Ab fugiat fuga tenetur adipisci nobis aperiam.
-          </p>
-        </div>
-
+       
+        <div className="customer__review_top">
+            <h2>Why Choose us</h2>
+          </div>
         <div className="choose__us-wrapper">
           <div className="choose__us-box">
             <div className="choose__img">
@@ -32,7 +28,7 @@ const Choose = () => {
           </div>
 
           <div className="choose__us-box">
-            <div className="choose__img choose__img-box-02">
+            <div className="choose__img">
               <Image src={idea} alt="" />
             </div>
             <div className="choose__us-content">
@@ -45,7 +41,7 @@ const Choose = () => {
           </div>
 
           <div className="choose__us-box">
-            <div className="choose__img choose__img-box-03">
+            <div className="choose__img">
               <Image src={handshake} alt="" />
             </div>
             <div className="choose__us-content">
@@ -58,7 +54,7 @@ const Choose = () => {
           </div>
 
           <div className="choose__us-box">
-            <div className="choose__img choose__img-box-04">
+            <div className="choose__img">
               <Image src={designThinking} alt="" />
             </div>
             <div className="choose__us-content">

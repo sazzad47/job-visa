@@ -7,7 +7,7 @@ import { Avatar } from '@mui/material'
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import UserMenu from './UserMenu'
 
-const LoggedRouter = () => {
+const LoggedRouter = ({boxClass, toggleClass}) => {
 
     const router = useRouter()
     const {state, dispatch} = useContext(DataContext)
@@ -23,7 +23,7 @@ const LoggedRouter = () => {
 
     return(
         <React.Fragment>
-            <UserMenu/>
+            <UserMenu boxClass={boxClass} toggleClass= {toggleClass}/>
         </React.Fragment>
     )
 }

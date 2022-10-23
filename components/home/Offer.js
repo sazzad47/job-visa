@@ -5,41 +5,71 @@ import letter from '../../public/images/demos/letter.png'
 import growth from '../../public/images/demos/growth.png'
 import ppc from '../../public/images/demos/ppc.png'
 import automation from '../../public/images/demos/automation.png'
+import Link from 'next/link'
 
 const Offer = () => {
   return (
     <section>
-      <div className="container">
-        <div className="choose__us-top">
-          <h2>What We Offer</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            <br />
-            Ab fugiat fuga tenetur adipisci nobis aperiam.
-          </p>
-        </div>
-
+      <div className="container offer_section">
+        
+        <div className="customer__review_top">
+            <h2>What We Offer</h2>
+          </div>
         <div className="offer__wrapper">
           
           <div className="offer__box">
-            <Image src={letter} alt="" />
-            <h4>Visa Loan</h4>
+            <div className='offer_front'>
+               <Image src={letter} alt="" />
+            </div>
+            <div className='offer_content'>
+               <h4>Visa Loan</h4>
+               <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis,
+                ipsam!
+               </p>
+               <Link href="/services"><button>Read more</button></Link>
+            </div>
+          </div>
+          <div className="offer__box">
+            <div className='offer_front'>
+               <Image src={growth} alt="" />
+            </div>
+            <div className='offer_content'>
+               <h4>Visa Loan</h4>
+               <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis,
+                ipsam!
+               </p>
+               <Link href="/services"><button>Read more</button></Link>
+            </div>
+          </div>
+          <div className="offer__box">
+            <div className='offer_front'>
+               <Image src={ppc} alt="" />
+            </div>
+            <div className='offer_content'>
+               <h4>Visa Loan</h4>
+               <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis,
+                ipsam!
+               </p>
+               <Link href="/services"><button>Read more</button></Link>
+            </div>
+          </div>
+          <div className="offer__box">
+            <div className='offer_front'>
+               <Image src={automation} alt="" />
+            </div>
+            <div className='offer_content'>
+               <h4>Visa Loan</h4>
+               <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis,
+                ipsam!
+               </p>
+               <Link href="/services"><button>Read more</button></Link>
+            </div>
           </div>
 
-          <div className="offer__box">
-            <Image src={growth} alt="" />
-            <h4>Lorem ipsum</h4>
-          </div>
-
-          <div className="offer__box">
-            <Image src={ppc} alt="" />
-            <h4>Lorem ipsum</h4>
-          </div>
-
-          <div className="offer__box">
-            <Image src={automation} alt="" />
-            <h4>Lorem ipsum</h4>
-          </div>
         </div>
       </div>
     </section>
