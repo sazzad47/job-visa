@@ -9,7 +9,6 @@ import {Row } from 'reactstrap';
 import { DataContext } from '../../../store/GlobalState';
 import { postData } from '../../../utils/fetchData';
 import {imageUpload} from '../../../utils/imageUpload';
-import {fileUpload} from '../../../utils/fileUpload';
 
 const Communication = ({totalCost, loan, setLoading, setSuccess, handleBack}) => {
   const { state, dispatch } = useContext(DataContext);

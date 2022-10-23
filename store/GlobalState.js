@@ -10,7 +10,7 @@ export const DataContext = createContext()
 export const DataProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(reducers, initialState)
-    const { cart, auth } = state
+    const { auth } = state
 
     useEffect(() => {
         const firstLogin = localStorage.getItem("firstLogin");
