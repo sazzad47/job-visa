@@ -217,7 +217,8 @@ const reducers = (state, action) => {
                 ...state,
                 paymentInfo: {
                     ...state.paymentInfo,
-                        [action.payload.name]: action.payload.value
+                        [action.payload.name]: action.payload.value,
+                        amount: action.payload.amount
                 }
              };
         case JOBS_ACTIONS.CHANGE_JOBS_CREATE_INPUTS: 

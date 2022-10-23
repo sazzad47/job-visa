@@ -16,54 +16,24 @@ const stripePromise = loadStripe(publishableKey);
 const Index = ({setCheckAuth}) => {
   const { state, dispatch } = useContext(DataContext);
   const {auth} = state
-  const [loading, setLoading] = useState(false);
-  const [totalCost, setTotalCost] = useState('');
-  const [error, setError] = useState('')
-  const router = useRouter();
-  const { status } = router.query;
+
 
   const {
     visaApplyID,
-  
+    amount
   } = state.paymentInfo;
    
-  const [message, setMessage] = useState('')
-
-      const getTotalCost = async() => {
-        if (!visaApplyID) return
-        setLoading(true)
-        const res = await getData(
-          `totalCost?visaApplyID=${visaApplyID}`, auth.token
-        )
-       
-        if(res.err) {
-          setLoading(false);
-          setMessage(res.err) 
-        } else {
-          let cost = res.totalCost
-          setTotalCost(cost)
-          
-          setLoading(false);
-          setMessage(`Total Cost: $${res.totalCost}`)
-        }
-        
-      }
-      
-      const handleInput = (e) => {
-      
-        dispatch({
-          type: 'CHANGE_PAYMENT_INPUTS', 
-          payload: {name: e.target.name, value: e.target.value}
-        })
   
-      }
+
+     
+   
       const item = {
         name: `Visa Application No ${visaApplyID}`,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
         visaApplyID,
         method: "card",
         quantity: 1,
-        price: totalCost,
+        price: amount,
       };
     
       const createCheckOutSession = async () => {
@@ -82,15 +52,10 @@ const Index = ({setCheckAuth}) => {
         dispatch({ type: 'NOTIFY', payload: {loading: false} })
       };
 
-      useEffect(()=> {
-        if (!visaApplyID) {
-          setMessage('')
-          setTotalCost('')
-        }
-      },[visaApplyID])
+      
   return (
     <> 
-     {status? 
+     {/* {status? 
      <PaymentMessage status= {status} item={item} /> 
      :
      <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -105,12 +70,12 @@ const Index = ({setCheckAuth}) => {
         <Grid item xs={12} className="text-center">
           {loading? <CircularProgress /> :<div className='loan-amount'> {message? message: null} </div>}
         </Grid>
-        <Grid item xs={12} className="text-end">
+        <Grid item xs={12} className="text-end"> */}
 
-        <Button disabled={!totalCost} variant='contained' onClick={createCheckOutSession}>Checkout</Button>
+        <Button variant='contained' onClick={createCheckOutSession}>Checkout</Button>
+        {/* </Grid>
         </Grid>
-        </Grid>
-        </Paper>}
+        </Paper>} */}
         </>
   )
 }

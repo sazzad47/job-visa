@@ -7,7 +7,7 @@ import {
 export const PaginationActions = props => (
     <RaPaginationActions
         {...props}
-        // these props are passed down to the MUI <Pagination> component
+       
         color="primary"
         showFirstButton
         showLastButton

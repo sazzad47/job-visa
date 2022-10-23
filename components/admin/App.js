@@ -33,6 +33,7 @@ import { Route } from 'react-router-dom';
 
 import Contact from './contact';
 import EditContact from './contact/EditPage';
+import Home from './home';
 import Services from './services';
 import EditServices from './services/EditPage';
 import Terms from './terms';
@@ -68,6 +69,7 @@ const App = () => {
             <Route path="/contact" element={<Contact pageName="contact" />} />
             <Route path="/contact/edit" element={<EditContact pageName="contact" />} />
             <Route path="/services" element={<Services pageName="services" />} />
+            <Route path="/home" element={<Home pageName="home" />} />
             <Route path="/services/edit" element={<EditServices pageName="services" />} />
             <Route path="/terms" element={<Terms pageName="terms" />} />
             <Route path="/terms/edit" element={<EditTerms pageName="terms" />} />

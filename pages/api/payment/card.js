@@ -1,10 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-import VisaApplicant from '../../../models/visaApplicant'
-import JobApplicant from '../../../models/jobApplicant'
-import Payment from '../../../models/paymentModel'
-import Users from '../../../models/userModel'
 import auth from '../../../middleware/auth'
-import sendEmail from '../../../utils/mail';
 async function CreateStripeSession(req, res) {
   const result = await auth(req, res)
   const { item } = req.body;
@@ -30,8 +25,8 @@ async function CreateStripeSession(req, res) {
     payment_method_types: ['card'],
     line_items: [transformedItem],
     mode: 'payment',
-    success_url: redirectURL + '?status=success',
-    cancel_url: redirectURL + '?status=cancel',
+    success_url: redirectURL + '/success',
+    cancel_url: redirectURL + '/failed',
     metadata: {
       user: JSON.stringify(result.id),
       visaApplyID: item.visaApplyID,

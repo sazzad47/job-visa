@@ -17,6 +17,7 @@ import PolicyIcon from '@mui/icons-material/Policy';
 import EmergencyShareIcon from '@mui/icons-material/EmergencyShare';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import MessageIcon from '@mui/icons-material/Message';
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 export const MyMenu = () => (
     <Menu>
         <Menu.DashboardItem to="/dashboard" primaryText="Dashboard" />
@@ -28,6 +29,7 @@ export const MyMenu = () => (
         <Menu.Item to="/payment" primaryText="Payments" leftIcon={<PaymentIcon />}/>
         <Menu.Item to="/messages" primaryText="Messages" leftIcon={<MessageIcon />}/>
         <Menu.Item to="/contact" primaryText="Contact" leftIcon={<ContactPageIcon />}/>
+        <Menu.Item to="/home" primaryText="Home" leftIcon={<OtherHousesIcon />}/>
         <Menu.Item to="/services" primaryText="Services" leftIcon={<MedicalInformationIcon />}/>
         <Menu.Item to="/terms" primaryText="Terms & Conditions" leftIcon={<GavelIcon />}/>
         <Menu.Item to="/cookies" primaryText="Cookies" leftIcon={<CookieIcon />}/>

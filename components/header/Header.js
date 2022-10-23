@@ -95,6 +95,7 @@ const Navbarmenu = () => {
                     <li className="menu-item " ><NavLink href="/jobs" onClick={toggleClass} className="nav-item nav-link">Jobs</NavLink></li>
                     <li className="menu-item " ><NavLink href="/notices" onClick={toggleClass} className="nav-item nav-link">Notice</NavLink></li>
                     <li className="menu-item " ><NavLink href="/services" onClick={toggleClass} className="nav-item nav-link">Service</NavLink></li>
+                    <li className="menu-item " ><NavLink href="/payment" onClick={toggleClass} className="nav-item nav-link">Payment</NavLink></li>
                     <li className="menu-item " ><NavLink href="/contact" onClick={toggleClass} className="nav-item nav-link">Contact</NavLink></li>
                     <li className="menu-item nav-auth-btn" >
                     {Object.values(auth).length===0? <NavLink href="/auth" onClick={toggleClass} className="nav-item nav-link">Login</NavLink>: 
