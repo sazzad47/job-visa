@@ -1,16 +1,20 @@
-import React from 'react'
-import Link from 'next/link'
-import { Typography } from '@mui/material'
+import React from "react";
+import { Typography } from "@mui/material";
 
-const Copyright = ({props}) => {
+const Copyright = ({ props }) => {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-    {'Copyright © '}
-      <span className='me-2'>Novage</span>
-    {new Date().getFullYear()}
-    {'.'}
-  </Typography>
-  )
-}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <span className="me-2">Novage</span>
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+};
 
-export default Copyright
+export default Copyright;

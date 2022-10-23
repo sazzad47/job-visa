@@ -8,8 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import DownloadPDF from "../DownloadPDF";
+
 const columns = [
   { id: "id", label: "ID", minWidth: 70, align: "center" },
   { id: "title", label: "Title", minWidth: 170, align: "center" },
@@ -18,63 +18,51 @@ const columns = [
     label: "Date",
     minWidth: 170,
     align: "center",
-    format: (value) => value.toLocaleString()
+    format: (value) => value.toLocaleString(),
   },
   {
     id: "download",
     label: "Download",
     minWidth: 170,
     align: "center",
-    format: (value) => value.toLocaleString()
-  }
+    format: (value) => value.toLocaleString(),
+  },
 ];
 
-
-
 function createData(id, title, date, download) {
- 
-  return {id, title, date, download };
+  return { id, title, date, download };
 }
-
-
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    
   },
   container: {
-    maxHeight: 440
-  }
+    maxHeight: 440,
+  },
 });
 
-export default function Index({data}) {
- 
-  const rows = data.map((item) => (
-    createData(item.index, <a href={`${item.file}`}>{item.title}</a>, `${new Date(item.createdAt).toLocaleDateString()}`, DownloadPDF(item.file))
-  ))
+export default function Index({ data }) {
+  const rows = data.map((item) =>
+    createData(
+      item.index,
+      <a href={`${item.file}`}>{item.title}</a>,
+      `${new Date(item.createdAt).toLocaleDateString()}`,
+      DownloadPDF(item.file)
+    )
+  );
 
-    
-   
-   
-    
-    
-  ;
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   return (
     <Paper className="notice-table-container">
       <TableContainer className={classes.container}>

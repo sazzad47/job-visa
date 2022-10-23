@@ -1,183 +1,188 @@
-import mongoose from 'mongoose'
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+import mongoose from "mongoose";
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 const Schema = mongoose.Schema;
 
-const jobApplicantSchema = new mongoose.Schema({
+const jobApplicantSchema = new mongoose.Schema(
+  {
     index: Number,
     userId: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     fJobCountry: {
-        type: String,
+      type: String,
     },
     fJobNo: {
-        type: String,
+      type: String,
     },
     fJobSL: {
-        type: String,
+      type: String,
     },
     fJobName: {
-        type: String,
+      type: String,
     },
     fJobExperience: {
-        type: String,
+      type: String,
     },
     fJobExperienceCertificate: {
-        type: String,
+      type: String,
     },
     sJobCountry: {
-        type: String,
+      type: String,
     },
     sJobNo: {
-        type: String,
+      type: String,
     },
     sJobSL: {
-        type: String,
+      type: String,
     },
     sJobName: {
-        type: String,
+      type: String,
     },
     sJobExperience: {
-        type: String,
+      type: String,
     },
     sJobExperienceCertificate: {
-        type: String,
+      type: String,
     },
     tJobCountry: {
-        type: String,
+      type: String,
     },
     tJobNo: {
-        type: String,
+      type: String,
     },
     tJobSL: {
-        type: String,
+      type: String,
     },
     tJobName: {
-        type: String,
+      type: String,
     },
     tJobExperience: {
-        type: String,
+      type: String,
     },
     tJobExperienceCertificate: {
-        type: String,
+      type: String,
     },
     foJobCountry: {
-        type: String,
+      type: String,
     },
     foJobNo: {
-        type: String,
+      type: String,
     },
     foJobSL: {
-        type: String,
+      type: String,
     },
     foJobName: {
-        type: String,
+      type: String,
     },
     foJobExperience: {
-        type: String,
+      type: String,
     },
     foJobExperienceCertificate: {
-        type: String,
+      type: String,
     },
     languages: {
-        type: String,
+      type: String,
     },
     nationality: {
-        type: String,
+      type: String,
     },
     nidCard: {
-        type: String,
+      type: String,
     },
     fullName: {
-        type: String,
+      type: String,
     },
     fathersName: {
-        type: String,
+      type: String,
     },
     mothersName: {
-        type: String,
+      type: String,
     },
     streetAddress: {
-        type: String,
+      type: String,
     },
     streetAddressLine2: {
-        type: String,
+      type: String,
     },
     city: {
-        type: String,
+      type: String,
     },
     province: {
-        type: String,
+      type: String,
     },
     postal: {
-        type: String,
+      type: String,
     },
     country: {
-        type: String,
+      type: String,
     },
     dateOfBirth: {
-        type: String,
+      type: String,
     },
     photo: {
-        type: String,
+      type: String,
     },
     signature: {
-        type: String,
+      type: String,
     },
     passportCountry: {
-        type: String,
+      type: String,
     },
     passportNumber: {
-        type: String,
+      type: String,
     },
     passportDateOfIssue: {
-        type: String,
+      type: String,
     },
     passportDateOfExpiry: {
-        type: String,
+      type: String,
     },
     visaApplicationID: {
-        type: String,
+      type: String,
     },
     medicalReport: {
-        type: String,
+      type: String,
     },
     email: {
-        type: String,
+      type: String,
     },
     phoneNumber: {
-        type: String,
+      type: String,
     },
     homePhoneNumber: {
-        type: String,
+      type: String,
     },
     cost: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     paid: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     status: {
-        type: String,
-        default: "pending"
+      type: String,
+      default: "pending",
     },
     done: {
-        type: Boolean,
-        default: false
-    }
-    
-    
-}, {
-    timestamps: true
-})
-
-
-if(!mongoose.models.jobApplicant){
-    jobApplicantSchema.plugin(AutoIncrement,{id:'jobApplicationCounter',inc_field:'index' });
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
   }
+);
 
-let Dataset = mongoose.models.jobApplicant || mongoose.model('jobApplicant', jobApplicantSchema)
-export default Dataset
+if (!mongoose.models.jobApplicant) {
+  jobApplicantSchema.plugin(AutoIncrement, {
+    id: "jobApplicationCounter",
+    inc_field: "index",
+  });
+}
+
+let Dataset =
+  mongoose.models.jobApplicant ||
+  mongoose.model("jobApplicant", jobApplicantSchema);
+export default Dataset;

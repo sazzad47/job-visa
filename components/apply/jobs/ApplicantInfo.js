@@ -1,18 +1,24 @@
-import { Button, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material'
-import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import React, { useContext, useState } from 'react'
-import FileUpload from './FileUpload';
-import { DataContext } from '../../../store/GlobalState';
-import { countries } from '../visa/data';
-import InputModal from '../../InputModal';
-import { toast } from 'react-toastify';
+import {
+  Button,
+  FormControlLabel,
+  FormLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import React, { useContext, useState } from "react";
+import FileUpload from "./FileUpload";
+import { DataContext } from "../../../store/GlobalState";
+import { countries } from "../visa/data";
+import InputModal from "../../InputModal";
+import { toast } from "react-toastify";
 
-
-const PersonalInfo = ({handleBack, handleNext}) => {
- 
+const PersonalInfo = ({ handleBack, handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
-  const [showLanguagesField, setShowLanguagesField] = useState(true)
+  const [showLanguagesField, setShowLanguagesField] = useState(true);
   const {
     languages,
     nationality,
@@ -30,8 +36,7 @@ const PersonalInfo = ({handleBack, handleNext}) => {
     photo,
     signature,
   } = state.jobApplicant.appliantInfo;
-
-  const emptyInput = (
+  const emptyInput =
     !languages ||
     !nationality ||
     !nidCard ||
@@ -46,130 +51,227 @@ const PersonalInfo = ({handleBack, handleNext}) => {
     !country ||
     !dateOfBirth ||
     !photo ||
-    !signature
-    )
+    !signature;
 
-   
-      const [dob, setDob] = useState(null);
-    
-    
-      const handleDateOfBirth = (newValue) => {
-      dispatch({
-        type: 'CHANGE_JOB_APPLICANTS_INPUTS', 
-        payload: {name: "dateOfBirth", value: newValue}
-      })
-      setDob(newValue);
-    };
-   
-    const handleChangeStep = () => {
-      if (emptyInput) return toast('Please fill out all the fieds!', {type: 'error'})
-      handleNext()
-    }
-   
-    const handleInput = (e) => {
-      dispatch({
-        type: 'CHANGE_JOB_APPLICANTS_INPUTS', 
-        payload: {name: e.target.name, value: e.target.value}
-      })
+  const [dob, setDob] = useState(null);
 
-    }
+  const handleDateOfBirth = (newValue) => {
+    dispatch({
+      type: "CHANGE_JOB_APPLICANTS_INPUTS",
+      payload: { name: "dateOfBirth", value: newValue },
+    });
+    setDob(newValue);
+  };
 
-    const handleSubmit = (e) => {
-     e.preventDefault();
-    }
-    console.log('state',state)
+  const handleChangeStep = () => {
+    if (emptyInput)
+      return toast("Please fill out all the fieds!", { type: "error" });
+    handleNext();
+  };
 
-    const countryList = countries.map((country, index) => (
-      <MenuItem key={index} value={country.name}>{country.name}</MenuItem>
-    ))
+  const handleInput = (e) => {
+    dispatch({
+      type: "CHANGE_JOB_APPLICANTS_INPUTS",
+      payload: { name: e.target.name, value: e.target.value },
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  console.log("state", state);
+  const countryList = countries.map((country, index) => (
+    <MenuItem key={index} value={country.name}>
+      {country.name}
+    </MenuItem>
+  ));
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-      <FormLabel id="languages">How many languages do you know?</FormLabel>
-      <RadioGroup
-        row
-        aria-labelledby="languages"
-        name="languages"
-      >
-        <FormControlLabel name='languages' onChange={handleInput} onClick={()=> setShowLanguagesField(true)} value="English" control={<Radio />} label="English" />
-        <FormControlLabel name='languages' onChange={handleInput} onClick={()=> setShowLanguagesField(true)} value="Hindi" control={<Radio />} label="Hindi" />
-        <InputModal handleInput={handleInput} showOther={setShowLanguagesField} name="languages" label="How many languages do you know?" placeholder="" />
-      </RadioGroup>
-      <TextField hidden={showLanguagesField} fullWidth disabled value={languages} />
-      
-      <div className='visa-form-input'>
-        <TextField name='nationality' onChange={handleInput} required fullWidth label="What is your nationality?" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='nidCard' onChange={handleInput} required fullWidth label="National ID card Number" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='fullName' onChange={handleInput} required fullWidth label="Full Name" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='fathersName' onChange={handleInput} required fullWidth label="Father&rsquo;s Name" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='mothersName' onChange={handleInput} required fullWidth label="Mother&rsquo;s Name" variant="standard" />
-      </div>
-      <div className='mt-3'>Address</div>
-      <div className=''>
-        <TextField name='streetAddress' onChange={handleInput} required fullWidth label="Street Address" variant="standard" />
-      </div>
-      
-      <div className='visa-form-input'>
-        <TextField name='streetAddressLine2' onChange={handleInput} required fullWidth label="Street Address Line 2" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='city' onChange={handleInput} required fullWidth label="City" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='province' onChange={handleInput} required fullWidth label="State/Province" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
-        <TextField name='postal' onChange={handleInput} required fullWidth label="Postal/Zip Code" variant="standard" />
-      </div>
-      <div className='visa-form-input'>
+        <FormLabel id="languages">How many languages do you know?</FormLabel>
+        <RadioGroup row aria-labelledby="languages" name="languages">
+          <FormControlLabel
+            name="languages"
+            onChange={handleInput}
+            onClick={() => setShowLanguagesField(true)}
+            value="English"
+            control={<Radio />}
+            label="English"
+          />
+          <FormControlLabel
+            name="languages"
+            onChange={handleInput}
+            onClick={() => setShowLanguagesField(true)}
+            value="Hindi"
+            control={<Radio />}
+            label="Hindi"
+          />
+          <InputModal
+            handleInput={handleInput}
+            showOther={setShowLanguagesField}
+            name="languages"
+            label="How many languages do you know?"
+            placeholder=""
+          />
+        </RadioGroup>
         <TextField
+          hidden={showLanguagesField}
+          fullWidth
+          disabled
+          value={languages}
+        />
+
+        <div className="visa-form-input">
+          <TextField
+            name="nationality"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="What is your nationality?"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="nidCard"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="National ID card Number"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="fullName"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Full Name"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="fathersName"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Father&rsquo;s Name"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="mothersName"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Mother&rsquo;s Name"
+            variant="standard"
+          />
+        </div>
+        <div className="mt-3">Address</div>
+        <div className="">
+          <TextField
+            name="streetAddress"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Street Address"
+            variant="standard"
+          />
+        </div>
+
+        <div className="visa-form-input">
+          <TextField
+            name="streetAddressLine2"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Street Address Line 2"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="city"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="City"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="province"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="State/Province"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="postal"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Postal/Zip Code"
+            variant="standard"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
             name="country"
             onChange={handleInput}
             select
             fullWidth
             label="Country"
-            variant='standard'
-            
-            >
+            variant="standard"
+          >
             {countryList}
-            
-         </TextField>
+          </TextField>
         </div>
-        <div className='visa-form-input d-flex justify-content-between'>
-       
-         <LocalizationProvider dateAdapter={AdapterDayjs}>
-         <DesktopDatePicker
-          
-          label="Date of Birth"
-          inputFormat="MM/DD/YYYY"
-          value={dob}
-          onChange={handleDateOfBirth}
-          renderInput={(params) => <TextField variant='standard' fullWidth {...params} />}
+        <div className="visa-form-input d-flex justify-content-between">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              label="Date of Birth"
+              inputFormat="MM/DD/YYYY"
+              value={dob}
+              onChange={handleDateOfBirth}
+              renderInput={(params) => (
+                <TextField variant="standard" fullWidth {...params} />
+              )}
+            />
+          </LocalizationProvider>
+        </div>
+        <div className="mt-3 mb-2">Your Photo</div>
+        <FileUpload
+          accept="image/*"
+          name="photo"
+          type="CHANGE_JOB_APPLICANTS_INPUTS"
         />
-         </LocalizationProvider>
-         </div>
-         <div className='mt-3 mb-2'>Your Photo</div>
-          <FileUpload accept="image/*" name="photo" type='CHANGE_JOB_APPLICANTS_INPUTS'/>
-         <div className='mt-3 mb-2'>Your Signature</div>
-           <FileUpload accept="image/*" name="signature" type='CHANGE_JOB_APPLICANTS_INPUTS'/>
-       
-           <div className='mt-4 d-flex align-items-center justify-content-between'>
-          <Button variant='contained' onClick={handleBack}>Back</Button>
-          
-          <Button type='submit' variant='contained' onClick={handleChangeStep}>Next</Button>
-        
-          </div>
-        </form>
-    </React.Fragment>
-  )
-}
+        <div className="mt-3 mb-2">Your Signature</div>
+        <FileUpload
+          accept="image/*"
+          name="signature"
+          type="CHANGE_JOB_APPLICANTS_INPUTS"
+        />
 
-export default PersonalInfo
+        <div className="mt-4 d-flex align-items-center justify-content-between">
+          <Button variant="contained" onClick={handleBack}>
+            Back
+          </Button>
+
+          <Button type="submit" variant="contained" onClick={handleChangeStep}>
+            Next
+          </Button>
+        </div>
+      </form>
+    </React.Fragment>
+  );
+};
+
+export default PersonalInfo;

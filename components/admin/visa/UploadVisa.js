@@ -6,7 +6,6 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CircularProgress, FormControlLabel, Grid, TextField } from '@mui/material';
-
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useNotify, useRecordContext } from 'react-admin';
 import { useState } from 'react';
@@ -47,7 +46,7 @@ export default function UploadVisa() {
       ])
           let id = record.id
           
-          patchData(`visaApplicants/${id}?visa=${media[0]}`)
+          patchData(`visaApplicants/${id}?visa=${media[0]}`, auth.token)
           handleClose()
           setLoading(false)
           notify('Visa has been uploaded successfully!', {type: 'success'})

@@ -1,149 +1,155 @@
-import mongoose from 'mongoose'
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+import mongoose from "mongoose";
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 const Schema = mongoose.Schema;
 
-const loanApplicantSchema = new mongoose.Schema({
+const loanApplicantSchema = new mongoose.Schema(
+  {
     index: Number,
     userId: Number,
     visaApplyID: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     jobApplyID: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     totalRS: {
-        type: String,
+      type: String,
     },
     loanAmount: {
-        type: String,
+      type: String,
     },
     amountOfMoney: {
-        type: String,
+      type: String,
     },
     idNumber: {
-        type: String,
+      type: String,
     },
     frontPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     backPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     photoOfApplicant: {
-        type: String,
+      type: String,
     },
     signature: {
-        type: String,
+      type: String,
     },
     isFatherPresent: {
-        type: String,
+      type: String,
     },
     fatherDeathCertificate: {
-        type: String,
+      type: String,
     },
     fatherIdNumber: {
-        type: String,
+      type: String,
     },
     fatherFrontPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     fatherBackPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     photoOfFather: {
-        type: String,
+      type: String,
     },
     signatureOfFather: {
-        type: String,
+      type: String,
     },
     isMotherPresent: {
-        type: String,
+      type: String,
     },
     motherDeathCertificate: {
-        type: String,
+      type: String,
     },
     motherIdNumber: {
-        type: String,
+      type: String,
     },
     motherFrontPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     motherBackPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     photoOfMother: {
-        type: String,
+      type: String,
     },
     signatureOfMother: {
-        type: String,
+      type: String,
     },
     landLocation: {
-        type: String,
+      type: String,
     },
     landAmount: {
-        type: String,
+      type: String,
     },
     mediumOfGetting: {
-        type: String,
+      type: String,
     },
     plotNo: {
-        type: String,
+      type: String,
     },
     precursorDeathCertificate: {
-        type: String,
+      type: String,
     },
     inheritanceCertificate: {
-        type: String,
+      type: String,
     },
     houseLandDocuments: {
-        type: String,
+      type: String,
     },
     loanForm: {
-        type: String,
+      type: String,
     },
     bankName: {
-        type: String,
+      type: String,
     },
     accountIdNumber: {
-        type: String,
+      type: String,
     },
     bankBranchName: {
-        type: String,
+      type: String,
     },
     bankStatement: {
-        type: String,
+      type: String,
     },
     email: {
-        type: String,
+      type: String,
     },
     phoneNumber: {
-        type: String,
+      type: String,
     },
     homePhoneNumber: {
-        type: String,
+      type: String,
     },
     comments: {
-        type: String,
+      type: String,
     },
     status: {
-        type: String,
-        default: "pending"
+      type: String,
+      default: "pending",
     },
     done: {
-        type: Boolean,
-        default: false
-    }
-    
-}, {
-    timestamps: true
-})
-
-
-if(!mongoose.models.loanApplicant){
-    loanApplicantSchema.plugin(AutoIncrement,{id:'loanApplicationCounter',inc_field:'index' });
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
   }
+);
 
-let Dataset = mongoose.models.loanApplicant || mongoose.model('loanApplicant', loanApplicantSchema)
-export default Dataset
+if (!mongoose.models.loanApplicant) {
+  loanApplicantSchema.plugin(AutoIncrement, {
+    id: "loanApplicationCounter",
+    inc_field: "index",
+  });
+}
+
+let Dataset =
+  mongoose.models.loanApplicant ||
+  mongoose.model("loanApplicant", loanApplicantSchema);
+export default Dataset;

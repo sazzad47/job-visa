@@ -1,18 +1,17 @@
-import React from 'react'
-import award from '../../public/images/demos/award.png'
-import idea from '../../public/images/demos/idea.png'
-import handshake from '../../public/images/demos/handshake.png'
-import designThinking from '../../public/images/demos/design-thinking.png'
-import Image from 'next/image'
+import React from "react";
+import award from "../../public/images/demos/award.png";
+import idea from "../../public/images/demos/idea.png";
+import handshake from "../../public/images/demos/handshake.png";
+import designThinking from "../../public/images/demos/design-thinking.png";
+import Image from "next/image";
 
 const Choose = () => {
   return (
     <section>
       <div className="container">
-       
         <div className="customer__review_top">
-            <h2>Why Choose us</h2>
-          </div>
+          <h2>Why Choose us</h2>
+        </div>
         <div className="choose__us-wrapper">
           <div className="choose__us-box">
             <div className="choose__img">
@@ -26,7 +25,6 @@ const Choose = () => {
               </p>
             </div>
           </div>
-
           <div className="choose__us-box">
             <div className="choose__img">
               <Image src={idea} alt="" />
@@ -39,7 +37,6 @@ const Choose = () => {
               </p>
             </div>
           </div>
-
           <div className="choose__us-box">
             <div className="choose__img">
               <Image src={handshake} alt="" />
@@ -52,7 +49,6 @@ const Choose = () => {
               </p>
             </div>
           </div>
-
           <div className="choose__us-box">
             <div className="choose__img">
               <Image src={designThinking} alt="" />
@@ -68,7 +64,7 @@ const Choose = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Choose
+export default Choose;

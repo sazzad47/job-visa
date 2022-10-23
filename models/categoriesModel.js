@@ -1,14 +1,18 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const CategoriesSchema = new mongoose.Schema({
+const CategoriesSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        trim: true
-    }
-}, {
-    timestamps: true
-})
+      type: String,
+      required: true,
+      trim: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-let Dataset = mongoose.models.categories || mongoose.model('categories', CategoriesSchema)
-export default Dataset
+let Dataset =
+  mongoose.models.categories || mongoose.model("categories", CategoriesSchema);
+export default Dataset;

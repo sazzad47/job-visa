@@ -1,21 +1,15 @@
-/* about us section start */
 .about__us {
-    background: transparent !important;
-    padding: 0 !important;
-    align-items: center;
-    color: black;
-  }
-  
-  .about__us-text {
-    color: var(--secondary-color) !important;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    
-  }
-  
-  .about__img {
-    text-align: right;
-  }
-  
-  /* about us section end */
+  background: transparent !important;
+  padding: 0 !important;
+  align-items: center;
+  color: black;
+}
+.about__us-text {
+  color: var(--secondary-color) !important;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.about__img {
+  text-align: right;
+}

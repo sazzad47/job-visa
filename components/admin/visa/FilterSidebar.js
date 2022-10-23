@@ -3,7 +3,7 @@ import { Card, CardContent } from '@mui/material';
 
 import CategoryIcon from '@mui/icons-material/LocalOffer';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 export const FilterSidebar = () => (
     <Card sx={{ order: -1, mr: 2, mt: 8, width: 200 }}>
         <CardContent>
@@ -16,6 +16,11 @@ export const FilterSidebar = () => (
                 <FilterListItem label="Pending" value={{ status: 'pending' }} />
                 <FilterListItem label="Approved" value={{ status: 'approved' }} />
                 <FilterListItem label="Declined" value={{ status: 'declined' }} />
+                
+            </FilterList>
+            <FilterList label="Visa" icon={<CloudUploadIcon />}>
+                <FilterListItem label="Yes" value={{ uploadedVisa: true }} />
+                <FilterListItem label="No" value={{ uploadedVisa: false }} />
                 
             </FilterList>
         </CardContent>

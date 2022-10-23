@@ -1,48 +1,39 @@
-import connectDB from '../../../utils/connectDB'
-import Payment from '../../../models/paymentModel'
-import auth from '../../../middleware/auth'
-import sendEmail from '../../../utils/mail'
+import connectDB from "../../../utils/connectDB";
+import Payment from "../../../models/paymentModel";
+import auth from "../../../middleware/auth";
+import sendEmail from "../../../utils/mail";
 
-connectDB()
+connectDB();
 
 export default async (req, res) => {
-    switch(req.method){
-        case "POST":
-            await pay(req, res)
-            break;
-        case "GET":
-            await getApplicants(req, res)
-            break;
-    }
-}
+  switch (req.method) {
+    case "POST":
+      await pay(req, res);
+      break;
+  }
+};
 
 const pay = async (req, res) => {
-    try{
-        const result = await auth(req, res)
-        
-        const { visaApplyID, jobApplyID, bankReceipt, method, amount } = req.body
-        
-        
+  try {
+    const result = await auth(req, res);
 
-        const newPayment = new Payment({ 
-            user: result.id,
-            visaApplyID,
-            jobApplyID,
-            bankReceipt,
-            method,
-            amount
-            
-            
-        })
+    const { visaApplyID, jobApplyID, bankReceipt, method, amount } = req.body;
 
-      
+    const newPayment = new Payment({
+      user: result.id,
+      visaApplyID,
+      jobApplyID,
+      bankReceipt,
+      method,
+      amount,
+    });
 
-        await newPayment.save()
-        await sendEmail({
-            to: result.email,
-            from: process.env.SENDER_EMAIL,
-            subject: '[job-visa] Received payment.',
-            html: `
+    await newPayment.save();
+    await sendEmail({
+      to: result.email,
+      from: process.env.SENDER_EMAIL,
+      subject: "[job-visa] Received payment.",
+      html: `
             <div>
               <p>Hello, ${result.name}</p>
               <p>We received your payment.</p>
@@ -52,12 +43,10 @@ const pay = async (req, res) => {
                vitae dicta sunt explicabo.</p>
             </div>
             `,
-          });
+    });
 
-          
-        res.json({msg: "Uploaded successfully!"})
-
-    }catch(err){
-        return res.status(500).json({err: err.message})
-    }
-}
+    res.json({ msg: "Uploaded successfully!" });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};

@@ -1,214 +1,220 @@
-import mongoose from 'mongoose'
-const AutoIncrement = require('mongoose-sequence')(mongoose);
+import mongoose from "mongoose";
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 const Schema = mongoose.Schema;
 
-const visaApplicantSchema = new mongoose.Schema({
+const visaApplicantSchema = new mongoose.Schema(
+  {
     index: Number,
     userId: Number,
     IdentityCard: {
-        type: String,
+      type: String,
     },
     IdCardNumber: {
-        type: String,
+      type: String,
     },
     fullName: {
-        type: String,
+      type: String,
     },
     fathersName: {
-        type: String,
+      type: String,
     },
     mothersName: {
-        type: String,
+      type: String,
     },
     streetAddress: {
-        type: String,
+      type: String,
     },
     streetAddressLine2: {
-        type: String,
+      type: String,
     },
     city: {
-        type: String,
+      type: String,
     },
     province: {
-        type: String,
+      type: String,
     },
     postal: {
-        type: String,
+      type: String,
     },
     gender: {
-        type: String,
+      type: String,
     },
     dateOfBirth: {
-        type: String,
+      type: String,
     },
     dateOfIdCardIssue: {
-        type: String,
+      type: String,
     },
     religion: {
-        type: String,
+      type: String,
     },
     nationality: {
-        type: String,
+      type: String,
     },
     bloodGroup: {
-        type: String,
+      type: String,
     },
     maritalStatus: {
-        type: String,
+      type: String,
     },
     frontPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     backPhotoOfIdCard: {
-        type: String,
+      type: String,
     },
     photo: {
-        type: String,
+      type: String,
     },
     signature: {
-        type: String,
+      type: String,
     },
     passportCountry: {
-        type: String,
+      type: String,
     },
     passportNumber: {
-        type: String,
+      type: String,
     },
     passportIssuingAuthority: {
-        type: String,
+      type: String,
     },
     passportDateOfBirth: {
-        type: String,
+      type: String,
     },
     passportDateOfIssue: {
-        type: String,
+      type: String,
     },
     passportDateOfExpiry: {
-        type: String,
+      type: String,
     },
     passportDocument: {
-        type: String,
+      type: String,
     },
     wishedCountry: {
-        type: String,
+      type: String,
     },
     visaType: {
-        type: String,
+      type: String,
     },
     marriageCertificate: {
-        type: String,
+      type: String,
     },
     wishedStayDuration: {
-        type: String,
+      type: String,
     },
     isWishingCitizenship: {
-        type: String,
+      type: String,
     },
     locatedAtHome: {
-        type: String,
+      type: String,
     },
     homeStreetAddress: {
-        type: String,
+      type: String,
     },
     homeStreetAddressLine2: {
-        type: String,
+      type: String,
     },
     homeCity: {
-        type: String,
+      type: String,
     },
     homeProvince: {
-        type: String,
+      type: String,
     },
     homePostal: {
-        type: String,
+      type: String,
     },
     homeStayDuration: {
-        type: String,
+      type: String,
     },
     familyDependentOn: {
-        type: String,
+      type: String,
     },
     currentJob: {
-        type: String,
+      type: String,
     },
     monthlyIncome: {
-        type: String,
+      type: String,
     },
     familyMember: {
-        type: String,
+      type: String,
     },
     educationalQualification: {
-        type: String,
+      type: String,
     },
     languages: {
-        type: String,
+      type: String,
     },
     ieltsScore: {
-        type: String,
+      type: String,
     },
     ieltsDocument: {
-        type: String,
+      type: String,
     },
     bankName: {
-        type: String,
+      type: String,
     },
     bankStateIssuDate: {
-        type: String,
+      type: String,
     },
     bankStateDocument: {
-        type: String,
+      type: String,
     },
     hospitalName: {
-        type: String,
+      type: String,
     },
     MedicalReportIssueDate: {
-        type: String,
+      type: String,
     },
     MedicalReportDocument: {
-        type: String,
+      type: String,
     },
     email: {
-        type: String,
+      type: String,
     },
     phone: {
-        type: String,
+      type: String,
     },
     homePhone: {
-        type: String,
+      type: String,
     },
     cost: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     paid: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     status: {
-        type: String,
-        default: "pending"
+      type: String,
+      default: "pending",
     },
     visa: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     uploadedVisa: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     done: {
-        type: Boolean,
-        default: false
-    }
-    
-}, {
-    timestamps: true
-})
-
-
-if(!mongoose.models.visaApplicant){
-    visaApplicantSchema.plugin(AutoIncrement,{id:'visaApplicationCounter',inc_field:'index' });
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
   }
+);
 
-let Dataset = mongoose.models.visaApplicant || mongoose.model('visaApplicant', visaApplicantSchema)
-export default Dataset
+if (!mongoose.models.visaApplicant) {
+  visaApplicantSchema.plugin(AutoIncrement, {
+    id: "visaApplicationCounter",
+    inc_field: "index",
+  });
+}
+
+let Dataset =
+  mongoose.models.visaApplicant ||
+  mongoose.model("visaApplicant", visaApplicantSchema);
+export default Dataset;

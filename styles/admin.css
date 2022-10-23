@@ -1,45 +1,59 @@
-
-#main-content > div > div > span > div > div.MuiTablePagination-spacer.css-1psng7p-MuiTablePagination-spacer {
- min-height: 5rem !important;
- display: flex !important;
- align-items: center !important;
- justify-content: center !important;
- 
+#main-content
+  > div
+  > div
+  > span
+  > div
+  > div.MuiTablePagination-spacer.css-1psng7p-MuiTablePagination-spacer {
+  min-height: 5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 #main-content > div > div > span > div > p {
- min-height: 5rem !important;
- margin-top: 1rem !important;
- position: relative;
- display: flex !important;
- align-items: center !important;
- justify-content: center !important;
- 
+  min-height: 5rem !important;
+  margin-top: 1rem !important;
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-#main-content > div > div > span > div > div.MuiInputBase-root.MuiInputBase-colorPrimary.css-16c50h-MuiInputBase-root-MuiTablePagination-select {
- min-height: 5rem !important;
- display: flex !important;
- align-items: center !important;
- justify-content: center !important;
- 
+#main-content
+  > div
+  > div
+  > span
+  > div
+  > div.MuiInputBase-root.MuiInputBase-colorPrimary.css-16c50h-MuiInputBase-root-MuiTablePagination-select {
+  min-height: 5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-#main-content > div > div > span > div > p.MuiTablePagination-displayedRows.css-levciy-MuiTablePagination-displayedRows {
- min-height: 5rem !important;
- margin-top: 1rem !important;
- display: flex !important;
- align-items: center !important;
- justify-content: center !important;
- 
+#main-content
+  > div
+  > div
+  > span
+  > div
+  > p.MuiTablePagination-displayedRows.css-levciy-MuiTablePagination-displayedRows {
+  min-height: 5rem !important;
+  margin-top: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-#main-content > div > div > span > div > div.MuiTablePagination-actions.css-e8518-RaPaginationActions-root {
- min-height: 5rem !important;
- display: flex !important;
- align-items: center !important;
- justify-content: center !important;
- 
+#main-content
+  > div
+  > div
+  > span
+  > div
+  > div.MuiTablePagination-actions.css-e8518-RaPaginationActions-root {
+  min-height: 5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 .css-pdct74-MuiTablePagination-selectLabel {
-    margin-top: 1rem !important;
+  margin-top: 1rem !important;
 }
 .css-levciy-MuiTablePagination-displayedRows {
-    margin-top: 1rem !important;
+  margin-top: 1rem !important;
 }
