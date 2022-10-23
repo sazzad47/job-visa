@@ -1,22 +1,66 @@
+/*  poppins google fonts link */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+/* css variables */
+:root {
+  --body-bg-color: #080689;
+  --block-bg-color: #05043e;
+  --card-primary-color: #151450;
+  --card-secondary-color: #770755;
+  --card-effect-color: #0a053a;
+  --btn-bg-color: #120544;
+  --secondary-color: #7259db;
+  --icon-bg-01: #f7a025;
+  --icon-bg-02: #2d70ab;
+  --icon-bg-03: #fe1161;
+  --icon-bg-04: #0389fe;
+  --main-blue: #00253a;
+  --main-green: #2e933c;
+  --white: #ffffff;
+  --hero: rgb(2, 2, 49);
+  --text-small: 1rem;
+  --text-heading: 2rem;
+  --home-text-color: #fff;
+}
+
+/* reset default browser design */
 
 * {
-  font-family: 'Nunito', sans-serif;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+/* base style */
+
+body {
+  font-family: "Poppins", sans-serif;
+ 
 }
 /* ----------- Loading ------------- */
 @import url("./loading.css");
 
-/* ----------- Products ------------- */
-@import url("./product.css");
+/* ----------- Navbar ------------- */
+@import url("./navbar.css");
+
+/* ----------- Home ------------- */
+@import url("./home.css");
+
+/* ----------- Sidebar ------------- */
+@import url("./sidebar.css");
+
+/* ----------- Hero ------------- */
+@import url("./hero.css");
+
+/* ----------- Testimonial ------------- */
+@import url("./testimonial.css");
+
+/* ----------- Footer ------------- */
+@import url("./footer.css");
 
 /* ----------- Profile ------------- */
 @import url("./profile.css");
-
-/* ----------- Products Manager ------------- */
-@import url("./products_manager.css");
-
-/* ----------- Home ------------- */
-/* @import url("./home.css"); */
 
 /* ----------- About ------------- */
 @import url("./about.css");
@@ -24,16 +68,26 @@
 /* ----------- Contact ------------- */
 @import url("./contact.css");
 
-/* ----------- Navbar ------------- */
-@import url("./navbar.css");
-
-/* ----------- Footer ------------- */
-@import url("./footer.css");
-
 /* ----------- Auth ------------- */
 @import url("./auth.css");
 
+/* ----------- Forgot Password ------------- */
+@import url("./forgot-password.css");
+
 /* ----------- Visa ------------- */
 @import url("./visa.css");
+
+/* ----------- Job ------------- */
+@import url("./job.css");
+
+/* ----------- Notices ------------- */
+@import url("./notices.css");
+
+/* ----------- Checking ------------- */
+@import url("./checking.css");
+
+/* ----------- Admin ------------- */
+@import url("./admin.css");
+
 
 

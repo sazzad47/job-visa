@@ -1,43 +1,4 @@
-/*  poppins google fonts link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
-/* css variables */
-:root {
-  --body-bg-color: #080689;
-  --block-bg-color: #05043e;
-  --card-primary-color: #151450;
-  --card-secondary-color: #770755;
-  --card-effect-color: #0a053a;
-  --btn-bg-color: #120544;
-  --secondary-color: #7259db;
-  --icon-bg-01: #f7a025;
-  --icon-bg-02: #2d70ab;
-  --icon-bg-03: #fe1161;
-  --icon-bg-04: #0389fe;
-  --main-blue: #00253a;
-  --main-green: #2e933c;
-  --white: #ffffff;
-  --hero: rgb(2, 2, 49);
-  --text-small: 1rem;
-  --text-heading: 2rem;
-  --home-text-color: #fff;
-}
-
-/* reset default browser design */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  
-}
-
-/* base style */
-
-body {
-  font-family: "Poppins", sans-serif;
- 
-}
 .landing_page {
   background-color: var(--hero);
   margin: 0 !important;

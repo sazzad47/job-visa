@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid';
 import { useContext } from 'react';
 import { DataContext } from '../../store/GlobalState';
 import { Button } from '@mui/material';
-import Card from './Card'
 import Link from 'next/link';
+import StripeCheckout from './StripeCheckout';
 
 export default function Review({handleBack}) {
   const { state, dispatch } = useContext(DataContext);
@@ -110,7 +110,7 @@ export default function Review({handleBack}) {
         <Grid item xs={12} className="d-flex justify-content-between">
 
         <Button variant='contained' onClick={handleBack}>Back</Button>
-        {method==='card'? <Card/> : <Link href="/payment/bank" ><Button variant='contained'>Checkout</Button></Link>}
+        {method==='card'? <StripeCheckout/> : <Link href="/payment/bank" ><Button variant='contained'>Checkout</Button></Link>}
         </Grid>
       </Grid>
     </React.Fragment>
