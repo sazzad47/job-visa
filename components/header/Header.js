@@ -59,7 +59,7 @@ const Navbarmenu = () => {
     <header className="header_section">
             <div className="header_content">
              
-                {/* Add Logo  */}
+            
                 <div className="header__logo">
                     <Link href="/">
                        <Image src={logo} alt="" />
@@ -68,7 +68,7 @@ const Navbarmenu = () => {
 
                    
                
-                    <nav className="main-nav " >
+                    <nav className="main-nav d-block" >
 
 
 
@@ -116,7 +116,7 @@ const Navbarmenu = () => {
                     : <LoggedRouter boxClass={boxClass} toggleClass={toggleClass} />}
                     
                  </div>
-                  {/* Responsive Menu Button */}
+                 
                 {isResponsiveclose === true ? <> 
                     <div className="menubar__button" style={{ display: 'none' }} onClick={toggleClass} > <FiXCircle />   </div>
                 </> : <> 

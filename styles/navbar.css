@@ -1,9 +1,4 @@
 
-.is-active {
-  color: #ff5800!important;
-}
-
-
 ul.main-menu {
   display: inline-flex;
   list-style: none;
@@ -101,7 +96,6 @@ li {
   border: 1px solid lavender;
   width: 227px;
   left: -60px;
-  margin-top: 5px;
   padding: 2px 0 0 0;
   z-index: 1000;
   box-shadow: 0 10px 12px rgb(22 33 39 / 25%);
