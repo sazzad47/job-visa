@@ -15,7 +15,6 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
   const {
     wishedCountry,
     visaType,
-    marriageCertificate,
     wishedStayDuration,
     isWishingCitizenship,
   } = state.visaApplicant.visaProcessingInfo;
@@ -23,7 +22,6 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
   const emptyInput = (
     !wishedCountry ||
     !visaType ||
-    !marriageCertificate ||
     !wishedStayDuration ||
     !isWishingCitizenship
     )
@@ -74,8 +72,11 @@ const VisaProcessingInfo = ({handleBack, handleNext}) => {
         <FormControlLabel name='visaType' onChange={handleInput} value="Immigrant Visa" control={<Radio />} label="Immigrant Visa" />
         
       </RadioGroup>
+      {visaType === "Marriage Visa" && 
+      <>
       <div className='mt-3 mb-2'>Upload your marriage certificate</div>
           <FileUpload accept="application/pdf" name="marriageCertificate" type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"/>
+      </>}
           <FormLabel className='mt-4' id="wishedStayDuration">How many months/years do you want to stay?</FormLabel>
       <RadioGroup
         row
