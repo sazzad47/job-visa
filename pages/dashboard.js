@@ -5,12 +5,13 @@ import VisaApplications from "../components/userDashboard/visa";
 import JobApplications from "../components/userDashboard/job";
 import LoanApplications from "../components/userDashboard/loan";
 import Payments from "../components/userDashboard/payment";
-
+import AdminDashboard from './admin'
 const Dashboard = () => {
   const { state } = useContext(DataContext);
   const { auth } = state;
 
   if (!auth.user) return null;
+  if (auth.user.role==="admin") return <AdminDashboard/>;
   return (
     <div style={{ padding: "2rem", overflowX: "hidden" }}>
       <Head>
