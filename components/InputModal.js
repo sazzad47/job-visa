@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
-import { FormControlLabel, Grid, RadioGroup } from "@mui/material";
+import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 
 const style = {
   position: "absolute",
