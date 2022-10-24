@@ -31,10 +31,9 @@ const PaymentList = (props) => {
       <Datagrid>
         <TextField source="index" label="Payment ID" />
         <TextField source="visaApplyID" label="Visa Application ID" />
-        <TextField source="jobApplyID" label="Job Application ID" />
         <TextField source="method" label="Payment Method" />
         <TextField source="amount" label="Amount" />
-        <FileField source="bankReceipt" title="Bank Receipt" />
+        <FileField source="country" title="Country" />
         <ShowButton />
       </Datagrid>
     </List>

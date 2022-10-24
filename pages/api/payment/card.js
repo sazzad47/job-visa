@@ -28,6 +28,14 @@ async function CreateStripeSession(req, res) {
       visaApplyID: item.visaApplyID,
       amount: item.price,
       method: item.method,
+      firstName: item.firstName,
+      lastName: item.lastName,
+      address1: item.address1,
+      address2: item.address2,
+      city: item.city,
+      customer_state: item.customer_state,
+      zip: item.zip,
+      country: item.country,
     },
   });
 

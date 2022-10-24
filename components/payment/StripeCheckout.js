@@ -9,12 +9,31 @@ const stripePromise = loadStripe(publishableKey);
 const StripeCheckout = () => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  const { visaApplyID, amount } = state.paymentInfo;
+  const {
+    firstName,
+    lastName,
+    address1,
+    address2,
+    city,
+    customer_state,
+    zip,
+    country,
+    visaApplyID,
+    amount,
+  } = state.paymentInfo;
 
   const item = {
     name: `Visa Application No ${visaApplyID}`,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+    firstName,
+    lastName,
+    address1,
+    address2,
+    city,
+    customer_state,
+    zip,
+    country,
     visaApplyID,
     method: "card",
     quantity: 1,

@@ -39,7 +39,15 @@ const handler = async (req, res) => {
         visaApplyID: data.visaApplyID,
         amount: data.price,
         method: data.method,
-      });
+        firstName: data.firstName,
+        lastName: data.lastName,
+        address1: data.address1,
+        address2: data.address2,
+        city: data.city,
+        customer_state: data.customer_state,
+        zip: data.zip,
+        country: data.country,
+      }); 
 
       await newPayment.save();
       await sendEmail({

@@ -17,7 +17,21 @@ const pay = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    const { visaApplyID, jobApplyID, bankReceipt, method, amount } = req.body;
+    const {
+      visaApplyID,
+      jobApplyID,
+      bankReceipt,
+      method,
+      amount,
+      firstName,
+      lastName,
+      address1,
+      address2,
+      city,
+      customer_state,
+      zip,
+      country,
+    } = req.body;
 
     const newPayment = new Payment({
       user: result.id,
@@ -26,6 +40,14 @@ const pay = async (req, res) => {
       bankReceipt,
       method,
       amount,
+      firstName,
+      lastName,
+      address1,
+      address2,
+      city,
+      customer_state,
+      zip,
+      country,
     });
 
     await newPayment.save();

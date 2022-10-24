@@ -25,6 +25,38 @@ const paymentSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    firstName: {
+      type: String,
+      default: "",
+    },
+    lastName: {
+      type: String,
+      default: "",
+    },
+    address1: {
+      type: String,
+      default: "",
+    },
+    address2: {
+      type: String,
+      default: "",
+    },
+    city: {
+      type: String,
+      default: "",
+    },
+    customer_state: {
+      type: String,
+      default: "",
+    },
+    zip: {
+      type: String,
+      default: "",
+    },
+    country: {
+      type: String,
+      default: "",
+    },
     done: {
       type: Boolean,
       default: false,
