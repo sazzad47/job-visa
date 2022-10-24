@@ -51,7 +51,7 @@ export const MyMenu = () => (
       primaryText="Contact"
       leftIcon={<ContactPageIcon />}
     />
-    <Menu.Item to="/home" primaryText="Home" leftIcon={<OtherHousesIcon />} />
+    {/* <Menu.Item to="/home" primaryText="Home" leftIcon={<OtherHousesIcon />} /> */}
     <Menu.Item
       to="/services"
       primaryText="Services"
