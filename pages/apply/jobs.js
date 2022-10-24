@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import Auth from "../../components/Auth";
+import Head from "next/head";
 
 const Job = () => {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,9 @@ const Job = () => {
   const { auth } = state;
   return (
     <React.Fragment>
+      <Head>
+        <title>Apply for job</title>
+      </Head>
       <div className={auth.token ? "visa-page" : "authContainer"}>
         {auth.token ? (
           <>

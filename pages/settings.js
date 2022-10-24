@@ -68,7 +68,7 @@ const Settings = () => {
   return (
     <div className="profile_page">
       <Head>
-        <title>Profile</title>
+        <title>Settings</title>
       </Head>
       <section className="row text-secondary mx-2 mx-md-5 my-3">
         <div

@@ -4,6 +4,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import Auth from "../../components/Auth";
+import Head from "next/head";
 
 export default function Payment() {
   const { state } = useContext(DataContext);
@@ -14,6 +15,9 @@ export default function Payment() {
       {auth.token ? (
         <>
           <Breadcrumb title="Payment" />
+          <Head>
+            <title>Payment</title>
+          </Head>
           <Checkout />
         </>
       ) : (

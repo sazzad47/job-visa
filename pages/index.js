@@ -12,6 +12,7 @@ const Home = () => {
     <div className="landing_page">
       <Head>
         <title>Home Page</title>
+        <meta name="description" content="International visa and job portal." />
       </Head>
       <Hero />
       <Offer />

@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import { getData } from "../../utils/fetchData";
+import Head from "next/head";
 
 const JobChecking = () => {
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,9 @@ const JobChecking = () => {
   };
   return (
     <React.Fragment>
+      <Head>
+        <title>Job Checking</title>
+      </Head>
       <Container component="main" maxWidth="xs">
         <Card
           elevation={4}

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { useState, useRef } from "react";
 import ResetPassword from "../components/forgotPassword/ResetPassword";
 import SendEmail from "../components/forgotPassword/SendEmail";
@@ -11,6 +12,9 @@ const ForgotPassword = () => {
   };
   return (
     <div className="forgot-password">
+      <Head>
+        <title>Forgot Password</title>
+      </Head>
       <div className="block mx-3">
         <div className="inner-block" ref={card}>
           <div className="block-front">

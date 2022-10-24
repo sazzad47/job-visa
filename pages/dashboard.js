@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div style={{ padding: "2rem", overflowX: "hidden" }}>
       <Head>
-        <title>Profile</title>
+        <title>Dashboard</title>
       </Head>
       <section className="row text-secondary my-3">
         <h3 className="text-center text-uppercase">User Dashboard</h3>

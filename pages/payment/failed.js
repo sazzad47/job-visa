@@ -2,10 +2,14 @@ import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import React from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Link from "next/link";
+import Head from "next/head";
 
 const PaymentMessage = () => {
   return (
     <React.Fragment>
+      <Head>
+        <title>Payment failed</title>
+      </Head>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"

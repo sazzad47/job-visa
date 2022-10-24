@@ -2,9 +2,13 @@ import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import React from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Link from "next/link";
+import Head from "next/head";
 const PaymentMessage = () => {
   return (
     <React.Fragment>
+      <Head>
+        <title>Payment successful</title>
+      </Head>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"

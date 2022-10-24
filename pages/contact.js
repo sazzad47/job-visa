@@ -4,6 +4,7 @@ import Parser from "html-react-parser";
 import { getData, postData } from "../utils/fetchData";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Head from "next/head";
 
 const Notice = ({ data }) => {
   const initialState = { name: "", email: "", message: "" };
@@ -27,6 +28,9 @@ const Notice = ({ data }) => {
   };
   return (
     <React.Fragment>
+      <Head>
+        <title>Contact</title>
+      </Head>
       <Breadcrumb title="Contact" />
       <div className="contact-page-container">
         <div className="contact-page">

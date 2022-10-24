@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { getData } from "../../utils/fetchData";
+import Head from "next/head";
 
 const LoanChecking = () => {
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,9 @@ const LoanChecking = () => {
   };
   return (
     <React.Fragment>
+      <Head>
+        <title>Loan Checking</title>
+      </Head>
       <Container component="main" maxWidth="xs">
         <Card
           elevation={4}

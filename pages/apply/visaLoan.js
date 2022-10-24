@@ -7,6 +7,7 @@ import { useState } from "react";
 import Auth from "../../components/Auth";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
+import Head from "next/head";
 
 const Loan = () => {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,9 @@ const Loan = () => {
   const { auth } = state;
   return (
     <React.Fragment>
+      <Head>
+        <title>Apply for loan</title>
+      </Head>
       <div className={auth.token ? "visa-page" : "authContainer"}>
         {auth.token ? (
           <>

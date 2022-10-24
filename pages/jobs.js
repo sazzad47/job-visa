@@ -7,6 +7,7 @@ import { getData } from "../utils/fetchData";
 import { useRouter } from "next/router";
 import JobItem from "../components/jobs/JobItem";
 import filterSearch from "../utils/filterSearch";
+import Head from "next/head";
 
 const Jobs = ({ props }) => {
   const [data, setData] = useState(props.data);
@@ -28,6 +29,9 @@ const Jobs = ({ props }) => {
 
   return (
     <React.Fragment>
+      <Head>
+        <title>Jobs</title>
+      </Head>
       <Breadcrumb title="Jobs" />
       <Container sx={{ py: 8 }} maxWidth="md">
         <Filter />

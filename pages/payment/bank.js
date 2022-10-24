@@ -13,6 +13,7 @@ import { postData } from "../../utils/fetchData";
 import { useState } from "react";
 import PaymentMessage from "../../components/payment/PaymentMessage";
 import { imageUpload } from "../../utils/imageUpload";
+import Head from "next/head";
 
 const Bank = () => {
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,10 @@ const Bank = () => {
   };
   return (
     <React.Fragment>
+      <Head>
+        <title>Pay with bank</title>
+        <meta name="description" content={Parser(data.shortDescription)} />
+      </Head>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
           variant="outlined"

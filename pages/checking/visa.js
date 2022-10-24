@@ -31,6 +31,9 @@ const VisaChecking = () => {
   };
   return (
     <React.Fragment>
+      <Head>
+        <title>Visa Checking</title>
+      </Head>
       <Container component="main" maxWidth="xs">
         <Card
           elevation={4}
