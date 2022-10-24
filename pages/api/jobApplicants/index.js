@@ -144,7 +144,7 @@ const apply = async (req, res) => {
       subject: "[job-visa] Received job application.",
       html: `
             <div>
-              <p>Hello, ${newApplication.name}</p>
+              <p>Hello, ${newApplication.fullName}</p>
               <p>We received your job application.</p>
               <p>Sed ut perspiciatis unde omnis iste natus error
                sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 

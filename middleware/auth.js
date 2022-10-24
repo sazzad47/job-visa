@@ -13,6 +13,7 @@ const auth = async (req, res) => {
     userId: user.userId,
     role: user.role,
     root: user.root,
+    name: user.name
   };
 };
 
