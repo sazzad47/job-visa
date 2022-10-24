@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
 import { getData } from "../../utils/fetchData";
+import Head from "next/head";
 
 const VisaChecking = () => {
   const [loading, setLoading] = useState(false);

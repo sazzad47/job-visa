@@ -38,7 +38,6 @@ const Bank = () => {
     <React.Fragment>
       <Head>
         <title>Pay with bank</title>
-        <meta name="description" content={Parser(data.shortDescription)} />
       </Head>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper
