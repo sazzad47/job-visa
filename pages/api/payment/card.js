@@ -3,7 +3,6 @@ import auth from "../../../middleware/auth";
 async function CreateStripeSession(req, res) {
   const result = await auth(req, res);
   const { item } = req.body;
-  console.log("checkout", item);
   const redirectURL = `${process.env.BASE_URL}/payment`;
   const transformedItem = {
     price_data: {

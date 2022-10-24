@@ -32,12 +32,12 @@ const handler = async (req, res) => {
     if ("checkout.session.completed" === stripeEvent.type) {
       const session = stripeEvent.data.object;
       const data = session.metadata;
-
-      console.log("payment success", session);
+      
+      console.log("payment success", data);
       const newPayment = new Payment({
         user: JSON.parse(data.user),
         visaApplyID: data.visaApplyID,
-        amount: data.price,
+        amount: data.amount,
         method: data.method,
         firstName: data.firstName,
         lastName: data.lastName,
