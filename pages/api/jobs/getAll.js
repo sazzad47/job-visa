@@ -47,7 +47,7 @@ class APIfeatures {
 
 const getJobs = async (req, res) => {
   try {
-    const features = new APIfeatures(Jobs.find(), req.query)
+    const features = new APIfeatures(Jobs.find({done: false}), req.query)
       .filtering()
       .sorting()
       .paginating();
