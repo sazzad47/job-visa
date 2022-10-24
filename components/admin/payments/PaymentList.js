@@ -33,7 +33,7 @@ const PaymentList = (props) => {
         <TextField source="visaApplyID" label="Visa Application ID" />
         <TextField source="method" label="Payment Method" />
         <TextField source="amount" label="Amount" />
-        <FileField source="country" title="Country" />
+        <TextField source="country" title="Country" />
         <ShowButton />
       </Datagrid>
     </List>
