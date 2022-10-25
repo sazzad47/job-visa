@@ -191,7 +191,7 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
             onChange={handleInput}
             required
             fullWidth
-            label="State/Province"
+            label="State/Country"
             variant="outlined"
           />
         </div>

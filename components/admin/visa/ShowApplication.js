@@ -47,14 +47,26 @@ const VisaApplicationShow = (props) => (
         </Typography>
         <TextField Lable="Identity Card" source="IdentityCard" />
         <TextField Lable="ID Card Number" source="IdCardNumber" />
-        <TextField Lable="Full Name" source="fullName" />
-        <TextField Lable="Father's Name" source="fathersName" />
-        <TextField Lable="Mother's Name" source="mothersName" />
-        <TextField Lable="Street Address" source="streetAddress" />
-        <TextField Lable="Street Address Line 2" source="streetAddressLine2" />
-        <TextField Lable="City" source="city" />
-        <TextField Lable="State/Province" source="province" />
-        <TextField Lable="Postal/Zip Code" source="postal" />
+        <Typography variant="h3" sx={{ fontWeight: "medium" }}>
+          Name
+        </Typography>
+        <TextField Lable="First Name" source="firstName" />
+        <TextField Lable="Middle Name" source="middleName" />
+        <TextField Lable="Surname" source="surname" />
+        <Typography variant="h3" sx={{ fontWeight: "medium" }}>
+          Father's Name
+        </Typography>
+        <TextField Lable="First Name" source="fathersNameFirst" />
+        <TextField Lable="Middle Name" source="fathersNameMiddle" />
+        <TextField Lable="Surname" source="fathersNameSurname" />
+        <Typography variant="h3" sx={{ fontWeight: "medium" }}>
+          Mother's Name
+        </Typography>
+        <TextField Lable="First Name" source="mothersNameFirst" />
+        <TextField Lable="Middle Name" source="mothersNameMiddle" />
+        <TextField Lable="Surname" source="mothersNameSurname" />
+        <TextField Lable="Occupation" source="currentJob" />
+        <TextField Lable="Monthly Income" source="monthlyIncome" />
         <TextField Lable="Gender" source="gender" />
         <TextField Lable="Date of Birth" source="dateOfBirth" />
         <TextField Lable="Date of Issue" source="dateOfIdCardIssue" />
@@ -62,6 +74,13 @@ const VisaApplicationShow = (props) => (
         <TextField Lable="Nationality" source="nationality" />
         <TextField Lable="Blood Group" source="bloodGroup" />
         <TextField Lable="Marital Status" source="maritalStatus" />
+        <TextField Lable="Educational Qualification" source="educationalQualification" />
+        <TextField Lable="Languages" source="languages" />
+        <TextField Lable="IELTS Score" source="ieltsScore" />
+        <FileField
+          source="ieltsDocument"
+          title="IELTS Document"
+        />
         <ImageField
           source="frontPhotoOfIdCard"
           title="Front Photo of your ID Card"
@@ -75,37 +94,85 @@ const VisaApplicationShow = (props) => (
         <Typography variant="h6" sx={{ fontWeight: "medium" }}>
           Passport Information
         </Typography>
-        <TextField Lable="Country" source="passportCountry" />
+        <TextField Lable="Passport Type" source="passportType" />
         <TextField Lable="Passport Number" source="passportNumber" />
         <TextField
           Lable="Issuing Authority"
           source="passportIssuingAuthority"
         />
-        <TextField Lable="Date of Birth" source="passportDateOfBirth" />
+        <TextField Lable="Passport Issuing Place" source="passportIssuingPlace" />
         <TextField Lable="Date of Issue" source="passportDateOfIssue" />
         <TextField Lable="Date of Expiry" source="passportDateOfExpiry" />
-        <FileField source="passportDocument" title="Upload your passport" />
+        <TextField Lable="Nationality/State" source="passportNationality" />
+        <FileField source="passportDocument" title="Passport Document" />
+        <TextField Lable="Do you have any other passport/Identity Certificate?" source="isOtherPassport" />
+        <TextField Lable="Passport Number" source="otherPassportNumber" />
+        <TextField
+          Lable="Issuing Authority"
+          source="otherPassportIssuingAuthority"
+        />
+        <TextField Lable="Passport Issuing Place" source="otherPassportIssuingPlace" />
+        <TextField Lable="Date of Issue" source="otherPassportDateOfIssue" />
+        <TextField Lable="Date of Expiry" source="otherPassportDateOfExpiry" />
+        <TextField Lable="Nationality/State" source="otherPassportNationality" />
+        <FileField source="otherPassportDocument" title="Other Passport Document" />
         <Typography variant="h6" sx={{ fontWeight: "medium" }}>
           Visa Processing Information
         </Typography>
-        <TextField
-          Lable="Name of the country you wish to visit"
-          source="wishedCountry"
-        />
         <TextField Lable="Select your visa" source="visaType" />
+        <TextField
+          Lable="Visa Issue Country"
+          source="visaIssueCountry"
+        />
+        <TextField
+          Lable="Visa Duration"
+          source="visaDuration"
+        />
+        <TextField
+          Lable="Visa Issued Place"
+          source="visaIssuingPlace"
+        />
+        <TextField
+          Lable="Entry Date"
+          source="entryDate"
+        />
+        <TextField
+          Lable="Stay Duration"
+          source="stayDuration"
+        />
         <FileField
-          source="marriageCertificate"
-          title="Upload your marriage certificate"
+          source="flightReservation"
+          title="Flight Reservation"
         />
-
-        <TextField
-          Lable="How many months/years do you want to stay?"
-          source="wishedStayDuration"
+        <FileField
+          source="inspectionCard"
+          title="Inspection Card"
         />
-        <TextField
-          Lable="Do you want to be citizen there?"
-          source="isWishingCitizenship"
+        <FileField
+          source="invitationLetter"
+          title="Invitation Letter"
         />
+        <ImageField
+          source="utilityBill"
+          title="Utility Bill"
+        />
+        <FileField
+          source="policeClearanceCertificate"
+          title="Police Clearance Certificate"
+        />
+        <FileField
+          source="bankStatementOfLast6M"
+          title="bank Statement Of Last 6 months"
+        />
+        <FileField
+          source="bankSolvencyCertificate"
+          title="Bank Solvency Certificate"
+        />
+         <TextField
+          Lable="Place To Stay"
+          source="placeToStay"
+        />
+        
         <Typography variant="h6" sx={{ fontWeight: "medium" }}>
           Home Information
         </Typography>
@@ -129,25 +196,10 @@ const VisaApplicationShow = (props) => (
           Lable="Who does your family depend on?"
           source="familyDependentOn"
         />
-        <TextField Lable="What do you do now?" source="currentJob" />
-        <TextField
-          Lable="How much is your monthly income?"
-          source="monthlyIncome"
-        />
         <TextField
           Lable="How many people are in your family?"
           source="familyMember"
         />
-        <TextField
-          Lable="Educational Qualification"
-          source="educationalQualification"
-        />
-        <TextField
-          Lable=">How many languages do you know?"
-          source="languages"
-        />
-        <TextField Lable="IELTS Score" source="ieltsScore" />
-        <FileField source="ieltsDocument" title="IELTS Document" />
         <Typography variant="h6" sx={{ fontWeight: "medium" }}>
           Bank Statement
         </Typography>
@@ -169,9 +221,16 @@ const VisaApplicationShow = (props) => (
         <Typography variant="h6" sx={{ fontWeight: "medium" }}>
           Contact Information
         </Typography>
+        <TextField Lable="Street Address" source="streetAddress" />
+        <TextField Lable="Street Address Line 2" source="streetAddressLine2" />
+        <TextField Lable="City" source="city" />
+        <TextField Lable="State/Province" source="province" />
+        <TextField Lable="Postal/Zip Code" source="postal" />
         <TextField Lable="Email" source="email" />
-        <TextField Lable="Phone Number" source="phone" />
-        <TextField Lable="Home Phone Number" source="homePhone" />
+        <TextField Lable="Home Email" source="homeEmail" />
+        <TextField Lable="Mobile Number" source="mobile" />
+        <TextField Lable="Home Mobile Number" source="homeMobile" />
+        <TextField Lable="Telephone" source="telephone" />
       </SimpleShowLayout>
     </Show>
   </>

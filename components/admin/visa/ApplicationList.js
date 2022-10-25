@@ -33,8 +33,8 @@ const VisaApplicatioinList = (props) => {
       <Datagrid>
         <TextField source="index" label="ID" />
         <TextField source="userId" label="User ID" />
-        <TextField source="passportCountry" label="From Country" />
-        <TextField source="wishedCountry" label="Visa Application Country" />
+        <TextField source="province" label="From Country" />
+        <TextField source="visaIssueCountry" label="Visa Application Country" />
         <TextField source="visaType" label="Category" />
         <TextField source="cost" label="Cost (USD)" />
         <BooleanField source="paid" label="Paid" />
