@@ -19,7 +19,6 @@ const pay = async (req, res) => {
 
     const {
       visaApplyID,
-      jobApplyID,
       bankReceipt,
       method,
       amount,
@@ -36,7 +35,6 @@ const pay = async (req, res) => {
     const newPayment = new Payment({
       user: result.id,
       visaApplyID,
-      jobApplyID,
       bankReceipt,
       method,
       amount,
