@@ -16,11 +16,39 @@ import { toast } from "react-toastify";
 
 const VisaProcessingInfo = ({ handleBack, handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
-  const [showDurationField, setShowDurationField] = useState(true);
-  const { wishedCountry, visaType, wishedStayDuration, isWishingCitizenship } =
+  const [showPlaceField, setShowPlaceField] = useState(true);
+  const { 
+    visaType,
+    visaIssueCountry,
+    visaDuration,
+    visaIssuingPlace,
+    entryDate,
+    stayDuration,
+    flightReservation,
+    inspectionCard,
+    invitationLetter,
+    utilityBill,
+    policeClearanceCertificate,
+    bankStatementOfLast6M,
+    bankSolvencyCertificate,
+    placeToStay
+   } =
     state.visaApplicant.visaProcessingInfo;
   const emptyInput =
-    !wishedCountry || !visaType || !wishedStayDuration || !isWishingCitizenship;
+        !visaType ||
+        !visaIssueCountry ||
+        !visaDuration ||
+        !visaIssuingPlace ||
+        !entryDate ||
+        !stayDuration ||
+        !flightReservation ||
+        !inspectionCard ||
+        !invitationLetter ||
+        !utilityBill ||
+        !policeClearanceCertificate ||
+        !bankStatementOfLast6M ||
+        !bankSolvencyCertificate ||
+        !placeToStay
   const handleInput = (e) => {
     dispatch({
       type: "CHANGE_VISA_APPLICANTS_VISA_INPUTS",
@@ -41,14 +69,40 @@ const VisaProcessingInfo = ({ handleBack, handleNext }) => {
       {country.name}
     </MenuItem>
   ));
+  console.log('visa info', state.visaApplicant.visaProcessingInfo)
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <div>Name of the country you wish to visit</div>
+      <div className="mt-3">Select your visa type</div>
+        <div className="visa-form-input">
+          <TextField
+            name="visaType"
+            value={visaType}
+            onChange={handleInput}
+            required
+            select
+            fullWidth
+            label=""
+          >
+            <MenuItem value="H1B visa">H1B visa</MenuItem>
+            <MenuItem value="H2 visa">H2 visa</MenuItem>
+            <MenuItem value="L visa">L visa</MenuItem>
+            <MenuItem value="R visa">R visa</MenuItem>
+            <MenuItem value="Q visa">Q visa</MenuItem>
+            <MenuItem value="IR visa">IR visa</MenuItem>
+            <MenuItem value="EB-1">EB-1</MenuItem>
+            <MenuItem value="EB-2">EB-2</MenuItem>
+            <MenuItem value="EB-3">EB-3</MenuItem>
+            <MenuItem value="EB-5">EB-5</MenuItem>
+          </TextField>
+        </div>
+        
+        <div className="mt-3">Visa Issue Country</div>
         <div className="visa-form-input mb-3">
           <TextField
-            name="wishedCountry"
+            name="visaIssueCountry"
             onChange={handleInput}
+            required
             select
             fullWidth
             label=""
@@ -56,101 +110,135 @@ const VisaProcessingInfo = ({ handleBack, handleNext }) => {
             {countryList}
           </TextField>
         </div>
-        <FormLabel id="visaType">Select your visa</FormLabel>
-        <RadioGroup row aria-labelledby="visaType" name="visaType">
-          <FormControlLabel
-            name="visaType"
+        <div>Visa Duration &#40;Month Year&#41;</div>
+        <div className="visa-form-input mb-3">
+          <TextField
+            name="visaDuration"
+            value={visaDuration}
             onChange={handleInput}
-            value="Working Visa"
-            control={<Radio />}
-            label="Working Visa"
+            required
+            fullWidth
+            label=""
+            placeholder="Enter your visa duration"
           />
-          <FormControlLabel
-            name="visaType"
+        </div>
+        <div>Visa Issued Place</div>
+        <div className="visa-form-input mb-3">
+          <TextField
+            name="visaIssuingPlace"
+            value={visaIssuingPlace}
             onChange={handleInput}
-            value="Marriage Visa"
-            control={<Radio />}
-            label="Marriage Visa"
+            required
+            fullWidth
+            label=""
+            placeholder="Enter your visa issued place"
           />
-          <FormControlLabel
-            name="visaType"
+        </div>
+        <div>Entry Date</div>
+        <div className="visa-form-input mb-3">
+          <TextField
+            name="entryDate"
+            value={entryDate}
             onChange={handleInput}
-            value="Immigrant Visa"
-            control={<Radio />}
-            label="Immigrant Visa"
+            required
+            fullWidth
+            label=""
+            placeholder="Enter your entry date"
           />
-        </RadioGroup>
-        {visaType === "Marriage Visa" && (
-          <>
-            <div className="mt-3 mb-2">Upload your marriage certificate</div>
+        </div>
+        <div>Stay Duration &#40;Days&#41;</div>
+        <div className="visa-form-input mb-3">
+          <TextField
+            name="stayDuration"
+            value={stayDuration}
+            onChange={handleInput}
+            required
+            fullWidth
+            label=""
+            placeholder="Enter your visa duration"
+          />
+        </div>
+        <div className="mt-3 mb-2">Flight Reservation</div>
             <FileUpload
               accept="application/pdf"
-              name="marriageCertificate"
+              name="flightReservation"
               type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
-            />
-          </>
-        )}
-        <FormLabel className="mt-4" id="wishedStayDuration">
-          How many months/years do you want to stay?
+          />
+        <div className="mt-3 mb-2">Inspection Card</div>
+            <FileUpload
+              accept="application/pdf"
+              name="inspectionCard"
+              type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
+          />
+        <div className="mt-3 mb-2">Invitation Letter</div>
+            <FileUpload
+              accept="application/pdf"
+              name="invitationLetter"
+              type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
+          />
+        <div className="mt-3 mb-2">Utility Bill</div>
+            <FileUpload
+              accept="image/*"
+              name="utilityBill"
+              type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
+          />
+        <div className="mt-3 mb-2">Police Clearance Certificate</div>
+          <FileUpload
+            accept="application/pdf"
+            name="policeClearanceCertificate"
+            type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
+        />
+        <div className="mt-3 mb-2">Bank statement of last 06 months certificate</div>
+          <FileUpload
+            accept="application/pdf"
+            name="bankStatementOfLast6M"
+            type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
+        />
+        <div className="mt-3 mb-2">Bank Solvency Certificate</div>
+          <FileUpload
+            accept="application/pdf"
+            name="bankSolvencyCertificate"
+            type="CHANGE_VISA_APPLICANTS_VISA_INPUTS"
+        />
+        <FormLabel className="mt-4" id="placeToStay">
+          Place to stay
         </FormLabel>
         <RadioGroup
           row
-          aria-labelledby="wishedStayDuration"
-          name="wishedStayDuration"
+          aria-labelledby="placeToStay"
+          name="placeToStay"
         >
           <FormControlLabel
-            name="wishedStayDuration"
+            name="placeToStay"
             onChange={handleInput}
-            onClick={() => setShowDurationField(true)}
-            value="7 months"
+            onClick={() => setShowPlaceField(true)}
+            value="Hotel booking "
             control={<Radio />}
-            label="7 months"
+            label="Hotel booking"
           />
           <FormControlLabel
-            name="wishedStayDuration"
+            name="placeToStay"
             onChange={handleInput}
-            onClick={() => setShowDurationField(true)}
-            value="3 years"
+            onClick={() => setShowPlaceField(true)}
+            value="Relatives house"
             control={<Radio />}
-            label="3 years"
+            label="Relatives house"
           />
           <InputModal
             handleInput={handleInput}
-            showOther={setShowDurationField}
-            name="wishedStayDuration"
-            label="How many months/years do you want to stay?"
+            showOther={setShowPlaceField}
+            name="placeToStay"
+            label="Place to stay"
             placeholder=""
           />
         </RadioGroup>
         <TextField
-          hidden={showDurationField}
+          hidden={showPlaceField}
           fullWidth
           disabled
-          value={wishedStayDuration}
+          value={placeToStay}
         />
-        <FormLabel className="mt-4" id="isWishingCitizenship">
-          Do you want to be citizen there?
-        </FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="isWishingCitizenship"
-          name="isWishingCitizenship"
-        >
-          <FormControlLabel
-            name="isWishingCitizenship"
-            onChange={handleInput}
-            value="Yes"
-            control={<Radio />}
-            label="Yes"
-          />
-          <FormControlLabel
-            name="isWishingCitizenship"
-            onChange={handleInput}
-            value="No"
-            control={<Radio />}
-            label="No"
-          />
-        </RadioGroup>
+       
         <div className="mt-4 d-flex align-items-center justify-content-between">
           <Button variant="contained" onClick={handleBack}>
             Back

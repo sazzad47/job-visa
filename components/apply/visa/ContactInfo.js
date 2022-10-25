@@ -11,27 +11,39 @@ import { imageUpload } from "../../../utils/imageUpload";
 const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth, visaApplicant } = state;
-  const { frontPhotoOfIdCard, backPhotoOfIdCard, photo, signature } =
+  const {ieltsDocument, frontPhotoOfIdCard, backPhotoOfIdCard, photo, signature } =
     state.visaApplicant.personalInfo;
 
-  const { passportDocument } = state.visaApplicant.passportInfo;
+  const { passportDocument, otherPassportDocument } = state.visaApplicant.passportInfo;
 
-  const { marriageCertificate } = state.visaApplicant.visaProcessingInfo;
-
-  const { ieltsDocument } = state.visaApplicant.home;
+  const { 
+  flightReservation,
+  inspectionCard,
+  invitationLetter,
+  utilityBill,
+  policeClearanceCertificate,
+  bankStatementOfLast6M,
+  bankSolvencyCertificate, } = state.visaApplicant.visaProcessingInfo;
 
   const { bankStateDocument } = state.visaApplicant.bank;
 
   const { MedicalReportDocument } = state.visaApplicant.medical;
 
   const documents = {
+    ieltsDocument,
     frontPhotoOfIdCard,
     backPhotoOfIdCard,
     photo,
     signature,
     passportDocument,
-    marriageCertificate,
-    ieltsDocument,
+    otherPassportDocument,
+    flightReservation,
+    inspectionCard,
+    invitationLetter,
+    utilityBill,
+    policeClearanceCertificate,
+    bankStatementOfLast6M,
+    bankSolvencyCertificate,
     bankStateDocument,
     MedicalReportDocument,
   };
@@ -44,6 +56,7 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
   const validKeys = Object.keys(documents);
   const [phnValue, setPhnValue] = useState(null);
   const [homePhnValue, setHomePhnValue] = useState(null);
+  const [telephoneNumber, setTelephoneNumber] = useState(null);
   const recaptcha = useRef(null);
   const [isHuman, setIsHuman] = useState(false);
 
@@ -54,7 +67,7 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
   const handlePhn = (newValue) => {
     dispatch({
       type: "CHANGE_VISA_APPLICANTS_CONTACT_INPUTS",
-      payload: { name: "phone", value: newValue },
+      payload: { name: "mobile", value: newValue },
     });
     setPhnValue(newValue);
   };
@@ -62,9 +75,17 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
   const handleHomePhn = (newValue) => {
     dispatch({
       type: "CHANGE_VISA_APPLICANTS_CONTACT_INPUTS",
-      payload: { name: "homePhone", value: newValue },
+      payload: { name: "homeMobile", value: newValue },
     });
     setHomePhnValue(newValue);
+  };
+  
+  const handleTelephoneNumber = (newValue) => {
+    dispatch({
+      type: "CHANGE_VISA_APPLICANTS_CONTACT_INPUTS",
+      payload: { name: "telephone", value: newValue },
+    });
+    setTelephoneNumber(newValue);
   };
   const handleInput = (e) => {
     dispatch({
@@ -89,6 +110,7 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
         ...visaApplicant,
         personalInfo: {
           ...visaApplicant.personalInfo,
+          ieltsDocument: mediaData.ieltsDocument || "",
           frontPhotoOfIdCard: mediaData.frontPhotoOfIdCard || "",
           backPhotoOfIdCard: mediaData.backPhotoOfIdCard || "",
           photo: mediaData.photo || "",
@@ -97,14 +119,18 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
         passportInfo: {
           ...visaApplicant.passportInfo,
           passportDocument: mediaData.passportDocument || "",
+          otherPassportDocument: mediaData.otherPassportDocument || "",
         },
         visaProcessingInfo: {
           ...visaApplicant.visaProcessingInfo,
           marriageCertificate: mediaData.marriageCertificate || "",
-        },
-        home: {
-          ...visaApplicant.home,
-          ieltsDocument: mediaData.ieltsDocument || "",
+          flightReservation: mediaData.flightReservation || "",
+          inspectionCard: mediaData.inspectionCard || "",
+          invitationLetter: mediaData.invitationLetter || "",
+          utilityBill: mediaData.utilityBill || "",
+          policeClearanceCertificate: mediaData.policeClearanceCertificate || "",
+          bankStatementOfLast6M: mediaData.bankStatementOfLast6M || "",
+          bankSolvencyCertificate: mediaData.bankSolvencyCertificate || "",
         },
         bank: {
           ...visaApplicant.bank,
@@ -128,31 +154,103 @@ const ContactInfo = ({ setLoading, setSuccess, handleBack }) => {
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit} style={{ minWidth: "100%" }}>
+      <div className="mt-3">Address</div>
+        <div className="visa-form-input">
+          <TextField
+            name="streetAddress"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Street Address"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="streetAddressLine2"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Street Address Line 2"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="city"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="City"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="province"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="State/Province"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="postal"
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Postal/Zip Code"
+            variant="outlined"
+          />
+        </div>
         <div className="mt-3">Email</div>
         <div className="visa-form-input">
           <TextField
             name="email"
+            type='email'
             onChange={handleInput}
             required
             fullWidth
             variant="outlined"
           />
         </div>
-        <div className="mt-3">Phone Number</div>
+        <div className="mt-3">Home Email</div>
+        <div className="visa-form-input">
+          <TextField
+            name="homeEmail"
+            type='email'
+            onChange={handleInput}
+            required
+            fullWidth
+            variant="outlined"
+          />
+        </div>
+        <div className="mt-3">Mobile Number</div>
         <div className="mt-3">
           <PhoneInput
-            placeholder="Enter phone number"
+            placeholder="Enter your mobile number"
             value={phnValue}
             onChange={handlePhn}
             required
           />
         </div>
-        <div className="mt-3">Home Phone Number</div>
+        <div className="mt-3">Home Mobile Number</div>
         <div className="mt-3">
           <PhoneInput
-            placeholder="Enter your home phone number"
+            placeholder="Enter your home mobile number"
             value={homePhnValue}
             onChange={handleHomePhn}
+            required
+          />
+        </div>
+        <div className="mt-3">Telephone</div>
+        <div className="mt-3">
+          <PhoneInput
+            placeholder="Enter your telephone number"
+            value={telephoneNumber}
+            onChange={handleTelephoneNumber}
             required
           />
         </div>

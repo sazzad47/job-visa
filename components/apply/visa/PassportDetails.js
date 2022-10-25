@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useContext, useState } from "react";
@@ -9,34 +9,39 @@ import { toast } from "react-toastify";
 const PassportDetails = ({ handleBack, handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
   const {
-    passportCountry,
+    passportType,
     passportNumber,
     passportIssuingAuthority,
-    passportDateOfBirth,
+    passportIssuingPlace,
     passportDateOfIssue,
     passportDateOfExpiry,
+    passportNationality,
     passportDocument,
+    isOtherPassport,
+    otherPassportNumber,
+    otherPassportIssuingAuthority,
+    otherPassportIssuingPlace,
+    otherPassportDateOfIssue,
+    otherPassportDateOfExpiry,
+    otherPassportNationality,
+    otherPassportDocument,
   } = state.visaApplicant.passportInfo;
   const emptyInput =
-    !passportCountry ||
+    !passportType ||
     !passportNumber ||
     !passportIssuingAuthority ||
-    !passportDateOfBirth ||
+    !passportIssuingPlace ||
     !passportDateOfIssue ||
     !passportDateOfExpiry ||
-    !passportDocument;
-  const [dob, setDob] = useState(null);
+    !passportNationality ||
+    !passportDocument ||
+    !isOtherPassport
   const [doi, setDoi] = useState(null);
   const [doe, setDoe] = useState(null);
+  const [otherDoi, setOtherDoi] = useState(null);
+  const [otherDoe, setOtherDoe] = useState(null);
 
-  const handleDateOfBirth = (newValue) => {
-    dispatch({
-      type: "CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS",
-      payload: { name: "passportDateOfBirth", value: newValue },
-    });
-    setDob(newValue);
-  };
-
+ 
   const handleDateOfIssue = (newValue) => {
     dispatch({
       type: "CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS",
@@ -51,6 +56,21 @@ const PassportDetails = ({ handleBack, handleNext }) => {
       payload: { name: "passportDateOfExpiry", value: newValue },
     });
     setDoe(newValue);
+  };
+  const handleOtherDateOfIssue = (newValue) => {
+    dispatch({
+      type: "CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS",
+      payload: { name: "otherPassportDateOfIssue", value: newValue },
+    });
+    setOtherDoi(newValue);
+  };
+
+  const handleOtherDateOfExpiry = (newValue) => {
+    dispatch({
+      type: "CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS",
+      payload: { name: "otherPassportDateOfExpiry", value: newValue },
+    });
+    setOtherDoe(newValue);
   };
 
   const handleInput = (e) => {
@@ -67,22 +87,25 @@ const PassportDetails = ({ handleBack, handleNext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  console.log('paspporinfo', state.visaApplicant.passportInfo)
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit} style={{ minWidth: "100%" }}>
         <div className="visa-form-input">
           <TextField
-            name="passportCountry"
+            name="passportType"
+            value={passportType}
             onChange={handleInput}
             required
             fullWidth
-            label="Country"
+            label="Passport Type"
             variant="outlined"
           />
         </div>
         <div className="visa-form-input">
           <TextField
             name="passportNumber"
+            value={passportNumber}
             onChange={handleInput}
             required
             fullWidth
@@ -94,6 +117,7 @@ const PassportDetails = ({ handleBack, handleNext }) => {
         <div className="visa-form-input">
           <TextField
             name="passportIssuingAuthority"
+            value={passportIssuingAuthority}
             onChange={handleInput}
             required
             fullWidth
@@ -101,18 +125,17 @@ const PassportDetails = ({ handleBack, handleNext }) => {
             variant="outlined"
           />
         </div>
-        <div className="visa-form-input d-flex justify-content-between">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              label="Date of Birth"
-              inputFormat="MM/DD/YYYY"
-              value={dob}
-              onChange={handleDateOfBirth}
-              renderInput={(params) => <TextField fullWidth {...params} />}
-            />
-          </LocalizationProvider>
+        <div className="visa-form-input">
+          <TextField
+            name="passportIssuingPlace"
+            value={passportIssuingPlace}
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Country of Issue"
+            variant="outlined"
+          />
         </div>
-
         <div className="visa-form-input d-flex justify-content-between">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
@@ -135,13 +158,126 @@ const PassportDetails = ({ handleBack, handleNext }) => {
             />
           </LocalizationProvider>
         </div>
-
+        <div className="visa-form-input">
+          <TextField
+            name="passportNationality"
+            value={passportNationality}
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Nationality/Status"
+            variant="outlined"
+          />
+        </div>
         <div className="mt-3 mb-2">Upload your passport</div>
         <FileUpload
           accept="application/pdf"
           name="passportDocument"
           type="CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS"
         />
+        <FormLabel sx={{mt:4}} id="isOtherPassport">Do you have any other passport/Identity Certificate?</FormLabel>
+        <RadioGroup
+          row
+          aria-labelledby="isOtherPassport"
+          name="isOtherPassport"
+          required
+          
+        >
+          <FormControlLabel
+            name="isOtherPassport"
+            onChange={handleInput}
+            value="yes"
+            control={<Radio />}
+            label="Yes"
+          />
+          <FormControlLabel
+            name="isOtherPassport"
+            onChange={handleInput}
+            value="no"
+            control={<Radio />}
+            label="No"
+          />
+        </RadioGroup>
+        {
+          isOtherPassport === "yes" && (
+            <>
+           
+        <div className="visa-form-input">
+          <TextField
+            name="otherPassportNumber"
+            value={otherPassportNumber}
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Passport Number"
+            placeholder="Enter your passport number"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="otherPassportIssuingAuthority"
+            value={otherPassportIssuingAuthority}
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Issuing Authority"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="otherPassportIssuingPlace"
+            value={otherPassportIssuingPlace}
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Country of Issue"
+            variant="outlined"
+          />
+        </div>
+        <div className="visa-form-input d-flex justify-content-between">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              label="Date of Issue"
+              inputFormat="MM/DD/YYYY"
+              value={otherDoi}
+              onChange={handleOtherDateOfIssue}
+              renderInput={(params) => <TextField fullWidth {...params} />}
+            />
+          </LocalizationProvider>
+        </div>
+        <div className="visa-form-input d-flex justify-content-between">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              label="Date of Expiry"
+              inputFormat="MM/DD/YYYY"
+              value={otherDoe}
+              onChange={handleOtherDateOfExpiry}
+              renderInput={(params) => <TextField fullWidth {...params} />}
+            />
+          </LocalizationProvider>
+        </div>
+        <div className="visa-form-input">
+          <TextField
+            name="otherPassportNationality"
+            value={otherPassportNationality}
+            onChange={handleInput}
+            required
+            fullWidth
+            label="Nationality/Status"
+            variant="outlined"
+          />
+        </div>
+        <div className="mt-3 mb-2">Upload your passport</div>
+        <FileUpload
+          accept="application/pdf"
+          name="otherPassportDocument"
+          type="CHANGE_VISA_APPLICANTS_PASSPORT_INPUTS"
+        />
+            </>
+          )
+        }
         <div className="mt-4 d-flex align-items-center justify-content-between">
           <Button variant="contained" onClick={handleBack}>
             Back

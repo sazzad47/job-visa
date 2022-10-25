@@ -2,6 +2,7 @@ import {
   Button,
   FormControlLabel,
   FormLabel,
+  Grid,
   MenuItem,
   Radio,
   RadioGroup,
@@ -22,14 +23,17 @@ const PersonalInfo = ({ handleNext }) => {
   const {
     IdentityCard,
     IdCardNumber,
-    fullName,
-    fathersName,
-    mothersName,
-    streetAddress,
-    streetAddressLine2,
-    city,
-    province,
-    postal,
+    firstName,
+    middleName,
+    surname,
+    fathersNameFirst,
+    fathersNameMiddle,
+    fathersNameSurname,
+    mothersNameFirst,
+    mothersNameMiddle,
+    mothersNameSurname,
+    currentJob,
+    monthlyIncome,
     gender,
     dateOfBirth,
     dateOfIdCardIssue,
@@ -37,6 +41,10 @@ const PersonalInfo = ({ handleNext }) => {
     nationality,
     bloodGroup,
     maritalStatus,
+    educationalQualification,
+    languages,
+    ieltsScore,
+    ieltsDocument,
     frontPhotoOfIdCard,
     backPhotoOfIdCard,
     photo,
@@ -45,14 +53,14 @@ const PersonalInfo = ({ handleNext }) => {
   const emptyInput =
     !IdentityCard ||
     !IdCardNumber ||
-    !fullName ||
-    !fathersName ||
-    !mothersName ||
-    !streetAddress ||
-    !streetAddressLine2 ||
-    !city ||
-    !province ||
-    !postal ||
+    !firstName ||
+    !surname ||
+    !fathersNameFirst ||
+    !fathersNameSurname ||
+    !mothersNameFirst ||
+    !mothersNameSurname ||
+    !currentJob ||
+    !monthlyIncome ||
     !gender ||
     !dateOfBirth ||
     !dateOfIdCardIssue ||
@@ -60,6 +68,9 @@ const PersonalInfo = ({ handleNext }) => {
     !nationality ||
     !bloodGroup ||
     !maritalStatus ||
+    !educationalQualification ||
+    !languages ||
+    !ieltsScore ||
     !frontPhotoOfIdCard ||
     !backPhotoOfIdCard ||
     !photo ||
@@ -98,15 +109,15 @@ const PersonalInfo = ({ handleNext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
+  
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <FormLabel id="identityCard">Identity Card</FormLabel>
+        <FormLabel id="IdentityCard">Identity Card</FormLabel>
         <RadioGroup
           row
-          aria-labelledby="identityCard"
-          name="identityCard"
+          aria-labelledby="IdentityCard"
+          name="IdentityCard"
           required
         >
           <FormControlLabel
@@ -151,6 +162,7 @@ const PersonalInfo = ({ handleNext }) => {
         <div className="visa-form-input">
           <TextField
             name="IdCardNumber"
+            value={IdCardNumber}
             onChange={handleInput}
             required
             fullWidth
@@ -159,87 +171,133 @@ const PersonalInfo = ({ handleNext }) => {
             variant="outlined"
           />
         </div>
+        <div className="mt-3 mb-2">Full Name</div>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="firstName"
+              value={firstName}
+              onChange={handleInput}
+              required
+              fullWidth
+              label="First Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="middleName"
+              value={middleName}
+              onChange={handleInput}
+              fullWidth
+              label="Middle Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="surname"
+              value={surname}
+              onChange={handleInput}
+              required
+              fullWidth
+              label="Surname"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
+        <div className="mt-3 mb-2">Father's Name</div>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="fathersNameFirst"
+              value={fathersNameFirst}
+              onChange={handleInput}
+              required
+              fullWidth
+              label="First Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="fathersNameMiddle"
+              value={fathersNameMiddle}
+              onChange={handleInput}
+              fullWidth
+              label="Middle Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="fathersNameSurname"
+              value={fathersNameSurname}
+              onChange={handleInput}
+              required
+              fullWidth
+              label="Surname"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
+        <div className="mt-3 mb-2">Mother's Name</div>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="mothersNameFirst"
+              value={mothersNameFirst}
+              onChange={handleInput}
+              required
+              fullWidth
+              label="First Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="mothersNameMiddle"
+              value={mothersNameMiddle}
+              onChange={handleInput}
+              fullWidth
+              label="Middle Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <TextField
+              name="mothersNameSurname"
+              value={mothersNameSurname}
+              onChange={handleInput}
+              required
+              fullWidth
+              label="Surname"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
+        <div className="mt-3">Your occupation</div>
         <div className="visa-form-input">
           <TextField
-            name="fullName"
+            name="currentJob"
+            value={currentJob}
             onChange={handleInput}
             required
             fullWidth
-            label="Full Name"
-            placeholder="Enter your full name"
+            placeholder="Enter your occupation"
+            label="Your Occupation"
             variant="outlined"
           />
         </div>
         <div className="visa-form-input">
           <TextField
-            name="fathersName"
+            name="monthlyIncome"
+            value={monthlyIncome}
             onChange={handleInput}
             required
             fullWidth
-            label="Father's Name"
-            placeholder="Enter your father's name"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="mothersName"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Mother's Name"
-            placeholder="Enter your mother's name"
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">Address</div>
-        <div className="visa-form-input">
-          <TextField
-            name="streetAddress"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Street Address"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="streetAddressLine2"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Street Address Line 2"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="city"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="City"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="province"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="State/Province"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="postal"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Postal/Zip Code"
+            placeholder="Enter your monthly income"
+            label="Monthly Income"
             variant="outlined"
           />
         </div>
@@ -291,7 +349,7 @@ const PersonalInfo = ({ handleNext }) => {
         <div className="visa-form-input d-flex justify-content-between">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
-              label="Date of Issue"
+              label="Date of ID Card Issue"
               inputFormat="MM/DD/YYYY"
               value={doi}
               onChange={handleDateOfIssue}
@@ -370,6 +428,60 @@ const PersonalInfo = ({ handleNext }) => {
             />
           </RadioGroup>
         </div>
+        <div className="mt-3">Educational Qualification</div>
+        <div className="visa-form-input">
+          <TextField
+            name="educationalQualification"
+            value={educationalQualification}
+            onChange={handleInput}
+            required
+            fullWidth
+            variant="outlined"
+          />
+        </div>
+        <div className="mt-3">How many languages do you know?</div>
+        <div className="visa-form-input">
+          <TextField
+            name="languages"
+            value={languages}
+            onChange={handleInput}
+            required
+            fullWidth
+            variant="outlined"
+          />
+        </div>
+        <div className="mt-3">IELTS Score</div>
+        <div className="visa-form-input">
+          <TextField
+            name="ieltsScore"
+            value={ieltsScore}
+            onChange={handleInput}
+            select
+            fullWidth
+            label=""
+          >
+            <MenuItem value="No">No</MenuItem>
+            <MenuItem value="1">1</MenuItem>
+            <MenuItem value="2">2</MenuItem>
+            <MenuItem value="3">3</MenuItem>
+            <MenuItem value="4">4</MenuItem>
+            <MenuItem value="5">5</MenuItem>
+            <MenuItem value="6">6</MenuItem>
+            <MenuItem value="7">7</MenuItem>
+            <MenuItem value="8">8</MenuItem>
+            <MenuItem value="9">9</MenuItem>
+          </TextField>
+        </div>
+        {ieltsScore !== "No" && (
+          <>
+            <div className="mt-3 mb-2">IELTS Document</div>
+            <FileUpload
+              accept="application/pdf"
+              name="ieltsDocument"
+              type="CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS"
+            />
+          </>
+        )}
         <div className="mt-3 mb-2">Front Photo of your ID Card</div>
         <FileUpload
           accept="image/*"

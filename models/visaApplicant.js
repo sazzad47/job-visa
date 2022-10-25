@@ -9,173 +9,337 @@ const visaApplicantSchema = new mongoose.Schema(
     IdentityCard: {
       type: String,
     },
+    IdentityCard: {
+      type: String,
+      default: ""
+    },
     IdCardNumber: {
       type: String,
+      default: ""
     },
-    fullName: {
+    firstName: {
       type: String,
+      default: ""
     },
-    fathersName: {
+    middleName: {
       type: String,
+      default: ""
     },
-    mothersName: {
+    surname: {
       type: String,
+      default: ""
     },
-    streetAddress: {
+    fathersNameFirst: {
       type: String,
+      default: ""
     },
-    streetAddressLine2: {
+    fathersNameMiddle: {
       type: String,
+      default: ""
     },
-    city: {
+    fathersNameSurname: {
       type: String,
+      default: ""
     },
-    province: {
+    mothersNameFirst: {
       type: String,
+      default: ""
     },
-    postal: {
+    mothersNameMiddle: {
       type: String,
+      default: ""
     },
-    gender: {
+    mothersNameSurname: {
       type: String,
-    },
-    dateOfBirth: {
-      type: String,
-    },
-    dateOfIdCardIssue: {
-      type: String,
-    },
-    religion: {
-      type: String,
-    },
-    nationality: {
-      type: String,
-    },
-    bloodGroup: {
-      type: String,
-    },
-    maritalStatus: {
-      type: String,
-    },
-    frontPhotoOfIdCard: {
-      type: String,
-    },
-    backPhotoOfIdCard: {
-      type: String,
-    },
-    photo: {
-      type: String,
-    },
-    signature: {
-      type: String,
-    },
-    passportCountry: {
-      type: String,
-    },
-    passportNumber: {
-      type: String,
-    },
-    passportIssuingAuthority: {
-      type: String,
-    },
-    passportDateOfBirth: {
-      type: String,
-    },
-    passportDateOfIssue: {
-      type: String,
-    },
-    passportDateOfExpiry: {
-      type: String,
-    },
-    passportDocument: {
-      type: String,
-    },
-    wishedCountry: {
-      type: String,
-    },
-    visaType: {
-      type: String,
-    },
-    marriageCertificate: {
-      type: String,
-    },
-    wishedStayDuration: {
-      type: String,
-    },
-    isWishingCitizenship: {
-      type: String,
-    },
-    locatedAtHome: {
-      type: String,
-    },
-    homeStreetAddress: {
-      type: String,
-    },
-    homeStreetAddressLine2: {
-      type: String,
-    },
-    homeCity: {
-      type: String,
-    },
-    homeProvince: {
-      type: String,
-    },
-    homePostal: {
-      type: String,
-    },
-    homeStayDuration: {
-      type: String,
-    },
-    familyDependentOn: {
-      type: String,
+      default: ""
     },
     currentJob: {
       type: String,
+      default: ""
     },
     monthlyIncome: {
       type: String,
+      default: ""
     },
-    familyMember: {
+    gender: {
       type: String,
+      default: ""
+    },
+    dateOfBirth: {
+      type: String,
+      default: ""
+    },
+    dateOfIdCardIssue: {
+      type: String,
+      default: ""
+    },
+    religion: {
+      type: String,
+      default: ""
+    },
+    nationality: {
+      type: String,
+      default: ""
+    },
+    bloodGroup: {
+      type: String,
+      default: ""
+    },
+    maritalStatus: {
+      type: String,
+      default: ""
     },
     educationalQualification: {
       type: String,
+      default: ""
     },
     languages: {
       type: String,
+      default: ""
     },
     ieltsScore: {
       type: String,
+      default: ""
     },
     ieltsDocument: {
       type: String,
+      default: ""
+    },
+    frontPhotoOfIdCard: {
+      type: String,
+      default: ""
+    },
+    backPhotoOfIdCard: {
+      type: String,
+      default: ""
+    },
+    photo: {
+      type: String,
+      default: ""
+    },
+    signature: {
+      type: String,
+      default: ""
+    },
+    passportType: {
+      type: String,
+      default: ""
+    },
+    passportNumber: {
+      type: String,
+      default: ""
+    },
+    passportIssuingAuthority: {
+      type: String,
+      default: ""
+    },
+    passportIssuingPlace: {
+      type: String,
+      default: ""
+    },
+    passportDateOfIssue: {
+      type: String,
+      default: ""
+    },
+    passportDateOfExpiry: {
+      type: String,
+      default: ""
+    },
+    passportNationality: {
+      type: String,
+      default: ""
+    },
+    passportDocument: {
+      type: String,
+      default: ""
+    },
+    isOtherPassport: {
+      type: String,
+      default: ""
+    },
+    otherPassportNumber: {
+      type: String,
+      default: ""
+    },
+    otherPassportIssuingAuthority: {
+      type: String,
+      default: ""
+    },
+    otherPassportIssuingPlace: {
+      type: String,
+      default: ""
+    },
+    otherPassportDateOfIssue: {
+      type: String,
+      default: ""
+    },
+    otherPassportDateOfExpiry: {
+      type: String,
+      default: ""
+    },
+    otherPassportNationality: {
+      type: String,
+      default: ""
+    },
+    otherPassportDocument: {
+      type: String,
+      default: ""
+    },
+    visaType: {
+      type: String,
+      default: ""
+    },
+    visaIssueCountry: {
+      type: String,
+      default: ""
+    },
+    visaDuration: {
+      type: String,
+      default: ""
+    },
+    visaIssuingPlace: {
+      type: String,
+      default: ""
+    },
+    entryDate: {
+      type: String,
+      default: ""
+    },
+    stayDuration: {
+      type: String,
+      default: ""
+    },
+    flightReservation: {
+      type: String,
+      default: ""
+    },
+    inspectionCard: {
+      type: String,
+      default: ""
+    },
+    invitationLetter: {
+      type: String,
+      default: ""
+    },
+    utilityBill: {
+      type: String,
+      default: ""
+    },
+    policeClearanceCertificate: {
+      type: String,
+      default: ""
+    },
+    bankStatementOfLast6M: {
+      type: String,
+      default: ""
+    },
+    bankSolvencyCertificate: {
+      type: String,
+      default: ""
+    },
+    placeToStay: {
+      type: String,
+      default: ""
+    },
+    locatedAtHome: {
+      type: String,
+      default: ""
+    },
+    homeStreetAddress: {
+      type: String,
+      default: ""
+    },
+    homeStreetAddressLine2: {
+      type: String,
+      default: ""
+    },
+    homeCity: {
+      type: String,
+      default: ""
+    },
+    homeProvince: {
+      type: String,
+      default: ""
+    },
+    homePostal: {
+      type: String,
+      default: ""
+    },
+    homeStayDuration: {
+      type: String,
+      default: ""
+    },
+    familyDependentOn: {
+      type: String,
+      default: ""
+    },
+    familyMember: {
+      type: String,
+      default: ""
     },
     bankName: {
       type: String,
+      default: ""
     },
     bankStateIssuDate: {
       type: String,
+      default: ""
     },
     bankStateDocument: {
       type: String,
+      default: ""
     },
     hospitalName: {
       type: String,
+      default: ""
     },
     MedicalReportIssueDate: {
       type: String,
+      default: ""
     },
     MedicalReportDocument: {
       type: String,
+      default: ""
+    },
+    streetAddress: {
+      type: String,
+      default: ""
+    },
+    streetAddressLine2: {
+      type: String,
+      default: ""
+    },
+    city: {
+      type: String,
+      default: ""
+    },
+    province: {
+      type: String,
+      default: ""
+    },
+    postal: {
+      type: String,
+      default: ""
     },
     email: {
       type: String,
+      default: ""
     },
-    phone: {
+    homeEmail: {
       type: String,
+      default: ""
     },
-    homePhone: {
+    mobile: {
       type: String,
+      default: ""
+    },
+    homeMobile: {
+      type: String,
+      default: ""
+    },
+    telephone: {
+      type: String,
+      default: ""
     },
     cost: {
       type: Number,

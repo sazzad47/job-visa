@@ -25,12 +25,7 @@ const HomeInfo = ({ handleBack, handleNext }) => {
     homePostal,
     homeStayDuration,
     familyDependentOn,
-    currentJob,
-    monthlyIncome,
     familyMember,
-    educationalQualification,
-    languages,
-    ieltsScore,
   } = state.visaApplicant.home;
   const emptyInput =
     !locatedAtHome ||
@@ -41,12 +36,7 @@ const HomeInfo = ({ handleBack, handleNext }) => {
     !homePostal ||
     !homeStayDuration ||
     !familyDependentOn ||
-    !currentJob ||
-    !monthlyIncome ||
-    !familyMember ||
-    !educationalQualification ||
-    !languages ||
-    !ieltsScore;
+    !familyMember
   const handleInput = (e) => {
     dispatch({
       type: "CHANGE_VISA_APPLICANTS_HOME_INPUTS",
@@ -190,26 +180,6 @@ const HomeInfo = ({ handleBack, handleNext }) => {
           disabled
           value={familyDependentOn}
         />
-        <div className="mt-3">What do you do now?</div>
-        <div className="visa-form-input">
-          <TextField
-            name="currentJob"
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">How much is your monthly income?</div>
-        <div className="visa-form-input">
-          <TextField
-            name="monthlyIncome"
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
         <div className="mt-3">How many people are in your family?</div>
         <div className="visa-form-input">
           <TextField
@@ -220,57 +190,7 @@ const HomeInfo = ({ handleBack, handleNext }) => {
             variant="outlined"
           />
         </div>
-        <div className="mt-3">Educational Qualification</div>
-        <div className="visa-form-input">
-          <TextField
-            name="educationalQualification"
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">How many languages do you know?</div>
-        <div className="visa-form-input">
-          <TextField
-            name="languages"
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">IELTS Score</div>
-        <div className="visa-form-input">
-          <TextField
-            name="ieltsScore"
-            onChange={handleInput}
-            select
-            fullWidth
-            label=""
-          >
-            <MenuItem value="No">No</MenuItem>
-            <MenuItem value="1">1</MenuItem>
-            <MenuItem value="2">2</MenuItem>
-            <MenuItem value="3">3</MenuItem>
-            <MenuItem value="4">4</MenuItem>
-            <MenuItem value="5">5</MenuItem>
-            <MenuItem value="6">6</MenuItem>
-            <MenuItem value="7">7</MenuItem>
-            <MenuItem value="8">8</MenuItem>
-            <MenuItem value="9">9</MenuItem>
-          </TextField>
-        </div>
-        {ieltsScore !== "No" && (
-          <>
-            <div className="mt-3 mb-2">IELTS Document</div>
-            <FileUpload
-              accept="application/pdf"
-              name="ieltsDocument"
-              type="CHANGE_VISA_APPLICANTS_HOME_INPUTS"
-            />
-          </>
-        )}
+        
         <div className="mt-4 d-flex align-items-center justify-content-between">
           <Button variant="contained" onClick={handleBack}>
             Back
