@@ -364,7 +364,7 @@ const JobInfo = ({ handleNext }) => {
             md={12}
             className="col_custom d-flex justify-content-end"
           >
-            <button type="submit" onClick={handleNext}>
+            <button type="submit" onClick={handleChangeStep}>
               Next
             </button>
           </Grid>

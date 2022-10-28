@@ -300,18 +300,21 @@
   margin-right: 12px !important;
 }
 .PhoneInputInput {
-  height: 3.5rem;
-  border: 1px solid rgb(238, 166, 166);
+  height: 40px;
   border-radius: 2px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  padding: 0 10px;
 }
-.PhoneInputInput:active,
+/* .PhoneInputInput:active,
 .PhoneInputInput:focus {
   outline: 2px solid rgb(106, 106, 240);
   border: none !important;
 }
 .PhoneInputInput:hover {
   border: 1px solid red;
-}
+} */
 
 .PhoneInputCountry {
   height: 3.5rem;

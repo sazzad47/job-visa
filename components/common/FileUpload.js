@@ -33,7 +33,7 @@ const FileUpload = ({label, accept, name, type }) => {
             {accept === "image/*" ? "Browse Image" : "Browse file"}
           </Button>
         </label>
-        <div className="file-name text-white">{currentFile ? currentFile.name : null}</div>
+        <div className="file-name">{currentFile ? currentFile.name : null}</div>
       </div>
     </div>
   );

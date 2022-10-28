@@ -217,20 +217,6 @@ const Communication = ({
             />
           </Grid>
         </Grid>
-        {/* <Grid container spacing={2} className="input_row">
-          <Grid item xs={12} md={4} className="field_title">
-            Comments
-          </Grid>
-          <Grid item xs={12} md={6} className="col_custom">
-            <TextArea
-             label=""
-             type="text"
-             name="comments"
-             onChange={handleInput}
-             required={true} 
-             />
-          </Grid>
-        </Grid> */}
         <Grid container spacing={2} className="input_row">
           <Grid item xs={12} md={4} className="field_title">
             Verify that you are not a robot
@@ -252,7 +238,7 @@ const Communication = ({
             className="col_custom d-flex justify-content-between"
           >
             <button onClick={handleBack}>Back</button>
-            <button  type="submit">
+            <button disabled={!isHuman} type="submit">
               Submit
             </button>
           </Grid>

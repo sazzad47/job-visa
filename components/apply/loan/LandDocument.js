@@ -252,7 +252,7 @@ const LandDocument = ({ handleBack, handleNext }) => {
           <button type="submit" onClick={handleBack}>
             Back
           </button>
-          <button type="submit" onClick={handleNext}>
+          <button type="submit" onClick={handleChangeStep}>
             Next
           </button>
         </Grid>

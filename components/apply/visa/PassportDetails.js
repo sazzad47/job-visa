@@ -304,7 +304,7 @@ const PassportDetails = ({ handleBack, handleNext }) => {
             className="col_custom d-flex justify-content-between"
           >
             <button onClick={handleBack}>Back</button>
-            <button type="submit" onClick={handleNext}>
+            <button type="submit" onClick={handleChangeStep}>
               Next
             </button>
           </Grid>

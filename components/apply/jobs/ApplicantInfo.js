@@ -172,7 +172,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
           <Grid item xs={12} md={3} className="field_title">
             Full Name
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="First Name"
               type="text"
@@ -182,7 +182,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="Middle Name"
               type="text"
@@ -192,7 +192,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="Surname"
               type="text"
@@ -207,7 +207,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
           <Grid item xs={12} md={3} className="field_title">
             Father's Name
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="First Name"
               type="text"
@@ -217,7 +217,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="Middle Name"
               type="text"
@@ -227,7 +227,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="Surname"
               type="text"
@@ -242,7 +242,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
           <Grid item xs={12} md={3} className="field_title">
             Mother's Name
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="First Name"
               type="text"
@@ -252,7 +252,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="Middle Name"
               type="text"
@@ -262,7 +262,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
               required={true}
             />
           </Grid>
-          <Grid item xs={4} md={3} className="col_custom">
+          <Grid item xs={12} md={3} className="col_custom">
             <InputField
               label="Surname"
               type="text"
@@ -352,6 +352,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
                 onChange={handleInput}
                 required={true}
               >
+                <option disabled value="" >Place select...</option>
                 {countryList}
               </Select>
             </Grid>
@@ -406,7 +407,7 @@ const PersonalInfo = ({ handleBack, handleNext }) => {
             <button type="submit" onClick={handleBack}>
               Back
             </button>
-            <button type="submit" onClick={handleNext}>
+            <button type="submit" onClick={handleChangeStep}>
               Next
             </button>
           </Grid>
