@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import FileUpload from "../../components/apply/visa/FileUpload";
+import FileUpload from "../../components/common/FileUpload";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
 import { postData } from "../../utils/fetchData";
