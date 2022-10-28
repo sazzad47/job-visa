@@ -1,8 +1,5 @@
-import { Box, Card, LinearProgress, Typography } from "@mui/material";
 import React from "react";
 import VisaForm from "../../components/apply/visa/VisaForm";
-import Image from "next/image";
-import visaIcon from "../../public/images/demos/visaIcon.png";
 import { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../../store/GlobalState";
@@ -20,50 +17,25 @@ const Visa = () => {
       <Head>
         <title>Apply for visa</title>
       </Head>
-      {/* <div className={auth.token ? "visa-page" : "authContainer"}>
-        {auth.token ? (
-          <>
-            <div className="visa-page-header">
-              <Image src={visaIcon} />
-              <Typography align="center" style={{ fontSize: "1.4rem" }}>
-                Visa Application Form
-              </Typography>
+      {auth.token ? (
+        <>
+          <div className="page_apply">
+            <div className="form_apply">
+              <h2>Visa Application Form</h2>
+              <VisaForm
+                loading={loading}
+                setLoading={setLoading}
+                success={success}
+                setSuccess={setSuccess}
+              />
             </div>
-
-            <Card
-              className={loading ? "form-no-border" : "visa-page-form"}
-              elevation={2}
-            >
-              {loading ? (
-                <Box sx={{ width: "100%" }}>
-                  <LinearProgress />
-                </Box>
-              ) : null}
-              <div className="p-4">
-                <VisaForm
-                  loading={loading}
-                  setLoading={setLoading}
-                  success={success}
-                  setSuccess={setSuccess}
-                />
-              </div>
-            </Card>
-          </>
-        ) : (
+          </div>
+        </>
+      ) : (
+        <div className="authContainer">
           <Auth />
-        )}
-      </div> */}
-      <div className="page_apply">
-        <div className="form_apply">
-           <h2>Visa Application Form</h2>
-           <VisaForm
-                  loading={loading}
-                  setLoading={setLoading}
-                  success={success}
-                  setSuccess={setSuccess}
-                />
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };
