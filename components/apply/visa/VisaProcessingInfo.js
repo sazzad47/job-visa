@@ -118,7 +118,7 @@ const VisaProcessingInfo = ({ handleBack, handleNext }) => {
           <Grid item xs={12} md={6} className="col_custom">
             <InputField
               label=""
-              type="text"
+              type="number"
               name="visaDuration"
               value={visaDuration}
               onChange={handleInput}
@@ -163,7 +163,7 @@ const VisaProcessingInfo = ({ handleBack, handleNext }) => {
           <Grid item xs={12} md={6} className="col_custom">
             <InputField
               label=""
-              type="text"
+              type="number"
               name="stayDuration"
               value={stayDuration}
               onChange={handleInput}
