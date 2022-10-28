@@ -1,8 +1,9 @@
-import { Button, TextField } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useContext } from "react";
-import FileUpload from "../visa/FileUpload";
+import FileUpload from "../../common/FileUpload";
 import { DataContext } from "../../../store/GlobalState";
 import { toast } from "react-toastify";
+import InputField from "../../common/InputField";
 
 const BankDetails = ({ handleBack, handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -29,50 +30,79 @@ const BankDetails = ({ handleBack, handleNext }) => {
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <div className="visa-form-input">
-          <TextField
-            name="bankName"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Bank Name"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="accountIdNumber"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Account ID Number"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="bankBranchName"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Bank Branch Name"
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3 mb-2">Bank Statement</div>
-        <FileUpload
-          accept="application/pdf"
-          name="bankStatement"
-          type="CHANGE_LOAN_APPLICANTS_BANK_INPUTS"
-        />
-        <div className="mt-4 d-flex align-items-center justify-content-between">
-          <Button variant="contained" onClick={handleBack}>
-            Back
-          </Button>
-          <Button type="submit" variant="contained" onClick={handleChangeStep}>
-            Next
-          </Button>
-        </div>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Bank Name
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="bankName"
+              value={bankName}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Account ID Number
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="accountIdNumber"
+              value={accountIdNumber}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Bank Branch Name
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="bankBranchName"
+              value={bankBranchName}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Bank Statement
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <FileUpload
+              accept="application/pdf"
+              name="bankStatement"
+              type="CHANGE_LOAN_APPLICANTS_BANK_INPUTS"
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            className="col_custom d-flex justify-content-between"
+          >
+            <button type="submit" onClick={handleBack}>
+              Back
+            </button>
+            <button type="submit" onClick={handleNext}>
+              Next
+            </button>
+          </Grid>
+        </Grid>
       </form>
     </React.Fragment>
   );

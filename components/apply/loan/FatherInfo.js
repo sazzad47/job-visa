@@ -1,15 +1,9 @@
-import {
-  Button,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useContext } from "react";
-import FileUpload from "../visa/FileUpload";
+import FileUpload from "../../common/FileUpload";
 import { DataContext } from "../../../store/GlobalState";
 import { toast } from "react-toastify";
+import InputField from "../../common/InputField";
 
 const FatherInfo = ({ handleBack, handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -44,84 +38,134 @@ const FatherInfo = ({ handleBack, handleNext }) => {
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <FormLabel id="isFatherPresent">Father is</FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="isFatherPresent"
-          name="isFatherPresent"
-          required
-        >
-          <FormControlLabel
-            name="isFatherPresent"
-            onChange={handleInput}
-            value="yes"
-            control={<Radio />}
-            label="Alive and kicking"
-          />
-          <FormControlLabel
-            name="isFatherPresent"
-            onChange={handleInput}
-            value="no"
-            control={<Radio />}
-            label="Dead"
-          />
-        </RadioGroup>
-        {isFatherPresent === "no" && (
-          <>
-            <div className="mt-3 mb-2">Death Certificate</div>
-            <FileUpload
-              accept="application/pdf"
-              name="fatherDeathCertificate"
-              type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Is your father alive?
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom d-flex">
+            <input
+              className="radio_input"
+              onChange={handleInput}
+              type="radio"
+              id="yes"
+              name="isFatherPresent"
+              value="Yes"
             />
+            <label className="radio_input_label" htmlFor="yes">
+              Yes
+            </label>
+            <br />
+            <input
+              className="radio_input"
+              onChange={handleInput}
+              type="radio"
+              id="no"
+              name="isFatherPresent"
+              value="No"
+            />
+            <label className="radio_input_label" htmlFor="no">
+              No
+            </label>
+          </Grid>
+        </Grid>
+        {isFatherPresent === "No" && (
+          <>
+            <Grid container spacing={2} className="input_row">
+              <Grid item xs={12} md={4} className="field_title">
+                Death Certificate
+              </Grid>
+              <Grid item xs={12} md={6} className="col_custom">
+                <FileUpload
+                  accept="application/pdf"
+                  name="fatherDeathCertificate"
+                  type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
+                />
+              </Grid>
+            </Grid>
           </>
         )}
-        <div className="visa-form-input">
-          <TextField
-            name="fatherIdNumber"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="ID Card Number"
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3 mb-2">Front Photo of ID Card</div>
-        <FileUpload
-          accept="image/*"
-          name="fatherFrontPhotoOfIdCard"
-          type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
-        />
-        <div className="mt-3 mb-2">Back Photo of ID Card</div>
-        <FileUpload
-          accept="image/*"
-          name="fatherBackPhotoOfIdCard"
-          type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
-        />
-        <div className="mt-3 mb-2">Father&#39;s Photo</div>
-        <FileUpload
-          accept="image/*"
-          name="photoOfFather"
-          type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
-        />
-        {isFatherPresent === "yes" && (
-          <>
-            <div className="mt-3 mb-2">Signature</div>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            NID Card Number
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="fatherIdNumber"
+              value={fatherIdNumber}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Front photo of NID card
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
             <FileUpload
               accept="image/*"
-              name="signatureOfFather"
+              name="fatherFrontPhotoOfIdCard"
               type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
             />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Back photo of NID card
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <FileUpload
+              accept="image/*"
+              name="fatherBackPhotoOfIdCard"
+              type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Father's Photo
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <FileUpload
+              accept="image/*"
+              name="photoOfFather"
+              type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
+            />
+          </Grid>
+        </Grid>
+        {isFatherPresent === "Yes" && (
+          <>
+            <Grid container spacing={2} className="input_row">
+              <Grid item xs={12} md={4} className="field_title">
+                Father's Signature
+              </Grid>
+              <Grid item xs={12} md={6} className="col_custom">
+                <FileUpload
+                  accept="image/*"
+                  name="signatureOfFather"
+                  type="CHANGE_LOAN_APPLICANTS_FATHER_INPUTS"
+                />
+              </Grid>
+            </Grid>
           </>
         )}
-        <div className="mt-4 d-flex align-items-center justify-content-between">
-          <Button variant="contained" onClick={handleBack}>
-            Back
-          </Button>
-          <Button type="submit" variant="contained" onClick={handleChangeStep}>
-            Next
-          </Button>
-        </div>
+        <Grid container spacing={2} className="input_row">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            className="col_custom d-flex justify-content-between"
+          >
+            <button type="submit" onClick={handleBack}>
+              Back
+            </button>
+            <button type="submit" onClick={handleNext}>
+              Next
+            </button>
+          </Grid>
+        </Grid>
       </form>
     </React.Fragment>
   );

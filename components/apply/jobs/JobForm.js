@@ -51,8 +51,8 @@ export default function JobForm({ loading, setLoading, success, setSuccess }) {
   const maxSteps = steps.length;
   return (
     <>
-      {success ? (
-        <Box sx={{ maxWidth: 450, flexGrow: 1 }}>
+       {success ? (
+        <Box sx={{ maxWidth: 450, mt:5, display:'block', mx:'auto'}}>
           <Paper
             square
             elevation={0}
@@ -72,7 +72,7 @@ export default function JobForm({ loading, setLoading, success, setSuccess }) {
             </Typography>
           </Paper>
           <div className="d-flex align-items-center justify-content-center mb-2">
-            <Box sx={{ width: "100%", mt: 3 }}>
+            <Box sx={{ width: "100%", mt: 3, color:'#000' }}>
               <Typography align="center">
                 Go to your dashboard to check your information.
               </Typography>
@@ -94,59 +94,19 @@ export default function JobForm({ loading, setLoading, success, setSuccess }) {
           </Box>
         </Box>
       ) : (
-        <Box sx={{ maxWidth: 450, flexGrow: 1 }}>
-          <Paper
-            square
-            elevation={0}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              pl: 2,
-              bgcolor: "background.default",
-            }}
-          >
-            {loading ? (
-              <Typography className="checking-effect visa-page-form-title">
-                Uploading...
-              </Typography>
-            ) : (
-              <Typography className="visa-page-form-title">
-                {steps[activeStep].label}
-              </Typography>
-            )}
-          </Paper>
-          <div className="d-flex align-items-center justify-content-center mb-2">
-            {loading ? (
-              <Box sx={{ width: "100%", mt: 3 }}>
-                <Typography align="center">
-                  Please wait, it may take some time depending on your internet
-                  speed.
-                </Typography>
-              </Box>
-            ) : (
-              <MobileStepper
+        <>
+        <div className="form_stepper">
+        <MobileStepper
                 variant="dots"
                 steps={maxSteps}
                 position="static"
                 activeStep={activeStep}
               />
-            )}
-          </div>
-          {loading ? null : (
-            <Box
-              sx={{
-                maxWidth: 450,
-                minWidth: { xs: 300, sm: 450 },
-                width: "100%",
-                p: 2,
-              }}
-            >
-              {steps[activeStep].form}
-            </Box>
-          )}
-        </Box>
+        </div>
+      <div className="form_title">{steps[activeStep].label}</div>
+      {steps[activeStep].form}
+      </>
       )}
-    </>
+      </>
   );
 }

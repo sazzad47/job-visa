@@ -31,6 +31,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
 }
 /* ----------- Loading ------------- */
 @import url("./loading.css");
@@ -54,8 +55,12 @@ body {
 @import url("./auth.css");
 /* ----------- Forgot Password ------------- */
 @import url("./forgot-password.css");
-/* ----------- Visa ------------- */
-@import url("./visa.css");
+/* ----------- Apply ------------- */
+@import url("./apply.css");
+/* ----------- Job Apply ------------- */
+@import url("./jobApply.css");
+/* ----------- Laon Apply ------------- */
+@import url("./loanApply.css");
 /* ----------- Job ------------- */
 @import url("./job.css");
 /* ----------- Notices ------------- */

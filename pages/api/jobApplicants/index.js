@@ -54,9 +54,15 @@ const apply = async (req, res) => {
       languages,
       nationality,
       nidCard,
-      fullName,
-      fathersName,
-      mothersName,
+      firstName,
+      middleName,
+      surname,
+      fathersNameFirst,
+      fathersNameMiddle,
+      fathersNameSurname,
+      mothersNameFirst,
+      mothersNameMiddle,
+      mothersNameSurname,
       streetAddress,
       streetAddressLine2,
       city,
@@ -108,9 +114,15 @@ const apply = async (req, res) => {
       languages,
       nationality,
       nidCard,
-      fullName,
-      fathersName,
-      mothersName,
+      firstName,
+      middleName,
+      surname,
+      fathersNameFirst,
+      fathersNameMiddle,
+      fathersNameSurname,
+      mothersNameFirst,
+      mothersNameMiddle,
+      mothersNameSurname,
       streetAddress,
       streetAddressLine2,
       city,
@@ -144,7 +156,7 @@ const apply = async (req, res) => {
       subject: "[job-visa] Received job application.",
       html: `
             <div>
-              <p>Hello, ${newApplication.fullName}</p>
+              <p>Hello, ${newApplication.firstName}</p>
               <p>We received your job application.</p>
               <p>Sed ut perspiciatis unde omnis iste natus error
                sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 

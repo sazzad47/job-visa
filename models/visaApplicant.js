@@ -57,7 +57,7 @@ const visaApplicantSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
-    monthlyIncome: {
+    placeOfBirth: {
       type: String,
       default: ""
     },

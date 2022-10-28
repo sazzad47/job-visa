@@ -1,28 +1,15 @@
-import {
-  Button,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useContext, useState } from "react";
-import FileUpload from "./FileUpload";
+import { Grid } from "@mui/material";
+import React, { useContext } from "react";
+import FileUpload from "../../common/FileUpload";
 import { DataContext } from "../../../store/GlobalState";
-import InputModal from "../../InputModal";
 import { toast } from "react-toastify";
+import InputField from "../../common/InputField";
+import Select from "../../common/Select";
 
 const PersonalInfo = ({ handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
-  const [showGenderField, setShowGenderField] = useState(true);
-  const [showCardField, setShowCardField] = useState(true);
+
   const {
-    IdentityCard,
-    IdCardNumber,
     firstName,
     middleName,
     surname,
@@ -33,26 +20,18 @@ const PersonalInfo = ({ handleNext }) => {
     mothersNameMiddle,
     mothersNameSurname,
     currentJob,
-    monthlyIncome,
-    gender,
+    placeOfBirth,
+    PlaceOfBirthCity,
     dateOfBirth,
-    dateOfIdCardIssue,
     religion,
     nationality,
     bloodGroup,
     maritalStatus,
     educationalQualification,
     languages,
-    ieltsScore,
     ieltsDocument,
-    frontPhotoOfIdCard,
-    backPhotoOfIdCard,
-    photo,
-    signature,
   } = state.visaApplicant.personalInfo;
   const emptyInput =
-    !IdentityCard ||
-    !IdCardNumber ||
     !firstName ||
     !surname ||
     !fathersNameFirst ||
@@ -60,40 +39,16 @@ const PersonalInfo = ({ handleNext }) => {
     !mothersNameFirst ||
     !mothersNameSurname ||
     !currentJob ||
-    !monthlyIncome ||
-    !gender ||
+    !placeOfBirth ||
+    !PlaceOfBirthCity ||
     !dateOfBirth ||
-    !dateOfIdCardIssue ||
     !religion ||
     !nationality ||
     !bloodGroup ||
     !maritalStatus ||
     !educationalQualification ||
     !languages ||
-    !ieltsScore ||
-    !frontPhotoOfIdCard ||
-    !backPhotoOfIdCard ||
-    !photo ||
-    !signature;
-
-  const [dob, setDob] = useState(null);
-  const [doi, setDoi] = useState(null);
-
-  const handleDateOfBirth = (newValue) => {
-    dispatch({
-      type: "CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS",
-      payload: { name: "dateOfBirth", value: newValue },
-    });
-    setDob(newValue);
-  };
-
-  const handleDateOfIssue = (newValue) => {
-    dispatch({
-      type: "CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS",
-      payload: { name: "dateOfIdCardIssue", value: newValue },
-    });
-    setDoi(newValue);
-  };
+    !ieltsDocument;
 
   const handleInput = (e) => {
     dispatch({
@@ -109,408 +64,337 @@ const PersonalInfo = ({ handleNext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <FormLabel id="IdentityCard">Identity Card</FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="IdentityCard"
-          name="IdentityCard"
-          required
-        >
-          <FormControlLabel
-            name="IdentityCard"
-            onChange={handleInput}
-            onClick={() => setShowCardField(true)}
-            value="National ID Card"
-            control={<Radio />}
-            label="National ID Card"
-          />
-          <FormControlLabel
-            name="IdentityCard"
-            onChange={handleInput}
-            onClick={() => setShowCardField(true)}
-            value="Passport"
-            control={<Radio />}
-            label="Passport"
-          />
-          <FormControlLabel
-            name="IdentityCard"
-            onChange={handleInput}
-            onClick={() => setShowCardField(true)}
-            value="Birth Certificate"
-            control={<Radio />}
-            label="Birth Certificate"
-          />
-          <InputModal
-            handleInput={handleInput}
-            showOther={setShowCardField}
-            name="IdentityCard"
-            label="Identity Card"
-            placeholder="Enter your Identity Card"
-          />
-        </RadioGroup>
-        <TextField
-          hidden={showCardField}
-          fullWidth
-          disabled
-          value={IdentityCard}
-        />
-
-        <div className="visa-form-input">
-          <TextField
-            name="IdCardNumber"
-            value={IdCardNumber}
-            onChange={handleInput}
-            required
-            fullWidth
-            label="ID Card Number"
-            placeholder="Enter your ID card number"
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3 mb-2">Full Name</div>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={4}>
-            <TextField
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Full Name
+          </Grid>
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="First Name"
+              type="text"
               name="firstName"
               value={firstName}
               onChange={handleInput}
-              required
-              fullWidth
-              label="First Name"
-              variant="outlined"
+              required={true}
             />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="Middle Name"
+              type="text"
               name="middleName"
               value={middleName}
               onChange={handleInput}
-              fullWidth
-              label="Middle Name"
-              variant="outlined"
+              required={true}
             />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="Surname"
+              type="text"
               name="surname"
               value={surname}
               onChange={handleInput}
-              required
-              fullWidth
-              label="Surname"
-              variant="outlined"
+              required={true}
             />
           </Grid>
         </Grid>
-        <div className="mt-3 mb-2">Father's Name</div>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={4}>
-            <TextField
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Father's Name
+          </Grid>
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="First Name"
+              type="text"
               name="fathersNameFirst"
               value={fathersNameFirst}
               onChange={handleInput}
-              required
-              fullWidth
-              label="First Name"
-              variant="outlined"
+              required={true}
             />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="Middle Name"
+              type="text"
               name="fathersNameMiddle"
               value={fathersNameMiddle}
               onChange={handleInput}
-              fullWidth
-              label="Middle Name"
-              variant="outlined"
+              required={true}
             />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="Surname"
+              type="text"
               name="fathersNameSurname"
               value={fathersNameSurname}
               onChange={handleInput}
-              required
-              fullWidth
-              label="Surname"
-              variant="outlined"
+              required={true}
             />
           </Grid>
         </Grid>
-        <div className="mt-3 mb-2">Mother's Name</div>
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={4}>
-            <TextField
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Mother's Name
+          </Grid>
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="First Name"
+              type="text"
               name="mothersNameFirst"
               value={mothersNameFirst}
               onChange={handleInput}
-              required
-              fullWidth
-              label="First Name"
-              variant="outlined"
+              required={true}
             />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="Middle Name"
+              type="text"
               name="mothersNameMiddle"
               value={mothersNameMiddle}
               onChange={handleInput}
-              fullWidth
-              label="Middle Name"
-              variant="outlined"
+              required={true}
             />
           </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
+          <Grid item xs={4} md={3} className="col_custom">
+            <InputField
+              label="Surname"
+              type="text"
               name="mothersNameSurname"
               value={mothersNameSurname}
               onChange={handleInput}
-              required
-              fullWidth
-              label="Surname"
-              variant="outlined"
+              required={true}
             />
           </Grid>
         </Grid>
-        <div className="mt-3">Your occupation</div>
-        <div className="visa-form-input">
-          <TextField
-            name="currentJob"
-            value={currentJob}
-            onChange={handleInput}
-            required
-            fullWidth
-            placeholder="Enter your occupation"
-            label="Your Occupation"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="monthlyIncome"
-            value={monthlyIncome}
-            onChange={handleInput}
-            required
-            fullWidth
-            placeholder="Enter your monthly income"
-            label="Monthly Income"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <FormLabel id="gender">Gender</FormLabel>
-          <RadioGroup row aria-labelledby="gender" name="gender">
-            <FormControlLabel
-              name="gender"
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Your Occupation
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="currentJob"
+              value={currentJob}
               onChange={handleInput}
-              onClick={() => setShowGenderField(true)}
-              value="Male"
-              control={<Radio />}
-              label="Male"
+              required={true}
             />
-            <FormControlLabel
-              name="gender"
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Date Of Birth
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="date"
+              name="dateOfBirth"
+              value={dateOfBirth}
               onChange={handleInput}
-              onClick={() => setShowGenderField(true)}
-              value="Female"
-              control={<Radio />}
-              label="Female"
+              required={true}
             />
-            <InputModal
-              handleInput={handleInput}
-              showOther={setShowGenderField}
-              name="gender"
-              label="Gender"
-              placeholder="Enter your gender"
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Place of Birth
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="placeOfBirth"
+              value={placeOfBirth}
+              onChange={handleInput}
+              required={true}
             />
-          </RadioGroup>
-          <TextField
-            hidden={showGenderField}
-            fullWidth
-            disabled
-            value={gender}
-          />
-        </div>
-        <div className="visa-form-input d-flex justify-content-between">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              label="Date of Birth"
-              inputFormat="MM/DD/YYYY"
-              value={dob}
-              onChange={handleDateOfBirth}
-              renderInput={(params) => <TextField fullWidth {...params} />}
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Place of Birth Town/City
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="PlaceOfBirthCity"
+              value={PlaceOfBirthCity}
+              onChange={handleInput}
+              required={true}
             />
-          </LocalizationProvider>
-        </div>
-        <div className="visa-form-input d-flex justify-content-between">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              label="Date of ID Card Issue"
-              inputFormat="MM/DD/YYYY"
-              value={doi}
-              onChange={handleDateOfIssue}
-              renderInput={(params) => <TextField fullWidth {...params} />}
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Current Nationality
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="nationality"
+              value={nationality}
+              onChange={handleInput}
+              required={true}
             />
-          </LocalizationProvider>
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="religion"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Religion"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="nationality"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Nationality"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="bloodGroup"
-            onChange={handleInput}
-            select
-            fullWidth
-            label="Blood Group"
-          >
-            <MenuItem value="A+">A+</MenuItem>
-            <MenuItem value="A-">A-</MenuItem>
-            <MenuItem value="B+">B+</MenuItem>
-            <MenuItem value="B-">B-</MenuItem>
-            <MenuItem value="AB+">AB+</MenuItem>
-            <MenuItem value="AB-">AB-</MenuItem>
-            <MenuItem value="O+">O+</MenuItem>
-            <MenuItem value="O-">O-</MenuItem>
-          </TextField>
-        </div>
-        <div className="visa-form-input">
-          <FormLabel id="maritalStatus">Marital Status</FormLabel>
-          <RadioGroup row aria-labelledby="maritalStatus" name="maritalStatus">
-            <FormControlLabel
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Religion
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="religion"
+              value={religion}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Blood Group
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <Select
+              label=""
+              type="text"
+              name="bloodGroup"
+              value={bloodGroup}
+              onChange={handleInput}
+              required={true}
+            >
+              <option disabled value="">Select your blood group</option>
+              <option value="A+">A+</option>
+              <option value="B+">B+</option>
+              <option value="AB+">AB+</option>
+              <option value="O+">O+</option>
+              <option value="A-">A-</option>
+              <option value="B-">B-</option>
+              <option value="AB-">AB-</option>
+              <option value="O-">O-</option>
+            </Select>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Marital Status
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom d-flex">
+            <input
+              className="radio_input"
+              onChange={handleInput}
+              type="radio"
+              id="single"
               name="maritalStatus"
-              onChange={handleInput}
               value="Single"
-              control={<Radio />}
-              label="Single"
             />
-            <FormControlLabel
-              name="maritalStatus"
+            <label className="radio_input_label" htmlFor="single">
+              Single
+            </label>
+            <br />
+            <input
+              className="radio_input"
               onChange={handleInput}
+              type="radio"
+              id="married"
+              name="maritalStatus"
               value="Married"
-              control={<Radio />}
-              label="Married"
             />
-            <FormControlLabel
-              name="maritalStatus"
+            <label className="radio_input_label" htmlFor="married">
+              Married
+            </label>
+            <br />
+            <input
+              className="radio_input"
               onChange={handleInput}
+              type="radio"
+              id="divorced"
+              name="maritalStatus"
               value="Divorced"
-              control={<Radio />}
-              label="Divorced"
             />
-            <FormControlLabel
-              name="maritalStatus"
+            <label className="radio_input_label" htmlFor="divorced">
+              Divorced
+            </label>
+            <input
+              className="radio_input"
               onChange={handleInput}
+              type="radio"
+              id="widow(er)"
+              name="maritalStatus"
               value="Widow(er)"
-              control={<Radio />}
-              label="Widow(er)"
             />
-          </RadioGroup>
-        </div>
-        <div className="mt-3">Educational Qualification</div>
-        <div className="visa-form-input">
-          <TextField
-            name="educationalQualification"
-            value={educationalQualification}
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">How many languages do you know?</div>
-        <div className="visa-form-input">
-          <TextField
-            name="languages"
-            value={languages}
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">IELTS Score</div>
-        <div className="visa-form-input">
-          <TextField
-            name="ieltsScore"
-            value={ieltsScore}
-            onChange={handleInput}
-            select
-            fullWidth
-            label=""
-          >
-            <MenuItem value="No">No</MenuItem>
-            <MenuItem value="1">1</MenuItem>
-            <MenuItem value="2">2</MenuItem>
-            <MenuItem value="3">3</MenuItem>
-            <MenuItem value="4">4</MenuItem>
-            <MenuItem value="5">5</MenuItem>
-            <MenuItem value="6">6</MenuItem>
-            <MenuItem value="7">7</MenuItem>
-            <MenuItem value="8">8</MenuItem>
-            <MenuItem value="9">9</MenuItem>
-          </TextField>
-        </div>
-        {ieltsScore !== "No" && (
-          <>
-            <div className="mt-3 mb-2">IELTS Document</div>
+            <label className="radio_input_label" htmlFor="widow(er)">
+              Widow(er)
+            </label>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Educational Qualification
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="educationalQualification"
+              value={educationalQualification}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Main Language Spoken
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="languages"
+              value={languages}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            IELTS Certificate
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
             <FileUpload
               accept="application/pdf"
               name="ieltsDocument"
               type="CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS"
             />
-          </>
-        )}
-        <div className="mt-3 mb-2">Front Photo of your ID Card</div>
-        <FileUpload
-          accept="image/*"
-          name="frontPhotoOfIdCard"
-          type="CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS"
-        />
-        <div className="mt-3 mb-2">Back Photo of your ID Card</div>
-        <FileUpload
-          accept="image/*"
-          name="backPhotoOfIdCard"
-          type="CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS"
-        />
-        <div className="mt-3 mb-2">Your Photo</div>
-        <FileUpload
-          accept="image/*"
-          name="photo"
-          type="CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS"
-        />
-        <div className="mt-3 mb-2">Your Signature</div>
-        <FileUpload
-          accept="image/*"
-          name="signature"
-          type="CHANGE_VISA_APPLICANTS_PERSONAL_INPUTS"
-        />
-        <div className="mt-4 d-flex align-items-center justify-content-end">
-          <Button type="submit" variant="contained" onClick={handleChangeStep}>
-            Next
-          </Button>
-        </div>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            className="col_custom d-flex justify-content-end"
+          >
+            <button type="submit" onClick={handleNext}>
+              Next
+            </button>
+          </Grid>
+        </Grid>
       </form>
     </React.Fragment>
   );

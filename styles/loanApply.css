@@ -1,0 +1,205 @@
+.page_loan_apply {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    width: 100%;
+    background-image: url(../public/visa/bg_loan.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  }
+  /* .page_loan_apply::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(#ffeb3b, #e91e63);
+    border-radius: 50%;
+    transform: translate(-420px, -180px);
+  }
+  .page_loan_apply::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(#2196f3, #83d8ff);
+    border-radius: 50%;
+    transform: translate(400px, 180px);
+  } */
+  .page_loan_apply .form_loan_apply {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 900px;
+    padding: 50px;
+    background: rgba(255,255,255,0.1);
+    /* background: transparent; */
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  .page_loan_apply .form_loan_apply::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.05);
+    pointer-events: none;
+    transform: skewX(-15deg);
+  }
+  .page_loan_apply h2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    color: #fff;
+    background: linear-gradient(#5b5f63, #0e587a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .page_loan_apply .form_stepper {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+    color: #fff;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .css-rh92k-MuiPaper-root-MuiMobileStepper-root {
+    background: transparent;
+  }
+  .page_loan_apply .form_title {
+    position: relative;
+    margin: 1rem 0;
+    margin-bottom: 2rem;
+    width: 100%;
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .page_loan_apply .form_loan_apply .input_row {
+    margin: 1rem 0;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom {
+    position: relative;
+    margin: 1rem 0;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    color: #000;
+  }
+  .page_loan_apply .form_loan_apply .field_title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #000;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box input,
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box select,
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 0 10px;
+    z-index: 1;
+    color: #000;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box.textarea {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    padding: 0px 0;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 10px;
+    display: block;
+    transition: 0.5s;
+    pointer-events: none;
+  }
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box input:focus + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box input:active + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box input:valid + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box select:focus + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box select:active + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box select:valid + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea:focus + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea:active + .text,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea:valid + .text {
+    top: -35px;
+    left: -10px;
+  }
+  
+  .page_loan_apply .form_loan_apply .input_row .col_custom .input_box .line {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transition: 0.5s;
+    border-radius: 2px;
+    pointer-events: none;
+  
+  }
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box input:focus ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box input:active ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box input:valid ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box select:focus ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box select:active ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box select:valid ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea:focus ~ .line,
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea:active ~ .line, 
+.page_loan_apply .form_loan_apply .input_row .col_custom .input_box textarea:valid ~ .line {
+    height: 100%;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom .radio_input_label {
+    margin-right: 1rem;
+    margin-left: 4px;
+    color: #000;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom button {
+    outline: none;
+    border: none;
+    padding: 10px 40px;
+    cursor: pointer;
+    background: #fff;
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 2px;
+  }
+  .page_loan_apply .form_loan_apply .input_row .col_custom .select_label {
+    color: #fff;
+    margin-bottom: 10px;
+  }

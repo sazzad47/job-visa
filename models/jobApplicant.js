@@ -90,14 +90,41 @@ const jobApplicantSchema = new mongoose.Schema(
     nidCard: {
       type: String,
     },
-    fullName: {
+    firstName: {
       type: String,
+      default: ""
     },
-    fathersName: {
+    middleName: {
       type: String,
+      default: ""
     },
-    mothersName: {
+    surname: {
       type: String,
+      default: ""
+    },
+    fathersNameFirst: {
+      type: String,
+      default: ""
+    },
+    fathersNameMiddle: {
+      type: String,
+      default: ""
+    },
+    fathersNameSurname: {
+      type: String,
+      default: ""
+    },
+    mothersNameFirst: {
+      type: String,
+      default: ""
+    },
+    mothersNameMiddle: {
+      type: String,
+      default: ""
+    },
+    mothersNameSurname: {
+      type: String,
+      default: ""
     },
     streetAddress: {
       type: String,

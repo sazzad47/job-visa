@@ -1,10 +1,9 @@
-import { Button, TextField } from "@mui/material";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useContext, useState } from "react";
-import FileUpload from "./FileUpload";
+import { Grid } from "@mui/material";
+import FileUpload from "../../common/FileUpload";
 import { DataContext } from "../../../store/GlobalState";
 import { toast } from "react-toastify";
+import InputField from "../../common/InputField";
+import React, { useContext } from "react";
 
 const HomeInfo = ({ handleBack, handleNext }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -23,23 +22,7 @@ const HomeInfo = ({ handleBack, handleNext }) => {
     !passportDateOfExpiry ||
     !visaApplicationID ||
     !medicalReport;
-  const [doi, setDoi] = useState(null);
-  const [doe, setDoe] = useState(null);
-  const handleDateOfIssue = (newValue) => {
-    dispatch({
-      type: "CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS",
-      payload: { name: "passportDateOfIssue", value: newValue },
-    });
-    setDoi(newValue);
-  };
 
-  const handleDateOfExpiry = (newValue) => {
-    dispatch({
-      type: "CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS",
-      payload: { name: "passportDateOfExpiry", value: newValue },
-    });
-    setDoe(newValue);
-  };
   const handleInput = (e) => {
     dispatch({
       type: "CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS",
@@ -58,78 +41,109 @@ const HomeInfo = ({ handleBack, handleNext }) => {
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <div className="visa-form-input">
-          <TextField
-            name="passportCountry"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Passport Country Name"
-            variant="standard"
-          />
-        </div>
-
-        <div className="visa-form-input">
-          <TextField
-            name="passportNumber"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Passport Number"
-            variant="standard"
-          />
-        </div>
-        <div className="visa-form-input d-flex justify-content-between">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              label="Date of Issue"
-              inputFormat="MM/DD/YYYY"
-              value={doi}
-              onChange={handleDateOfIssue}
-              renderInput={(params) => (
-                <TextField variant="standard" fullWidth {...params} />
-              )}
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Passport Country Name
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="passportCountry"
+              value={passportCountry}
+              onChange={handleInput}
+              required={true}
             />
-          </LocalizationProvider>
-        </div>
-        <div className="visa-form-input d-flex justify-content-between">
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              label="Date of Expiry"
-              inputFormat="MM/DD/YYYY"
-              value={doe}
-              onChange={handleDateOfExpiry}
-              renderInput={(params) => (
-                <TextField variant="standard" fullWidth {...params} />
-              )}
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Passport Number
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="passportNumber"
+              value={passportNumber}
+              onChange={handleInput}
+              required={true}
             />
-          </LocalizationProvider>
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="visaApplicationID"
-            onChange={handleInput}
-            required
-            fullWidth
-            label="Visa Application ID"
-            variant="standard"
-          />
-        </div>
-        <div className="mt-3 mb-2">Medical Report</div>
-        <FileUpload
-          accept="application/pdf"
-          name="medicalReport"
-          type="CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS"
-        />
+          </Grid>
+        </Grid>
 
-        <div className="mt-4 d-flex align-items-center justify-content-between">
-          <Button variant="contained" onClick={handleBack}>
-            Back
-          </Button>
-          <Button type="submit" variant="contained" onClick={handleChangeStep}>
-            Next
-          </Button>
-        </div>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Date of Issue
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="date"
+              name="passportDateOfIssue"
+              value={passportDateOfIssue}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Date of Expiry
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="date"
+              name="passportDateOfExpiry"
+              value={passportDateOfExpiry}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Visa Application ID
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="visaApplicationID"
+              value={visaApplicationID}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Medical Report
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <FileUpload
+              accept="application/pdf"
+              name="medicalReport"
+              type="CHANGE_JOB_APPLICANTS_PASSPORT_INPUTS"
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            className="col_custom d-flex justify-content-between"
+          >
+            <button type="submit" onClick={handleBack}>
+              Back
+            </button>
+            <button type="submit" onClick={handleNext}>
+              Next
+            </button>
+          </Grid>
+        </Grid>
       </form>
     </React.Fragment>
   );

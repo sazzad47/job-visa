@@ -1,0 +1,322 @@
+.page_apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
+  background-image: url(../public/visa/bg_visa.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+/* .page_apply::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(#ffeb3b, #e91e63);
+  border-radius: 50%;
+  transform: translate(-420px, -180px);
+}
+.page_apply::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(#2196f3, #83d8ff);
+  border-radius: 50%;
+  transform: translate(400px, 180px);
+} */
+.page_apply .form_apply {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 900px;
+  padding: 50px;
+  background: rgba(255,255,255,0.1);
+  /* background: transparent; */
+  box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+.page_apply .form_apply::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
+  transform: skewX(-15deg);
+}
+.page_apply h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  color: #fff;
+  background: linear-gradient(#5b5f63, #0e587a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page_apply .form_stepper {
+  position: relative;
+  margin-top: 2rem;
+  width: 100%;
+  color: #fff;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.css-rh92k-MuiPaper-root-MuiMobileStepper-root {
+  background: transparent;
+}
+.page_apply .form_title {
+  position: relative;
+  margin: 1rem 0;
+  margin-bottom: 2rem;
+  width: 100%;
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page_apply .form_apply .input_row {
+  margin: 1rem 0;
+}
+.page_apply .form_apply .input_row .col_custom {
+  position: relative;
+  margin: 1rem 0;
+}
+.page_apply .form_apply .input_row .col_custom .input_box {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  color: #000;
+}
+.page_apply .form_apply .field_title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+.page_apply .form_apply .input_row .col_custom .input_box input,
+.page_apply .form_apply .input_row .col_custom .input_box select,
+.page_apply .form_apply .input_row .col_custom .input_box textarea {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  padding: 0 10px;
+  z-index: 1;
+  color: #000;
+}
+.page_apply .form_apply .input_row .col_custom .input_box.textarea {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  padding: 10px 0;
+}
+.page_apply .form_apply .input_row .col_custom .input_box .text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 40px;
+  font-size: 18px;
+  padding: 0 10px;
+  display: block;
+  transition: 0.5s;
+  pointer-events: none;
+}
+.page_apply .form_apply .input_row .col_custom .input_box input:focus + .text,
+.page_apply .form_apply .input_row .col_custom .input_box input:active + .text,
+.page_apply .form_apply .input_row .col_custom .input_box input:valid + .text,
+.page_apply .form_apply .input_row .col_custom .input_box select:focus + .text,
+.page_apply .form_apply .input_row .col_custom .input_box select:active + .text,
+.page_apply .form_apply .input_row .col_custom .input_box select:valid + .text,
+.page_apply .form_apply .input_row .col_custom .input_box textarea:focus + .text,
+.page_apply .form_apply .input_row .col_custom .input_box textarea:active + .text,
+.page_apply .form_apply .input_row .col_custom .input_box textarea:valid + .text {
+  top: -35px;
+  left: -10px;
+}
+
+.page_apply .form_apply .input_row .col_custom .input_box .line {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transition: 0.5s;
+  border-radius: 2px;
+  pointer-events: none;
+
+}
+.page_apply .form_apply .input_row .col_custom .input_box input:focus ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box input:active ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box input:valid ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box select:focus ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box select:active ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box select:valid ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box textarea:focus ~ .line,
+.page_apply .form_apply .input_row .col_custom .input_box textarea:active ~ .line, 
+.page_apply .form_apply .input_row .col_custom .input_box textarea:valid ~ .line {
+  height: 100%;
+}
+.page_apply .form_apply .input_row .col_custom .radio_input_label {
+  margin-right: 1rem;
+  margin-left: 4px;
+  color: #000;
+}
+.page_apply .form_apply .input_row .col_custom button {
+  outline: none;
+  border: none;
+  padding: 10px 40px;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 2px;
+}
+.visa-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.visa-form-input {
+  margin-top: 1rem;
+}
+.visa-page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.visa-page-form {
+  margin: 2rem;
+  border-top: 2px solid rgb(109, 145, 245);
+}
+.form-no-border {
+  margin: 2rem;
+  padding: 0;
+}
+.visa-page-form-title {
+  font-weight: bold;
+  color: rgb(109, 145, 245);
+}
+.loan-amount {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-color: rgb(222, 232, 241);
+}
+.custom-input {
+  border: 1px solid rgb(199, 185, 185);
+  width: 100%;
+  height: 3rem;
+  border-radius: 5px;
+  padding: 1rem;
+}
+.custom-input:hover {
+  border: 1px solid rgb(146, 102, 102);
+}
+.custom-input:active,
+.custom-input:focus {
+  border: 1px solid rgb(89, 19, 219);
+  outline: none;
+}
+.other_info_container {
+  padding: 0 10px;
+  color: #000;
+  border: none;
+  width: 50%;
+  height: 3rem;
+  border-radius: 5px;
+  background: #fff;
+}
+.preview {
+  max-width: 200px;
+}
+
+.btn-upload {
+  position: absolute !important;
+  right: 12px;
+}
+
+.file-name {
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 300px;
+  vertical-align: middle;
+}
+
+.list-group {
+  padding: 0;
+  margin: 0;
+}
+
+.list-header {
+  margin-top: 10px !important;
+}
+
+.upload-message {
+  font-weight: bold;
+  color: #63a84e;
+}
+
+.upload-message.error {
+  color: #da4148;
+}
+
+.btn-choose {
+  margin-right: 12px !important;
+}
+.PhoneInputInput {
+  height: 3.5rem;
+  border: 1px solid rgb(238, 166, 166);
+  border-radius: 2px;
+}
+.PhoneInputInput:active,
+.PhoneInputInput:focus {
+  outline: 2px solid rgb(106, 106, 240);
+  border: none !important;
+}
+.PhoneInputInput:hover {
+  border: 1px solid red;
+}
+
+.PhoneInputCountry {
+  height: 3.5rem;
+}
+.recap {
+  transform: scale(0.66);
+  transform-origin: 0 0;
+}

@@ -1,22 +1,17 @@
-import {
-  Button,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { DataContext } from "../../../store/GlobalState";
 import { getData } from "../../../utils/fetchData";
-import InputModal from "../../InputModal";
+import InputField from "../../common/InputField";
+import InputModal from "../../common/InputModal";
 
 const LoanInfo = ({ totalCost, setTotalCost, setLoan, handleNext }) => {
   const [loading, setLoading] = useState(false);
+  const [showAmountField, setShowAmountField] = useState(true);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  const { visaApplyID, loanAmount } = state.loanApplicant.loanInfo;
+  const { visaApplyID, jobApplyID, loanAmount } = state.loanApplicant.loanInfo;
   const emptyInput = !visaApplyID || !loanAmount;
   const [message, setMessage] = useState("");
   const getTotalCost = async () => {
@@ -67,91 +62,148 @@ const LoanInfo = ({ totalCost, setTotalCost, setLoan, handleNext }) => {
   useEffect(() => {
     if (!visaApplyID) {
       setMessage("");
+      setTotalCost("");
     }
   }, [visaApplyID]);
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <div className="visa-form-input">
-          <TextField
-            name="visaApplyID"
-            onChange={handleInput}
-            onKeyUp={getTotalCost}
-            required
-            fullWidth
-            label="Visa Apply ID"
-            placeholder="Enter your visa apply ID"
-            variant="outlined"
-          />
-        </div>
-        <div className="visa-form-input">
-          <TextField
-            name="jobApplyID"
-            onChange={handleInput}
-            onKeyUp={getTotalCost}
-            required
-            fullWidth
-            label="Job Apply ID"
-            placeholder="Enter your job apply ID"
-            variant="outlined"
-          />
-        </div>
-        <div className="mt-3">Total Rs</div>
-        <div className="visa-form-input mb-3">
-          <div className="loan-amount">
-            {loading ? "loading..." : message ? message : null}
-          </div>
-        </div>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Visa Apply ID
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <div className="input_box">
+              <input
+                label=""
+                type="text"
+                name="visaApplyID"
+                value={visaApplyID}
+                onChange={handleInput}
+                onKeyUp={getTotalCost}
+                required={true}
+              />
 
+              <span className="line"></span>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Job Apply ID
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="text"
+              name="jobApplyID"
+              value={jobApplyID}
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={3} className="field_title">
+            Total Rs
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <div className="loan-amount">
+              {loading ? "loading..." : message ? message : null}
+            </div>
+          </Grid>
+        </Grid>
         {totalCost && (
           <>
-            <FormLabel id="loanAmount">Loan Amount</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="loanAmount"
-              name="loanAmount"
-              required
-            >
-              <FormControlLabel
-                name="loanAmount"
-                onChange={handleInput}
-                value="15"
-                control={<Radio />}
-                label="15%"
-              />
-              <FormControlLabel
-                name="loanAmount"
-                onChange={handleInput}
-                value="25"
-                control={<Radio />}
-                label="25%"
-              />
-              <InputModal
-                handleInput={handleInput}
-                name="loanAmount"
-                label="Loan Amount"
-                placeholder="Ex. 30%"
-              />
-            </RadioGroup>
+            <Grid container spacing={2} className="input_row">
+              <Grid item xs={12} md={3} className="field_title">
+                Loan Amount
+              </Grid>
+              <Grid
+                style={{ marginTop: "30px" }}
+                container
+                spacing={2}
+                xs={12}
+                md={8}
+                className="col_custom d-flex"
+              >
+                <Grid item xs={4} md={4}>
+                  <input
+                    className="radio_input"
+                    onChange={handleInput}
+                    onClick={() => setShowAmountField(true)}
+                    type="radio"
+                    id="15%"
+                    name="loanAmount"
+                    value="15%"
+                  />
+                  <label className="radio_input_label" htmlFor="15%">
+                    15%
+                  </label>
+                </Grid>
+                <Grid item xs={4} md={4}>
+                  <input
+                    className="radio_input"
+                    onChange={handleInput}
+                    onClick={() => setShowAmountField(true)}
+                    type="radio"
+                    id="30%"
+                    name="loanAmount"
+                    value="30%"
+                  />
+                  <label className="radio_input_label" htmlFor="30%">
+                    30%
+                  </label>
+                </Grid>
+                <Grid item xs={4} md={4}>
+                  <InputModal
+                    handleInput={handleInput}
+                    showOther={setShowAmountField}
+                    name="loanAmount"
+                    label="Ex. 40%"
+                    placeholder=""
+                  />
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <input
+                    className="other_info_container"
+                    hidden={showAmountField}
+                    disabled
+                    value={loanAmount}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
           </>
         )}
         {totalCost && loanAmount && (
           <>
-            <div className="mt-3">Amount of Money</div>
-            <div className="visa-form-input">
-              <div className="loan-amount">{amountToApplyFor}</div>
-            </div>
+            <Grid container spacing={2} className="input_row">
+              <Grid item xs={12} md={3} className="field_title">
+                Amount of Money
+              </Grid>
+              <Grid item xs={12} md={6} className="col_custom">
+                <div className="loan-amount"> ${amountToApplyFor}</div>
+              </Grid>
+            </Grid>
           </>
         )}
-        <div className="mt-4 d-flex align-items-center justify-content-end">
-          <Button
-            disabled={!amountToApplyFor}
-            variant="contained"
-            onClick={parseInt(loanAmount) > 70 ? handleNotify : handleNextPage}
+        <Grid container spacing={2} className="input_row">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            className="col_custom d-flex justify-content-end"
           >
-            Next
-          </Button>
-        </div>
+            <button
+              disabled={!amountToApplyFor}
+              onClick={parseInt(loanAmount) > 70 ? handleNotify : handleNext}
+              type="submit"
+            >
+              Next
+            </button>
+          </Grid>
+        </Grid>
       </form>
     </React.Fragment>
   );

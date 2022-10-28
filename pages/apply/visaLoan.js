@@ -19,7 +19,7 @@ const Loan = () => {
       <Head>
         <title>Apply for loan</title>
       </Head>
-      <div className={auth.token ? "visa-page" : "authContainer"}>
+      {/* <div className={auth.token ? "visa-page" : "authContainer"}>
         {auth.token ? (
           <>
             <div className="visa-page-header">
@@ -50,6 +50,17 @@ const Loan = () => {
         ) : (
           <Auth />
         )}
+      </div> */}
+      <div className="page_loan_apply">
+        <div className="form_loan_apply">
+           <h2>Loan Application Form</h2>
+           <LoanForm
+                  loading={loading}
+                  setLoading={setLoading}
+                  success={success}
+                  setSuccess={setSuccess}
+                />
+        </div>
       </div>
     </React.Fragment>
   );

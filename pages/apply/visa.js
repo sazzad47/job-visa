@@ -20,7 +20,7 @@ const Visa = () => {
       <Head>
         <title>Apply for visa</title>
       </Head>
-      <div className={auth.token ? "visa-page" : "authContainer"}>
+      {/* <div className={auth.token ? "visa-page" : "authContainer"}>
         {auth.token ? (
           <>
             <div className="visa-page-header">
@@ -52,6 +52,17 @@ const Visa = () => {
         ) : (
           <Auth />
         )}
+      </div> */}
+      <div className="page_apply">
+        <div className="form_apply">
+           <h2>Visa Application Form</h2>
+           <VisaForm
+                  loading={loading}
+                  setLoading={setLoading}
+                  success={success}
+                  setSuccess={setSuccess}
+                />
+        </div>
       </div>
     </React.Fragment>
   );

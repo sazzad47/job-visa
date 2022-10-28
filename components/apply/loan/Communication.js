@@ -1,4 +1,4 @@
-import { Button, TextareaAutosize, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextareaAutosize, TextField, Typography } from "@mui/material";
 import React, { useContext, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import "react-phone-number-input/style.css";
@@ -7,6 +7,8 @@ import { Row } from "reactstrap";
 import { DataContext } from "../../../store/GlobalState";
 import { postData } from "../../../utils/fetchData";
 import { imageUpload } from "../../../utils/imageUpload";
+import InputField from "../../common/InputField";
+import TextArea from "../../common/TextArea";
 
 const Communication = ({
   totalCost,
@@ -111,6 +113,7 @@ const Communication = ({
 
     let media;
     setLoading(true);
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
     media = await imageUpload(validDocuments);
     const mediaData = Object.assign.apply(
       {},
@@ -173,71 +176,89 @@ const Communication = ({
 
   return (
     <React.Fragment>
-      <form onSubmit={handleSubmit} style={{ minWidth: "100%" }}>
-        <div className="mt-3">Email</div>
-        <div className="visa-form-input">
-          <TextField
-            name="email"
-            onChange={handleInput}
-            required
-            fullWidth
-            variant="outlined"
-          />
-        </div>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Email
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <InputField
+              label=""
+              type="email"
+              name="email"
+              onChange={handleInput}
+              required={true}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Phone Number
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <PhoneInput
+              placeholder="Enter your mobile number"
+              value={phnValue}
+              onChange={handlePhn}
+              required
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Home Phone Number
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <PhoneInput
+              placeholder="Enter your home mobile number"
+              value={homePhnValue}
+              onChange={handleHomePhn}
+              required
+            />
+          </Grid>
+        </Grid>
+        {/* <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Comments
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <TextArea
+             label=""
+             type="text"
+             name="comments"
+             onChange={handleInput}
+             required={true} 
+             />
+          </Grid>
+        </Grid> */}
+        <Grid container spacing={2} className="input_row">
+          <Grid item xs={12} md={4} className="field_title">
+            Verify that you are not a robot
+          </Grid>
+          <Grid item xs={12} md={6} className="col_custom">
+            <ReCAPTCHA
+              ref={recaptcha}
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={onChange}
+            />
+          </Grid>
+        </Grid>
 
-        <div className="mt-3">Phone Number</div>
-        <div className="mt-3">
-          <PhoneInput
-            placeholder="Enter phone number"
-            value={phnValue}
-            onChange={handlePhn}
-            required
-          />
-        </div>
-        <div className="mt-3">Home Phone Number</div>
-        <div className="mt-3">
-          <PhoneInput
-            placeholder="Enter your home phone number"
-            value={homePhnValue}
-            onChange={handleHomePhn}
-            required
-          />
-        </div>
-        <div className="mt-3 mb-3">Comments or Questions</div>
-        <TextareaAutosize
-          minRows={3}
-          name="comments"
-          onChange={handleInput}
-          style={{ width: "100%" }}
-        />
-        <Row className="d-flex mt-3">
-          <div className="d-flex align-items-center justify-content-start mb-2">
-            <Typography>Verify that you are not a robot</Typography>
-          </div>
-          <div className="recap d-none d-md-block">
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={onChange}
-            />
-          </div>
-          <div className="d-block d-md-none">
-            <ReCAPTCHA
-              ref={recaptcha}
-              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={onChange}
-            />
-          </div>
-        </Row>
-        <div className="mt-4 d-flex align-items-center justify-content-between">
-          <Button variant="contained" onClick={handleBack}>
-            Back
-          </Button>
-          <Button disabled={!isHuman} type="submit" variant="contained">
-            Submit
-          </Button>
-        </div>
+        <Grid container spacing={2} className="input_row">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            className="col_custom d-flex justify-content-between"
+          >
+            <button onClick={handleBack}>Back</button>
+            <button  type="submit">
+              Submit
+            </button>
+          </Grid>
+        </Grid>
       </form>
+      
     </React.Fragment>
   );
 };

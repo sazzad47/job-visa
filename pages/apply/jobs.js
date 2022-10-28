@@ -19,7 +19,7 @@ const Job = () => {
       <Head>
         <title>Apply for job</title>
       </Head>
-      <div className={auth.token ? "visa-page" : "authContainer"}>
+      {/* <div className={auth.token ? "visa-page" : "authContainer"}>
         {auth.token ? (
           <>
             <div className="visa-page-header">
@@ -50,6 +50,17 @@ const Job = () => {
         ) : (
           <Auth />
         )}
+      </div> */}
+      <div className="page_job_apply">
+        <div className="form_job_apply">
+           <h2>Job Application Form</h2>
+           <JobForm
+                  loading={loading}
+                  setLoading={setLoading}
+                  success={success}
+                  setSuccess={setSuccess}
+                />
+        </div>
       </div>
     </React.Fragment>
   );
