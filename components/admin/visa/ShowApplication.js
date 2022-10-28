@@ -20,7 +20,7 @@ import UploadVisa from "./UploadVisa";
 const ApplicationTitle = () => {
   const record = useRecordContext();
   if (!record) return null;
-  return <span>{`Application No ${record.index}`}</span>;
+  return <span>{`Application No ${record.id}`}</span>;
 };
 
 const ApplicationActions = () => (

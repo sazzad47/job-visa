@@ -12,9 +12,9 @@ import { FilterSidebar } from "./FilterSidebar";
 const SearchFilter = (props) => (
   <Filter {...props}>
     <SearchInput
-      type="number"
+      type="text"
       placeholder="Search ID"
-      source="index"
+      source="_id"
       alwaysOn
       resettable
     />
@@ -31,7 +31,7 @@ const VisaApplicatioinList = (props) => {
       filters={<SearchFilter />}
     >
       <Datagrid>
-        <TextField source="index" label="ID" />
+        <TextField source="id" label="ID" />
         <TextField source="userId" label="User ID" />
         <TextField source="province" label="From Country" />
         <TextField source="visaIssueCountry" label="Visa Application Country" />

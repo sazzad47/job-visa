@@ -56,6 +56,7 @@ export default function PaymentForm({ handleBack, handleNext }) {
       setMessage("");
       setTotalCost("");
     }
+    getTotalCost();
   }, [visaApplyID]);
 
   return (
@@ -67,9 +68,8 @@ export default function PaymentForm({ handleBack, handleNext }) {
         <Grid item xs={12}>
           <TextField
             name="visaApplyID"
-            type="number"
+            type="text"
             onChange={handleInput}
-            onKeyUp={getTotalCost}
             required
             fullWidth
             label="Visa Apply ID"

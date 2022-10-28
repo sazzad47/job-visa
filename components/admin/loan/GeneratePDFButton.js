@@ -11,8 +11,8 @@ const GeneratePDFButton = ({ title }) => {
     savePDF(element, {
       pageSize: "A4",
       margin: 40,
-      title: `Loan Application No ${record.index}`,
-      fileName: `${title} Application No ${record.index}`,
+      title: `Loan Application No ${record.id}`,
+      fileName: `${title} Application No ${record.id}`,
     });
   };
 

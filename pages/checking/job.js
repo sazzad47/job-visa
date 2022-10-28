@@ -70,9 +70,9 @@ const JobChecking = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="passportNumber"
               label="Passport Number"
-              name="email"
+              name="passportNumber"
               autoFocus
               onChange={(e) => setPassportNum(e.target.value)}
             />
@@ -80,11 +80,11 @@ const JobChecking = () => {
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="Job Application ID"
               label="Job Application ID"
-              type="number"
-              id="password"
-              autoComplete="current-password"
+              type="text"
+              id="Job Application ID"
+              autoComplete="Job Application ID"
               onChange={(e) => setJobAppID(e.target.value)}
             />
 
@@ -107,14 +107,20 @@ const JobChecking = () => {
                     sx={{ fontWeight: "bold", margin: "2rem 0" }}
                     align="center"
                   >
-                    Job Application No {data?.index}
+                    Job Application No {data?._id}
                   </Typography>
-                  <Grid container>
-                    <Grid item xs={12} md={6}>
-                      Name:
+                   <Grid container>
+                   <Grid item xs={12} md={6}>
+                      First Name:
+                    </Grid>
+                   <Grid item xs={12} md={6}>
+                      {data?.firstName}
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      {data?.fullName}
+                      Surname:
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      {data?.surname}
                     </Grid>
                     <Grid item xs={12} md={6}>
                       Passport Number:

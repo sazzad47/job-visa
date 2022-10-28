@@ -14,6 +14,7 @@ const LoanInfo = ({ totalCost, setTotalCost, setLoan, handleNext }) => {
   const { visaApplyID, jobApplyID, loanAmount } = state.loanApplicant.loanInfo;
   const emptyInput = !visaApplyID || !loanAmount;
   const [message, setMessage] = useState("");
+  console.log('visaapplyid', visaApplyID)
   const getTotalCost = async () => {
     if (!visaApplyID) return;
     setLoading(true);
@@ -55,6 +56,7 @@ const LoanInfo = ({ totalCost, setTotalCost, setLoan, handleNext }) => {
       type: "CHANGE_LOAN_APPLICANTS_LOAN_INPUTS",
       payload: { name: e.target.name, value: e.target.value },
     });
+    
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,6 +66,7 @@ const LoanInfo = ({ totalCost, setTotalCost, setLoan, handleNext }) => {
       setMessage("");
       setTotalCost("");
     }
+    getTotalCost()
   }, [visaApplyID]);
   return (
     <React.Fragment>
@@ -80,7 +83,6 @@ const LoanInfo = ({ totalCost, setTotalCost, setLoan, handleNext }) => {
                 name="visaApplyID"
                 value={visaApplyID}
                 onChange={handleInput}
-                onKeyUp={getTotalCost}
                 required={true}
               />
 

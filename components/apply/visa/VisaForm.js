@@ -7,9 +7,6 @@ import Button from "@mui/material/Button";
 import PersonalInfo from "./PersonalInfo";
 import PassportDetails from "./PassportDetails";
 import VisaProcessingInfo from "./VisaProcessingInfo";
-import HomeInfo from "./HomeInfo";
-import BankStatement from "./BankStatement";
-import MedicalReport from "./MedicalReport";
 import ContactInfo from "./ContactInfo";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";

@@ -17,7 +17,7 @@ const getTotalCost = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    const visa = await VisaApplicants.findOne({ index: visaApplyID });
+    const visa = await VisaApplicants.findOne({ _id: visaApplyID });
     if (!visa) return res.status(400).json({ err: "Application not found!" });
 
     if (visa.cost === 0)
@@ -28,6 +28,6 @@ const getTotalCost = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    return res.status(500).json({ err: err.message });
+    return res.status(500).json({ err: "Something went wrong!" });
   }
 };

@@ -9,7 +9,7 @@ import {
 const ApplicationTitle = () => {
   const record = useRecordContext();
   if (!record) return null;
-  return <span>{`Payment ID ${record.index}`}</span>;
+  return <span>{`Payment ID ${record.id}`}</span>;
 };
 
 const ShowPayment = (props) => (

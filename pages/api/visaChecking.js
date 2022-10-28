@@ -16,7 +16,7 @@ const getApplicant = async (req, res) => {
     const { index, passportNumber } = req.query;
 
     const applicant = await VisaApplicant.findOne({
-      index: parseInt(index),
+      _id: index,
       passportNumber,
     });
 

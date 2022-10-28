@@ -16,7 +16,7 @@ const getApplicant = async (req, res) => {
     const { index, idNumber } = req.query;
 
     const applicant = await LoanApplicant.findOne({
-      index: parseInt(index),
+      _id: index,
       idNumber,
     });
 

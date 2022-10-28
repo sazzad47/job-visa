@@ -19,7 +19,7 @@ const ApplicationTitle = () => {
   const record = useRecordContext();
   if (!record) return null;
   console.log("pdf", record.sJobExperienceCertificate);
-  return <span>{`Application No ${record.index}`}</span>;
+  return <span>{`Application No ${record.id}`}</span>;
 };
 
 const ApplicationActions = () => (

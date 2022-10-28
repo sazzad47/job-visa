@@ -12,8 +12,8 @@ import { Pagination } from "../PostPagination";
 const SearchFilter = (props) => (
   <Filter {...props}>
     <SearchInput
-      placeholder="Search by Email"
-      source="email"
+      placeholder="Search by ID"
+      source="_id"
       alwaysOn
       resettable
     />
@@ -29,7 +29,7 @@ const PaymentList = (props) => {
       filters={<SearchFilter />}
     >
       <Datagrid>
-        <TextField source="index" label="Payment ID" />
+        <TextField source="id" label="Payment ID" />
         <TextField source="visaApplyID" label="Visa Application ID" />
         <TextField source="method" label="Payment Method" />
         <TextField source="amount" label="Amount" />

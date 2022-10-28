@@ -24,7 +24,7 @@ const Index = () => {
           <tbody>
             {jobApplications.map((item) => (
               <tr key={item._id}>
-                <td className="p-2">{item.index}</td>
+                <td className="p-2">{item._id}</td>
                 <td className="p-2">{item.nidCard}</td>
                 <td className="p-2">{item.passportNumber}</td>
                 <td className="p-2">{item.status}</td>

@@ -25,7 +25,7 @@ const Index = () => {
           <tbody>
             {loanApplications.map((item) => (
               <tr key={item._id}>
-                <td className="p-2">{item.index}</td>
+                <td className="p-2">{item._id}</td>
                 <td className="p-2">{item.jobApplyID}</td>
                 <td className="p-2">{item.visaApplyID}</td>
                 <td className="p-2">{item.amountOfMoney}</td>

@@ -72,9 +72,9 @@ const LoanChecking = () => {
               required
               fullWidth
               id="idNumber"
-              label="ID Card Number"
+              label="NID Card Number"
               name="idNumber"
-              type="number"
+              type="text"
               autoFocus
               onChange={(e) => setIdNumber(e.target.value)}
             />
@@ -84,7 +84,7 @@ const LoanChecking = () => {
               fullWidth
               name="laonAppID"
               label="Loan Application ID"
-              type="number"
+              type="text"
               id="laonAppID"
               onChange={(e) => setLaonAppID(e.target.value)}
             />
@@ -108,7 +108,7 @@ const LoanChecking = () => {
                     sx={{ fontWeight: "bold", margin: "2rem 0" }}
                     align="center"
                   >
-                    Loan Application No {data?.index}
+                    Loan Application No {data?._id}
                   </Typography>
                   <Grid container>
                     <Grid item xs={12} md={6}>

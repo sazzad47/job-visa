@@ -71,10 +71,10 @@ const VisaChecking = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="passportNumber"
               label="Passport Number"
-              name="email"
-              type="number"
+              name="passportNumber"
+              type="text"
               autoFocus
               onChange={(e) => setPassportNum(e.target.value)}
             />
@@ -82,11 +82,11 @@ const VisaChecking = () => {
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="VisaApplicationID"
               label="Visa Application ID"
-              type="number"
-              id="password"
-              autoComplete="current-password"
+              type="text"
+              id="VisaApplicationID"
+              autoComplete="VisaApplicationID"
               onChange={(e) => setVisaAppID(e.target.value)}
             />
 
@@ -109,14 +109,20 @@ const VisaChecking = () => {
                     sx={{ fontWeight: "bold", margin: "2rem 0" }}
                     align="center"
                   >
-                    Visa Application No {data?.index}
+                    Visa Application No {data?._id}
                   </Typography>
                   <Grid container>
                     <Grid item xs={12} md={6}>
-                      Name:
+                      First Name:
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      {data?.fullName}
+                      {data?.firstName}
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      Surname:
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      {data?.surname}
                     </Grid>
                     <Grid item xs={12} md={6}>
                       Passport Number:
